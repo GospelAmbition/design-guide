@@ -1,0 +1,29 @@
+---
+import brands from '../data/brands.json';
+const { brand } = Astro.props;
+const b = brands.find((x) => x.id === brand);
+const lum = (hex) => {
+  const c = hex.replace('#', '').match(/../g).map((h) => parseInt(h, 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const ratio = (a, b2) => { const [x, y] = [lum(a), lum(b2)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+const bg = b.color.background.$value;
+const white = '#ffffff';
+---
+<div class="ds-grid">
+  {b.tokens.color.map((t) => {
+    const onChip = ratio(t.value, white) >= ratio(t.value, '#000000') ? '#fff' : '#000';
+    const r = ratio(t.value, bg);
+    return (
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style={`background:${t.value};color:${onChip}`}>{t.value.toUpperCase()}</div>
+        <div class="ds-swatch__body">
+          <code>--{t.name}</code>
+          <div class="ds-swatch__desc">{t.description}</div>
+          <div class="ds-swatch__desc">Contrast on background: {r.toFixed(1)}:1 {r >= 4.5 ? '(AA text)' : r >= 3 ? '(large text/UI only)' : '(decorative only)'}</div>
+        </div>
+      </div>
+    );
+  })}
+</div>

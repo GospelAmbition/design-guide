@@ -1,0 +1,21 @@
+---
+title: Overview
+description: Aurora style guide overview.
+sidebar:
+  order: 1
+---
+import Preview from '../../../../components/Preview.astro';
+import DoDont from '../../../../components/DoDont.astro';
+import brands from '../../../../data/brands.json';
+
+export const b = brands.find((x) => x.id === 'aurora');
+
+{b.meta.description}
+
+**Voice:** {b.meta.voice}
+
+<Preview brand="aurora" />
+
+## Principles
+
+<DoDont brand="aurora" />

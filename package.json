@@ -1,0 +1,16 @@
+{
+  "name": "design-system",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "dev": "npm run tokens && astro dev",
+    "build": "npm run tokens && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.6",
+    "astro": "^7.2.10",
+    "style-dictionary": "^5.7.0"
+  }
+}

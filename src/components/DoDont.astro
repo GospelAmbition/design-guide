@@ -1,0 +1,9 @@
+---
+import brands from '../data/brands.json';
+const { brand } = Astro.props;
+const b = brands.find((x) => x.id === brand);
+---
+<div class="ds-dodont">
+  <div class="do"><h4>Do</h4><ul>{b.rules.do.map((r) => <li>{r}</li>)}</ul></div>
+  <div class="dont"><h4>Don't</h4><ul>{b.rules.dont.map((r) => <li>{r}</li>)}</ul></div>
+</div>

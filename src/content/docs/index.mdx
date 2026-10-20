@@ -1,0 +1,20 @@
+---
+title: Design System
+description: Style guides for building on-brand sites, by people and by AI.
+---
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+This design system holds multiple style guides. Each guide defines the colours, typography, spacing and rules for one brand or product, and each can be handed straight to an AI assistant.
+
+<CardGrid>
+  <LinkCard title="Aurora" description="Warm, friendly, welcoming. Community and consumer sites." href="/guides/aurora/" />
+  <LinkCard title="Harbor" description="Calm, clear, professional. Dashboards and tools." href="/guides/harbor/" />
+</CardGrid>
+
+## How it works
+
+1. **Tokens are the source of truth.** Each guide is one JSON file in `tokens/brands/`.
+2. **A build step generates everything else:** CSS variables, an AI brief per guide, and `llms.txt`.
+3. **This site documents it** and is rebuilt automatically from the same tokens, so docs and code can't drift apart.
+
+To add a new guide, copy a file in `tokens/brands/`, edit the values, and add a folder under `src/content/docs/guides/`.
