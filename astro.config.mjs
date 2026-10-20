@@ -44,6 +44,8 @@ const liveSources = {
       const regenerate = async () => {
         try {
           for (const [p, content] of Object.entries(await buildOutputs())) writeFileSync(join(ROOT, p), content);
+          // Pages read these files at render time, so Vite doesn't know to reload them.
+          server.ws.send({ type: 'full-reload' });
         } catch (e) {
           logger.error(`Could not regenerate: ${e.message}`);
         }
