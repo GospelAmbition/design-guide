@@ -1,0 +1,70 @@
+---
+// Swatches (with contrast per mode), a type specimen and a table of all other tokens.
+import { flattenTokens } from '../../scripts/lib/brands.mjs';
+const { brand } = Astro.props;
+
+const lum = (hex) => {
+  const c = hex.replace('#', '').match(/../g).map((h) => parseInt(h, 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+const grade = (r) => (r >= 4.5 ? 'AA text' : r >= 3 ? 'large text/UI only' : 'decorative only');
+
+const base = flattenTokens(brand.tokens);
+const modes = [{ mode: 'light', tokens: base }, ...brand.modes.map((m) => ({ mode: m.mode, tokens: flattenTokens(m.tokens) }))];
+const value = (mode, name) => (mode.tokens.find((t) => t.name === name) ?? base.find((t) => t.name === name))?.value;
+const colours = base.filter((t) => t.type === 'color');
+const get = (name) => base.find((t) => t.name === name)?.value;
+const levels = [['step-4', 'h1'], ['step-3', 'h2'], ['step-2', 'h3'], ['step-1', 'h4 / lead'], ['step-0', 'body'], ['small', 'small']];
+const others = base.filter((t) => t.type !== 'color');
+---
+<h2>Colour</h2>
+<p>Contrast is measured in the same mode: <code>--color-on-X</code> against <code>--color-X</code>, everything else against <code>--color-background</code>.</p>
+{modes.map((mode) => (
+  <>
+    {modes.length > 1 && <h3>{mode.mode}</h3>}
+    <div class="ds-grid">
+      {colours.map((t) => {
+        const v = value(mode, t.name);
+        const on = ratio(v, '#ffffff') >= ratio(v, '#000000') ? '#fff' : '#000';
+        // on-X colours are measured against X; everything else against the page background.
+        const against = t.name.startsWith('color-on-') ? t.name.replace('color-on-', 'color-') : 'color-background';
+        const r = ratio(v, value(mode, against));
+        return (
+          <div class="ds-swatch">
+            <div class="ds-swatch__chip" style={`background:${v};color:${on}`}>{v.toUpperCase()}</div>
+            <div class="ds-swatch__body">
+              <code>--{t.name}</code>
+              <div class="ds-swatch__desc">{t.description}</div>
+              {t.name !== 'color-background' && <div class="ds-swatch__desc">{r.toFixed(1)}:1 on {against.replace('color-', '')} ({grade(r)})</div>}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </>
+))}
+
+<h2>Type</h2>
+<div class="ds-specimen" style={`background:${get('color-background')};color:${get('color-text')}`}>
+  {levels.filter(([s]) => get(`size-${s}`)).map(([s, role]) => {
+    const heading = role.startsWith('h');
+    return (
+      <div>
+        <span class="label">{role} · --size-{s} · {get(`size-${s}`)}</span>
+        <div style={`font-size:${get(`size-${s}`)};font-family:${get(heading ? 'font-heading' : 'font-body')};font-weight:${get(heading ? 'weight-heading' : 'weight-regular')};line-height:${get(heading ? 'leading-heading' : 'leading-body')}`}>
+          {heading ? `${role} — The quick brown fox` : 'Body text sits at the base size and is used for most content on the page.'}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<h2>All other tokens</h2>
+<table class="ds-table">
+  <thead><tr><th>Variable</th><th>Value</th><th>Use</th></tr></thead>
+  <tbody>
+    {others.map((t) => <tr><td><code>--{t.name}</code></td><td><code>{t.value}</code></td><td>{t.description}</td></tr>)}
+  </tbody>
+</table>

@@ -1,0 +1,15 @@
+{
+  "$description": "Dark mode. Overrides tokens.json when data-mode=\"dark\" is set (or the OS prefers dark and no data-mode is set). Must define every colour token.",
+  "color": {
+    "primary":       { "$value": "#60A5FA", "$type": "color", "$description": "Main brand colour. Buttons, links, key highlights." },
+    "primary-hover": { "$value": "#93C5FD", "$type": "color", "$description": "Hover/pressed state for primary." },
+    "on-primary":    { "$value": "#0F172A", "$type": "color", "$description": "Text and icons on primary." },
+    "secondary":     { "$value": "#94A3B8", "$type": "color", "$description": "Supporting colour. Secondary buttons, tags." },
+    "on-secondary":  { "$value": "#0F172A", "$type": "color", "$description": "Text and icons on secondary." },
+    "background":    { "$value": "#0B1120", "$type": "color", "$description": "Page background." },
+    "surface":       { "$value": "#111827", "$type": "color", "$description": "Cards and panels." },
+    "text":          { "$value": "#E2E8F0", "$type": "color", "$description": "Body text." },
+    "muted":         { "$value": "#94A3B8", "$type": "color", "$description": "Captions and secondary text." },
+    "border":        { "$value": "#1E293B", "$type": "color", "$description": "Dividers and card outlines." }
+  }
+}

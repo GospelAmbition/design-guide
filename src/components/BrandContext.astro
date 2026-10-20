@@ -1,0 +1,69 @@
+---
+// Wraps a brand page. Provides the brand, its modes, base stylesheet and resolved component CSS
+// to every <ds-preview> inside, and defines that element.
+// Previews render in shadow DOM with only the brand's CSS, so Starlight styles can't leak in.
+// Fonts are loaded in the document <head> by the page (fonts don't load from inside shadow DOM).
+const { brand, css = '' } = Astro.props;
+const json = JSON.stringify(css).replace(/</g, '\\u003c');
+---
+<div data-brand={brand.id} data-base={brand.base} data-modes={['light', ...brand.modes.map((m) => m.mode)].join(' ')}>
+  <script type="application/json" class="ds-css" set:html={json}></script>
+  <slot />
+</div>
+
+<script>
+  const cache = new Map();
+  const text = (url) => {
+    if (!cache.has(url)) cache.set(url, fetch(url).then((r) => (r.ok ? r.text() : '')));
+    return cache.get(url);
+  };
+
+  // Viewer chrome only. `all: initial` stops Starlight's inherited styles reaching the brand canvas.
+  const VIEWER_CSS = `
+    :host { all: initial; display: block; margin-block: 1rem; }
+    .bar { display: flex; gap: 4px; justify-content: flex-end; font: 12px system-ui, sans-serif; margin-bottom: 4px; }
+    .bar button { font: inherit; padding: 2px 8px; border: 1px solid #8884; border-radius: 4px; background: none; color: #888; cursor: pointer; }
+    .bar button[aria-pressed="true"] { background: #8883; color: inherit; }
+    .canvas { padding: 1.5rem; border: 1px solid #8885; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+    .canvas > * { margin: 0; }
+  `;
+
+  class DsPreview extends HTMLElement {
+    async connectedCallback() {
+      if (this.shadowRoot) return;
+      const ctx = this.closest('[data-brand]');
+      if (!ctx) return;
+      const root = this.attachShadow({ mode: 'open' });
+      const modes = ctx.dataset.modes.split(' ');
+      const starlightDark = document.documentElement.dataset.theme === 'dark';
+      this.dataset.mode = starlightDark && modes.includes('dark') ? 'dark' : 'light';
+
+      const [tokens, base] = await Promise.all([text(`/brands/${ctx.dataset.brand}/tokens.css`), text(`/${ctx.dataset.base}`)]);
+      const components = JSON.parse(ctx.querySelector('.ds-css')?.textContent || '""');
+      // base.css styles `body`; inside the preview the canvas plays the body's role.
+      const baseCss = base.replace(/(?<![-\w])body(?![-\w])/g, '.canvas');
+
+      root.innerHTML = `<style>${VIEWER_CSS}</style><style>${tokens}</style><style>${baseCss}</style><style>${components}</style>`;
+      if (modes.length > 1) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        for (const mode of modes) {
+          const b = document.createElement('button');
+          b.textContent = mode;
+          b.setAttribute('aria-pressed', String(mode === this.dataset.mode));
+          b.onclick = () => {
+            this.dataset.mode = mode;
+            bar.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          };
+          bar.append(b);
+        }
+        root.append(bar);
+      }
+      const canvas = document.createElement('div');
+      canvas.className = 'canvas';
+      canvas.append(this.querySelector('template').content.cloneNode(true));
+      root.append(canvas);
+    }
+  }
+  customElements.define('ds-preview', DsPreview);
+</script>

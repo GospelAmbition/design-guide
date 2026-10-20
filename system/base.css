@@ -1,0 +1,24 @@
+/* Base element styles for any page built with a brand. Load after the brand's tokens.css.
+   A brand can replace this file with its own brands/<id>/base.css. Tokens only, no raw colours or fonts. */
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-step-0);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+  margin: 0 0 var(--space-2);
+}
+h1 { font-size: var(--size-step-4); }
+h2 { font-size: var(--size-step-3); }
+h3 { font-size: var(--size-step-2); }
+h4 { font-size: var(--size-step-1); }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-hover); }

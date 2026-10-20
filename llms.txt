@@ -1,0 +1,54 @@
+# Design System
+
+> Brand guides for building on-brand websites, written to be read and edited by AI agents. Each brand defines its tokens, voice, rules, components and assets as plain files. The Starlight site in src/ is only a viewer for humans; everything you need is in brands/ and system/.
+
+## To build or review something for a brand
+
+1. Find the brand in the list below.
+2. Read `brands/<id>/brief.md`. It is the whole brand in one file, with shared components and brand overrides already merged. You normally need nothing else.
+3. Follow the brief exactly: load its fonts, `brands/<id>/tokens.css` and the base styles, and copy component HTML/CSS from it. Use only the CSS variables, never raw colours or font names.
+4. If the brief doesn't cover something (a component it doesn't have, a missing rule), say so instead of inventing brand decisions.
+
+## How the source is organised
+
+- `system/components/<name>.md` — shared components every brand gets. Each file has guidance, then one `css` block and one or more `html` example blocks. The site renders live previews from exactly these blocks.
+- `system/patterns/<name>.md` — shared page patterns (hero, sign-up form, …), same format as components. Empty for now.
+- `system/base.css` — base element styles (body, headings, links). Tokens only.
+- `brands/<id>/guidelines.md` — frontmatter (`name`, `summary`, `fonts`, `icons`, `exclude`) plus voice, principles, do and don't.
+- `brands/<id>/tokens.json` — design tokens (DTCG format). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
+- `brands/<id>/components/<name>.md` — brand components, same format as shared ones.
+- `brands/<id>/patterns/<name>.md` — brand patterns.
+- `brands/<id>/assets/` — logos and images, each described in `assets/assets.md` (what it is, where to use it, minimum size, clear space).
+- `brands/<id>/base.css` — optional; replaces `system/base.css` for that brand.
+
+### Resolution rules
+
+- A brand gets every shared component and pattern, unless its guidelines frontmatter lists the name in `exclude`.
+- A brand file with the same name as a shared one replaces it completely. It is not merged with the shared file.
+- A brand file with a new name is a component unique to that brand.
+- A component's `uses: [...]` frontmatter lists other components whose CSS it needs.
+
+## Editing the design system
+
+- Edit only source files: `system/`, `brands/<id>/guidelines.md`, `tokens*.json`, `components/`, `patterns/`, `assets/`, `base.css`, and the hand-written part of this file.
+- Never edit generated files: `brands/<id>/brief.md`, `brands/<id>/tokens.css`, and the GENERATED block below. Run `npm run generate` after editing sources.
+- Component CSS may only use the brand's CSS variables for colours, fonts, weights, sizes, spacing and radii. Small structural values (`0`, `1px` borders, `100%`) are fine.
+- To add a brand, create `brands/<id>/` with `guidelines.md`, `tokens.json` and `assets/assets.md` (copy an existing brand), then run `npm run generate`.
+- Run `npm run check` before committing. It validates every brand and fails if generated files are stale. The same check runs as a pre-commit hook and in CI.
+- To see the result, run `npm run dev` and open http://localhost:4321/guide/<id>/. Restart the server after adding or removing a brand or component file.
+
+<!-- BEGIN GENERATED: npm run generate -->
+## Brands
+
+- **Aurora** — Warm, friendly and welcoming. For community and consumer-facing sites.
+  Start with `brands/aurora/brief.md`. Source folder: `brands/aurora/`.
+- **Harbor** — Calm, clear and professional. For dashboards, tools and formal communication.
+  Start with `brands/harbor/brief.md`. Source folder: `brands/harbor/`.
+
+## Shared components
+
+- `system/components/button.md` — Triggers an action. Primary for the main action on a screen, secondary for the rest.
+- `system/components/card.md` — Groups related content on a raised surface.
+- `system/components/input.md` — A single-line text field with a visible label.
+- `system/components/tag.md` — A small filled label for a category or status.
+<!-- END GENERATED -->

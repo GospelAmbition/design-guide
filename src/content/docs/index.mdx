@@ -1,20 +1,15 @@
 ---
 title: Design System
-description: Style guides for building on-brand sites, by people and by AI.
+description: Brand guides for building on-brand sites, by people and by AI.
 ---
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-This design system holds multiple style guides. Each guide defines the colours, typography, spacing and rules for one brand or product, and each can be handed straight to an AI assistant.
-
-<CardGrid>
-  <LinkCard title="Aurora" description="Warm, friendly, welcoming. Community and consumer sites." href="/guides/aurora/" />
-  <LinkCard title="Harbor" description="Calm, clear, professional. Dashboards and tools." href="/guides/harbor/" />
-</CardGrid>
+This design system holds several brand guides. Pick a brand in the sidebar to see its tokens, components, assets and guidelines.
 
 ## How it works
 
-1. **Tokens are the source of truth.** Each guide is one JSON file in `tokens/brands/`.
-2. **A build step generates everything else:** CSS variables, an AI brief per guide, and `llms.txt`.
-3. **This site documents it** and is rebuilt automatically from the same tokens, so docs and code can't drift apart.
+1. **Plain files are the source of truth.** Each brand is one folder in `brands/`: `guidelines.md`, `tokens.json`, `components/`, `assets/`. Shared components live in `system/`.
+2. **Brands inherit shared components.** A brand can replace one with its own file of the same name, add its own, or exclude one.
+3. **Every component is one markdown file** with guidance and the exact HTML and CSS. The previews on this site are rendered from that same code, inside an isolated canvas that only sees the brand's styles.
+4. **A generated brief per brand** (`brands/<id>/brief.md`) merges everything into one file for AI agents. `npm run check` keeps it in sync.
 
-To add a new guide, copy a file in `tokens/brands/`, edit the values, and add a folder under `src/content/docs/guides/`.
+This site is a viewer. To change a brand, edit its files (or ask an AI agent to), and the site updates.

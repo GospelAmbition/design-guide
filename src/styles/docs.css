@@ -1,4 +1,4 @@
-/* Docs-site-only styling. Brand styling lives in the generated token files. */
+/* Viewer-only styling. Brand styling lives in brands/<id>/tokens.css and is only applied inside previews. */
 .ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; margin-block: 1.5rem; }
 .ds-swatch { border: 1px solid var(--sl-color-gray-5); border-radius: 8px; overflow: hidden; background: var(--sl-color-bg); }
 .ds-swatch__chip { height: 84px; display: flex; align-items: flex-end; padding: .5rem .75rem; font: 600 .8rem/1 system-ui; }
@@ -6,34 +6,12 @@
 .ds-swatch__body code { font-size: .75rem; }
 .ds-swatch__desc { color: var(--sl-color-gray-3); margin-top: .35rem; }
 .ds-table { width: 100%; }
-.ds-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: 1.5rem; }
-@media (max-width: 640px) { .ds-dodont { grid-template-columns: 1fr; } }
-.ds-dodont > div { border-radius: 8px; padding: 1rem 1.25rem; border: 1px solid var(--sl-color-gray-5); }
-.ds-dodont h4 { margin: 0 0 .5rem; font-size: .95rem; }
-.ds-dodont ul { margin: 0; padding-left: 1.1rem; }
-.ds-dodont .do { border-left: 4px solid #16a34a; }
-.ds-dodont .dont { border-left: 4px solid #dc2626; }
-
-/* Brand preview canvas: everything inside uses only that brand's variables */
-.brand-canvas { background: var(--color-background); color: var(--color-text); font-family: var(--font-body); font-size: var(--size-step-0); padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-lg); margin-block: 1.5rem; line-height: 1.55; }
-.brand-canvas h1, .brand-canvas h2, .brand-canvas h3, .brand-canvas h4 { font-family: var(--font-heading); color: var(--color-text); margin: 0 0 var(--space-2); line-height: 1.2; border: 0; }
-.brand-canvas p { margin: 0 0 var(--space-3); }
-.brand-canvas .muted { color: var(--color-muted); }
-.brand-canvas .row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-block: var(--space-3); align-items: center; }
-.brand-canvas .btn { font: 600 var(--size-step-0) var(--font-body); border: 0; border-radius: var(--radius-md); padding: var(--space-2) var(--space-4); cursor: pointer; }
-.brand-canvas .btn-primary { background: var(--color-primary); color: #fff; }
-.brand-canvas .btn-primary:hover { background: var(--color-primary-hover); }
-.brand-canvas .btn-secondary { background: transparent; color: var(--color-secondary); box-shadow: inset 0 0 0 2px var(--color-secondary); }
-.brand-canvas .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-4); max-width: 22rem; }
-.brand-canvas .tag { background: var(--color-secondary); color: #fff; border-radius: var(--radius-sm); padding: var(--space-1) var(--space-2); font-size: .8rem; }
-.brand-canvas input { font: inherit; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); }
-.ds-specimen { font-family: var(--font-body); background: var(--color-background); color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-4); margin-block: 1.5rem; }
-.ds-specimen > div { margin-bottom: var(--space-3); }
-.ds-specimen .label { font: 400 .75rem system-ui; color: var(--color-muted); display: block; }
-.ds-brief { position: relative; }
-.ds-brief button { cursor: pointer; padding: .5rem 1rem; border-radius: 6px; border: 1px solid var(--sl-color-gray-4); background: var(--sl-color-gray-6); color: var(--sl-color-text); font: inherit; }
-.ds-brief pre { max-height: 22rem; overflow: auto; font-size: .78rem; white-space: pre-wrap; }
+.ds-specimen { border: 1px solid var(--sl-color-gray-5); border-radius: 8px; padding: 1.5rem; margin-block: 1.5rem; }
+.ds-specimen > div { margin-bottom: 1rem; }
+.ds-specimen .label { font: 400 .75rem system-ui; opacity: .7; display: block; }
+.ds-source { font-size: .8rem; color: var(--sl-color-gray-3); }
+.ds-brief button { cursor: pointer; padding: .4rem 1rem; border-radius: 6px; border: 1px solid var(--sl-color-gray-4); background: var(--sl-color-gray-6); color: var(--sl-color-text); font: inherit; margin-right: .5rem; }
+.ds-brief pre { max-height: 32rem; overflow: auto; font-size: .78rem; white-space: pre-wrap; }
 
 /* Neutralise Starlight's flow-margin rule inside layout containers */
-.ds-grid > *, .brand-canvas .row > *, .ds-dodont > * { margin: 0 !important; }
-.ds-specimen > div { margin-top: 0 !important; }
+.ds-grid > *, .ds-specimen > div { margin-top: 0 !important; }

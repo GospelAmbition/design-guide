@@ -1,0 +1,3 @@
+#!/bin/sh
+# Validates brands and checks generated files are up to date. Installed by `npm install` (prepare script).
+npm run --silent check

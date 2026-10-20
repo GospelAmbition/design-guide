@@ -1,23 +1,29 @@
-# Design System (Starlight + Style Dictionary)
+# Design System
 
-Multiple style guides, one docs site. Each guide is a JSON token file; everything else is generated.
+Brand guides as plain files that AI agents (and people) can read and edit directly. The Starlight site is a viewer on top of them.
+
+**Agents: read [`llms.txt`](llms.txt) first.** It explains the layout, the override rules and how to edit.
 
 ## Run it
 ```
-npm install
-npm run dev      # http://localhost:4321
+npm install      # also installs the pre-commit hook
+npm run dev      # http://localhost:4321 — regenerates and reloads as you edit brands/ or system/
+npm run check    # validate brands, fail if generated files are stale
 npm run build    # static site in dist/
 ```
 
-## Add a style guide
-1. Copy `tokens/brands/aurora.json` to `tokens/brands/<name>.json` and edit the values, meta and rules.
-2. Copy `src/content/docs/guides/aurora/` to `src/content/docs/guides/<name>/` and replace `aurora` with `<name>` inside the files.
-3. Add the new stylesheet to `customCss` and a sidebar group in `astro.config.mjs`.
+## Layout
+```
+llms.txt                  entry point for agents (brand list is generated)
+system/                   shared: components/, patterns/, base.css
+brands/<id>/              one folder per brand
+  guidelines.md           name, summary, fonts, icons, exclude + voice and rules
+  tokens.json             DTCG tokens; tokens.<mode>.json for modes like dark
+  components/ patterns/   overrides (same name as shared) and brand-only items
+  assets/                 logos and images, described in assets.md
+  brief.md, tokens.css    GENERATED (committed): never edit by hand
+scripts/                  generate.mjs, check.mjs, lib/brands.mjs
+src/                      the Starlight viewer
+```
 
-## What gets generated (`npm run tokens`)
-- `public/tokens/<name>.css` drop-in CSS variables
-- `public/guides/<name>.md` AI brief (paste into an AI assistant)
-- `public/llms.txt` index for AI tools
-- `src/styles/generated/` and `src/data/` used by the docs site
-
-Never edit the generated files by hand.
+Adding a brand means adding a folder: the sidebar, pages, brief and `llms.txt` entry are generated.

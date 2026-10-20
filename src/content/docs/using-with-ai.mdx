@@ -3,24 +3,27 @@ title: Using this with AI
 description: How to get on-brand output from an AI assistant.
 ---
 
-Every guide has an **AI brief**: a single markdown file containing the exact values and rules for that brand.
+## Agents working in this repo (or through a file/GitHub MCP)
 
-## Quick start
+Point the agent at the repo. It should read `llms.txt` first (`AGENTS.md` and `CLAUDE.md` tell it to). From there it finds each brand's `brief.md`, which has everything in one file: setup, voice, rules, tokens, assets and component code with overrides already applied.
 
-1. Open the guide you need and go to its **For AI** page.
-2. Click **Copy brief to clipboard**.
-3. Paste it at the start of a chat with your AI assistant, then ask for what you need.
+Example prompts:
 
-## Example prompts
+> Using the Harbor brand from the design system, build a settings page with a form and a save button.
 
-> Here is our brand brief. Build a one-page sign-up site for our youth event. Use the CSS variables from the brief, don't hard-code colours.
+> Check this page against the Aurora brand and list anything that breaks the rules.
 
-> Here is our brand brief. Review this page I've made and list anything that breaks the rules.
+> Add a "badge" component to the shared system, then run the check.
 
-> Here is our brand brief. Write the intro paragraph for our newsletter in the brand voice.
+## Chat assistants (no repo access)
 
-## For developers and AI tools
+Open the brand's **Brief for AI** page, click **Copy brief**, and paste it at the start of the conversation.
 
-- `/llms.txt` lists every guide.
-- `/guides/<name>.md` is the brief for one guide.
-- `/tokens/<name>.css` is a drop-in stylesheet of CSS variables.
+## Raw files
+
+The site serves the same paths as the repo:
+
+- `/llms.txt`: the index
+- `/brands/<id>/brief.md`: one brand, resolved
+- `/brands/<id>/tokens.css`: drop-in CSS variables
+- `/brands/<id>/...` and `/system/...`: every source file

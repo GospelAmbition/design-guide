@@ -1,0 +1,115 @@
+---
+// Human viewer for each brand, built straight from brands/ and system/.
+// /guide/<id>/                       overview: guidelines + every component at a glance
+// /guide/<id>/tokens/                swatches, type, token table
+// /guide/<id>/components/<name>/     the resolved component (shared, override or brand-only)
+// /guide/<id>/patterns/<name>/
+// /guide/<id>/assets/
+// /guide/<id>/brief/                 the generated brief, for copy-paste
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import { getCollection, render } from 'astro:content';
+import { loadAll, read, fences, KINDS } from '../../../scripts/lib/brands.mjs';
+import BrandContext from '../../components/BrandContext.astro';
+import Tokens from '../../components/Tokens.astro';
+
+export function getStaticPaths() {
+  const { brands } = loadAll();
+  return brands.flatMap((b) => [
+    { params: { page: b.id }, props: { id: b.id, view: 'overview' } },
+    { params: { page: `${b.id}/tokens` }, props: { id: b.id, view: 'tokens' } },
+    { params: { page: `${b.id}/assets` }, props: { id: b.id, view: 'assets' } },
+    { params: { page: `${b.id}/brief` }, props: { id: b.id, view: 'brief' } },
+    ...KINDS.flatMap((kind) => b[kind].map((d) => ({ params: { page: `${b.id}/${kind}/${d.name}` }, props: { id: b.id, view: 'doc', kind, name: d.name } }))),
+  ]);
+}
+
+const { id, view, kind, name } = Astro.props;
+const brand = loadAll().brands.find((b) => b.id === id);
+const m = brand.meta;
+
+const entries = [...(await getCollection('brandFiles')), ...(await getCollection('systemFiles'))];
+const entryFor = async (path) => {
+  const e = entries.find((x) => x.filePath?.replaceAll('\\', '/').endsWith(path));
+  return e ? (await render(e)).Content : null;
+};
+const cssOf = (d) => fences(d.body).filter((f) => f.lang === 'css').map((f) => f.code).join('\n');
+const all = KINDS.flatMap((k) => brand[k]);
+const byName = (n) => all.find((d) => d.name === n);
+
+let title = m.name, description = m.summary, Content = null, css = '', doc = null, overview = '';
+if (view === 'overview') {
+  Content = await entryFor(`brands/${id}/guidelines.md`);
+  css = brand.components.map(cssOf).join('\n');
+  overview = brand.components.map((d) => fences(d.body).find((f) => f.lang === 'html')?.code ?? '').join('\n');
+} else if (view === 'tokens') {
+  title = `${m.name} tokens`;
+} else if (view === 'assets') {
+  title = `${m.name} assets`;
+  Content = await entryFor(`brands/${id}/assets/assets.md`);
+} else if (view === 'brief') {
+  title = `${m.name} brief for AI`;
+} else {
+  doc = brand[kind].find((d) => d.name === name);
+  title = `${m.name}: ${doc.data.title ?? doc.name}`;
+  description = doc.data.summary;
+  Content = await entryFor(doc.path);
+  css = [...(doc.data.uses ?? []).map(byName).filter(Boolean), doc].map(cssOf).join('\n');
+}
+
+const head = (m.fonts ?? []).map((href) => ({ tag: 'link', attrs: { rel: 'stylesheet', href } }));
+const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
+---
+<StarlightPage frontmatter={{ title, description, head }}>
+  <BrandContext brand={brand} css={css}>
+    {view === 'overview' && (
+      <>
+        <p>{m.summary}</p>
+        <h2>At a glance</h2>
+        <ds-preview><template set:html={overview} /></ds-preview>
+        <Content />
+        <h2>Icons</h2>
+        <p>{m.icons}</p>
+        <p class="ds-source">Source: <code>brands/{id}/guidelines.md</code></p>
+      </>
+    )}
+    {view === 'tokens' && (
+      <>
+        <Tokens brand={brand} />
+        <p class="ds-source">Source: <code>brands/{id}/tokens.json</code>{brand.modes.map((x) => <>, <code>{x.path}</code></>)}</p>
+      </>
+    )}
+    {view === 'assets' && (Content ? <Content /> : <p>No assets yet.</p>)}
+    {view === 'doc' && (
+      <>
+        {doc.origin === 'override' && <Aside type="note">{m.name} override of the shared {doc.name}. Replaces <code>{doc.replaces}</code>.</Aside>}
+        {doc.origin === 'brand' && <Aside type="tip">Only {m.name} has this component.</Aside>}
+        {doc.data.uses?.length > 0 && <p>Also uses the CSS from: {doc.data.uses.join(', ')}.</p>}
+        <Content />
+        <p class="ds-source">Source: <code>{doc.path}</code></p>
+      </>
+    )}
+    {view === 'brief' && (
+      <div class="ds-brief">
+        <p>
+          This is <code>brands/{id}/brief.md</code>: the whole brand in one file, generated from the sources. Agents working in this repo read it directly. For a chat assistant, paste it at the start of the conversation.
+        </p>
+        <p>
+          <button type="button" data-copy>Copy brief</button>
+          <a href={`/brands/${id}/brief.md`}>Raw .md</a> · <a href={`/brands/${id}/tokens.css`}>tokens.css</a>
+        </p>
+        <pre>{brief}</pre>
+      </div>
+    )}
+  </BrandContext>
+</StarlightPage>
+
+<script>
+  document.querySelectorAll('.ds-brief [data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(btn.closest('.ds-brief').querySelector('pre').textContent);
+      btn.textContent = 'Copied';
+      setTimeout(() => (btn.textContent = 'Copy brief'), 1500);
+    });
+  });
+</script>
