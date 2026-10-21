@@ -29,8 +29,8 @@ On the live site this is an SVG `clipPath` (`#clip-rounded-start` / `#clip-round
 ```css
 .drop-shadow { filter: drop-shadow(var(--shadow-drop)); }
 .clip-rounded-start, .clip-rounded-end { display: block; max-width: 100%; aspect-ratio: 1024 / 753; object-fit: cover; }
-.clip-rounded-start { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: var(--space-7); }
-.clip-rounded-end { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: calc(-1 * var(--space-7)); }
-[dir="rtl"] .clip-rounded-start { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: 0; margin-right: var(--space-7); }
-[dir="rtl"] .clip-rounded-end { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: 0; margin-right: calc(-1 * var(--space-7)); }
+.clip-rounded-start { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: var(--space-xl); }
+.clip-rounded-end { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: calc(-1 * var(--space-xl)); }
+[dir="rtl"] .clip-rounded-start { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: 0; margin-right: var(--space-xl); }
+[dir="rtl"] .clip-rounded-end { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: 0; margin-right: calc(-1 * var(--space-xl)); }
 ```

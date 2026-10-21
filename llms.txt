@@ -11,6 +11,7 @@
 
 ## How the source is organised
 
+- `system/composition/<name>.md` — shared layout primitives every brand gets (Every Layout / CUBE CSS: flow, cluster, repel, switcher, center, container). Same format as components. Each primitive is tuned with its own custom properties (`--flow-space`, `--gutter`, `--threshold`, …), set on the element or in a block's CSS; when unset they fall back to the brand's space tokens.
 - `system/components/<name>.md` — shared components every brand gets. Each file has guidance, then one `css` block and one or more `html` example blocks. The site renders live previews from exactly these blocks.
 - `system/patterns/<name>.md` — shared page patterns (hero, sign-up form, …), same format as components. Empty for now.
 - `system/base.css` — base element styles (body, headings, links). Tokens only.
@@ -18,6 +19,8 @@
   - `fonts`: a list of stylesheets. Each is a URL (e.g. Google Fonts) or a path inside the brand folder for self-hosted fonts (e.g. `assets/fonts/fonts.css`).
   - `icons`: one line of text, or a list of icon sets, each `{ name, use, source?, files? }`, where `use` says when to pick that set.
 - `brands/<id>/tokens.json` — design tokens (DTCG format). Groups are free-form: besides colour, font, size and so on, a brand can define `gradient` and `shadow` tokens, whose values may reference colour tokens (`linear-gradient({color.a}, {color.b})`). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
+  - Spacing is a named scale. Every brand must define `space.xs`, `s`, `m`, `l` and `xl`, so shared CSS means the same step everywhere; a brand may add more (`xxs`, `xxl`, `s-m`, …). There is no numbered `--space-1` scale.
+- `brands/<id>/composition/<name>.md` — brand composition primitives: overrides of shared ones or brand-only additions.
 - `brands/<id>/components/<name>.md` — brand components, same format as shared ones.
 - `brands/<id>/patterns/<name>.md` — brand patterns.
 - `brands/<id>/assets/` — logos and images, each described in `assets/assets.md` (what it is, where to use it, minimum size, clear space).
@@ -25,16 +28,16 @@
 
 ### Resolution rules
 
-- A brand gets every shared component and pattern, unless its guidelines frontmatter lists the name in `exclude`.
+- A brand gets every shared composition primitive, component and pattern, unless its guidelines frontmatter lists the name in `exclude`.
 - A brand file with the same name as a shared one replaces it completely. It is not merged with the shared file.
-- A brand file with a new name is a component unique to that brand.
-- A component's `uses: [...]` frontmatter lists other components whose CSS it needs.
+- A brand file with a new name is unique to that brand.
+- A file's `uses: [...]` frontmatter lists the other primitives and components whose CSS it needs.
 
 ## Editing the design system
 
-- Edit only source files: `system/`, `brands/<id>/guidelines.md`, `tokens*.json`, `components/`, `patterns/`, `assets/`, `base.css`, and the hand-written part of this file.
+- Edit only source files: `system/`, `brands/<id>/guidelines.md`, `tokens*.json`, `composition/`, `components/`, `patterns/`, `assets/`, `base.css`, and the hand-written part of this file.
 - Never edit generated files: `brands/<id>/brief.md`, `brands/<id>/tokens.css`, and the GENERATED block below. Run `npm run generate` after editing sources.
-- Component CSS may only use the brand's CSS variables for colours, fonts, weights, sizes, spacing and radii. Small structural values (`0`, `1px` borders, `100%`) are fine.
+- Component CSS may only use the brand's CSS variables for colours, fonts, weights, sizes, spacing and radii. Small structural values (`0`, `1px` borders, `100%`) are fine. A `var(--name, fallback)` with a fallback is a setting and may use any name; a `var()` without one must be a brand token.
 - To add a brand, create `brands/<id>/` with `guidelines.md`, `tokens.json` and `assets/assets.md` (copy an existing brand), then run `npm run generate`.
 - Run `npm run check` before committing. It validates every brand and fails if generated files are stale. The same check runs as a pre-commit hook and in CI.
 - To see the result, run `npm run dev` and open http://localhost:4321/guide/<id>/. Restart the server after adding or removing a brand or component file.
@@ -48,6 +51,15 @@
   Start with `brands/harbor/brief.md`. Source folder: `brands/harbor/`.
 - **Prayer.Global** — Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.
   Start with `brands/prayer-global/brief.md`. Source folder: `brands/prayer-global/`.
+
+## Shared composition
+
+- `system/composition/center.md` — Centres a block horizontally with a maximum width, such as a readable column of text.
+- `system/composition/cluster.md` — A row of items that wraps onto new lines, with even gaps. For tags, buttons, links and icons.
+- `system/composition/container.md` — The page-width wrapper. Centres a section's content at a maximum width with side padding.
+- `system/composition/flow.md` — Even vertical space between the children of an element. The default rhythm for any run of content.
+- `system/composition/repel.md` — Pushes items to opposite ends of a row, and lets them wrap when there isn't room.
+- `system/composition/switcher.md` — Items sit side by side, and all stack at once when the container gets narrower than a threshold. No media queries.
 
 ## Shared components
 

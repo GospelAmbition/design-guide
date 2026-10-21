@@ -4,7 +4,7 @@
 
 Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.
 
-This file is the whole Prayer.Global brand in one place, with shared components and Prayer.Global's overrides already merged. Use it to build or review anything for Prayer.Global. Follow it exactly.
+This file is the whole Prayer.Global brand in one place, with shared composition, components and patterns and Prayer.Global's overrides already merged. Use it to build or review anything for Prayer.Global. Follow it exactly.
 
 ## Setup
 
@@ -13,7 +13,7 @@ This file is the whole Prayer.Global brand in one place, with shared components 
    `<link rel="stylesheet" href="brands/prayer-global/assets/fonts/prayer-global-icons.css">`
 2. Load the variables: `brands/prayer-global/tokens.css` (copy also at the end of this file).
 3. Load the base element styles: `brands/prayer-global/base.css`.
-4. Copy the CSS of each component you use from the Components section. Use only the CSS variables, never raw colours or font names.
+4. Copy the CSS of each composition primitive and component you use from the Composition and Components sections. Use only the CSS variables, never raw colours or font names.
 
 ## Icons
 
@@ -166,13 +166,13 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 
 ### space
 
-- `--space-1`: `0.25rem`
-- `--space-2`: `0.5rem` — Button padding-y, tight list gaps.
-- `--space-3`: `1rem` — Button padding-x, .flow-small, nav padding.
-- `--space-4`: `1.5rem` — Container side padding (gutter 3rem).
-- `--space-5`: `2rem` — .flow-medium, .switcher-md gap.
-- `--space-6`: `3rem` — Footer padding (py-5).
-- `--space-7`: `4rem` — Section padding (.py-6), image overlap margin.
+- `--space-xxs`: `0.25rem`
+- `--space-xs`: `0.5rem` — Button padding-y, tight list gaps.
+- `--space-s`: `1rem` — Button padding-x, .flow-small, nav padding.
+- `--space-s-m`: `1.5rem` — Container side padding (gutter 3rem).
+- `--space-m`: `2rem` — .flow-medium, .switcher-md gap.
+- `--space-l`: `3rem` — Footer padding (py-5).
+- `--space-xl`: `4rem` — Section padding (.py-6), image overlap margin.
 - `--space-input-y`: `5px` — Form field padding top and bottom.
 - `--space-input-x`: `10px` — Form field padding left and right.
 
@@ -248,11 +248,296 @@ There is no wordmark file. The site sets "PRAYER.GLOBAL" as live text in Bebas K
 
 - **Files:** `app-store-badge.svg`, `google-play-badge.png` — the official English badges as used on the site. Use them unchanged and at equal height.
 
+## Composition
+
+### Center
+
+A flex column that centres its children (.center), and a block centred by its own width (.center-block). Brand override (`brands/prayer-global/composition/center.md`), replaces `system/composition/center.md`.
+
+Prayer.Global's own center, from the Composition section of `basic.css`. It replaces the shared Center. On the site, `.center` centres the children of a column, like the shared Center's `data-intrinsic`, and has no maximum width. Markup uses it all over, for example `btn … center w-fit mx-auto`.
+
+#### Code
+
+```html
+<div class="center" style="width: 100%; outline: 1px dashed currentColor">
+  <p>Children are centred in a column.</p>
+  <a class="btn btn-primary-light uppercase" href="#">Centred button</a>
+</div>
+<div class="center-block" style="outline: 1px dashed currentColor">
+  <p>Left-aligned text in a block centred by its own width.</p>
+</div>
+```
+
+```css
+.center { display: flex; flex-direction: column; align-items: center; }
+.center-block { width: fit-content; text-align: left; margin-inline: auto; }
+```
+
+### Cluster
+
+A row of items that wraps onto new lines, with even gaps. For tags, buttons, links and icons. Shared (`system/composition/cluster.md`).
+
+Every Layout's Cluster, as used in CUBE CSS.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--gutter` | `var(--space-s)` | Gap between items, both across and down. |
+| `--cluster-horizontal-alignment` | `flex-start` | `justify-content` of the row. |
+| `--cluster-vertical-alignment` | `center` | `align-items` of the row. |
+
+#### When to use
+
+- A group of buttons, a row of social links, a list of tags.
+
+#### Don't
+
+- Don't use it for two things pushed to opposite ends. Use Repel.
+
+#### Code
+
+```html
+<div class="cluster" role="list" style="padding: 0; margin: 0; list-style: none">
+  <div>First</div>
+  <div>Second item</div>
+  <div>Third</div>
+  <div>A longer fourth item</div>
+  <div>Fifth</div>
+</div>
+```
+
+```css
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-s));
+  justify-content: var(--cluster-horizontal-alignment, flex-start);
+  align-items: var(--cluster-vertical-alignment, center);
+}
+```
+
+### Container
+
+Bootstrap's .container (540–1320px at its breakpoints), with the site's data-gutter-4 and data-no-gutter options. Brand override (`brands/prayer-global/composition/container.md`), replaces `system/composition/container.md`.
+
+Replaces the shared Container. Prayer.Global sections use Bootstrap 5.2's `.container`, which steps between fixed maximum widths instead of growing fluidly. The site adds two options:
+
+- `data-gutter-4`: 1.5rem side padding.
+- `data-no-gutter`: no side padding, for full-bleed photos.
+
+#### Code
+
+```html
+<section style="width: 100%; outline: 1px dashed currentColor">
+  <div class="container" data-gutter-4 style="outline: 1px dashed currentColor">Bootstrap container with 1.5rem side padding.</div>
+</section>
+```
+
+```css
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.75rem;
+  margin-inline: auto;
+}
+.container[data-gutter-4] { padding-inline: var(--space-s-m); }
+.container[data-no-gutter] { padding-inline: 0; }
+@media (min-width: 576px) { .container { max-width: 540px; } }
+@media (min-width: 768px) { .container { max-width: 720px; } }
+@media (min-width: 992px) { .container { max-width: 960px; } }
+@media (min-width: 1200px) { .container { max-width: 1140px; } }
+@media (min-width: 1400px) { .container { max-width: 1320px; } }
+```
+
+### Flow
+
+Vertical space between children, in four fixed sizes. .flow (4rem), .flow-xmedium (3rem), .flow-medium (2rem), .flow-small (1rem). Brand override (`brands/prayer-global/composition/flow.md`), replaces `system/composition/flow.md`.
+
+Prayer.Global's own flow, from the Composition section of `basic.css`. It replaces the shared Flow because the site's version differs in three ways:
+
+- Each size is its own class, so `.flow-small` works without `.flow`.
+- `.flow` defaults to 4rem.
+- It also clears every child's own top and bottom margins.
+
+The site's `--pg-flow-size` override is called `--flow-space` here, as in the shared Flow.
+
+#### When to use
+
+- `.flow-small`: inside a text column (heading, paragraphs, button).
+- `.flow-medium`: between groups inside a section.
+- `.flow`: between whole sections stacked in one wrapper.
+
+#### Code
+
+```html
+<div class="flow-small" style="max-width: 32rem">
+  <h3>Flow small</h3>
+  <p>1rem between each child.</p>
+  <p>Child margins are cleared.</p>
+</div>
+<div class="flow-medium" style="max-width: 32rem">
+  <h3>Flow medium</h3>
+  <p>2rem between each child.</p>
+</div>
+```
+
+```css
+.flow > *,
+.flow-xmedium > *,
+.flow-medium > *,
+.flow-small > * { margin-top: 0; margin-bottom: 0; }
+.flow > * + * { margin-top: var(--flow-space, var(--space-xl)); }
+.flow-xmedium > * + * { margin-top: var(--flow-space, var(--space-l)); }
+.flow-medium > * + * { margin-top: var(--flow-space, var(--space-m)); }
+.flow-small > * + * { margin-top: var(--flow-space, var(--space-s)); }
+```
+
+### Repel
+
+Pushes items to opposite ends of a row. Unlike the shared Repel, it doesn't wrap. Brand override (`brands/prayer-global/composition/repel.md`), replaces `system/composition/repel.md`.
+
+Prayer.Global's own repel, from the Composition section of `basic.css`. It replaces the shared Repel. The site's version keeps the items on one line and leaves vertical alignment at the default.
+
+#### Code
+
+```html
+<div class="repel" style="width: 100%">
+  <strong>Left item</strong>
+  <span>Right item</span>
+</div>
+```
+
+```css
+.repel {
+  display: flex;
+  gap: var(--gutter, var(--space-s));
+  justify-content: space-between;
+}
+```
+
+### Stack
+
+A centred flex column with fixed gaps. .stack-xsm (0.5rem), .stack-sm (1rem), .stack-md (2rem), .stack (4rem). Prayer.Global-only (`brands/prayer-global/composition/stack.md`).
+
+Prayer.Global-only, from the Composition section of `basic.css`. Unlike Every Layout's Stack, which is the same as Flow, this one also centres its children. Use it for centred groups such as an icon, a title and a button.
+
+#### Options
+
+- `data-grid` switches to grid layout, so children can stretch to the full width.
+- `data-stretch` stretches the children instead of centring them.
+
+#### Code
+
+```html
+<div class="stack-sm" style="width: 100%">
+  <i class="icon icon-small pg-relay" aria-hidden="true"></i>
+  <h3>Centred group</h3>
+  <a class="btn btn-primary-light uppercase" href="#">Action</a>
+</div>
+```
+
+```css
+.stack-xsm,
+.stack-sm,
+.stack-md,
+.stack { display: flex; flex-direction: column; align-items: center; }
+.stack-sm[data-grid],
+.stack-md[data-grid],
+.stack[data-grid] { display: grid; }
+.stack-sm[data-stretch],
+.stack-md[data-stretch],
+.stack[data-stretch] { align-items: stretch; }
+.stack-xsm > *,
+.stack-sm > *,
+.stack-md > *,
+.stack > * { margin-top: 0; margin-bottom: 0; }
+.stack-xsm > * + * { margin-top: var(--flow-space, var(--space-xs)); }
+.stack-sm > * + * { margin-top: var(--flow-space, var(--space-s)); }
+.stack-md > * + * { margin-top: var(--flow-space, var(--space-m)); }
+.stack > * + * { margin-top: var(--flow-space, var(--space-xl)); }
+```
+
+### Switcher
+
+Items sit side by side, and all stack at once when the container gets narrower than a threshold. No media queries. Shared (`system/composition/switcher.md`).
+
+Every Layout's Switcher. It switches on the width of the container, not the viewport, so it works anywhere on the page.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--threshold` | `30rem` | Container width below which every item stacks. |
+| `--gutter` | `var(--space-s)` | Gap between items. |
+
+Five or more children always stack. The Switcher is for two to four items.
+
+#### When to use
+
+- Two-column sections (text beside an image), a row of three stats, pricing tiers.
+
+#### Don't
+
+- Don't use it for more than four items. Use a grid.
+
+#### Code
+
+```html
+<div class="switcher" style="width: 100%">
+  <div style="outline: 1px dashed currentColor; padding: 1rem">One</div>
+  <div style="outline: 1px dashed currentColor; padding: 1rem">Two</div>
+  <div style="outline: 1px dashed currentColor; padding: 1rem">Three</div>
+</div>
+```
+
+```css
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-s));
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--threshold, 30rem) - 100%) * 999);
+}
+.switcher > :nth-last-child(n + 5),
+.switcher > :nth-last-child(n + 5) ~ * {
+  flex-basis: 100%;
+}
+```
+
+### Switcher variants
+
+Prayer.Global's switcher sizes and direction. .switcher-md (40rem / 2rem gap), .switcher-lg (55rem / 3rem gap), .switcher-reverse. Prayer.Global-only (`brands/prayer-global/composition/switcher-variants.md`). Also needs the CSS from: switcher.
+
+Prayer.Global-only, added on top of the shared Switcher. The site's switcher stacks below 27rem by default (the shared Switcher uses 30rem), so this file sets that default too. Use the classes together with `.switcher`: `class="switcher switcher-md switcher-reverse"`.
+
+- `.switcher-md`: stacks below 40rem, with a 2rem gap. Most two-column sections on the home page use it.
+- `.switcher-lg`: stacks below 55rem, with a 3rem gap.
+- `.switcher-reverse`: puts the last item first when side by side, for an image on the left with its text second in the source.
+
+#### Code
+
+```html
+<div class="switcher switcher-md switcher-reverse" style="width: 100%">
+  <div style="outline: 1px dashed currentColor; padding: 1rem">First in source, shown on the right</div>
+  <div style="outline: 1px dashed currentColor; padding: 1rem">Second in source, shown on the left</div>
+</div>
+```
+
+```css
+.switcher { --threshold: 27rem; }
+.switcher-md { --threshold: 40rem; --gutter: var(--space-m); }
+.switcher-lg { --threshold: 55rem; --gutter: var(--space-l); }
+.switcher-reverse { flex-direction: row-reverse; }
+```
+
 ## Components
 
 ### Button
 
-Bootstrap .btn restyled as a pill with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest. Brand override (`brands/prayer-global/components/button.md`), replaces `system/components/button.md`.
+Bootstrap .btn restyled as a pill with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest. Brand override (`brands/prayer-global/components/button.md`), replaces `system/components/button.md`. Also needs the CSS from: utilities.
 
 Class names are the live site's own (Bootstrap 5.2 plus prayer-global-porch overrides), so markup copied from prayer.global keeps working.
 
@@ -311,7 +596,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   --btn-hover-bg: var(--btn-bg);
   --btn-hover-border: var(--btn-border);
   display: inline-block;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-xs) var(--space-s);
   font-family: var(--font-body);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);
@@ -332,7 +617,6 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 .btn:focus-visible { box-shadow: none; outline: 2px solid var(--color-secondary); outline-offset: 2px; }
 .btn:disabled { --btn-bg: var(--color-grey); --btn-border: var(--color-grey); opacity: 0.65; pointer-events: none; }
 .btn-lg { font-size: var(--size-large); }
-.py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
 
 .btn-cta {
   --btn-hover-bg: transparent;
@@ -430,10 +714,10 @@ On the live site this is an SVG `clipPath` (`#clip-rounded-start` / `#clip-round
 ```css
 .drop-shadow { filter: drop-shadow(var(--shadow-drop)); }
 .clip-rounded-start, .clip-rounded-end { display: block; max-width: 100%; aspect-ratio: 1024 / 753; object-fit: cover; }
-.clip-rounded-start { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: var(--space-7); }
-.clip-rounded-end { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: calc(-1 * var(--space-7)); }
-[dir="rtl"] .clip-rounded-start { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: 0; margin-right: var(--space-7); }
-[dir="rtl"] .clip-rounded-end { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: 0; margin-right: calc(-1 * var(--space-7)); }
+.clip-rounded-start { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: var(--space-xl); }
+.clip-rounded-end { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: calc(-1 * var(--space-xl)); }
+[dir="rtl"] .clip-rounded-start { border-radius: 0 36.768% 36.768% 0 / 0 50% 50% 0; margin-left: 0; margin-right: var(--space-xl); }
+[dir="rtl"] .clip-rounded-end { border-radius: 36.768% 0 0 36.768% / 50% 0 0 50%; margin-left: 0; margin-right: calc(-1 * var(--space-xl)); }
 ```
 
 ### Input
@@ -514,73 +798,9 @@ input[type="checkbox"]:not([role="switch"]):disabled { --checkbox-color: var(--c
 input[type="checkbox"]:not([role="switch"]):focus { outline: max(2px, 0.15em) solid var(--checkbox-color); outline-offset: max(2px, 0.15em); }
 ```
 
-### Layout
-
-The site's layout primitives. .container for page width, .switcher for side-by-side columns that stack on narrow screens, .flow-* for vertical rhythm, .center and .cluster. Prayer.Global-only (`brands/prayer-global/components/layout.md`).
-
-From prayer-global-porch `basic.css` ("Composition", based on Every Layout) and Bootstrap's `.container`. Every section and pattern is built from these.
-
-| Class | What it does |
-| --- | --- |
-| `.container` | Centres content at Bootstrap widths (540 / 720 / 960 / 1140 / 1320px). `data-gutter-4` gives 1.5rem side padding. |
-| `.switcher` | Children sit side by side and all stack once the container is narrower than `--switcher-width` (27rem; 40rem with `.switcher-md`). `.switcher-reverse` flips the order. |
-| `.flow-small` / `.flow-medium` | 1rem / 2rem between children. |
-| `.center` | A centred column. |
-| `.cluster` | A wrapping row with 1rem gaps. |
-| `.py-6` | 4rem section padding top and bottom. |
-
-#### Do
-
-- Wrap section content in `.container`, and two-column content in `.switcher.switcher-md`.
-
-#### Code
-
-```html
-<div class="container" data-gutter-4 style="outline: 1px dashed currentColor">
-  <div class="switcher switcher-md">
-    <div class="flow-small"><h3>Column one</h3><p>Sits beside column two on wide screens.</p></div>
-    <div class="flow-small"><h3>Column two</h3><p>Stacks under column one when narrow.</p></div>
-  </div>
-</div>
-```
-
-```css
-.container { width: 100%; padding-inline: 0.75rem; margin-inline: auto; box-sizing: border-box; }
-.container[data-gutter-4] { padding-inline: var(--space-4); }
-.container[data-no-gutter] { padding-inline: 0; }
-@media (min-width: 576px) { .container { max-width: 540px; } }
-@media (min-width: 768px) { .container { max-width: 720px; } }
-@media (min-width: 992px) { .container { max-width: 960px; } }
-@media (min-width: 1200px) { .container { max-width: 1140px; } }
-@media (min-width: 1400px) { .container { max-width: 1320px; } }
-
-.switcher { display: flex; flex-wrap: wrap; gap: var(--space, 1rem); }
-.switcher > * { flex-grow: 1; flex-basis: calc((var(--switcher-width, 27rem) - 100%) * 999); }
-.switcher > :nth-last-child(n + 5), .switcher > :nth-last-child(n + 5) ~ * { flex-basis: 100%; }
-.switcher-md { --switcher-width: 40rem; --space: 2rem; }
-.switcher-reverse { flex-direction: row-reverse; }
-
-.flow-small > *, .flow-medium > * { margin-top: 0; margin-bottom: 0; }
-.flow-small > * + * { margin-top: var(--space-3); }
-.flow-medium > * + * { margin-top: var(--space-5); }
-
-.center { display: flex; flex-direction: column; align-items: center; }
-.cluster { display: flex; gap: var(--space-3); align-items: center; justify-content: flex-start; flex-wrap: wrap; }
-.text-center { text-align: center; }
-.align-items-center { align-items: center; }
-.w-fit { width: fit-content; }
-.mx-auto { margin-inline: auto; }
-.py-6 { padding-top: var(--space-7); padding-bottom: var(--space-7); }
-.pt-6 { padding-top: var(--space-7); }
-.pb-6 { padding-bottom: var(--space-7); }
-.grow-2 { flex-grow: 2; }
-.grow-3 { flex-grow: 3; }
-.grow-4 { flex-grow: 4; }
-```
-
 ### Nav bar
 
-Sticky three-column bar. Share and streak on the left, the outlined "Prayer.Global" title in the centre, login and the menu button on the right. Prayer.Global-only (`brands/prayer-global/components/nav-bar.md`). Also needs the CSS from: icon, layout.
+Sticky three-column bar. Share and streak on the left, the outlined "Prayer.Global" title in the centre, login and the menu button on the right. Prayer.Global-only (`brands/prayer-global/components/nav-bar.md`). Also needs the CSS from: icon, cluster.
 
 From `pages/assets/nav.php`. There are three versions:
 
@@ -639,23 +859,23 @@ From `pages/assets/nav.php`. There are three versions:
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-s) var(--space-s-m);
   max-width: 1320px;
   margin-inline: auto;
   box-sizing: border-box;
 }
 .pg-navbar a { text-decoration: none; color: inherit; }
-.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-3); }
+.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-s); }
 .white-bg { background-color: var(--color-white); }
 .brand { color: var(--color-brand); }
 .navbar-dark { background-color: var(--color-brand); color: var(--color-white); }
 .icon-button { cursor: pointer; color: inherit; background: none; border: 0; padding: 0; border-radius: var(--radius-md); margin: 2px; display: flex; }
-.streak-link { display: flex; align-items: center; gap: var(--space-1); }
+.streak-link { display: flex; align-items: center; gap: var(--space-xxs); }
 .streak-link .icon { color: var(--color-secondary); }
 .navbar__title {
   justify-self: center;
   margin: 0;
-  padding: 0 var(--space-3);
+  padding: 0 var(--space-s);
   border: 1px solid currentColor;
   border-radius: var(--radius-box);
   font-size: var(--size-nav-title);
@@ -671,7 +891,7 @@ From `pages/assets/nav.php`. There are three versions:
 
 ### Stat
 
-A big Bebas Kai number over an uppercase Europa label. Three in a row for live mission figures. Prayer.Global-only (`brands/prayer-global/components/stat.md`). Also needs the CSS from: layout.
+A big Bebas Kai number over an uppercase Europa label. Three in a row for live mission figures. Prayer.Global-only (`brands/prayer-global/components/stat.md`). Also needs the CSS from: switcher, switcher-variants.
 
 From the home page stats ("Current lap status", "Laps completed", "Total intercessors"). The site's markup is `<span class="four-em font-title">` over `<p class="uppercase one-em">` in a `.lh-base.text-center` column.
 
@@ -768,13 +988,51 @@ From the About page ("Historic moment", "How it works", "Global race", "Moravian
 .pg-accordion__toggle[aria-expanded="true"]::after { content: "\e91e"; }
 ```
 
+### Utilities
+
+The single-purpose classes Prayer.Global's markup relies on. Section padding (.py-6), Bootstrap spacing and alignment, flex grow, widths. Prayer.Global-only (`brands/prayer-global/components/utilities.md`).
+
+CUBE CSS's utility layer for this brand: one class, one job. They come from the Utilities section of `basic.css` (`.py-6`, `.w-fit`, `.w-90`, `.grow-*`, `.font-italic`, `.cover`…) and from the Bootstrap 5.2 utilities the templates use (`.px-4`, `.py-5`, `.mx-auto`, `.text-center`…), with values as tokens.
+
+#### Code
+
+```html
+<div class="text-center py-6" style="width: 100%; outline: 1px dashed currentColor">
+  <p class="w-fit mx-auto px-4" style="outline: 1px dashed currentColor">.w-fit .mx-auto .px-4 inside .py-6 .text-center</p>
+</div>
+```
+
+```css
+.text-center { text-align: center; }
+.align-items-center { align-items: center; }
+.w-fit { width: fit-content; }
+.w-90 { width: 90%; }
+.w-60ch { max-width: 60ch; }
+.mx-auto { margin-inline: auto; }
+.grow-1 { flex-grow: 1; }
+.grow-2 { flex-grow: 2; }
+.grow-3 { flex-grow: 3; }
+.grow-4 { flex-grow: 4; }
+.font-italic { font-style: italic; }
+.fw-bold { font-weight: var(--weight-strong); }
+.cover { background-size: cover; background-repeat: no-repeat; }
+.py-1 { padding-top: var(--space-xxs); padding-bottom: var(--space-xxs); }
+.py-5 { padding-top: var(--space-l); padding-bottom: var(--space-l); }
+.py-6 { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+.pt-4 { padding-top: var(--space-s-m); }
+.pt-6 { padding-top: var(--space-xl); }
+.pb-6 { padding-bottom: var(--space-xl); }
+.px-4 { padding-left: var(--space-s-m); padding-right: var(--space-s-m); }
+.px-5 { padding-left: var(--space-l); padding-right: var(--space-l); }
+```
+
 Not available for Prayer.Global (excluded on purpose, don't build them): card, tag.
 
 ## Patterns
 
 ### Get the app
 
-A "Get the app" title and the App Store and Google Play badges beside the two-phone mockup. Prayer.Global-only (`brands/prayer-global/patterns/app-download.md`). Also needs the CSS from: layout.
+A "Get the app" title and the App Store and Google Play badges beside the two-phone mockup. Prayer.Global-only (`brands/prayer-global/patterns/app-download.md`). Also needs the CSS from: center, container, flow, switcher, switcher-variants, utilities.
 
 From the bottom of the home page.
 
@@ -808,13 +1066,13 @@ From the bottom of the home page.
 ```
 
 ```css
-.app-badges { gap: var(--space-2); }
+.app-badges { gap: var(--space-xs); }
 .app-badges img { height: 3.5rem; width: auto; display: block; }
 ```
 
 ### Call-out box
 
-A navy box inside the page column with an uppercase h4 question and one blue-gradient CTA with a chevron. Prayer.Global-only (`brands/prayer-global/patterns/callout-band.md`). Also needs the CSS from: button, icon.
+A navy box inside the page column with an uppercase h4 question and one blue-gradient CTA with a chevron. Prayer.Global-only (`brands/prayer-global/patterns/callout-band.md`). Also needs the CSS from: button, icon, utilities.
 
 "Want to create your own Prayer Relay?" on the Prayer Relays page (`pages/challenges/active-list.php`). The Donate page's "Donate online" box uses the same navy block.
 
@@ -841,18 +1099,17 @@ A navy box inside the page column with an uppercase h4 question and one blue-gra
 ```
 
 ```css
-.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-4) var(--space-3); }
+.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s-m) var(--space-s); }
 .callout-box h4 { font-weight: var(--weight-regular); }
-.callout-box .btn { margin-top: var(--space-4); }
+.callout-box .btn { margin-top: var(--space-s-m); }
 .has-icon { position: relative; }
-.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-2); }
-.px-5 { padding-left: var(--space-6); padding-right: var(--space-6); }
+.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xs); }
 .callout-box .two-rem.btn { font-size: 1.4rem; }
 ```
 
 ### Donate band
 
-Light-blue band. Photo on the left; statement heading, short copy, a white Donate button and the Gospel Ambition logo on the right. Prayer.Global-only (`brands/prayer-global/patterns/donate-band.md`). Also needs the CSS from: button, layout.
+Light-blue band. Photo on the left; statement heading, short copy, a white Donate button and the Gospel Ambition logo on the right. Prayer.Global-only (`brands/prayer-global/patterns/donate-band.md`). Also needs the CSS from: button, center, cluster, container, flow, switcher, utilities.
 
 "Gospel Ambition tools and trainings are 100% free, thanks to people like you." on the home page (`section.brand-lightest-bg.white`).
 
@@ -892,13 +1149,11 @@ Light-blue band. Photo on the left; statement heading, short copy, a white Donat
 .donate-band__actions { justify-content: space-between; }
 .donate-band__logo { width: 135px; }
 .donate-band__logo img { width: 100%; display: block; }
-.py-5 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```
 
 ### Feature band
 
-Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the left, a clipped image panel on the right. Prayer.Global-only (`brands/prayer-global/patterns/feature-band.md`). Also needs the CSS from: button, icon, image-panel, layout.
+Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the left, a clipped image panel on the right. Prayer.Global-only (`brands/prayer-global/patterns/feature-band.md`). Also needs the CSS from: button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities.
 
 "How it works" and "Prayer relays" on the home page (`section.brand-lightest-bg.blue-orange-gradient.py-6`). Alternate it with the white [Feature section](../feature-section/).
 
@@ -937,12 +1192,11 @@ Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the 
 
 ```css
 .blue-orange-gradient { background-image: var(--gradient-blue-orange); }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```
 
 ### Feature section
 
-White section. Clipped image panel on the left, Bebas Kai title with icon, short copy and one button on the right. Prayer.Global-only (`brands/prayer-global/patterns/feature-section.md`). Also needs the CSS from: button, icon, image-panel, layout.
+White section. Clipped image panel on the left, Bebas Kai title with icon, short copy and one button on the right. Prayer.Global-only (`brands/prayer-global/patterns/feature-section.md`). Also needs the CSS from: button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities.
 
 "Prayer fuel" and "My prayer activity" on the home page. It's the [Feature band](../feature-band/) on white, with the columns reversed (`.switcher-reverse`).
 
@@ -974,13 +1228,9 @@ White section. Clipped image panel on the left, Bebas Kai title with icon, short
 </section>
 ```
 
-```css
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
-```
-
 ### Footer
 
-Navy, centred. Credit lines, a single column of links, the copyright. Prayer.Global-only (`brands/prayer-global/patterns/footer.md`). Also needs the CSS from: layout.
+Navy, centred. Credit lines, a single column of links, the copyright. Prayer.Global-only (`brands/prayer-global/patterns/footer.md`). Also needs the CSS from: container, utilities.
 
 From `pages/assets/working-footer.php`. The live footer also repeats the app badges between the credits and the links.
 
@@ -1020,14 +1270,11 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
 .one-rem { font-size: var(--size-footer); }
 .pg-footer a { text-decoration: none; color: var(--color-brand-highlight); }
 .pg-footer a.white { color: var(--color-white); }
-.fw-bold { font-weight: var(--weight-strong); }
-.py-5 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-.pt-4 { padding-top: var(--space-4); }
 ```
 
 ### Hero
 
-Full-screen dark world map with the giant "Prayer.Global" title, the light-blue tagline, the white logo mark and one orange CTA. Prayer.Global-only (`brands/prayer-global/patterns/hero.md`). Also needs the CSS from: button, icon, layout.
+Full-screen dark world map with the giant "Prayer.Global" title, the light-blue tagline, the white logo mark and one orange CTA. Prayer.Global-only (`brands/prayer-global/patterns/hero.md`). Also needs the CSS from: button, icon, center.
 
 The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes use viewport height, so the whole hero fits one screen. Below 768px the title and tagline switch to fixed sizes.
 
@@ -1075,7 +1322,7 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
   background-repeat: no-repeat;
   background-position: top;
 }
-.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-3); }
+.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-s); }
 .hero .heading {
   font-family: var(--font-heading);
   font-size: var(--size-hero-title);
@@ -1092,8 +1339,8 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
 }
 .hero .heading__logo { font-size: var(--size-hero-logo); }
 .hero .btn-cta { font-size: var(--size-hero-cta); }
-.hero__next { margin-top: var(--space-2); text-decoration: none; }
-.hero .center { margin-block: var(--space-4); }
+.hero__next { margin-top: var(--space-xs); text-decoration: none; }
+.hero .center { margin-block: var(--space-s-m); }
 @media (max-width: 767px) {
   .hero .heading { font-size: 62px; }
   .hero .sub-heading { font-size: 32px; }
@@ -1102,7 +1349,7 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
 
 ### Intro section
 
-Centred statement heading in Europa, a few short lines, a quote, and the CTA, over a faint light-blue world map. Prayer.Global-only (`brands/prayer-global/patterns/intro-section.md`). Also needs the CSS from: button, layout.
+Centred statement heading in Europa, a few short lines, a quote, and the CTA, over a faint light-blue world map. Prayer.Global-only (`brands/prayer-global/patterns/intro-section.md`). Also needs the CSS from: button, center, container, flow, utilities.
 
 The first section under the hero ("Want to pray globally but don't know where to start?").
 
@@ -1134,15 +1381,9 @@ The first section under the hero ("Want to pray globally but don't know where to
 </section>
 ```
 
-```css
-.cover { background-size: cover; background-repeat: no-repeat; }
-.font-italic { font-style: italic; }
-.w-60ch { max-width: 60ch; }
-```
-
 ### Movement band
 
-Navy section with a Bebas Kai title and short text on the left, an uppercase list with prayer icons on the right, and two buttons underneath. Prayer.Global-only (`brands/prayer-global/patterns/movement-band.md`). Also needs the CSS from: button, icon, layout.
+Navy section with a Bebas Kai title and short text on the left, an uppercase list with prayer icons on the right, and two buttons underneath. Prayer.Global-only (`brands/prayer-global/patterns/movement-band.md`). Also needs the CSS from: button, icon, container, flow, switcher, switcher-variants, utilities.
 
 "Mobilize a movement of prayer" on the home page (`section.brand-bg.py-6`).
 
@@ -1186,13 +1427,13 @@ Navy section with a Bebas Kai title and short text on the left, an uppercase lis
 
 ```css
 .movement-list { font-size: var(--size-one-em); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0; }
-.movement-list li { display: flex; align-items: center; gap: var(--space-3); }
+.movement-list li { display: flex; align-items: center; gap: var(--space-s); }
 @media (max-width: 768px) { .movement-list { font-size: 1em; } }
 ```
 
 ### Stats band
 
-The blue world map beside a Europa statement heading, then three live stats and one orange CTA on a faint grey wash. Prayer.Global-only (`brands/prayer-global/patterns/stats-band.md`). Also needs the CSS from: button, stat, layout.
+The blue world map beside a Europa statement heading, then three live stats and one orange CTA on a faint grey wash. Prayer.Global-only (`brands/prayer-global/patterns/stats-band.md`). Also needs the CSS from: button, stat, center, container, flow, switcher, switcher-variants, utilities.
 
 "Join thousands of intercessors praying daily for the nations" on the home page.
 
@@ -1230,8 +1471,6 @@ The blue world map beside a Europa statement heading, then three live stats and 
 
 ```css
 .grey-gradient { background-image: var(--gradient-grey); }
-.w-90 { width: 90%; }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```
 
 ## Base styles (`brands/prayer-global/base.css`)
@@ -1252,7 +1491,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-weight: var(--weight-regular);
   line-height: var(--leading-heading);
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--space-xs);
 }
 h1, h2, h3 { font-family: var(--font-heading); }
 h1 { font-size: var(--size-h1); }
@@ -1273,18 +1512,18 @@ h5 { font-size: var(--size-h5); margin-bottom: 0; }
 .font-weight-bold { font-weight: var(--weight-strong); }
 .uppercase { text-transform: uppercase; }
 
-p { margin: 0 0 var(--space-3); }
+p { margin: 0 0 var(--space-s); }
 a { color: var(--color-brand-lighter); transition: 0.3s all ease; }
 a:hover, a:active { color: var(--color-brand-lightest); }
 
 /* Lists use a "●" bullet in the text colour. role="list" removes it. */
-ul { list-style: none; margin: 0 0 var(--space-3); padding: 0; line-height: var(--leading-body); }
+ul { list-style: none; margin: 0 0 var(--space-s); padding: 0; line-height: var(--leading-body); }
 ul li { position: relative; }
 ul:not([role="list"]) li { padding-left: 1.7em; }
 ul li::before { content: "●"; font-size: 1.5em; position: absolute; left: 0; top: 0.1em; line-height: 0.9; }
 ul[role="list"] li::before { content: none; }
-li + li { margin-top: var(--space-3); }
-[data-tight] > li + li { margin-top: var(--space-2); }
+li + li { margin-top: var(--space-s); }
+[data-tight] > li + li { margin-top: var(--space-xs); }
 [dir="rtl"] ul:not([role="list"]) li { padding-left: 0; padding-right: 1.7em; }
 [dir="rtl"] ul li::before { left: auto; right: 0; }
 
@@ -1370,13 +1609,13 @@ li + li { margin-top: var(--space-3); }
   --radius-md: 10px; /** Form fields, icon buttons. */
   --radius-box: 0.375rem; /** Bootstrap .rounded: the outlined nav title. */
   --radius-pill: 100px; /** Every button. */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem; /** Button padding-y, tight list gaps. */
-  --space-3: 1rem; /** Button padding-x, .flow-small, nav padding. */
-  --space-4: 1.5rem; /** Container side padding (gutter 3rem). */
-  --space-5: 2rem; /** .flow-medium, .switcher-md gap. */
-  --space-6: 3rem; /** Footer padding (py-5). */
-  --space-7: 4rem; /** Section padding (.py-6), image overlap margin. */
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem; /** Button padding-y, tight list gaps. */
+  --space-s: 1rem; /** Button padding-x, .flow-small, nav padding. */
+  --space-s-m: 1.5rem; /** Container side padding (gutter 3rem). */
+  --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
+  --space-l: 3rem; /** Footer padding (py-5). */
+  --space-xl: 4rem; /** Section padding (.py-6), image overlap margin. */
   --space-input-y: 5px; /** Form field padding top and bottom. */
   --space-input-x: 10px; /** Form field padding left and right. */
 }

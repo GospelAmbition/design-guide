@@ -1,7 +1,7 @@
 ---
 title: Get the app
 summary: A "Get the app" title and the App Store and Google Play badges beside the two-phone mockup.
-uses: [layout]
+uses: [center, container, flow, switcher, switcher-variants, utilities]
 ---
 
 From the bottom of the home page.
@@ -36,6 +36,6 @@ From the bottom of the home page.
 ```
 
 ```css
-.app-badges { gap: var(--space-2); }
+.app-badges { gap: var(--space-xs); }
 .app-badges img { height: 3.5rem; width: auto; display: block; }
 ```

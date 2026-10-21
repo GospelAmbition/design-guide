@@ -1,7 +1,7 @@
 ---
 title: Footer
 summary: Navy, centred. Credit lines, a single column of links, the copyright.
-uses: [layout]
+uses: [container, utilities]
 ---
 
 From `pages/assets/working-footer.php`. The live footer also repeats the app badges between the credits and the links.
@@ -42,7 +42,4 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
 .one-rem { font-size: var(--size-footer); }
 .pg-footer a { text-decoration: none; color: var(--color-brand-highlight); }
 .pg-footer a.white { color: var(--color-white); }
-.fw-bold { font-weight: var(--weight-strong); }
-.py-5 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-.pt-4 { padding-top: var(--space-4); }
 ```

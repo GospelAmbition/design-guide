@@ -25,7 +25,7 @@ summary: A small filled label for a category or status.
   background: var(--color-secondary);
   color: var(--color-on-secondary);
   border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-xs) var(--space-s);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);
 }

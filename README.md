@@ -15,11 +15,11 @@ npm run build    # static site in dist/
 ## Layout
 ```
 llms.txt                  entry point for agents (brand list is generated)
-system/                   shared: components/, patterns/, base.css
+system/                   shared: composition/, components/, patterns/, base.css
 brands/<id>/              one folder per brand
   guidelines.md           name, summary, fonts, icons, exclude + voice and rules
   tokens.json             DTCG tokens; tokens.<mode>.json for modes like dark
-  components/ patterns/   overrides (same name as shared) and brand-only items
+  composition/ components/ patterns/   overrides (same name as shared) and brand-only items
   assets/                 logos and images, described in assets.md
   brief.md, tokens.css    GENERATED (committed): never edit by hand
 scripts/                  generate.mjs, check.mjs, lib/brands.mjs

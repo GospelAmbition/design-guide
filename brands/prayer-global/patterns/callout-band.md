@@ -1,7 +1,7 @@
 ---
 title: Call-out box
 summary: A navy box inside the page column with an uppercase h4 question and one blue-gradient CTA with a chevron.
-uses: [button, icon]
+uses: [button, icon, utilities]
 ---
 
 "Want to create your own Prayer Relay?" on the Prayer Relays page (`pages/challenges/active-list.php`). The Donate page's "Donate online" box uses the same navy block.
@@ -29,11 +29,10 @@ uses: [button, icon]
 ```
 
 ```css
-.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-4) var(--space-3); }
+.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s-m) var(--space-s); }
 .callout-box h4 { font-weight: var(--weight-regular); }
-.callout-box .btn { margin-top: var(--space-4); }
+.callout-box .btn { margin-top: var(--space-s-m); }
 .has-icon { position: relative; }
-.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-2); }
-.px-5 { padding-left: var(--space-6); padding-right: var(--space-6); }
+.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xs); }
 .callout-box .two-rem.btn { font-size: 1.4rem; }
 ```

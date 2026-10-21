@@ -1,7 +1,7 @@
 ---
 title: Stat
 summary: A big Bebas Kai number over an uppercase Europa label. Three in a row for live mission figures.
-uses: [layout]
+uses: [switcher, switcher-variants]
 ---
 
 From the home page stats ("Current lap status", "Laps completed", "Total intercessors"). The site's markup is `<span class="four-em font-title">` over `<p class="uppercase one-em">` in a `.lh-base.text-center` column.

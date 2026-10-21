@@ -4,7 +4,7 @@
 
 Warm, friendly and welcoming. For community and consumer-facing sites.
 
-This file is the whole Aurora brand in one place, with shared components and Aurora's overrides already merged. Use it to build or review anything for Aurora. Follow it exactly.
+This file is the whole Aurora brand in one place, with shared composition, components and patterns and Aurora's overrides already merged. Use it to build or review anything for Aurora. Follow it exactly.
 
 ## Setup
 
@@ -12,7 +12,7 @@ This file is the whole Aurora brand in one place, with shared components and Aur
    `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;600&display=swap">`
 2. Load the variables: `brands/aurora/tokens.css` (copy also at the end of this file).
 3. Load the base element styles: `system/base.css`.
-4. Copy the CSS of each component you use from the Components section. Use only the CSS variables, never raw colours or font names.
+4. Copy the CSS of each composition primitive and component you use from the Composition and Components sections. Use only the CSS variables, never raw colours or font names.
 
 ## Icons
 
@@ -94,11 +94,11 @@ Warm, plain-spoken, encouraging. Short sentences. Speak directly to the reader.
 
 ### space
 
-- `--space-1`: `0.25rem`
-- `--space-2`: `0.5rem`
-- `--space-3`: `1rem`
-- `--space-4`: `1.5rem`
-- `--space-5`: `2.5rem`
+- `--space-xs`: `0.25rem`
+- `--space-s`: `0.5rem`
+- `--space-m`: `1rem`
+- `--space-l`: `1.5rem`
+- `--space-xl`: `2.5rem`
 
 
 ## Assets
@@ -115,11 +115,268 @@ Warm, plain-spoken, encouraging. Short sentences. Speak directly to the reader.
 - **Clear space:** at least the height of the mark's arc on every side.
 - **Don't:** recolour, stretch, or separate the mark from the wordmark.
 
+## Composition
+
+### Center
+
+Centres a block horizontally with a maximum width, such as a readable column of text. Shared (`system/composition/center.md`).
+
+Every Layout's Center. It centres the box itself, not the text inside it.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--measure` | `60ch` | Maximum width of the content. |
+| `--gutter` | `0` | Minimum space on each side on narrow screens. |
+
+Add `data-intrinsic` to also centre the children by their own width, for example a button below a paragraph.
+
+#### When to use
+
+- A column of article text, a form, a narrow intro inside a wide section.
+
+#### Don't
+
+- Don't use it as the page-width wrapper. That's Container.
+
+#### Code
+
+```html
+<div class="center" data-intrinsic style="outline: 1px dashed currentColor; width: 100%">
+  <p>A centred column, at most 60 characters wide.</p>
+  <span style="outline: 1px dashed currentColor">Intrinsic child</span>
+</div>
+```
+
+```css
+.center {
+  box-sizing: content-box;
+  max-inline-size: var(--measure, 60ch);
+  margin-inline: auto;
+  padding-inline: var(--gutter, 0);
+}
+.center[data-intrinsic] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+```
+
+### Cluster
+
+A row of items that wraps onto new lines, with even gaps. For tags, buttons, links and icons. Shared (`system/composition/cluster.md`).
+
+Every Layout's Cluster, as used in CUBE CSS.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--gutter` | `var(--space-s)` | Gap between items, both across and down. |
+| `--cluster-horizontal-alignment` | `flex-start` | `justify-content` of the row. |
+| `--cluster-vertical-alignment` | `center` | `align-items` of the row. |
+
+#### When to use
+
+- A group of buttons, a row of social links, a list of tags.
+
+#### Don't
+
+- Don't use it for two things pushed to opposite ends. Use Repel.
+
+#### Code
+
+```html
+<div class="cluster" role="list" style="padding: 0; margin: 0; list-style: none">
+  <div>First</div>
+  <div>Second item</div>
+  <div>Third</div>
+  <div>A longer fourth item</div>
+  <div>Fifth</div>
+</div>
+```
+
+```css
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-s));
+  justify-content: var(--cluster-horizontal-alignment, flex-start);
+  align-items: var(--cluster-vertical-alignment, center);
+}
+```
+
+### Container
+
+The page-width wrapper. Centres a section's content at a maximum width with side padding. Shared (`system/composition/container.md`).
+
+CUBE CSS's wrapper, called `container` here.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--container-max` | `80rem` | Maximum width of the content. |
+| `--gutter` | `var(--space-m)` | Padding on each side, so content never touches the screen edge. |
+
+#### When to use
+
+- Inside every full-width section, so the background runs edge to edge while the content stays at a readable width.
+
+#### Do
+
+- Put the background on the section and the `.container` inside it.
+
+#### Code
+
+```html
+<section style="width: 100%; outline: 1px dashed currentColor">
+  <div class="container" style="outline: 1px dashed currentColor">Content stays within the container's maximum width.</div>
+</section>
+```
+
+```css
+.container {
+  position: relative;
+  margin-inline: auto;
+  max-width: var(--container-max, 80rem);
+  padding-inline: var(--gutter, var(--space-m));
+}
+```
+
+### Flow
+
+Even vertical space between the children of an element. The default rhythm for any run of content. Shared (`system/composition/flow.md`).
+
+CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between siblings, never before the first child or after the last, so it doesn't fight the container's padding.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--flow-space` | `var(--space-m)` | Space between each child. Set it on the element or on any child. |
+
+#### When to use
+
+- Any sequence of blocks: a heading, paragraphs and a button in a section, or cards in a column.
+
+#### Do
+
+- Change the rhythm for one section with `style="--flow-space: var(--space-l)"` or in that block's CSS, rather than adding margins to children.
+- Set `--flow-space` on a single child to change the gap above just that child.
+
+#### Don't
+
+- Don't add top margins to the children as well. Flow owns that space.
+
+#### Code
+
+```html
+<div class="flow" style="max-width: 32rem">
+  <h3>A heading</h3>
+  <p>Each child is separated by the same space, taken from the brand's space scale.</p>
+  <p>No margin before the first child or after the last.</p>
+</div>
+```
+
+```css
+.flow > * + * { margin-block-start: var(--flow-space, var(--space-m)); }
+```
+
+### Repel
+
+Pushes items to opposite ends of a row, and lets them wrap when there isn't room. Shared (`system/composition/repel.md`).
+
+CUBE CSS's repel composition.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--gutter` | `var(--space-s)` | Minimum gap between the items, and between lines when they wrap. |
+| `--repel-vertical-alignment` | `center` | `align-items` of the row. |
+
+Add `data-nowrap` to keep the items on one line.
+
+#### When to use
+
+- A title with an action at the far end, a logo with a menu button, a button with a partner logo.
+
+#### Code
+
+```html
+<div class="repel" style="width: 100%">
+  <strong>Left item</strong>
+  <span>Right item</span>
+</div>
+```
+
+```css
+.repel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: var(--repel-vertical-alignment, center);
+  gap: var(--gutter, var(--space-s));
+}
+.repel[data-nowrap] { flex-wrap: nowrap; }
+```
+
+### Switcher
+
+Items sit side by side, and all stack at once when the container gets narrower than a threshold. No media queries. Shared (`system/composition/switcher.md`).
+
+Every Layout's Switcher. It switches on the width of the container, not the viewport, so it works anywhere on the page.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--threshold` | `30rem` | Container width below which every item stacks. |
+| `--gutter` | `var(--space-s)` | Gap between items. |
+
+Five or more children always stack. The Switcher is for two to four items.
+
+#### When to use
+
+- Two-column sections (text beside an image), a row of three stats, pricing tiers.
+
+#### Don't
+
+- Don't use it for more than four items. Use a grid.
+
+#### Code
+
+```html
+<div class="switcher" style="width: 100%">
+  <div style="outline: 1px dashed currentColor; padding: 1rem">One</div>
+  <div style="outline: 1px dashed currentColor; padding: 1rem">Two</div>
+  <div style="outline: 1px dashed currentColor; padding: 1rem">Three</div>
+</div>
+```
+
+```css
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-s));
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--threshold, 30rem) - 100%) * 999);
+}
+.switcher > :nth-last-child(n + 5),
+.switcher > :nth-last-child(n + 5) ~ * {
+  flex-basis: 100%;
+}
+```
+
 ## Components
 
 ### Button
 
-Triggers an action. Primary for the main action on a screen, secondary for the rest. Shared component (`system/components/button.md`).
+Triggers an action. Primary for the main action on a screen, secondary for the rest. Shared (`system/components/button.md`).
 
 > Placeholder shared component. Will be replaced by components found when scraping real brands.
 
@@ -150,7 +407,7 @@ Triggers an action. Primary for the main action on a screen, secondary for the r
   font: var(--weight-strong) var(--size-step-0) / var(--leading-heading) var(--font-body);
   border: 0;
   border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-s) var(--space-l);
   cursor: pointer;
 }
 .btn-primary {
@@ -199,7 +456,7 @@ Aurora-only component.
   background: var(--color-surface);
   border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-m) var(--space-l);
   max-width: 36rem;
 }
 .callout p { margin: 0; }
@@ -207,13 +464,13 @@ Aurora-only component.
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
   color: var(--color-primary);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-xs);
 }
 ```
 
 ### Card
 
-Groups related content on a raised surface. Shared component (`system/components/card.md`). Also needs the CSS from: button.
+Groups related content on a raised surface. Shared (`system/components/card.md`). Also needs the CSS from: button.
 
 > Placeholder shared component. Will be replaced by components found when scraping real brands.
 
@@ -241,7 +498,7 @@ Groups related content on a raised surface. Shared component (`system/components
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-4);
+  padding: var(--space-l);
   max-width: 22rem;
 }
 .card > :last-child { margin-bottom: 0; }
@@ -249,7 +506,7 @@ Groups related content on a raised surface. Shared component (`system/components
 
 ### Input
 
-A single-line text field with a visible label. Shared component (`system/components/input.md`).
+A single-line text field with a visible label. Shared (`system/components/input.md`).
 
 > Placeholder shared component. Will be replaced by components found when scraping real brands.
 
@@ -275,11 +532,11 @@ A single-line text field with a visible label. Shared component (`system/compone
 ```
 
 ```css
-.field { display: grid; gap: var(--space-1); max-width: 22rem; }
+.field { display: grid; gap: var(--space-xs); max-width: 22rem; }
 .field__label { font-weight: var(--weight-strong); font-size: var(--size-small); }
 .input {
   font: inherit;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-s) var(--space-m);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background: var(--color-surface);
@@ -293,7 +550,7 @@ A single-line text field with a visible label. Shared component (`system/compone
 
 ### Tag
 
-A small filled label for a category or status. Shared component (`system/components/tag.md`).
+A small filled label for a category or status. Shared (`system/components/tag.md`).
 
 > Placeholder shared component. Will be replaced by components found when scraping real brands.
 
@@ -317,7 +574,7 @@ A small filled label for a category or status. Shared component (`system/compone
   background: var(--color-secondary);
   color: var(--color-on-secondary);
   border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-xs) var(--space-s);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);
 }
@@ -345,13 +602,13 @@ h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
   line-height: var(--leading-heading);
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--space-s);
 }
 h1 { font-size: var(--size-step-4); }
 h2 { font-size: var(--size-step-3); }
 h3 { font-size: var(--size-step-2); }
 h4 { font-size: var(--size-step-1); }
-p { margin: 0 0 var(--space-3); }
+p { margin: 0 0 var(--space-m); }
 a { color: var(--color-primary); }
 a:hover { color: var(--color-primary-hover); }
 ```
@@ -388,10 +645,10 @@ a:hover { color: var(--color-primary-hover); }
   --radius-sm: 6px; /** Inputs, tags */
   --radius-md: 12px; /** Cards, buttons */
   --radius-lg: 24px; /** Hero panels */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
-  --space-5: 2.5rem;
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.5rem;
 }
 ```

@@ -1,7 +1,7 @@
 ---
 title: Hero
 summary: Full-screen dark world map with the giant "Prayer.Global" title, the light-blue tagline, the white logo mark and one orange CTA.
-uses: [button, icon, layout]
+uses: [button, icon, center]
 ---
 
 The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes use viewport height, so the whole hero fits one screen. Below 768px the title and tagline switch to fixed sizes.
@@ -50,7 +50,7 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
   background-repeat: no-repeat;
   background-position: top;
 }
-.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-3); }
+.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-s); }
 .hero .heading {
   font-family: var(--font-heading);
   font-size: var(--size-hero-title);
@@ -67,8 +67,8 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
 }
 .hero .heading__logo { font-size: var(--size-hero-logo); }
 .hero .btn-cta { font-size: var(--size-hero-cta); }
-.hero__next { margin-top: var(--space-2); text-decoration: none; }
-.hero .center { margin-block: var(--space-4); }
+.hero__next { margin-top: var(--space-xs); text-decoration: none; }
+.hero .center { margin-block: var(--space-s-m); }
 @media (max-width: 767px) {
   .hero .heading { font-size: 62px; }
   .hero .sub-heading { font-size: 32px; }

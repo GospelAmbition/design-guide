@@ -32,7 +32,7 @@ summary: Triggers an action. Primary for the main action on a screen, secondary 
   font: var(--weight-strong) var(--size-step-0) / var(--leading-heading) var(--font-body);
   border: 0;
   border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-s) var(--space-l);
   cursor: pointer;
 }
 .btn-primary {

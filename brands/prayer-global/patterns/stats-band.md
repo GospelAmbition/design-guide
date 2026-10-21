@@ -1,7 +1,7 @@
 ---
 title: Stats band
 summary: The blue world map beside a Europa statement heading, then three live stats and one orange CTA on a faint grey wash.
-uses: [button, stat, layout]
+uses: [button, stat, center, container, flow, switcher, switcher-variants, utilities]
 ---
 
 "Join thousands of intercessors praying daily for the nations" on the home page.
@@ -40,6 +40,4 @@ uses: [button, stat, layout]
 
 ```css
 .grey-gradient { background-image: var(--gradient-grey); }
-.w-90 { width: 90%; }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```

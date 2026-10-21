@@ -2,7 +2,7 @@
 // The preview renders that exact HTML; the page supplies the brand and the resolved CSS.
 import { visit } from 'unist-util-visit';
 
-const PREVIEWABLE = /\/(?:brands\/[^/]+|system)\/(?:components|patterns)\/[^/]+\.md$/;
+const PREVIEWABLE = /\/(?:brands\/[^/]+|system)\/(?:composition|components|patterns)\/[^/]+\.md$/;
 
 export default function remarkLivePreview() {
   return (tree, file) => {

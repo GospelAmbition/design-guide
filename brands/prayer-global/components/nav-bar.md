@@ -1,7 +1,7 @@
 ---
 title: Nav bar
 summary: Sticky three-column bar. Share and streak on the left, the outlined "Prayer.Global" title in the centre, login and the menu button on the right.
-uses: [icon, layout]
+uses: [icon, cluster]
 ---
 
 From `pages/assets/nav.php`. There are three versions:
@@ -61,23 +61,23 @@ From `pages/assets/nav.php`. There are three versions:
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-s) var(--space-s-m);
   max-width: 1320px;
   margin-inline: auto;
   box-sizing: border-box;
 }
 .pg-navbar a { text-decoration: none; color: inherit; }
-.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-3); }
+.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-s); }
 .white-bg { background-color: var(--color-white); }
 .brand { color: var(--color-brand); }
 .navbar-dark { background-color: var(--color-brand); color: var(--color-white); }
 .icon-button { cursor: pointer; color: inherit; background: none; border: 0; padding: 0; border-radius: var(--radius-md); margin: 2px; display: flex; }
-.streak-link { display: flex; align-items: center; gap: var(--space-1); }
+.streak-link { display: flex; align-items: center; gap: var(--space-xxs); }
 .streak-link .icon { color: var(--color-secondary); }
 .navbar__title {
   justify-self: center;
   margin: 0;
-  padding: 0 var(--space-3);
+  padding: 0 var(--space-s);
   border: 1px solid currentColor;
   border-radius: var(--radius-box);
   font-size: var(--size-nav-title);

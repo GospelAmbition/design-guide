@@ -1,7 +1,7 @@
 ---
 title: Feature band
 summary: Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the left, a clipped image panel on the right.
-uses: [button, icon, image-panel, layout]
+uses: [button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities]
 ---
 
 "How it works" and "Prayer relays" on the home page (`section.brand-lightest-bg.blue-orange-gradient.py-6`). Alternate it with the white [Feature section](../feature-section/).
@@ -41,5 +41,4 @@ uses: [button, icon, image-panel, layout]
 
 ```css
 .blue-orange-gradient { background-image: var(--gradient-blue-orange); }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```

@@ -1,7 +1,7 @@
 ---
 title: Movement band
 summary: Navy section with a Bebas Kai title and short text on the left, an uppercase list with prayer icons on the right, and two buttons underneath.
-uses: [button, icon, layout]
+uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 ---
 
 "Mobilize a movement of prayer" on the home page (`section.brand-bg.py-6`).
@@ -46,6 +46,6 @@ uses: [button, icon, layout]
 
 ```css
 .movement-list { font-size: var(--size-one-em); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0; }
-.movement-list li { display: flex; align-items: center; gap: var(--space-3); }
+.movement-list li { display: flex; align-items: center; gap: var(--space-s); }
 @media (max-width: 768px) { .movement-list { font-size: 1em; } }
 ```

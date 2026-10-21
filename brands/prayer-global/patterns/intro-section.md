@@ -1,7 +1,7 @@
 ---
 title: Intro section
 summary: Centred statement heading in Europa, a few short lines, a quote, and the CTA, over a faint light-blue world map.
-uses: [button, layout]
+uses: [button, center, container, flow, utilities]
 ---
 
 The first section under the hero ("Want to pray globally but don't know where to start?").
@@ -34,8 +34,3 @@ The first section under the hero ("Want to pray globally but don't know where to
 </section>
 ```
 
-```css
-.cover { background-size: cover; background-repeat: no-repeat; }
-.font-italic { font-style: italic; }
-.w-60ch { max-width: 60ch; }
-```

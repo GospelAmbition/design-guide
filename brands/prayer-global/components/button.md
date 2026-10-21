@@ -1,6 +1,7 @@
 ---
 title: Button
 summary: Bootstrap .btn restyled as a pill with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest.
+uses: [utilities]
 ---
 
 Class names are the live site's own (Bootstrap 5.2 plus prayer-global-porch overrides), so markup copied from prayer.global keeps working.
@@ -60,7 +61,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   --btn-hover-bg: var(--btn-bg);
   --btn-hover-border: var(--btn-border);
   display: inline-block;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-xs) var(--space-s);
   font-family: var(--font-body);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);
@@ -81,7 +82,6 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 .btn:focus-visible { box-shadow: none; outline: 2px solid var(--color-secondary); outline-offset: 2px; }
 .btn:disabled { --btn-bg: var(--color-grey); --btn-border: var(--color-grey); opacity: 0.65; pointer-events: none; }
 .btn-lg { font-size: var(--size-large); }
-.py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
 
 .btn-cta {
   --btn-hover-bg: transparent;

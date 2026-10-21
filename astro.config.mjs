@@ -21,6 +21,7 @@ const sidebar = [
     items: [
       { label: 'Overview', link: `/guide/${b.id}/` },
       { label: 'Tokens', link: `/guide/${b.id}/tokens/` },
+      ...(b.composition.length ? [{ label: 'Composition', items: docItems(b, 'composition') }] : []),
       { label: 'Components', items: docItems(b, 'components') },
       ...(b.patterns.length ? [{ label: 'Patterns', items: docItems(b, 'patterns') }] : []),
       { label: 'Assets', link: `/guide/${b.id}/assets/` },

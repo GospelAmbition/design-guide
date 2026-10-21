@@ -30,7 +30,7 @@ uses: [button]
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-4);
+  padding: var(--space-l);
   max-width: 22rem;
 }
 .card > :last-child { margin-bottom: 0; }

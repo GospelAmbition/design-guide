@@ -69,7 +69,7 @@ const tokenList = (tokens) =>
 function brief(brand, css) {
   const m = brand.meta;
   const origin = (d) => ({
-    shared: `Shared component (\`${d.path}\`).`,
+    shared: `Shared (\`${d.path}\`).`,
     override: `Brand override (\`${d.path}\`), replaces \`${d.replaces}\`.`,
     brand: `${m.name}-only (\`${d.path}\`).`,
   })[d.origin];
@@ -92,7 +92,7 @@ function brief(brand, css) {
 
 ${m.summary ?? ''}
 
-This file is the whole ${m.name} brand in one place, with shared components and ${m.name}'s overrides already merged. Use it to build or review anything for ${m.name}. Follow it exactly.
+This file is the whole ${m.name} brand in one place, with shared composition, components and patterns and ${m.name}'s overrides already merged. Use it to build or review anything for ${m.name}. Follow it exactly.
 
 ## Setup
 
@@ -100,7 +100,7 @@ This file is the whole ${m.name} brand in one place, with shared components and 
 ${(m.fonts ?? []).map((u) => `   \`<link rel="stylesheet" href="${fontHref(brand, u)}">\``).join('\n') || '   (none)'}
 2. Load the variables: \`brands/${brand.id}/tokens.css\` (copy also at the end of this file).
 3. Load the base element styles: \`${brand.base}\`.
-4. Copy the CSS of each component you use from the Components section. Use only the CSS variables, never raw colours or font names.
+4. Copy the CSS of each composition primitive and component you use from the Composition and Components sections. Use only the CSS variables, never raw colours or font names.
 ${brand.modes.length ? `5. Modes available: ${brand.modes.map((x) => `\`${x.mode}\``).join(', ')}. Set \`data-mode="<mode>"\` on \`<html>\`; dark also follows the OS setting when no data-mode is set. Check your output in every mode.\n` : ''}
 ## Icons
 
@@ -120,6 +120,8 @@ ${brand.modes.map((x) => `\n### ${x.mode} mode overrides\n\n${tokenList(x.tokens
 ## Assets
 
 ${assets}
+
+${docs('composition', 'Composition')}
 
 ${docs('components', 'Components')}${brand.excluded.length ? `\n\nNot available for ${m.name} (excluded on purpose, don't build them): ${brand.excluded.join(', ')}.` : ''}
 
@@ -149,9 +151,12 @@ function llmsIndex(current, { system, brands }) {
     '',
     ...brands.map((b) => `- **${b.meta.name}** — ${b.meta.summary ?? ''}\n  Start with \`brands/${b.id}/brief.md\`. Source folder: \`brands/${b.id}/\`.`),
     '',
-    '## Shared components',
-    '',
-    ...KINDS.flatMap((k) => system[k].map((d) => `- \`${d.path}\` — ${d.data.summary ?? d.data.title ?? d.name}`)),
+    ...KINDS.filter((k) => system[k].length).flatMap((k) => [
+      `## Shared ${k}`,
+      '',
+      ...system[k].map((d) => `- \`${d.path}\` — ${d.data.summary ?? d.data.title ?? d.name}`),
+      '',
+    ]).slice(0, -1),
     END,
   ].join('\n');
   const start = current.indexOf(BEGIN);

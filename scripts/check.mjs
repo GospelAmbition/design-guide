@@ -2,7 +2,7 @@
 // Runs as the pre-commit hook and in CI. Exit code 1 on any error.
 import { join } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
-import { ROOT, KINDS, read, exists, fences, flattenTokens, loadSystem, loadBrand, resolveBrand, brandIds, isUrl, fontHref } from './lib/brands.mjs';
+import { ROOT, KINDS, REQUIRED_SPACE, read, exists, fences, flattenTokens, loadSystem, loadBrand, resolveBrand, brandIds, isUrl, fontHref } from './lib/brands.mjs';
 import { buildOutputs } from './generate.mjs';
 
 const errors = [];
@@ -24,8 +24,10 @@ function checkCss(where, css, defined) {
     if (RAW_COLOUR.test(value.replace(/var\(\s*--[\w-]+/g, ''))) err(where, `raw colour in "${p}:${value.trim()}". Use a --color-* variable.`);
     if (/^font(-family)?$/.test(p) && /['"]/.test(value)) err(where, `literal font in "${p}:${value.trim()}". Use --font-*.`);
   });
-  for (const [, name] of css.matchAll(/var\(\s*(--[\w-]+)/g)) {
-    if (!defined.has(name) && !local.has(name)) err(where, `uses ${name}, which is not a token of this brand.`);
+  // var(--x, fallback) is a setting (e.g. a composition primitive's --gutter): any name is fine,
+  // and the fallback's own var()s are checked like any other. A var() without a fallback must be a token.
+  for (const [, name, comma] of css.matchAll(/var\(\s*(--[\w-]+)\s*(,?)/g)) {
+    if (!comma && !defined.has(name) && !local.has(name)) err(where, `uses ${name}, which is not a token of this brand.`);
   }
 }
 
@@ -77,6 +79,7 @@ for (const id of brandIds()) {
   const base = flattenTokens(brand.tokens);
   for (const t of base) if (!t.type) err(`${dir}/tokens.json`, `token ${t.name} has no $type.`);
   const baseNames = new Set(base.map((t) => t.name));
+  for (const step of REQUIRED_SPACE) if (!baseNames.has(`space-${step}`)) err(`${dir}/tokens.json`, `missing space.${step}. Every brand defines space ${REQUIRED_SPACE.join(', ')} (and may add more).`);
   for (const m of brand.modes) {
     const names = new Set(flattenTokens(m.tokens).map((t) => t.name));
     for (const n of names) if (!baseNames.has(n)) err(m.path, `token ${n} is not in tokens.json.`);

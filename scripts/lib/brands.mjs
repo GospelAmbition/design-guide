@@ -7,7 +7,10 @@ import YAML from 'yaml';
 
 // Scripts and the site always run from the repo root (npm scripts), and bundling breaks import.meta.url.
 export const ROOT = process.cwd();
-export const KINDS = ['components', 'patterns'];
+// composition: layout primitives (Every Layout / CUBE CSS), components: UI pieces, patterns: page sections.
+export const KINDS = ['composition', 'components', 'patterns'];
+// Space steps every brand must define, so shared CSS means the same step in every brand. Brands may add more.
+export const REQUIRED_SPACE = ['xs', 's', 'm', 'l', 'xl'];
 
 export const read = (p) => readFileSync(join(ROOT, p), 'utf8');
 export const exists = (p) => existsSync(join(ROOT, p));
@@ -41,6 +44,7 @@ export const flattenTokens = (obj, path = []) =>
 
 export function loadSystem() {
   return {
+    composition: loadDocs('system/composition'),
     components: loadDocs('system/components'),
     patterns: loadDocs('system/patterns'),
     base: 'system/base.css',
@@ -73,6 +77,7 @@ export function loadBrand(id) {
     guidelines,
     tokens,
     modes,
+    composition: loadDocs(`${dir}/composition`),
     components: loadDocs(`${dir}/components`),
     patterns: loadDocs(`${dir}/patterns`),
     assets: list(`${dir}/assets`).filter((f) => f !== 'assets.md'),

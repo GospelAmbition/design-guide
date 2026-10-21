@@ -1,7 +1,7 @@
 ---
 title: Feature section
 summary: White section. Clipped image panel on the left, Bebas Kai title with icon, short copy and one button on the right.
-uses: [button, icon, image-panel, layout]
+uses: [button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities]
 ---
 
 "Prayer fuel" and "My prayer activity" on the home page. It's the [Feature band](../feature-band/) on white, with the columns reversed (`.switcher-reverse`).
@@ -34,6 +34,3 @@ uses: [button, icon, image-panel, layout]
 </section>
 ```
 
-```css
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
-```

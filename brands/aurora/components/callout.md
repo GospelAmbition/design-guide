@@ -29,7 +29,7 @@ Aurora-only component.
   background: var(--color-surface);
   border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-m) var(--space-l);
   max-width: 36rem;
 }
 .callout p { margin: 0; }
@@ -37,6 +37,6 @@ Aurora-only component.
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
   color: var(--color-primary);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-xs);
 }
 ```

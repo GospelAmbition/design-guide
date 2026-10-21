@@ -30,6 +30,6 @@ Harbor overrides the shared tag: outlined and uppercase instead of filled, so ta
   color: var(--color-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-xs) var(--space-s);
 }
 ```

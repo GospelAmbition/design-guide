@@ -1,7 +1,7 @@
 ---
 title: Donate band
 summary: Light-blue band. Photo on the left; statement heading, short copy, a white Donate button and the Gospel Ambition logo on the right.
-uses: [button, layout]
+uses: [button, center, cluster, container, flow, switcher, utilities]
 ---
 
 "Gospel Ambition tools and trainings are 100% free, thanks to people like you." on the home page (`section.brand-lightest-bg.white`).
@@ -42,6 +42,4 @@ uses: [button, layout]
 .donate-band__actions { justify-content: space-between; }
 .donate-band__logo { width: 135px; }
 .donate-band__logo img { width: 100%; display: block; }
-.py-5 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 ```

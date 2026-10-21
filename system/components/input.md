@@ -27,11 +27,11 @@ summary: A single-line text field with a visible label.
 ```
 
 ```css
-.field { display: grid; gap: var(--space-1); max-width: 22rem; }
+.field { display: grid; gap: var(--space-xs); max-width: 22rem; }
 .field__label { font-weight: var(--weight-strong); font-size: var(--size-small); }
 .input {
   font: inherit;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-s) var(--space-m);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background: var(--color-surface);
