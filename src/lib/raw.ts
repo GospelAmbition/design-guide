@@ -7,6 +7,7 @@ import { ROOT } from '../../scripts/lib/brands.mjs';
 const TYPES: Record<string, string> = {
   '.md': 'text/markdown; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json',
   '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.txt': 'text/plain; charset=utf-8',
+  '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf',
 };
 
 const walk = (dir: string): string[] =>

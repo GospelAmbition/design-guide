@@ -49,6 +49,14 @@ export function loadSystem() {
 
 export const brandIds = () => list('brands').filter((d) => isDir(`brands/${d}`));
 
+// A `fonts` entry is either a stylesheet URL or a path inside the brand folder (self-hosted fonts).
+export const isUrl = (u) => /^https?:\/\//.test(u);
+export const fontHref = (brand, u) => (isUrl(u) ? u : `${brand.dir}/${u.replace(/^\.?\//, '')}`);
+
+// `icons` is either one line of text or a list of icon sets: [{ name, use, source?, files? }].
+export const iconSets = (meta) =>
+  Array.isArray(meta.icons) ? meta.icons : meta.icons ? [{ name: String(meta.icons) }] : [];
+
 export function loadBrand(id) {
   const dir = `brands/${id}`;
   const guidelines = exists(`${dir}/guidelines.md`) ? parseMarkdown(read(`${dir}/guidelines.md`)) : null;

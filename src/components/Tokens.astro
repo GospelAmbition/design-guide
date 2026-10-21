@@ -16,8 +16,16 @@ const modes = [{ mode: 'light', tokens: base }, ...brand.modes.map((m) => ({ mod
 const value = (mode, name) => (mode.tokens.find((t) => t.name === name) ?? base.find((t) => t.name === name))?.value;
 const colours = base.filter((t) => t.type === 'color');
 const get = (name) => base.find((t) => t.name === name)?.value;
-const levels = [['step-4', 'h1'], ['step-3', 'h2'], ['step-2', 'h3'], ['step-1', 'h4 / lead'], ['step-0', 'body'], ['small', 'small']];
-const others = base.filter((t) => t.type !== 'color');
+// Brands name their type scale either by step (step-4 … step-0) or by element (h1 … h5, body).
+const levels = get('size-h1')
+  ? [['h1', 'h1'], ['h2', 'h2'], ['h3', 'h3'], ['h4', 'h4'], ['h5', 'h5'], ['body', 'body'], ['small', 'small']]
+  : [['step-4', 'h1'], ['step-3', 'h2'], ['step-2', 'h3'], ['step-1', 'h4 / lead'], ['step-0', 'body'], ['small', 'small']];
+// Display fonts (e.g. Bebas Kai) only for the levels that use them: h4/h5 may be set in the body font.
+const headingFont = (role) => (get('size-h1') ? ['h1', 'h2', 'h3'].includes(role) : role.startsWith('h'));
+// Resolve {color.x} references so gradients can be previewed.
+const resolve = (v) => String(v).replace(/\{([\w.-]+)\}/g, (_, ref) => get(ref.replaceAll('.', '-')) ?? _);
+const swatches = base.filter((t) => t.type === 'gradient' || t.type === 'shadow');
+const others = base.filter((t) => t.type !== 'color' && !swatches.includes(t));
 ---
 <h2>Colour</h2>
 <p>Contrast is measured in the same mode: <code>--color-on-X</code> against <code>--color-X</code>, everything else against <code>--color-background</code>.</p>
@@ -49,17 +57,42 @@ const others = base.filter((t) => t.type !== 'color');
 <h2>Type</h2>
 <div class="ds-specimen" style={`background:${get('color-background')};color:${get('color-text')}`}>
   {levels.filter(([s]) => get(`size-${s}`)).map(([s, role]) => {
-    const heading = role.startsWith('h');
+    const heading = headingFont(role);
+    // A heading level set in the body font (h4/h5 when the scale names elements) is a bold uppercase label.
+    const label = !heading && get('size-h1') && /^h\d$/.test(role);
+    const style = heading
+      ? `font-family:${get('font-heading')};font-weight:${get('weight-heading')};line-height:${get('leading-heading')}`
+      : label
+        ? `font-family:${get('font-body')};font-weight:${get('weight-strong')};line-height:${get('leading-heading')};text-transform:uppercase`
+        : `font-family:${get('font-body')};font-weight:${get('weight-regular')};line-height:${get('leading-body')}`;
     return (
       <div>
         <span class="label">{role} · --size-{s} · {get(`size-${s}`)}</span>
-        <div style={`font-size:${get(`size-${s}`)};font-family:${get(heading ? 'font-heading' : 'font-body')};font-weight:${get(heading ? 'weight-heading' : 'weight-regular')};line-height:${get(heading ? 'leading-heading' : 'leading-body')}`}>
-          {heading ? `${role} — The quick brown fox` : 'Body text sits at the base size and is used for most content on the page.'}
+        <div style={`font-size:${get(`size-${s}`)};${style}`}>
+          {heading || label ? `${role} — The quick brown fox` : 'Body text sits at the base size and is used for most content on the page.'}
         </div>
       </div>
     );
   })}
 </div>
+
+{swatches.length > 0 && (
+  <>
+    <h2>Gradients and shadows</h2>
+    <div class="ds-grid">
+      {swatches.map((t) => (
+        <div class="ds-swatch">
+          <div class="ds-swatch__chip" style={t.type === 'gradient' ? `background:${resolve(t.value)}` : `background:#fff;margin:1rem;height:52px;border-radius:8px;${String(t.description).includes('drop-shadow') ? `filter:drop-shadow(${t.value})` : `box-shadow:${t.value}`}`}></div>
+          <div class="ds-swatch__body">
+            <code>--{t.name}</code>
+            <div class="ds-swatch__desc"><code>{resolve(t.value)}</code></div>
+            <div class="ds-swatch__desc">{t.description}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+)}
 
 <h2>All other tokens</h2>
 <table class="ds-table">

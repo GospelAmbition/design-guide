@@ -15,3 +15,7 @@
 
 /* Neutralise Starlight's flow-margin rule inside layout containers */
 .ds-grid > *, .ds-specimen > div { margin-top: 0 !important; }
+
+/* Assets meant for dark backgrounds: wrap them in <div class="ds-on-dark"> in assets.md. */
+.ds-on-dark { background: #11224e; padding: 1.5rem; border-radius: 8px; width: fit-content; }
+.ds-on-dark img { display: block; max-width: 220px; height: auto; margin: 0 !important; }

@@ -2,7 +2,7 @@
 // Runs as the pre-commit hook and in CI. Exit code 1 on any error.
 import { join } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
-import { ROOT, KINDS, read, exists, fences, flattenTokens, loadSystem, loadBrand, resolveBrand, brandIds } from './lib/brands.mjs';
+import { ROOT, KINDS, read, exists, fences, flattenTokens, loadSystem, loadBrand, resolveBrand, brandIds, isUrl, fontHref } from './lib/brands.mjs';
 import { buildOutputs } from './generate.mjs';
 
 const errors = [];
@@ -20,7 +20,8 @@ function checkCss(where, css, defined) {
     if (!value) return;
     const p = prop.replace(/^[\s\S]*\{/, '').trim();
     if (p.startsWith('--')) return;
-    if (RAW_COLOUR.test(value)) err(where, `raw colour in "${p}:${value.trim()}". Use a --color-* variable.`);
+    // Token names can contain colour words (--color-white, --gradient-orange); only literal values count.
+    if (RAW_COLOUR.test(value.replace(/var\(\s*--[\w-]+/g, ''))) err(where, `raw colour in "${p}:${value.trim()}". Use a --color-* variable.`);
     if (/^font(-family)?$/.test(p) && /['"]/.test(value)) err(where, `literal font in "${p}:${value.trim()}". Use --font-*.`);
   });
   for (const [, name] of css.matchAll(/var\(\s*(--[\w-]+)/g)) {
@@ -30,7 +31,7 @@ function checkCss(where, css, defined) {
 
 function checkHtml(where, html) {
   for (const [, style] of html.matchAll(/style\s*=\s*"([^"]*)"/g)) {
-    if (RAW_COLOUR.test(style)) err(where, `raw colour in inline style "${style}".`);
+    if (RAW_COLOUR.test(style.replace(/var\(\s*--[\w-]+/g, ''))) err(where, `raw colour in inline style "${style}".`);
   }
 }
 
@@ -59,8 +60,18 @@ for (const id of brandIds()) {
   if (!brand.guidelines) { err(dir, 'missing guidelines.md.'); continue; }
   if (!brand.tokens) { err(dir, 'missing tokens.json.'); continue; }
   for (const key of ['name', 'summary']) if (!brand.meta[key]) err(`${dir}/guidelines.md`, `frontmatter needs "${key}".`);
-  if (brand.meta.fonts && !Array.isArray(brand.meta.fonts)) err(`${dir}/guidelines.md`, '"fonts" must be a list of stylesheet URLs.');
-  if (!brand.meta.icons) err(`${dir}/guidelines.md`, 'frontmatter needs "icons": which icon set the brand uses and how.');
+  if (brand.meta.fonts && !Array.isArray(brand.meta.fonts)) err(`${dir}/guidelines.md`, '"fonts" must be a list of stylesheet URLs or paths inside the brand folder.');
+  for (const u of Array.isArray(brand.meta.fonts) ? brand.meta.fonts : []) {
+    if (!isUrl(u) && !exists(fontHref(brand, u))) err(`${dir}/guidelines.md`, `font stylesheet ${u} does not exist in ${dir}/.`);
+  }
+  const icons = brand.meta.icons;
+  if (!icons) err(`${dir}/guidelines.md`, 'frontmatter needs "icons": which icon set(s) the brand uses and how.');
+  else if (Array.isArray(icons)) {
+    for (const s of icons) {
+      if (!s?.name || !s?.use) err(`${dir}/guidelines.md`, 'each entry in "icons" needs a "name" and a "use" (when to pick this set).');
+      if (s?.files && !exists(`${dir}/${s.files.replace(/\/$/, '')}`)) err(`${dir}/guidelines.md`, `icon files ${s.files} do not exist in ${dir}/.`);
+    }
+  }
 
   // Tokens
   const base = flattenTokens(brand.tokens);

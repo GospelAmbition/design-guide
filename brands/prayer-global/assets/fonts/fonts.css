@@ -1,0 +1,23 @@
+/* Prayer.Global brand fonts. Self-hosted: load this file before tokens.css.
+   Copied from github.com/PrayerTools/prayer-global-porch (pages/assets/fonts). */
+@font-face {
+  font-family: 'Europa';
+  src: url('Europa-Regular.woff2') format('woff2'), url('Europa-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Europa';
+  src: url('Europa-Bold.woff2') format('woff2'), url('Europa-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bebas Kai';
+  src: url('BebasKai.woff2') format('woff2'), url('BebasKai.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

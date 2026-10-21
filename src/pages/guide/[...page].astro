@@ -9,7 +9,7 @@
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Aside } from '@astrojs/starlight/components';
 import { getCollection, render } from 'astro:content';
-import { loadAll, read, fences, KINDS } from '../../../scripts/lib/brands.mjs';
+import { loadAll, read, fences, KINDS, fontHref, isUrl, iconSets } from '../../../scripts/lib/brands.mjs';
 import BrandContext from '../../components/BrandContext.astro';
 import Tokens from '../../components/Tokens.astro';
 
@@ -57,7 +57,8 @@ if (view === 'overview') {
   css = [...(doc.data.uses ?? []).map(byName).filter(Boolean), doc].map(cssOf).join('\n');
 }
 
-const head = (m.fonts ?? []).map((href) => ({ tag: 'link', attrs: { rel: 'stylesheet', href } }));
+const head = (m.fonts ?? []).map((u) => ({ tag: 'link', attrs: { rel: 'stylesheet', href: isUrl(u) ? u : `/${fontHref(brand, u)}` } }));
+const icons = iconSets(m);
 const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
 ---
 <StarlightPage frontmatter={{ title, description, head }}>
@@ -69,7 +70,9 @@ const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
         <ds-preview><template set:html={overview} /></ds-preview>
         <Content />
         <h2>Icons</h2>
-        <p>{m.icons}</p>
+        {icons.length === 1 && !icons[0].use ? <p>{icons[0].name}</p> : (
+          <ul>{icons.map((s) => <li><strong>{s.name}</strong>{s.use && <> — {s.use}</>}{s.source && <><br /><small>Source: {s.source}</small></>}</li>)}</ul>
+        )}
         <p class="ds-source">Source: <code>brands/{id}/guidelines.md</code></p>
       </>
     )}

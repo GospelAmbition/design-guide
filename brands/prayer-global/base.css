@@ -1,0 +1,59 @@
+/* Prayer.Global base element styles. Replaces system/base.css for this brand.
+   Load after assets/fonts/fonts.css, assets/fonts/prayer-global-icons.css and tokens.css.
+   Translated from prayer-global-porch basic.css + Bootstrap 5.2 (the site's own rules, with values as tokens). */
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+}
+h1, h2, h3, h4, h5 {
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-heading);
+  margin: 0 0 var(--space-2);
+}
+h1, h2, h3 { font-family: var(--font-heading); }
+h1 { font-size: var(--size-h1); }
+h2 { font-size: var(--size-h2-sm); line-height: var(--leading-title); }
+h3 { font-size: var(--size-h3); }
+h4, h5 { font-family: var(--font-body); font-weight: var(--weight-strong); text-transform: uppercase; }
+h4 { font-size: var(--size-h4); }
+h5 { font-size: var(--size-h5); margin-bottom: 0; }
+@media (min-width: 768px) { h2 { font-size: var(--size-h2); } }
+@media (max-width: 768px) { h1 { font-size: var(--size-h1-md); } }
+@media (max-width: 576px) { h1 { font-size: var(--size-h1-sm); } }
+
+/* .h2 + .font-base: the big sentence-case Europa heading ("Want to pray globally…"). */
+.h2 { font-size: var(--size-h2-sm); line-height: var(--leading-title); }
+@media (max-width: 768px) { .h2 { font-size: var(--size-h2-xs); } }
+.font-base { font-family: var(--font-body); }
+.font-title { font-family: var(--font-heading); }
+.font-weight-bold { font-weight: var(--weight-strong); }
+.uppercase { text-transform: uppercase; }
+
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-brand-lighter); transition: 0.3s all ease; }
+a:hover, a:active { color: var(--color-brand-lightest); }
+
+/* Lists use a "●" bullet in the text colour. role="list" removes it. */
+ul { list-style: none; margin: 0 0 var(--space-3); padding: 0; line-height: var(--leading-body); }
+ul li { position: relative; }
+ul:not([role="list"]) li { padding-left: 1.7em; }
+ul li::before { content: "●"; font-size: 1.5em; position: absolute; left: 0; top: 0.1em; line-height: 0.9; }
+ul[role="list"] li::before { content: none; }
+li + li { margin-top: var(--space-3); }
+[data-tight] > li + li { margin-top: var(--space-2); }
+[dir="rtl"] ul:not([role="list"]) li { padding-left: 0; padding-right: 1.7em; }
+[dir="rtl"] ul li::before { left: auto; right: 0; }
+
+*:focus-visible { box-shadow: none; outline: 2px solid var(--color-secondary); outline-offset: 2px; }
+
+/* Colour utilities the site uses on whole sections. */
+.white { color: var(--color-white); }
+.brand-bg { background-color: var(--color-brand); }
+.brand-lightest-bg { background-color: var(--color-brand-lightest); }
+.dark-bg { background-color: var(--color-dark); }
+.brand-highlight { color: var(--color-brand-highlight); }

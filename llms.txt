@@ -15,7 +15,9 @@
 - `system/patterns/<name>.md` — shared page patterns (hero, sign-up form, …), same format as components. Empty for now.
 - `system/base.css` — base element styles (body, headings, links). Tokens only.
 - `brands/<id>/guidelines.md` — frontmatter (`name`, `summary`, `fonts`, `icons`, `exclude`) plus voice, principles, do and don't.
-- `brands/<id>/tokens.json` — design tokens (DTCG format). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
+  - `fonts`: a list of stylesheets. Each is a URL (e.g. Google Fonts) or a path inside the brand folder for self-hosted fonts (e.g. `assets/fonts/fonts.css`).
+  - `icons`: one line of text, or a list of icon sets, each `{ name, use, source?, files? }`, where `use` says when to pick that set.
+- `brands/<id>/tokens.json` — design tokens (DTCG format). Groups are free-form: besides colour, font, size and so on, a brand can define `gradient` and `shadow` tokens, whose values may reference colour tokens (`linear-gradient({color.a}, {color.b})`). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
 - `brands/<id>/components/<name>.md` — brand components, same format as shared ones.
 - `brands/<id>/patterns/<name>.md` — brand patterns.
 - `brands/<id>/assets/` — logos and images, each described in `assets/assets.md` (what it is, where to use it, minimum size, clear space).
@@ -44,6 +46,8 @@
   Start with `brands/aurora/brief.md`. Source folder: `brands/aurora/`.
 - **Harbor** — Calm, clear and professional. For dashboards, tools and formal communication.
   Start with `brands/harbor/brief.md`. Source folder: `brands/harbor/`.
+- **Prayer.Global** — Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.
+  Start with `brands/prayer-global/brief.md`. Source folder: `brands/prayer-global/`.
 
 ## Shared components
 
