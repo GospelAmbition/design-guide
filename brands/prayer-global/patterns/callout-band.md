@@ -29,10 +29,10 @@ uses: [button, icon, utilities]
 ```
 
 ```css
-.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s-m) var(--space-s); }
+.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s) var(--space-xs); }
 .callout-box h4 { font-weight: var(--weight-regular); }
-.callout-box .btn { margin-top: var(--space-s-m); }
+.callout-box .btn { margin-top: var(--space-s); }
 .has-icon { position: relative; }
-.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xs); }
+.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xxs); }
 .callout-box .two-rem.btn { font-size: 1.4rem; }
 ```

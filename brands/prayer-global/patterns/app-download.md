@@ -36,6 +36,6 @@ From the bottom of the home page.
 ```
 
 ```css
-.app-badges { gap: var(--space-xs); }
+.app-badges { gap: var(--space-xxs); }
 .app-badges img { height: 3.5rem; width: auto; display: block; }
 ```

@@ -33,7 +33,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
       <li><a class="white" href="#">Media &amp; Promotion</a></li>
       <li><a href="#">Privacy</a></li>
     </ul>
-    <p class="pt-s-m">Prayer Global © 2026 Gospel Ambition</p>
+    <p class="pt-s">Prayer Global © 2026 Gospel Ambition</p>
   </div>
 </footer>
 ```

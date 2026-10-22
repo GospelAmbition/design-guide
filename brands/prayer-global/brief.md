@@ -163,10 +163,10 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 
 ### space
 
-- `--space-xxs`: `0.25rem`
-- `--space-xs`: `0.5rem` — Button padding-y, tight list gaps.
-- `--space-s`: `1rem` — Button padding-x, .flow-small, nav padding.
-- `--space-s-m`: `1.5rem` — Container side padding (gutter 3rem).
+- `--space-xxxs`: `0.25rem`
+- `--space-xxs`: `0.5rem` — Button padding-y, tight list gaps.
+- `--space-xs`: `1rem` — Button padding-x, .flow-xsmall, nav padding.
+- `--space-s`: `1.5rem` — Container side padding (gutter 3rem).
 - `--space-m`: `2rem` — .flow-medium, .switcher-md gap.
 - `--space-l`: `3rem` — Footer and donate band padding (.py-l).
 - `--space-xl`: `4rem` — Section padding (.py-xl), image overlap margin.
@@ -354,26 +354,26 @@ CUBE CSS's wrapper, called `container` here.
 
 ### Flow
 
-Vertical space between children, in four fixed sizes. .flow (4rem), .flow-xmedium (3rem), .flow-medium (2rem), .flow-small (1rem). Brand override (`brands/prayer-global/composition/flow.md`), replaces `system/composition/flow.md`.
+Vertical space between children, in four fixed sizes. .flow (4rem), .flow-large (3rem), .flow-medium (2rem), .flow-xsmall (1rem). Brand override (`brands/prayer-global/composition/flow.md`), replaces `system/composition/flow.md`.
 
 Prayer.Global's own flow, from the Composition section of `basic.css`. It replaces the shared Flow because the site's version differs in three ways:
 
-- Each size is its own class, so `.flow-small` works without `.flow`.
+- Each size is its own class, so `.flow-xsmall` works without `.flow`.
 - `.flow` defaults to 4rem.
 - It also clears every child's own top and bottom margins.
 
-The site's `--pg-flow-size` override is called `--flow-space` here, as in the shared Flow.
+The site's `--pg-flow-size` override is called `--flow-space` here, as in the shared Flow. The size classes are named after the space token they use, so two differ from the site: its `.flow-small` is `.flow-xsmall` here and its `.flow-xmedium` is `.flow-large`.
 
 #### When to use
 
-- `.flow-small`: inside a text column (heading, paragraphs, button).
+- `.flow-xsmall`: inside a text column (heading, paragraphs, button).
 - `.flow-medium`: between groups inside a section.
 - `.flow`: between whole sections stacked in one wrapper.
 
 #### Code
 
 ```html
-<div class="flow-small" style="max-width: 32rem">
+<div class="flow-xsmall" style="max-width: 32rem">
   <h3>Flow small</h3>
   <p>1rem between each child.</p>
   <p>Child margins are cleared.</p>
@@ -386,13 +386,13 @@ The site's `--pg-flow-size` override is called `--flow-space` here, as in the sh
 
 ```css
 .flow > *,
-.flow-xmedium > *,
+.flow-large > *,
 .flow-medium > *,
-.flow-small > * { margin-top: 0; margin-bottom: 0; }
+.flow-xsmall > * { margin-top: 0; margin-bottom: 0; }
 .flow > * + * { margin-top: var(--flow-space, var(--space-xl)); }
-.flow-xmedium > * + * { margin-top: var(--flow-space, var(--space-l)); }
+.flow-large > * + * { margin-top: var(--flow-space, var(--space-l)); }
 .flow-medium > * + * { margin-top: var(--flow-space, var(--space-m)); }
-.flow-small > * + * { margin-top: var(--flow-space, var(--space-s)); }
+.flow-xsmall > * + * { margin-top: var(--flow-space, var(--space-xs)); }
 ```
 
 ### Repel
@@ -413,16 +413,16 @@ Prayer.Global's own repel, from the Composition section of `basic.css`. It repla
 ```css
 .repel {
   display: flex;
-  gap: var(--gutter, var(--space-s));
+  gap: var(--gutter, var(--space-xs));
   justify-content: space-between;
 }
 ```
 
 ### Stack
 
-A centred flex column with fixed gaps. .stack-xsm (0.5rem), .stack-sm (1rem), .stack-md (2rem), .stack (4rem). Prayer.Global-only (`brands/prayer-global/composition/stack.md`).
+A centred flex column with fixed gaps. .stack-xxs (0.5rem), .stack-xs (1rem), .stack-md (2rem), .stack (4rem). Prayer.Global-only (`brands/prayer-global/composition/stack.md`).
 
-Prayer.Global-only, from the Composition section of `basic.css`. Unlike Every Layout's Stack, which is the same as Flow, this one also centres its children. Use it for centred groups such as an icon, a title and a button.
+Prayer.Global-only, from the Composition section of `basic.css`. The size classes are named after the space token they use, so two differ from the site: its `.stack-xsm` is `.stack-xxs` here and its `.stack-sm` is `.stack-xs`. Unlike Every Layout's Stack, which is the same as Flow, this one also centres its children. Use it for centred groups such as an icon, a title and a button.
 
 #### Options
 
@@ -432,7 +432,7 @@ Prayer.Global-only, from the Composition section of `basic.css`. Unlike Every La
 #### Code
 
 ```html
-<div class="stack-sm" style="width: 100%">
+<div class="stack-xs" style="width: 100%">
   <i class="icon icon-small pg-relay" aria-hidden="true"></i>
   <h3>Centred group</h3>
   <a class="btn btn-primary-light uppercase" href="#">Action</a>
@@ -440,22 +440,22 @@ Prayer.Global-only, from the Composition section of `basic.css`. Unlike Every La
 ```
 
 ```css
-.stack-xsm,
-.stack-sm,
+.stack-xxs,
+.stack-xs,
 .stack-md,
 .stack { display: flex; flex-direction: column; align-items: center; }
-.stack-sm[data-grid],
+.stack-xs[data-grid],
 .stack-md[data-grid],
 .stack[data-grid] { display: grid; }
-.stack-sm[data-stretch],
+.stack-xs[data-stretch],
 .stack-md[data-stretch],
 .stack[data-stretch] { align-items: stretch; }
-.stack-xsm > *,
-.stack-sm > *,
+.stack-xxs > *,
+.stack-xs > *,
 .stack-md > *,
 .stack > * { margin-top: 0; margin-bottom: 0; }
-.stack-xsm > * + * { margin-top: var(--flow-space, var(--space-xs)); }
-.stack-sm > * + * { margin-top: var(--flow-space, var(--space-s)); }
+.stack-xxs > * + * { margin-top: var(--flow-space, var(--space-xxs)); }
+.stack-xs > * + * { margin-top: var(--flow-space, var(--space-xs)); }
 .stack-md > * + * { margin-top: var(--flow-space, var(--space-m)); }
 .stack > * + * { margin-top: var(--flow-space, var(--space-xl)); }
 ```
@@ -578,7 +578,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 <button class="btn btn-primary" type="button">Close</button>
 <a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 <a class="btn btn-secondary uppercase" href="#">Secondary</a>
-<a class="btn btn-outline-primary py-xxs" href="#">Pre-event setup</a>
+<a class="btn btn-outline-primary py-xxxs" href="#">Pre-event setup</a>
 ```
 
 ```html
@@ -598,7 +598,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   --btn-hover-bg: var(--btn-bg);
   --btn-hover-border: var(--btn-border);
   display: inline-block;
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xxs) var(--space-xs);
   font-family: var(--font-body);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);
@@ -855,29 +855,30 @@ From `pages/assets/nav.php`. There are three versions:
 
 ```css
 .pg-navbar { position: sticky; top: 0; z-index: 100; width: 100%; }
+.pg-navbar__inner .cluster { --gutter: var(--space-xs); }
 .pg-navbar[data-home] { position: fixed; left: 0; right: 0; padding: 1em; background: none; transition: background-color 0.3s ease-out; }
 .pg-navbar[data-home].scrolled { background-color: var(--color-brand); }
 .pg-navbar__inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--space-s) var(--space-s-m);
+  padding: var(--space-xs) var(--space-s);
   max-width: 1320px;
   margin-inline: auto;
   box-sizing: border-box;
 }
 .pg-navbar a { text-decoration: none; color: inherit; }
-.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-s); }
+.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-xs); }
 .white-bg { background-color: var(--color-white); }
 .brand { color: var(--color-brand); }
 .navbar-dark { background-color: var(--color-brand); color: var(--color-white); }
 .icon-button { cursor: pointer; color: inherit; background: none; border: 0; padding: 0; border-radius: var(--radius-md); margin: 2px; display: flex; }
-.streak-link { display: flex; align-items: center; gap: var(--space-xxs); }
+.streak-link { display: flex; align-items: center; gap: var(--space-xxxs); }
 .streak-link .icon { color: var(--color-secondary); }
 .navbar__title {
   justify-self: center;
   margin: 0;
-  padding: 0 var(--space-s);
+  padding: 0 var(--space-xs);
   border: 1px solid currentColor;
   border-radius: var(--radius-box);
   font-size: var(--size-nav-title);
@@ -992,7 +993,7 @@ From the About page ("Historic moment", "How it works", "Global race", "Moravian
 
 ### Utilities
 
-Single-purpose classes for spacing, alignment, flex grow and widths. Spacing classes are named after the space tokens (.py-xl, .px-s-m). Prayer.Global-only (`brands/prayer-global/components/utilities.md`).
+Single-purpose classes for spacing, alignment, flex grow and widths. Spacing classes are named after the space tokens (.py-xl, .px-s). Prayer.Global-only (`brands/prayer-global/components/utilities.md`).
 
 CUBE CSS's utility layer for this brand: one class, one job. Spacing classes are a prefix plus a space token: `p` padding, `x` left and right, `y` top and bottom, `t` top, `b` bottom, so `.py-xl` sets top and bottom padding to `--space-xl`. Only the classes the patterns use are defined so far. A complete set generated from the tokens is planned.
 
@@ -1000,7 +1001,7 @@ CUBE CSS's utility layer for this brand: one class, one job. Spacing classes are
 
 ```html
 <div class="text-center py-xl" style="width: 100%; outline: 1px dashed currentColor">
-  <p class="w-fit mx-auto px-s-m" style="outline: 1px dashed currentColor">.w-fit .mx-auto .px-s-m inside .py-xl .text-center</p>
+  <p class="w-fit mx-auto px-s" style="outline: 1px dashed currentColor">.w-fit .mx-auto .px-s inside .py-xl .text-center</p>
 </div>
 ```
 
@@ -1018,13 +1019,13 @@ CUBE CSS's utility layer for this brand: one class, one job. Spacing classes are
 .font-italic { font-style: italic; }
 .fw-bold { font-weight: var(--weight-strong); }
 .cover { background-size: cover; background-repeat: no-repeat; }
-.py-xxs { padding-top: var(--space-xxs); padding-bottom: var(--space-xxs); }
+.py-xxxs { padding-top: var(--space-xxxs); padding-bottom: var(--space-xxxs); }
 .py-l { padding-top: var(--space-l); padding-bottom: var(--space-l); }
 .py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
-.pt-s-m { padding-top: var(--space-s-m); }
+.pt-s { padding-top: var(--space-s); }
 .pt-xl { padding-top: var(--space-xl); }
 .pb-xl { padding-bottom: var(--space-xl); }
-.px-s-m { padding-left: var(--space-s-m); padding-right: var(--space-s-m); }
+.px-s { padding-left: var(--space-s); padding-right: var(--space-s); }
 .px-l { padding-left: var(--space-l); padding-right: var(--space-l); }
 ```
 
@@ -1068,7 +1069,7 @@ From the bottom of the home page.
 ```
 
 ```css
-.app-badges { gap: var(--space-xs); }
+.app-badges { gap: var(--space-xxs); }
 .app-badges img { height: 3.5rem; width: auto; display: block; }
 ```
 
@@ -1101,11 +1102,11 @@ A navy box inside the page column with an uppercase h4 question and one blue-gra
 ```
 
 ```css
-.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s-m) var(--space-s); }
+.callout-box { width: 100%; max-width: 1140px; box-sizing: border-box; text-align: center; padding: var(--space-s) var(--space-xs); }
 .callout-box h4 { font-weight: var(--weight-regular); }
-.callout-box .btn { margin-top: var(--space-s-m); }
+.callout-box .btn { margin-top: var(--space-s); }
 .has-icon { position: relative; }
-.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xs); }
+.icon-end { position: absolute; top: 50%; right: 0; transform: translateY(-50%); margin-right: var(--space-xxs); }
 .callout-box .two-rem.btn { font-size: 1.4rem; }
 ```
 
@@ -1133,9 +1134,9 @@ Light-blue band. Photo on the left; statement heading, short copy, a white Donat
 ```html
 <section class="brand-lightest-bg white" style="width: 100%">
   <div class="container" style="--gutter: 0">
-    <div class="switcher" style="--gutter: var(--space-s)">
+    <div class="switcher" style="--gutter: var(--space-xs)">
       <div class="grow-3 donate-band__photo" style="background-image: url(/brands/prayer-global/assets/photos/panel-donate.jpg)"></div>
-      <div class="flow-medium py-l px-s-m grow-4">
+      <div class="flow-medium py-l px-s grow-4">
         <h2 class="font-base h2">Gospel Ambition tools and trainings are 100% free, thanks to people like you.</h2>
         <p>We love equipping the global Church with free tools to mobilize prayer and make disciples. You can help expand this mission by becoming a monthly giver or making a one-time gift.</p>
         <div class="cluster donate-band__actions">
@@ -1150,7 +1151,7 @@ Light-blue band. Photo on the left; statement heading, short copy, a white Donat
 
 ```css
 .donate-band__photo { background-size: cover; background-position: center; min-height: 15rem; }
-.donate-band__actions { justify-content: space-between; }
+.donate-band__actions { --gutter: var(--space-xs); justify-content: space-between; }
 .donate-band__logo { width: 135px; }
 .donate-band__logo img { width: 100%; display: block; }
 ```
@@ -1181,12 +1182,12 @@ Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the 
 <section class="brand-lightest-bg blue-orange-gradient py-xl" style="width: 100%">
   <div class="container">
     <div class="switcher switcher-md align-items-center">
-      <div class="flow-small white">
+      <div class="flow-xsmall white">
         <h2 class="text-center">How it works <i class="icon icon-small pg-logo-prayer" aria-hidden="true"></i></h2>
         <p>Prayer.Global has broken the world down into 4,770 states based on geographical and governmental boundaries.</p>
         <p>Pray for all 4,770…complete a "prayer lap" around the world!</p>
         <p>An interactive map tracks your prayers in real time.</p>
-        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s-m" href="#">View prayer map</a>
+        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s" href="#">View prayer map</a>
       </div>
       <div class="drop-shadow"><img class="clip-rounded-start" src="/brands/prayer-global/assets/photos/panel-how-it-works.jpg" alt="" /></div>
     </div>
@@ -1222,10 +1223,10 @@ White section. Clipped image panel on the left, Bebas Kai title with icon, short
 ```html
 <section class="py-xl" style="width: 100%">
   <div class="container switcher switcher-md switcher-reverse align-items-center">
-    <div class="flow-small">
+    <div class="flow-xsmall">
       <h2 class="text-center">Prayer fuel <i class="icon icon-small pg-pray-hands-light" aria-hidden="true"></i></h2>
       <p>We'll give you location specific prayer prompts, scripture and images to help guide your prayers for each of the 4,770 states.</p>
-      <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
+      <a class="btn btn-cta btn-lg center w-fit mx-auto px-s" href="#">Start praying</a>
     </div>
     <div class="drop-shadow"><img class="clip-rounded-end" src="/brands/prayer-global/assets/photos/panel-prayer-fuel.jpg" alt="" /></div>
   </div>
@@ -1265,7 +1266,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
       <li><a class="white" href="#">Media &amp; Promotion</a></li>
       <li><a href="#">Privacy</a></li>
     </ul>
-    <p class="pt-s-m">Prayer Global © 2026 Gospel Ambition</p>
+    <p class="pt-s">Prayer Global © 2026 Gospel Ambition</p>
   </div>
 </footer>
 ```
@@ -1326,7 +1327,7 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
   background-repeat: no-repeat;
   background-position: top;
 }
-.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-s); }
+.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-xs); }
 .hero .heading {
   font-family: var(--font-heading);
   font-size: var(--size-hero-title);
@@ -1343,8 +1344,8 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
 }
 .hero .heading__logo { font-size: var(--size-hero-logo); }
 .hero .btn-cta { font-size: var(--size-hero-cta); }
-.hero__next { margin-top: var(--space-xs); text-decoration: none; }
-.hero .center { margin-block: var(--space-s-m); }
+.hero__next { margin-top: var(--space-xxs); text-decoration: none; }
+.hero .center { margin-block: var(--space-s); }
 @media (max-width: 767px) {
   .hero .heading { font-size: 62px; }
   .hero .sub-heading { font-size: 32px; }
@@ -1421,7 +1422,7 @@ Navy section with a Bebas Kai title and short text on the left, an uppercase lis
         <li><i class="icon pg-prayer" aria-hidden="true"></i><span>Campus ministries</span></li>
       </ul>
     </div>
-    <span class="switcher">
+    <span class="switcher" style="--gutter: var(--space-xs)">
       <a class="btn btn-primary-light uppercase" href="#">Create prayer relay</a>
       <a class="btn btn-outline-light uppercase" href="#">Information for leaders</a>
     </span>
@@ -1431,7 +1432,7 @@ Navy section with a Bebas Kai title and short text on the left, an uppercase lis
 
 ```css
 .movement-list { font-size: var(--size-one-em); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0; }
-.movement-list li { display: flex; align-items: center; gap: var(--space-s); }
+.movement-list li { display: flex; align-items: center; gap: var(--space-xs); }
 @media (max-width: 768px) { .movement-list { font-size: 1em; } }
 ```
 
@@ -1468,7 +1469,7 @@ The blue world map beside a Europa statement heading, then three live stats and 
       <div class="stat"><span class="stat__value">63</span><p class="stat__label">Laps completed</p></div>
       <div class="stat"><span class="stat__value">33,759</span><p class="stat__label">Total intercessors</p></div>
     </div>
-    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
+    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s" href="#">Start praying</a>
   </div>
 </section>
 ```
@@ -1495,7 +1496,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-weight: var(--weight-regular);
   line-height: var(--leading-heading);
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 var(--space-xxs);
 }
 h1, h2, h3 { font-family: var(--font-heading); }
 h1 { font-size: var(--size-h1); }
@@ -1516,18 +1517,18 @@ h5 { font-size: var(--size-h5); margin-bottom: 0; }
 .font-weight-bold { font-weight: var(--weight-strong); }
 .uppercase { text-transform: uppercase; }
 
-p { margin: 0 0 var(--space-s); }
+p { margin: 0 0 var(--space-xs); }
 a { color: var(--color-brand-lighter); transition: 0.3s all ease; }
 a:hover, a:active { color: var(--color-brand-lightest); }
 
 /* Lists use a "●" bullet in the text colour. role="list" removes it. */
-ul { list-style: none; margin: 0 0 var(--space-s); padding: 0; line-height: var(--leading-body); }
+ul { list-style: none; margin: 0 0 var(--space-xs); padding: 0; line-height: var(--leading-body); }
 ul li { position: relative; }
 ul:not([role="list"]) li { padding-left: 1.7em; }
 ul li::before { content: "●"; font-size: 1.5em; position: absolute; left: 0; top: 0.1em; line-height: 0.9; }
 ul[role="list"] li::before { content: none; }
-li + li { margin-top: var(--space-s); }
-[data-tight] > li + li { margin-top: var(--space-xs); }
+li + li { margin-top: var(--space-xs); }
+[data-tight] > li + li { margin-top: var(--space-xxs); }
 [dir="rtl"] ul:not([role="list"]) li { padding-left: 0; padding-right: 1.7em; }
 [dir="rtl"] ul li::before { left: auto; right: 0; }
 
@@ -1610,10 +1611,10 @@ li + li { margin-top: var(--space-s); }
   --radius-md: 10px; /** Form fields, icon buttons. */
   --radius-box: 0.375rem; /** The outlined nav title. */
   --radius-pill: 100px; /** Every button. */
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem; /** Button padding-y, tight list gaps. */
-  --space-s: 1rem; /** Button padding-x, .flow-small, nav padding. */
-  --space-s-m: 1.5rem; /** Container side padding (gutter 3rem). */
+  --space-xxxs: 0.25rem;
+  --space-xxs: 0.5rem; /** Button padding-y, tight list gaps. */
+  --space-xs: 1rem; /** Button padding-x, .flow-xsmall, nav padding. */
+  --space-s: 1.5rem; /** Container side padding (gutter 3rem). */
   --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
   --space-l: 3rem; /** Footer and donate band padding (.py-l). */
   --space-xl: 4rem; /** Section padding (.py-xl), image overlap margin. */

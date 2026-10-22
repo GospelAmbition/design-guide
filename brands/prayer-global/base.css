@@ -13,7 +13,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-weight: var(--weight-regular);
   line-height: var(--leading-heading);
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 var(--space-xxs);
 }
 h1, h2, h3 { font-family: var(--font-heading); }
 h1 { font-size: var(--size-h1); }
@@ -34,18 +34,18 @@ h5 { font-size: var(--size-h5); margin-bottom: 0; }
 .font-weight-bold { font-weight: var(--weight-strong); }
 .uppercase { text-transform: uppercase; }
 
-p { margin: 0 0 var(--space-s); }
+p { margin: 0 0 var(--space-xs); }
 a { color: var(--color-brand-lighter); transition: 0.3s all ease; }
 a:hover, a:active { color: var(--color-brand-lightest); }
 
 /* Lists use a "●" bullet in the text colour. role="list" removes it. */
-ul { list-style: none; margin: 0 0 var(--space-s); padding: 0; line-height: var(--leading-body); }
+ul { list-style: none; margin: 0 0 var(--space-xs); padding: 0; line-height: var(--leading-body); }
 ul li { position: relative; }
 ul:not([role="list"]) li { padding-left: 1.7em; }
 ul li::before { content: "●"; font-size: 1.5em; position: absolute; left: 0; top: 0.1em; line-height: 0.9; }
 ul[role="list"] li::before { content: none; }
-li + li { margin-top: var(--space-s); }
-[data-tight] > li + li { margin-top: var(--space-xs); }
+li + li { margin-top: var(--space-xs); }
+[data-tight] > li + li { margin-top: var(--space-xxs); }
 [dir="rtl"] ul:not([role="list"]) li { padding-left: 0; padding-right: 1.7em; }
 [dir="rtl"] ul li::before { left: auto; right: 0; }
 

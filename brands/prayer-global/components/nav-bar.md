@@ -55,29 +55,30 @@ From `pages/assets/nav.php`. There are three versions:
 
 ```css
 .pg-navbar { position: sticky; top: 0; z-index: 100; width: 100%; }
+.pg-navbar__inner .cluster { --gutter: var(--space-xs); }
 .pg-navbar[data-home] { position: fixed; left: 0; right: 0; padding: 1em; background: none; transition: background-color 0.3s ease-out; }
 .pg-navbar[data-home].scrolled { background-color: var(--color-brand); }
 .pg-navbar__inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--space-s) var(--space-s-m);
+  padding: var(--space-xs) var(--space-s);
   max-width: 1320px;
   margin-inline: auto;
   box-sizing: border-box;
 }
 .pg-navbar a { text-decoration: none; color: inherit; }
-.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-s); }
+.pg-navbar__end { display: flex; justify-content: flex-end; align-items: center; gap: var(--space-xs); }
 .white-bg { background-color: var(--color-white); }
 .brand { color: var(--color-brand); }
 .navbar-dark { background-color: var(--color-brand); color: var(--color-white); }
 .icon-button { cursor: pointer; color: inherit; background: none; border: 0; padding: 0; border-radius: var(--radius-md); margin: 2px; display: flex; }
-.streak-link { display: flex; align-items: center; gap: var(--space-xxs); }
+.streak-link { display: flex; align-items: center; gap: var(--space-xxxs); }
 .streak-link .icon { color: var(--color-secondary); }
 .navbar__title {
   justify-self: center;
   margin: 0;
-  padding: 0 var(--space-s);
+  padding: 0 var(--space-xs);
   border: 1px solid currentColor;
   border-radius: var(--radius-box);
   font-size: var(--size-nav-title);

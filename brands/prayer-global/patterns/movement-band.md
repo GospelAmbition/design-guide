@@ -36,7 +36,7 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
         <li><i class="icon pg-prayer" aria-hidden="true"></i><span>Campus ministries</span></li>
       </ul>
     </div>
-    <span class="switcher">
+    <span class="switcher" style="--gutter: var(--space-xs)">
       <a class="btn btn-primary-light uppercase" href="#">Create prayer relay</a>
       <a class="btn btn-outline-light uppercase" href="#">Information for leaders</a>
     </span>
@@ -46,6 +46,6 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 
 ```css
 .movement-list { font-size: var(--size-one-em); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0; }
-.movement-list li { display: flex; align-items: center; gap: var(--space-s); }
+.movement-list li { display: flex; align-items: center; gap: var(--space-xs); }
 @media (max-width: 768px) { .movement-list { font-size: 1em; } }
 ```

@@ -33,7 +33,7 @@ uses: [button, stat, center, container, flow, switcher, switcher-variants, utili
       <div class="stat"><span class="stat__value">63</span><p class="stat__label">Laps completed</p></div>
       <div class="stat"><span class="stat__value">33,759</span><p class="stat__label">Total intercessors</p></div>
     </div>
-    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
+    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s" href="#">Start praying</a>
   </div>
 </section>
 ```

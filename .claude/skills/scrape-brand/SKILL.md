@@ -56,11 +56,11 @@ Then run one assumption round (brand id, branch, what to do with logos and icon 
 **Independence from the site's implementation.** The guide is mainly for building new things in the brand, so it must be consistent with itself:
 - No Bootstrap (or other framework) naming, numbering or colours: no `.px-4` / `.py-5`, no `#f8f9fa` "light", no black hover text. Fold framework-only colours into the nearest brand colours.
 - Use the shared `system/composition/` primitives (flow, cluster, repel, switcher, center, container). Override one only when the site's own composition CSS genuinely behaves differently, and add brand-only primitives for extras. Never override with framework versions (e.g. a Bootstrap breakpoint `.container`).
-- Utility classes are named after the space tokens (`.py-xl`, `.px-s-m`). Patterns `uses:` every primitive, component and utilities file whose CSS they need.
+- Utility classes are named after the space tokens (`.py-xl`, `.px-m`). Patterns `uses:` every primitive, component and utilities file whose CSS they need.
 - Guidelines tell agents to build from the guide and adapt to a target site's own classes, never to paste the guide's markup in.
 
 **Tokens**
-- Every brand must define `space.xs`, `s`, `m`, `l` and `xl` (named, never numbered), and may add `xxs`, `s-m`, `xxl`… Map the site's real gaps onto them.
+- Every brand must define `space.xs`, `s`, `m`, `l` and `xl` (named, never numbered), and may add steps at either end (`xxs`, `xxl`…), never in between (no `s-m`). Map the site's real gaps onto one continuous sequence. If a gap falls between two steps, keep `m` fixed and shift the names on that side outwards (`s`→`xs`, `xs`→`xxs`…). Size-named classes (`.switcher-md`) use the token of the same name.
 - Gradients and shadows are tokens and may reference colours: `linear-gradient({color.a}, {color.b})`.
 - Self-hosted fonts: copy only woff2 and woff, write `assets/fonts/fonts.css`, and list it in the `fonts` frontmatter as a path. Icon fonts ship with their class stylesheet, also listed in `fonts`, and get a font token for any `content:` glyphs.
 - Leave colour naming close to the site's for a first scrape (renaming to roles or a 100–900 scale is a later clean-up), but keep descriptions free of framework references.

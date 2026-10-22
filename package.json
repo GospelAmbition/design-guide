@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "node scripts/generate.mjs",
     "check": "node scripts/check.mjs",
-    "dev": "npm run generate && astro dev",
+    "dev": "npm run generate && node -e \"require('fs').rmSync('.astro/data-store.json', { force: true })\" && astro dev",
     "build": "npm run generate && astro build",
     "preview": "astro preview",
     "prepare": "git config core.hooksPath .githooks || true"

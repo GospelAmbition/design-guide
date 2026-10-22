@@ -41,7 +41,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 <button class="btn btn-primary" type="button">Close</button>
 <a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 <a class="btn btn-secondary uppercase" href="#">Secondary</a>
-<a class="btn btn-outline-primary py-xxs" href="#">Pre-event setup</a>
+<a class="btn btn-outline-primary py-xxxs" href="#">Pre-event setup</a>
 ```
 
 ```html
@@ -61,7 +61,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   --btn-hover-bg: var(--btn-bg);
   --btn-hover-border: var(--btn-border);
   display: inline-block;
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xxs) var(--space-xs);
   font-family: var(--font-body);
   font-size: var(--size-small);
   font-weight: var(--weight-strong);

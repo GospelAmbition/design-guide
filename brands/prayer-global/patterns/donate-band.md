@@ -24,9 +24,9 @@ uses: [button, center, cluster, container, flow, switcher, utilities]
 ```html
 <section class="brand-lightest-bg white" style="width: 100%">
   <div class="container" style="--gutter: 0">
-    <div class="switcher" style="--gutter: var(--space-s)">
+    <div class="switcher" style="--gutter: var(--space-xs)">
       <div class="grow-3 donate-band__photo" style="background-image: url(/brands/prayer-global/assets/photos/panel-donate.jpg)"></div>
-      <div class="flow-medium py-l px-s-m grow-4">
+      <div class="flow-medium py-l px-s grow-4">
         <h2 class="font-base h2">Gospel Ambition tools and trainings are 100% free, thanks to people like you.</h2>
         <p>We love equipping the global Church with free tools to mobilize prayer and make disciples. You can help expand this mission by becoming a monthly giver or making a one-time gift.</p>
         <div class="cluster donate-band__actions">
@@ -41,7 +41,7 @@ uses: [button, center, cluster, container, flow, switcher, utilities]
 
 ```css
 .donate-band__photo { background-size: cover; background-position: center; min-height: 15rem; }
-.donate-band__actions { justify-content: space-between; }
+.donate-band__actions { --gutter: var(--space-xs); justify-content: space-between; }
 .donate-band__logo { width: 135px; }
 .donate-band__logo img { width: 100%; display: block; }
 ```

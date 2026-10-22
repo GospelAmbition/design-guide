@@ -19,7 +19,7 @@
   - `fonts`: a list of stylesheets. Each is a URL (e.g. Google Fonts) or a path inside the brand folder for self-hosted fonts (e.g. `assets/fonts/fonts.css`).
   - `icons`: one line of text, or a list of icon sets, each `{ name, use, source?, files? }`, where `use` says when to pick that set.
 - `brands/<id>/tokens.json` — design tokens (DTCG format). Groups are free-form: besides colour, font, size and so on, a brand can define `gradient` and `shadow` tokens, whose values may reference colour tokens (`linear-gradient({color.a}, {color.b})`). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
-  - Spacing is a named scale. Every brand must define `space.xs`, `s`, `m`, `l` and `xl`, so shared CSS means the same step everywhere; a brand may add more (`xxs`, `xxl`, `s-m`, …). There is no numbered `--space-1` scale.
+  - Spacing is a named scale. Every brand must define `space.xs`, `s`, `m`, `l` and `xl`, so shared CSS means the same step everywhere; a brand may add more steps at either end (`xxs`, `xxxs`, `xxl`, …). Never add an in-between step such as `s-m`: if a site needs a size between two steps, keep `m` where it is and shift the names on that side outwards (a new step between `s` and `m` becomes `s`, the old `s` becomes `xs`, and so on), so the scale stays one sequence. Classes named after a size (`.switcher-md`, `.flow-xsmall`) use the token of that name. There is no numbered `--space-1` scale.
 - `brands/<id>/composition/<name>.md` — brand composition primitives: overrides of shared ones or brand-only additions.
 - `brands/<id>/components/<name>.md` — brand components, same format as shared ones.
 - `brands/<id>/patterns/<name>.md` — brand patterns.
@@ -47,6 +47,8 @@
 
 - **Aurora** — Warm, friendly and welcoming. For community and consumer-facing sites.
   Start with `brands/aurora/brief.md`. Source folder: `brands/aurora/`.
+- **Disciple.Tools** — Clear, practical and free. Blue and green on white, heavy Open Sans headings over Roboto, for presenting the Disciple.Tools software to disciple-making teams.
+  Start with `brands/disciple-tools/brief.md`. Source folder: `brands/disciple-tools/`.
 - **Harbor** — Calm, clear and professional. For dashboards, tools and formal communication.
   Start with `brands/harbor/brief.md`. Source folder: `brands/harbor/`.
 - **Prayer.Global** — Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.

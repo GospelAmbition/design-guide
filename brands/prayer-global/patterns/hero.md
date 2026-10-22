@@ -50,7 +50,7 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
   background-repeat: no-repeat;
   background-position: top;
 }
-.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-s); }
+.hero__inner { min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between; padding-inline: var(--space-xs); }
 .hero .heading {
   font-family: var(--font-heading);
   font-size: var(--size-hero-title);
@@ -67,8 +67,8 @@ The home page opens with this (`section.hero` in `pages/home/body2.php`). Sizes 
 }
 .hero .heading__logo { font-size: var(--size-hero-logo); }
 .hero .btn-cta { font-size: var(--size-hero-cta); }
-.hero__next { margin-top: var(--space-xs); text-decoration: none; }
-.hero .center { margin-block: var(--space-s-m); }
+.hero__next { margin-top: var(--space-xxs); text-decoration: none; }
+.hero .center { margin-block: var(--space-s); }
 @media (max-width: 767px) {
   .hero .heading { font-size: 62px; }
   .hero .sub-heading { font-size: 32px; }

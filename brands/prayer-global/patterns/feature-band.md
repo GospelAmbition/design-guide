@@ -26,12 +26,12 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 <section class="brand-lightest-bg blue-orange-gradient py-xl" style="width: 100%">
   <div class="container">
     <div class="switcher switcher-md align-items-center">
-      <div class="flow-small white">
+      <div class="flow-xsmall white">
         <h2 class="text-center">How it works <i class="icon icon-small pg-logo-prayer" aria-hidden="true"></i></h2>
         <p>Prayer.Global has broken the world down into 4,770 states based on geographical and governmental boundaries.</p>
         <p>Pray for all 4,770…complete a "prayer lap" around the world!</p>
         <p>An interactive map tracks your prayers in real time.</p>
-        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s-m" href="#">View prayer map</a>
+        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s" href="#">View prayer map</a>
       </div>
       <div class="drop-shadow"><img class="clip-rounded-start" src="/brands/prayer-global/assets/photos/panel-how-it-works.jpg" alt="" /></div>
     </div>

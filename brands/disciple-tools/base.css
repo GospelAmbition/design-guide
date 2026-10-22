@@ -1,0 +1,56 @@
+/* Disciple.Tools base element styles. Replaces system/base.css for this brand.
+   Load after the Google Fonts and Font Awesome stylesheets and tokens.css.
+   Based on the rules disciple.tools renders (theme + Elementor kit), with values as tokens. */
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-base);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5 { margin: 0; }
+
+/* Page title: Roboto 800 in blue, centred, with a tall line box. */
+h1 {
+  font-family: var(--font-body);
+  font-size: var(--size-h1);
+  font-weight: var(--weight-heavy);
+  line-height: var(--leading-page-title);
+  color: var(--color-blue);
+  text-align: center;
+}
+/* Section headings: Open Sans 800 in blue. */
+h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heavy);
+  line-height: var(--leading-heading);
+  color: var(--color-blue);
+}
+h2 { font-size: var(--size-h2); }
+h3 { font-size: var(--size-h3); }
+/* Image-box titles: Open Sans 700 in the text colour. */
+h4, h5 { font-family: var(--font-heading); font-weight: var(--weight-strong); color: var(--color-text); }
+h4 { font-size: var(--size-h4); line-height: var(--leading-base); }
+h5 { font-size: var(--size-h5); line-height: var(--leading-h5); }
+
+p { margin: 0 0 var(--space-paragraph); line-height: var(--leading-body); }
+p:last-child { margin-bottom: 0; }
+strong, b { font-weight: var(--weight-strong); }
+
+a { color: var(--color-blue); font-weight: var(--weight-strong); text-decoration: none; }
+a:hover, a:focus { color: var(--color-green); text-decoration: underline; }
+
+*:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
+img { max-width: 100%; height: auto; }
+
+/* Section colours. Text on blue and green is white; headings follow. */
+.bg-blue { background-color: var(--color-blue); color: var(--color-white); }
+.bg-green { background-color: var(--color-green); color: var(--color-white); }
+.bg-grey-light { background-color: var(--color-grey-light); }
+.bg-grey-lightest { background-color: var(--color-grey-lightest); }
+.bg-blue h2, .bg-blue h3, .bg-green h2, .bg-green h3 { color: var(--color-white); }
+.bg-blue p { color: var(--color-grey-lighter); }
+.bg-blue a, .bg-green a { color: var(--color-white); }

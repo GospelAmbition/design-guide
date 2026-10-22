@@ -17,7 +17,7 @@ Prayer.Global's own repel, from the Composition section of `basic.css`. It repla
 ```css
 .repel {
   display: flex;
-  gap: var(--gutter, var(--space-s));
+  gap: var(--gutter, var(--space-xs));
   justify-content: space-between;
 }
 ```

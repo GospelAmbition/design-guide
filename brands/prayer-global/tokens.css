@@ -64,10 +64,10 @@
   --radius-md: 10px; /** Form fields, icon buttons. */
   --radius-box: 0.375rem; /** The outlined nav title. */
   --radius-pill: 100px; /** Every button. */
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem; /** Button padding-y, tight list gaps. */
-  --space-s: 1rem; /** Button padding-x, .flow-small, nav padding. */
-  --space-s-m: 1.5rem; /** Container side padding (gutter 3rem). */
+  --space-xxxs: 0.25rem;
+  --space-xxs: 0.5rem; /** Button padding-y, tight list gaps. */
+  --space-xs: 1rem; /** Button padding-x, .flow-xsmall, nav padding. */
+  --space-s: 1.5rem; /** Container side padding (gutter 3rem). */
   --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
   --space-l: 3rem; /** Footer and donate band padding (.py-l). */
   --space-xl: 4rem; /** Section padding (.py-xl), image overlap margin. */
