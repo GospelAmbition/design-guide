@@ -18,12 +18,13 @@ const sidebar = [
   { label: 'Start here', items: [{ label: 'Overview', slug: 'index' }, { label: 'Using this with AI', slug: 'using-with-ai' }] },
   ...brands.map((b) => ({
     label: b.meta.name ?? b.id,
+    collapsed: true,
     items: [
       { label: 'Overview', link: `/guide/${b.id}/` },
       { label: 'Tokens', link: `/guide/${b.id}/tokens/` },
-      ...(b.composition.length ? [{ label: 'Composition', items: docItems(b, 'composition') }] : []),
-      { label: 'Components', items: docItems(b, 'components') },
-      ...(b.patterns.length ? [{ label: 'Patterns', items: docItems(b, 'patterns') }] : []),
+      ...(b.composition.length ? [{ label: 'Composition', collapsed: true, items: docItems(b, 'composition') }] : []),
+      { label: 'Components', collapsed: true, items: docItems(b, 'components') },
+      ...(b.patterns.length ? [{ label: 'Patterns', collapsed: true, items: docItems(b, 'patterns') }] : []),
       { label: 'Assets', link: `/guide/${b.id}/assets/` },
       { label: 'Brief for AI', link: `/guide/${b.id}/brief/` },
     ],

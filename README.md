@@ -27,3 +27,29 @@ src/                      the Starlight viewer
 ```
 
 Adding a brand means adding a folder: the sidebar, pages, brief and `llms.txt` entry are generated.
+
+## Plan
+
+want to create a landing page that looks like Prayer.Global.
+Can we point an agent and create something on brand from that.
+Wherever
+- on the original site
+- on another site
+- in slides
+- a printable design
+
+Better to point it to the future and allow it to diverge from site class naming and design conventions.
+
+Better to iteratively improve and not get it fully right first time as we don't know what direction we are going in yet.
+
+Naming of class colours needs to be more what they are for if they have a function. and shades of colour can use the number system if they are not functional.
+
+Get minimum thing going.
+- [ ] Prayer.Global
+- [ ] Gospel Ambition from prospectus.
+- [ ] Disciple.Tools
+- [ ] Empty Prayer.Tools and see if Chad can suck his brand from a design file into the design guide.
+
+and then see if Chad can do a second pass before doing some more.
+
+Try out creating a landing page with Prayer.Global.
