@@ -42,7 +42,7 @@ textarea[type="text"], .input {
   border-radius: var(--radius-md);
   padding: var(--space-input-y) var(--space-input-x);
   box-shadow: var(--shadow-small);
-  color: var(--color-input-text);
+  color: var(--color-text);
   background-color: var(--color-white);
 }
 input[type="checkbox"]:not([role="switch"]) {

@@ -15,10 +15,7 @@
   --color-secondary-darker: #d28041; /** --pg-secondary-color-darker. Hover on .btn-secondary. */
   --color-grey: #acabab; /** --pg-grey. Form field borders, disabled buttons, list dividers. */
   --color-grey-light: #f3f5f8; /** --pg-grey-light. */
-  --color-input-text: #6c757d; /** Text typed into form fields (Bootstrap gray-600). */
-  --color-white: #ffffff; /** Text on dark sections and on every filled button. */
-  --color-light: #f8f9fa; /** Bootstrap light. .btn-outline-light text, border and hover fill. */
-  --color-black: #000000; /** Text on .btn-outline-light when hovered. Nowhere else. */
+  --color-white: #ffffff; /** Text on dark sections and on every filled button; outline buttons on dark. */
   --color-orange-top: #ffb858; /** First stop of --gradient-orange (CTA buttons). */
   --color-orange-bottom: #ea7519; /** Last stop of --gradient-orange (CTA buttons). */
   --color-blue-top: #5a81c0; /** First stop of --gradient-blue (.cta-blue). */
@@ -37,7 +34,7 @@
   --weight-strong: 700; /** Buttons, h4, h5, .font-weight-bold. The CTA's 600 also renders as this. */
   --weight-heading: 400; /** Bebas Kai's only weight. */
   --leading-body: 1.8; /** Body text (--bs-body-line-height). */
-  --leading-heading: 1.2; /** h1, h3–h5 (Bootstrap default). */
+  --leading-heading: 1.2; /** h1, h3–h5. */
   --leading-title: 1.1; /** h2 and .h2. */
   --leading-base: 1.5; /** Buttons and .lh-base (stats). */
   --leading-tight: 1; /** Icons (.icon). */
@@ -65,15 +62,15 @@
   --size-hero-cta: 3vh; /** CTA button in the hero. */
   --radius-sm: 5px; /** Language switcher button. */
   --radius-md: 10px; /** Form fields, icon buttons. */
-  --radius-box: 0.375rem; /** Bootstrap .rounded: the outlined nav title. */
+  --radius-box: 0.375rem; /** The outlined nav title. */
   --radius-pill: 100px; /** Every button. */
   --space-xxs: 0.25rem;
   --space-xs: 0.5rem; /** Button padding-y, tight list gaps. */
   --space-s: 1rem; /** Button padding-x, .flow-small, nav padding. */
   --space-s-m: 1.5rem; /** Container side padding (gutter 3rem). */
   --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
-  --space-l: 3rem; /** Footer padding (py-5). */
-  --space-xl: 4rem; /** Section padding (.py-6), image overlap margin. */
+  --space-l: 3rem; /** Footer and donate band padding (.py-l). */
+  --space-xl: 4rem; /** Section padding (.py-xl), image overlap margin. */
   --space-input-y: 5px; /** Form field padding top and bottom. */
   --space-input-x: 10px; /** Form field padding left and right. */
 }

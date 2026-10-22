@@ -1,6 +1,6 @@
 /* Prayer.Global base element styles. Replaces system/base.css for this brand.
    Load after assets/fonts/fonts.css, assets/fonts/prayer-global-icons.css and tokens.css.
-   Translated from prayer-global-porch basic.css + Bootstrap 5.2 (the site's own rules, with values as tokens). */
+   Based on the rules prayer.global renders, with values as tokens. */
 body {
   margin: 0;
   background: var(--color-background);

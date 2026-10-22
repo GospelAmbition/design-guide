@@ -22,7 +22,7 @@ The first section under the hero ("Want to pray globally but don't know where to
 ## Code
 
 ```html
-<section class="container py-6 cover" style="background-image: url(/brands/prayer-global/assets/world-map-light.png)">
+<section class="container py-xl cover" style="background-image: url(/brands/prayer-global/assets/world-map-light.png)">
   <div class="flow-medium center text-center">
     <h2 class="font-base font-weight-bold h2">Want to pray globally but don't know where to start?</h2>
     <p>Prayer.Global makes praying for the lost simple— and life-changing.</p>

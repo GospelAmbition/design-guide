@@ -53,7 +53,7 @@ Hopeful, simple and inviting. Prayer.Global makes a huge goal ("cover the world 
 - Use `.btn-primary-light` for secondary actions in feature sections and bands, and `.btn-white` on navy or light-blue bands.
 - Put an icon at the end of section titles: `<i class="icon icon-small pg-…">`, in the title's colour.
 - Alternate white feature sections with `.blue-orange-gradient` feature bands to pace a long page.
-- Use the site's class names (Layout, Button and Icon components) so markup moves between this guide and prayer.global unchanged.
+- Build new pages from this guide's tokens, composition and components. When adding to an existing site, adapt them to that site's own classes; don't paste the guide's markup in as-is.
 - Show the white logo mark only on navy (`--color-brand`, `--color-dark`) or on dark photos.
 
 ### Don't
@@ -90,10 +90,7 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 - `--color-secondary-darker`: `#D28041` — --pg-secondary-color-darker. Hover on .btn-secondary.
 - `--color-grey`: `#ACABAB` — --pg-grey. Form field borders, disabled buttons, list dividers.
 - `--color-grey-light`: `#F3F5F8` — --pg-grey-light.
-- `--color-input-text`: `#6C757D` — Text typed into form fields (Bootstrap gray-600).
-- `--color-white`: `#FFFFFF` — Text on dark sections and on every filled button.
-- `--color-light`: `#F8F9FA` — Bootstrap light. .btn-outline-light text, border and hover fill.
-- `--color-black`: `#000000` — Text on .btn-outline-light when hovered. Nowhere else.
+- `--color-white`: `#FFFFFF` — Text on dark sections and on every filled button; outline buttons on dark.
 - `--color-orange-top`: `#FFB858` — First stop of --gradient-orange (CTA buttons).
 - `--color-orange-bottom`: `#EA7519` — Last stop of --gradient-orange (CTA buttons).
 - `--color-blue-top`: `#5A81C0` — First stop of --gradient-blue (.cta-blue).
@@ -127,7 +124,7 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 ### leading
 
 - `--leading-body`: `1.8` — Body text (--bs-body-line-height).
-- `--leading-heading`: `1.2` — h1, h3–h5 (Bootstrap default).
+- `--leading-heading`: `1.2` — h1, h3–h5.
 - `--leading-title`: `1.1` — h2 and .h2.
 - `--leading-base`: `1.5` — Buttons and .lh-base (stats).
 - `--leading-tight`: `1` — Icons (.icon).
@@ -161,7 +158,7 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 
 - `--radius-sm`: `5px` — Language switcher button.
 - `--radius-md`: `10px` — Form fields, icon buttons.
-- `--radius-box`: `0.375rem` — Bootstrap .rounded: the outlined nav title.
+- `--radius-box`: `0.375rem` — The outlined nav title.
 - `--radius-pill`: `100px` — Every button.
 
 ### space
@@ -171,8 +168,8 @@ These are facts from the scrape, recorded so builds don't copy them by accident:
 - `--space-s`: `1rem` — Button padding-x, .flow-small, nav padding.
 - `--space-s-m`: `1.5rem` — Container side padding (gutter 3rem).
 - `--space-m`: `2rem` — .flow-medium, .switcher-md gap.
-- `--space-l`: `3rem` — Footer padding (py-5).
-- `--space-xl`: `4rem` — Section padding (.py-6), image overlap margin.
+- `--space-l`: `3rem` — Footer and donate band padding (.py-l).
+- `--space-xl`: `4rem` — Section padding (.py-xl), image overlap margin.
 - `--space-input-y`: `5px` — Form field padding top and bottom.
 - `--space-input-x`: `10px` — Form field padding left and right.
 
@@ -319,35 +316,40 @@ Every Layout's Cluster, as used in CUBE CSS.
 
 ### Container
 
-Bootstrap's .container (540–1320px at its breakpoints), with the site's data-gutter-4 and data-no-gutter options. Brand override (`brands/prayer-global/composition/container.md`), replaces `system/composition/container.md`.
+The page-width wrapper. Centres a section's content at a maximum width with side padding. Shared (`system/composition/container.md`).
 
-Replaces the shared Container. Prayer.Global sections use Bootstrap 5.2's `.container`, which steps between fixed maximum widths instead of growing fluidly. The site adds two options:
+CUBE CSS's wrapper, called `container` here.
 
-- `data-gutter-4`: 1.5rem side padding.
-- `data-no-gutter`: no side padding, for full-bleed photos.
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--container-max` | `80rem` | Maximum width of the content. |
+| `--gutter` | `var(--space-m)` | Padding on each side, so content never touches the screen edge. |
+
+#### When to use
+
+- Inside every full-width section, so the background runs edge to edge while the content stays at a readable width.
+
+#### Do
+
+- Put the background on the section and the `.container` inside it.
 
 #### Code
 
 ```html
 <section style="width: 100%; outline: 1px dashed currentColor">
-  <div class="container" data-gutter-4 style="outline: 1px dashed currentColor">Bootstrap container with 1.5rem side padding.</div>
+  <div class="container" style="outline: 1px dashed currentColor">Content stays within the container's maximum width.</div>
 </section>
 ```
 
 ```css
 .container {
-  width: 100%;
-  box-sizing: border-box;
-  padding-inline: 0.75rem;
+  position: relative;
   margin-inline: auto;
+  max-width: var(--container-max, 80rem);
+  padding-inline: var(--gutter, var(--space-m));
 }
-.container[data-gutter-4] { padding-inline: var(--space-s-m); }
-.container[data-no-gutter] { padding-inline: 0; }
-@media (min-width: 576px) { .container { max-width: 540px; } }
-@media (min-width: 768px) { .container { max-width: 720px; } }
-@media (min-width: 992px) { .container { max-width: 960px; } }
-@media (min-width: 1200px) { .container { max-width: 1140px; } }
-@media (min-width: 1400px) { .container { max-width: 1320px; } }
 ```
 
 ### Flow
@@ -537,9 +539,9 @@ Prayer.Global-only, added on top of the shared Switcher. The site's switcher sta
 
 ### Button
 
-Bootstrap .btn restyled as a pill with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest. Brand override (`brands/prayer-global/components/button.md`), replaces `system/components/button.md`. Also needs the CSS from: utilities.
+Pill-shaped buttons with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest. Brand override (`brands/prayer-global/components/button.md`), replaces `system/components/button.md`. Also needs the CSS from: utilities.
 
-Class names are the live site's own (Bootstrap 5.2 plus prayer-global-porch overrides), so markup copied from prayer.global keeps working.
+Variants are named after the colour roles they use. They'll be renamed when the brand's colours get their clean-up.
 
 #### Variants
 
@@ -574,8 +576,9 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 <a class="btn btn-cta" href="#">Start praying</a>
 <a class="btn btn-primary-light uppercase" href="#">View prayer map</a>
 <button class="btn btn-primary" type="button">Close</button>
+<a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 <a class="btn btn-secondary uppercase" href="#">Secondary</a>
-<a class="btn btn-outline-primary py-1" href="#">Pre-event setup</a>
+<a class="btn btn-outline-primary py-xxs" href="#">Pre-event setup</a>
 ```
 
 ```html
@@ -583,7 +586,6 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   <a class="btn btn-cta cta-blue btn-lg" href="#">Login</a>
   <a class="btn btn-white uppercase" href="#">Donate</a>
   <a class="btn btn-outline-light uppercase" href="#">Information for leaders</a>
-  <a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 </div>
 ```
 
@@ -633,7 +635,7 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 .btn-secondary { --btn-bg: var(--color-secondary); --btn-hover-bg: var(--color-secondary-darker); border: none; }
 .btn-white { --btn-color: var(--color-brand); --btn-bg: var(--color-white); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-brand-lighter); border: none; }
 .btn-outline-primary { --btn-color: var(--color-brand-light); --btn-border: var(--color-brand-light); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-brand-light); }
-.btn-outline-light { --btn-color: var(--color-light); --btn-border: var(--color-light); --btn-hover-color: var(--color-black); --btn-hover-bg: var(--color-light); }
+.btn-outline-light { --btn-color: var(--color-white); --btn-border: var(--color-white); --btn-hover-color: var(--color-brand); --btn-hover-bg: var(--color-white); }
 ```
 
 ### Icon
@@ -762,7 +764,7 @@ textarea[type="text"], .input {
   border-radius: var(--radius-md);
   padding: var(--space-input-y) var(--space-input-x);
   box-shadow: var(--shadow-small);
-  color: var(--color-input-text);
+  color: var(--color-text);
   background-color: var(--color-white);
 }
 input[type="checkbox"]:not([role="switch"]) {
@@ -990,15 +992,15 @@ From the About page ("Historic moment", "How it works", "Global race", "Moravian
 
 ### Utilities
 
-The single-purpose classes Prayer.Global's markup relies on. Section padding (.py-6), Bootstrap spacing and alignment, flex grow, widths. Prayer.Global-only (`brands/prayer-global/components/utilities.md`).
+Single-purpose classes for spacing, alignment, flex grow and widths. Spacing classes are named after the space tokens (.py-xl, .px-s-m). Prayer.Global-only (`brands/prayer-global/components/utilities.md`).
 
-CUBE CSS's utility layer for this brand: one class, one job. They come from the Utilities section of `basic.css` (`.py-6`, `.w-fit`, `.w-90`, `.grow-*`, `.font-italic`, `.cover`…) and from the Bootstrap 5.2 utilities the templates use (`.px-4`, `.py-5`, `.mx-auto`, `.text-center`…), with values as tokens.
+CUBE CSS's utility layer for this brand: one class, one job. Spacing classes are a prefix plus a space token: `p` padding, `x` left and right, `y` top and bottom, `t` top, `b` bottom, so `.py-xl` sets top and bottom padding to `--space-xl`. Only the classes the patterns use are defined so far. A complete set generated from the tokens is planned.
 
 #### Code
 
 ```html
-<div class="text-center py-6" style="width: 100%; outline: 1px dashed currentColor">
-  <p class="w-fit mx-auto px-4" style="outline: 1px dashed currentColor">.w-fit .mx-auto .px-4 inside .py-6 .text-center</p>
+<div class="text-center py-xl" style="width: 100%; outline: 1px dashed currentColor">
+  <p class="w-fit mx-auto px-s-m" style="outline: 1px dashed currentColor">.w-fit .mx-auto .px-s-m inside .py-xl .text-center</p>
 </div>
 ```
 
@@ -1016,14 +1018,14 @@ CUBE CSS's utility layer for this brand: one class, one job. They come from the 
 .font-italic { font-style: italic; }
 .fw-bold { font-weight: var(--weight-strong); }
 .cover { background-size: cover; background-repeat: no-repeat; }
-.py-1 { padding-top: var(--space-xxs); padding-bottom: var(--space-xxs); }
-.py-5 { padding-top: var(--space-l); padding-bottom: var(--space-l); }
-.py-6 { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
-.pt-4 { padding-top: var(--space-s-m); }
-.pt-6 { padding-top: var(--space-xl); }
-.pb-6 { padding-bottom: var(--space-xl); }
-.px-4 { padding-left: var(--space-s-m); padding-right: var(--space-s-m); }
-.px-5 { padding-left: var(--space-l); padding-right: var(--space-l); }
+.py-xxs { padding-top: var(--space-xxs); padding-bottom: var(--space-xxs); }
+.py-l { padding-top: var(--space-l); padding-bottom: var(--space-l); }
+.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+.pt-s-m { padding-top: var(--space-s-m); }
+.pt-xl { padding-top: var(--space-xl); }
+.pb-xl { padding-bottom: var(--space-xl); }
+.px-s-m { padding-left: var(--space-s-m); padding-right: var(--space-s-m); }
+.px-l { padding-left: var(--space-l); padding-right: var(--space-l); }
 ```
 
 Not available for Prayer.Global (excluded on purpose, don't build them): card, tag.
@@ -1051,8 +1053,8 @@ From the bottom of the home page.
 #### Code
 
 ```html
-<section class="py-6" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center" data-gutter-4>
+<section class="py-xl" style="width: 100%">
+  <div class="switcher container switcher-md align-items-center">
     <div class="flow-medium">
       <h2 class="text-center">Get the app</h2>
       <div class="center app-badges">
@@ -1094,7 +1096,7 @@ A navy box inside the page column with an uppercase h4 question and one blue-gra
 ```html
 <div class="callout-box brand-bg white">
   <h4>Want to create your own Prayer Relay?</h4>
-  <a class="btn btn-cta two-rem has-icon cta-blue px-5" href="#">Login <i class="icon pg-chevron-right two-rem icon-end"></i></a>
+  <a class="btn btn-cta two-rem has-icon cta-blue px-l" href="#">Login <i class="icon pg-chevron-right two-rem icon-end"></i></a>
 </div>
 ```
 
@@ -1130,14 +1132,16 @@ Light-blue band. Photo on the left; statement heading, short copy, a white Donat
 
 ```html
 <section class="brand-lightest-bg white" style="width: 100%">
-  <div class="switcher container" data-no-gutter>
-    <div class="grow-3 donate-band__photo" style="background-image: url(/brands/prayer-global/assets/photos/panel-donate.jpg)"></div>
-    <div class="flow-medium py-5 px-4 grow-4">
-      <h2 class="font-base h2">Gospel Ambition tools and trainings are 100% free, thanks to people like you.</h2>
-      <p>We love equipping the global Church with free tools to mobilize prayer and make disciples. You can help expand this mission by becoming a monthly giver or making a one-time gift.</p>
-      <div class="cluster donate-band__actions">
-        <a class="btn btn-white uppercase center" href="#">Donate</a>
-        <div class="donate-band__logo"><img src="/brands/prayer-global/assets/gospel-ambition-white.png" alt="Gospel Ambition" /></div>
+  <div class="container" style="--gutter: 0">
+    <div class="switcher" style="--gutter: var(--space-s)">
+      <div class="grow-3 donate-band__photo" style="background-image: url(/brands/prayer-global/assets/photos/panel-donate.jpg)"></div>
+      <div class="flow-medium py-l px-s-m grow-4">
+        <h2 class="font-base h2">Gospel Ambition tools and trainings are 100% free, thanks to people like you.</h2>
+        <p>We love equipping the global Church with free tools to mobilize prayer and make disciples. You can help expand this mission by becoming a monthly giver or making a one-time gift.</p>
+        <div class="cluster donate-band__actions">
+          <a class="btn btn-white uppercase center" href="#">Donate</a>
+          <div class="donate-band__logo"><img src="/brands/prayer-global/assets/gospel-ambition-white.png" alt="Gospel Ambition" /></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1155,7 +1159,7 @@ Light-blue band. Photo on the left; statement heading, short copy, a white Donat
 
 Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the left, a clipped image panel on the right. Prayer.Global-only (`brands/prayer-global/patterns/feature-band.md`). Also needs the CSS from: button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities.
 
-"How it works" and "Prayer relays" on the home page (`section.brand-lightest-bg.blue-orange-gradient.py-6`). Alternate it with the white [Feature section](../feature-section/).
+"How it works" and "Prayer relays" on the home page (`section.brand-lightest-bg.blue-orange-gradient.py-xl`). Alternate it with the white [Feature section](../feature-section/).
 
 #### When to use
 
@@ -1174,15 +1178,15 @@ Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the 
 #### Code
 
 ```html
-<section class="brand-lightest-bg blue-orange-gradient py-6" style="width: 100%">
-  <div class="container" data-gutter-4>
+<section class="brand-lightest-bg blue-orange-gradient py-xl" style="width: 100%">
+  <div class="container">
     <div class="switcher switcher-md align-items-center">
       <div class="flow-small white">
         <h2 class="text-center">How it works <i class="icon icon-small pg-logo-prayer" aria-hidden="true"></i></h2>
         <p>Prayer.Global has broken the world down into 4,770 states based on geographical and governmental boundaries.</p>
         <p>Pray for all 4,770…complete a "prayer lap" around the world!</p>
         <p>An interactive map tracks your prayers in real time.</p>
-        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-4" href="#">View prayer map</a>
+        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s-m" href="#">View prayer map</a>
       </div>
       <div class="drop-shadow"><img class="clip-rounded-start" src="/brands/prayer-global/assets/photos/panel-how-it-works.jpg" alt="" /></div>
     </div>
@@ -1216,12 +1220,12 @@ White section. Clipped image panel on the left, Bebas Kai title with icon, short
 #### Code
 
 ```html
-<section class="py-6" style="width: 100%">
-  <div class="container switcher switcher-md switcher-reverse align-items-center" data-gutter-4>
+<section class="py-xl" style="width: 100%">
+  <div class="container switcher switcher-md switcher-reverse align-items-center">
     <div class="flow-small">
       <h2 class="text-center">Prayer fuel <i class="icon icon-small pg-pray-hands-light" aria-hidden="true"></i></h2>
       <p>We'll give you location specific prayer prompts, scripture and images to help guide your prayers for each of the 4,770 states.</p>
-      <a class="btn btn-cta btn-lg center w-fit mx-auto px-4" href="#">Start praying</a>
+      <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
     </div>
     <div class="drop-shadow"><img class="clip-rounded-end" src="/brands/prayer-global/assets/photos/panel-prayer-fuel.jpg" alt="" /></div>
   </div>
@@ -1250,7 +1254,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
 #### Code
 
 ```html
-<footer class="brand-bg white text-center one-rem py-5 pg-footer" style="width: 100%">
+<footer class="brand-bg white text-center one-rem py-l pg-footer" style="width: 100%">
   <div class="container">
     <p>Made with ♥ by <a href="#">Gospel Ambition</a>.<br />Powered by <a href="#">Disciple.Tools</a>.<br />Part of the <a href="#">Prayer.Tools</a> network.</p>
     <ul role="list" data-tight>
@@ -1261,7 +1265,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
       <li><a class="white" href="#">Media &amp; Promotion</a></li>
       <li><a href="#">Privacy</a></li>
     </ul>
-    <p class="pt-4">Prayer Global © 2026 Gospel Ambition</p>
+    <p class="pt-s-m">Prayer Global © 2026 Gospel Ambition</p>
   </div>
 </footer>
 ```
@@ -1369,7 +1373,7 @@ The first section under the hero ("Want to pray globally but don't know where to
 #### Code
 
 ```html
-<section class="container py-6 cover" style="background-image: url(/brands/prayer-global/assets/world-map-light.png)">
+<section class="container py-xl cover" style="background-image: url(/brands/prayer-global/assets/world-map-light.png)">
   <div class="flow-medium center text-center">
     <h2 class="font-base font-weight-bold h2">Want to pray globally but don't know where to start?</h2>
     <p>Prayer.Global makes praying for the lost simple— and life-changing.</p>
@@ -1385,7 +1389,7 @@ The first section under the hero ("Want to pray globally but don't know where to
 
 Navy section with a Bebas Kai title and short text on the left, an uppercase list with prayer icons on the right, and two buttons underneath. Prayer.Global-only (`brands/prayer-global/patterns/movement-band.md`). Also needs the CSS from: button, icon, container, flow, switcher, switcher-variants, utilities.
 
-"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-6`).
+"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-xl`).
 
 #### When to use
 
@@ -1403,8 +1407,8 @@ Navy section with a Bebas Kai title and short text on the left, an uppercase lis
 #### Code
 
 ```html
-<section class="brand-bg py-6" style="width: 100%">
-  <div class="flow-medium container white" data-gutter-4>
+<section class="brand-bg py-xl" style="width: 100%">
+  <div class="flow-medium container white">
     <div class="switcher switcher-md">
       <div class="flow-medium grow-3">
         <h2>Mobilize a movement of prayer</h2>
@@ -1453,18 +1457,18 @@ The blue world map beside a Europa statement heading, then three live stats and 
 #### Code
 
 ```html
-<section class="flow-medium pt-6" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center" data-gutter-4>
+<section class="flow-medium pt-xl" style="width: 100%">
+  <div class="switcher container switcher-md align-items-center">
     <div><img class="w-90" src="/brands/prayer-global/assets/world-map-blue.png" alt="" /></div>
     <h2 class="font-base h2">Join thousands of intercessors praying daily for the nations.</h2>
   </div>
-  <div class="flow-medium grey-gradient pb-6">
+  <div class="flow-medium grey-gradient pb-xl">
     <div class="container switcher switcher-md">
       <div class="stat"><span class="stat__value">32%</span><p class="stat__label">Current lap status</p></div>
       <div class="stat"><span class="stat__value">63</span><p class="stat__label">Laps completed</p></div>
       <div class="stat"><span class="stat__value">33,759</span><p class="stat__label">Total intercessors</p></div>
     </div>
-    <a class="btn btn-cta btn-lg center w-fit mx-auto px-4" href="#">Start praying</a>
+    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
   </div>
 </section>
 ```
@@ -1478,7 +1482,7 @@ The blue world map beside a Europa statement heading, then three live stats and 
 ```css
 /* Prayer.Global base element styles. Replaces system/base.css for this brand.
    Load after assets/fonts/fonts.css, assets/fonts/prayer-global-icons.css and tokens.css.
-   Translated from prayer-global-porch basic.css + Bootstrap 5.2 (the site's own rules, with values as tokens). */
+   Based on the rules prayer.global renders, with values as tokens. */
 body {
   margin: 0;
   background: var(--color-background);
@@ -1557,10 +1561,7 @@ li + li { margin-top: var(--space-s); }
   --color-secondary-darker: #d28041; /** --pg-secondary-color-darker. Hover on .btn-secondary. */
   --color-grey: #acabab; /** --pg-grey. Form field borders, disabled buttons, list dividers. */
   --color-grey-light: #f3f5f8; /** --pg-grey-light. */
-  --color-input-text: #6c757d; /** Text typed into form fields (Bootstrap gray-600). */
-  --color-white: #ffffff; /** Text on dark sections and on every filled button. */
-  --color-light: #f8f9fa; /** Bootstrap light. .btn-outline-light text, border and hover fill. */
-  --color-black: #000000; /** Text on .btn-outline-light when hovered. Nowhere else. */
+  --color-white: #ffffff; /** Text on dark sections and on every filled button; outline buttons on dark. */
   --color-orange-top: #ffb858; /** First stop of --gradient-orange (CTA buttons). */
   --color-orange-bottom: #ea7519; /** Last stop of --gradient-orange (CTA buttons). */
   --color-blue-top: #5a81c0; /** First stop of --gradient-blue (.cta-blue). */
@@ -1579,7 +1580,7 @@ li + li { margin-top: var(--space-s); }
   --weight-strong: 700; /** Buttons, h4, h5, .font-weight-bold. The CTA's 600 also renders as this. */
   --weight-heading: 400; /** Bebas Kai's only weight. */
   --leading-body: 1.8; /** Body text (--bs-body-line-height). */
-  --leading-heading: 1.2; /** h1, h3–h5 (Bootstrap default). */
+  --leading-heading: 1.2; /** h1, h3–h5. */
   --leading-title: 1.1; /** h2 and .h2. */
   --leading-base: 1.5; /** Buttons and .lh-base (stats). */
   --leading-tight: 1; /** Icons (.icon). */
@@ -1607,15 +1608,15 @@ li + li { margin-top: var(--space-s); }
   --size-hero-cta: 3vh; /** CTA button in the hero. */
   --radius-sm: 5px; /** Language switcher button. */
   --radius-md: 10px; /** Form fields, icon buttons. */
-  --radius-box: 0.375rem; /** Bootstrap .rounded: the outlined nav title. */
+  --radius-box: 0.375rem; /** The outlined nav title. */
   --radius-pill: 100px; /** Every button. */
   --space-xxs: 0.25rem;
   --space-xs: 0.5rem; /** Button padding-y, tight list gaps. */
   --space-s: 1rem; /** Button padding-x, .flow-small, nav padding. */
   --space-s-m: 1.5rem; /** Container side padding (gutter 3rem). */
   --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
-  --space-l: 3rem; /** Footer padding (py-5). */
-  --space-xl: 4rem; /** Section padding (.py-6), image overlap margin. */
+  --space-l: 3rem; /** Footer and donate band padding (.py-l). */
+  --space-xl: 4rem; /** Section padding (.py-xl), image overlap margin. */
   --space-input-y: 5px; /** Form field padding top and bottom. */
   --space-input-x: 10px; /** Form field padding left and right. */
 }

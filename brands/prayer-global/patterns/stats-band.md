@@ -22,18 +22,18 @@ uses: [button, stat, center, container, flow, switcher, switcher-variants, utili
 ## Code
 
 ```html
-<section class="flow-medium pt-6" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center" data-gutter-4>
+<section class="flow-medium pt-xl" style="width: 100%">
+  <div class="switcher container switcher-md align-items-center">
     <div><img class="w-90" src="/brands/prayer-global/assets/world-map-blue.png" alt="" /></div>
     <h2 class="font-base h2">Join thousands of intercessors praying daily for the nations.</h2>
   </div>
-  <div class="flow-medium grey-gradient pb-6">
+  <div class="flow-medium grey-gradient pb-xl">
     <div class="container switcher switcher-md">
       <div class="stat"><span class="stat__value">32%</span><p class="stat__label">Current lap status</p></div>
       <div class="stat"><span class="stat__value">63</span><p class="stat__label">Laps completed</p></div>
       <div class="stat"><span class="stat__value">33,759</span><p class="stat__label">Total intercessors</p></div>
     </div>
-    <a class="btn btn-cta btn-lg center w-fit mx-auto px-4" href="#">Start praying</a>
+    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
   </div>
 </section>
 ```

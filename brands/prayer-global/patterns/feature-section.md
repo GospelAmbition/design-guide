@@ -22,12 +22,12 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 ## Code
 
 ```html
-<section class="py-6" style="width: 100%">
-  <div class="container switcher switcher-md switcher-reverse align-items-center" data-gutter-4>
+<section class="py-xl" style="width: 100%">
+  <div class="container switcher switcher-md switcher-reverse align-items-center">
     <div class="flow-small">
       <h2 class="text-center">Prayer fuel <i class="icon icon-small pg-pray-hands-light" aria-hidden="true"></i></h2>
       <p>We'll give you location specific prayer prompts, scripture and images to help guide your prayers for each of the 4,770 states.</p>
-      <a class="btn btn-cta btn-lg center w-fit mx-auto px-4" href="#">Start praying</a>
+      <a class="btn btn-cta btn-lg center w-fit mx-auto px-s-m" href="#">Start praying</a>
     </div>
     <div class="drop-shadow"><img class="clip-rounded-end" src="/brands/prayer-global/assets/photos/panel-prayer-fuel.jpg" alt="" /></div>
   </div>

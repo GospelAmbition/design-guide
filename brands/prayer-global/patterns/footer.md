@@ -22,7 +22,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
 ## Code
 
 ```html
-<footer class="brand-bg white text-center one-rem py-5 pg-footer" style="width: 100%">
+<footer class="brand-bg white text-center one-rem py-l pg-footer" style="width: 100%">
   <div class="container">
     <p>Made with ♥ by <a href="#">Gospel Ambition</a>.<br />Powered by <a href="#">Disciple.Tools</a>.<br />Part of the <a href="#">Prayer.Tools</a> network.</p>
     <ul role="list" data-tight>
@@ -33,7 +33,7 @@ From `pages/assets/working-footer.php`. The live footer also repeats the app bad
       <li><a class="white" href="#">Media &amp; Promotion</a></li>
       <li><a href="#">Privacy</a></li>
     </ul>
-    <p class="pt-4">Prayer Global © 2026 Gospel Ambition</p>
+    <p class="pt-s-m">Prayer Global © 2026 Gospel Ambition</p>
   </div>
 </footer>
 ```

@@ -24,7 +24,7 @@ uses: [button, icon, utilities]
 ```html
 <div class="callout-box brand-bg white">
   <h4>Want to create your own Prayer Relay?</h4>
-  <a class="btn btn-cta two-rem has-icon cta-blue px-5" href="#">Login <i class="icon pg-chevron-right two-rem icon-end"></i></a>
+  <a class="btn btn-cta two-rem has-icon cta-blue px-l" href="#">Login <i class="icon pg-chevron-right two-rem icon-end"></i></a>
 </div>
 ```
 

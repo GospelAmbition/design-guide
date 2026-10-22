@@ -21,8 +21,8 @@ From the bottom of the home page.
 ## Code
 
 ```html
-<section class="py-6" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center" data-gutter-4>
+<section class="py-xl" style="width: 100%">
+  <div class="switcher container switcher-md align-items-center">
     <div class="flow-medium">
       <h2 class="text-center">Get the app</h2>
       <div class="center app-badges">

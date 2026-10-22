@@ -1,10 +1,10 @@
 ---
 title: Button
-summary: Bootstrap .btn restyled as a pill with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest.
+summary: Pill-shaped buttons with bold labels. The orange-gradient .btn-cta is the main action; blue, white, orange and outline pills are for the rest.
 uses: [utilities]
 ---
 
-Class names are the live site's own (Bootstrap 5.2 plus prayer-global-porch overrides), so markup copied from prayer.global keeps working.
+Variants are named after the colour roles they use. They'll be renamed when the brand's colours get their clean-up.
 
 ## Variants
 
@@ -39,8 +39,9 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 <a class="btn btn-cta" href="#">Start praying</a>
 <a class="btn btn-primary-light uppercase" href="#">View prayer map</a>
 <button class="btn btn-primary" type="button">Close</button>
+<a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 <a class="btn btn-secondary uppercase" href="#">Secondary</a>
-<a class="btn btn-outline-primary py-1" href="#">Pre-event setup</a>
+<a class="btn btn-outline-primary py-xxs" href="#">Pre-event setup</a>
 ```
 
 ```html
@@ -48,7 +49,6 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
   <a class="btn btn-cta cta-blue btn-lg" href="#">Login</a>
   <a class="btn btn-white uppercase" href="#">Donate</a>
   <a class="btn btn-outline-light uppercase" href="#">Information for leaders</a>
-  <a class="btn btn-primary-dark uppercase" href="#">Primary dark</a>
 </div>
 ```
 
@@ -98,5 +98,5 @@ Add `.uppercase` to every variant except `.btn-cta` and `.btn-primary`, which up
 .btn-secondary { --btn-bg: var(--color-secondary); --btn-hover-bg: var(--color-secondary-darker); border: none; }
 .btn-white { --btn-color: var(--color-brand); --btn-bg: var(--color-white); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-brand-lighter); border: none; }
 .btn-outline-primary { --btn-color: var(--color-brand-light); --btn-border: var(--color-brand-light); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-brand-light); }
-.btn-outline-light { --btn-color: var(--color-light); --btn-border: var(--color-light); --btn-hover-color: var(--color-black); --btn-hover-bg: var(--color-light); }
+.btn-outline-light { --btn-color: var(--color-white); --btn-border: var(--color-white); --btn-hover-color: var(--color-brand); --btn-hover-bg: var(--color-white); }
 ```

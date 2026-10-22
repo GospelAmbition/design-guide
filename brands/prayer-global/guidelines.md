@@ -43,7 +43,7 @@ Hopeful, simple and inviting. Prayer.Global makes a huge goal ("cover the world 
 - Use `.btn-primary-light` for secondary actions in feature sections and bands, and `.btn-white` on navy or light-blue bands.
 - Put an icon at the end of section titles: `<i class="icon icon-small pg-…">`, in the title's colour.
 - Alternate white feature sections with `.blue-orange-gradient` feature bands to pace a long page.
-- Use the site's class names (Layout, Button and Icon components) so markup moves between this guide and prayer.global unchanged.
+- Build new pages from this guide's tokens, composition and components. When adding to an existing site, adapt them to that site's own classes; don't paste the guide's markup in as-is.
 - Show the white logo mark only on navy (`--color-brand`, `--color-dark`) or on dark photos.
 
 ## Don't

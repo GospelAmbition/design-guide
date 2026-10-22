@@ -4,7 +4,7 @@ summary: Navy section with a Bebas Kai title and short text on the left, an uppe
 uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 ---
 
-"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-6`).
+"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-xl`).
 
 ## When to use
 
@@ -22,8 +22,8 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 ## Code
 
 ```html
-<section class="brand-bg py-6" style="width: 100%">
-  <div class="flow-medium container white" data-gutter-4>
+<section class="brand-bg py-xl" style="width: 100%">
+  <div class="flow-medium container white">
     <div class="switcher switcher-md">
       <div class="flow-medium grow-3">
         <h2>Mobilize a movement of prayer</h2>
