@@ -11,14 +11,21 @@ Read `llms.txt` first. It defines the file formats, resolution rules and CSS rul
 
 ## 0. Discovery first (no edits yet)
 
-If the `discover` skill is available, run it. Otherwise ask in short rounds, at most 3 lettered questions per round, each with its reason and your recommendation. Settle these before touching files:
+If the `discover` skill is available, run it. Either way, ask in the text of your message, never with the `AskUserQuestion` tool: the user wants to answer in their own words.
+
+- Short rounds of at most 3 numbered questions. A round contains only its questions: no recap, no trailing notes.
+- One question per item, each with lettered options (`a)`, `b)`…), the reason you're asking, any gotcha, and your recommendation.
+- Things you'd otherwise assume go in a separate assumption round: numbered "I'm assuming X." statements the user confirms or corrects by number.
+
+Settle these before touching files:
 
 1. **Source of truth.** Recommend the hybrid: exact values from the site's CSS variables and computed styles, with screenshots to decide what's actually used. Screenshots alone only give approximate hexes.
 2. **Fonts.** Self-hosted commercial fonts: copy the files into the brand (check the licence), point at the site's URLs, or use free stand-ins.
 3. **Scope.** Which pages count as "the brand" (usually landing and marketing pages, not app or login screens).
 4. **Screenshots.** Take them yourself with Claude in Chrome (recommended), or the user supplies them for pages behind a login.
-5. **Components.** Restyle only the shared components, or also add the site's distinctive pieces as brand components and patterns (recommended).
-6. **Voice.** Draft it from the site's copy and mark it as a draft (recommended), or the user supplies it.
+5. **Voice.** Draft it from the site's copy and mark it as a draft (recommended), or the user supplies it.
+
+Don't ask about component scope: the brand always overrides the shared components to match the site, and adds the site's distinctive pieces as brand components and patterns (see section 4).
 
 Then run one assumption round (brand id, branch, what to do with logos and icon sets) and wait for "implement".
 
@@ -50,6 +57,8 @@ Then run one assumption round (brand id, branch, what to do with logos and icon 
 **Fidelity**
 - **Rendered values win.** When the CSS says one thing and the browser renders another (e.g. weight 300 with only a 400 file, so 400 renders), record what renders and add a one-line note.
 - **Never invent CSS when real CSS exists.** Translate the site's own rules into tokens. If you can't find the rule, measure the computed style. Mark anything only estimated from screenshots as approximate.
+- **Override every shared component the site has.** Restyle each one with the site's real CSS so it looks like the site's version, not the shared default.
+- **Add the site's distinctive pieces.** Anything the site uses that the shared set lacks (its hero, section bands, feature rows, special buttons…) becomes a brand component or pattern.
 - **Don't invent components the site doesn't have.** If it has no cards or tags, `exclude` the shared ones and say why in the guidelines.
 - Express exact shapes in CSS when you can. For example, an SVG `clipPath` half-ellipse becomes elliptical `border-radius` with the same radii.
 

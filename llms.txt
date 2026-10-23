@@ -47,6 +47,8 @@
 
 - **Disciple.Tools** — Clear, practical and free. Blue and green on white, heavy Open Sans headings over Roboto, for presenting the Disciple.Tools software to disciple-making teams.
   Start with `brands/disciple-tools/brief.md`. Source folder: `brands/disciple-tools/`.
+- **Gospel Ambition** — Confident, warm and mission-driven. Brand red and charcoal on white, heavy Poppins headlines and sweeping red curves, for inviting ministries to use free disciple-making tools.
+  Start with `brands/gospel-ambition/brief.md`. Source folder: `brands/gospel-ambition/`.
 - **Prayer.Global** — Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.
   Start with `brands/prayer-global/brief.md`. Source folder: `brands/prayer-global/`.
 

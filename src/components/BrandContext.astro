@@ -35,6 +35,8 @@ const json = JSON.stringify({
     .bar button[aria-pressed="true"] { background: #8883; color: inherit; }
     .canvas { padding: 1.5rem; border: 1px solid #8885; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
     .canvas > * { margin: 0; }
+    /* Page sections span the canvas as they would span a page, instead of shrinking to their content. */
+    .canvas > :is(section, header, footer, nav, main) { flex: 1 1 100%; }
   `;
 
   class DsPreview extends HTMLElement {

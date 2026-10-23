@@ -1,0 +1,56 @@
+/* Gospel Ambition base element styles. Replaces system/base.css for this brand.
+   Load after the Google Fonts stylesheet and tokens.css.
+   Values are the XD design's text styles, as tokens. */
+/* body is an inline-size container: fluid sizes use cqi (1% of the page width) and
+   breakpoints use @container, so components respond to the space they're in. */
+body {
+  container-type: inline-size;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-heading); line-height: var(--leading-heading); }
+
+/* Page and ribbon titles: Poppins ExtraBold. The hero title adds italic (.hero__title). */
+h1 { font-size: var(--size-h1); font-weight: var(--weight-heavy); }
+/* Section headings: Poppins Bold. Highlight the key phrase with .text-accent. */
+h2 { font-size: var(--size-h2); font-weight: var(--weight-bold); }
+/* Card titles. */
+h3 { font-size: var(--size-h3); font-weight: var(--weight-bold); }
+
+p { margin: 0; }
+strong, b { font-weight: var(--weight-semibold); }
+
+/* Links are charcoal and underlined; red on hover. */
+a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+a:hover { color: var(--color-red); }
+
+*:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
+img { max-width: 100%; height: auto; }
+
+/* Text styles. */
+.display { font-family: var(--font-heading); font-size: var(--size-display); font-weight: var(--weight-heavy); line-height: var(--leading-display); }
+.lead { font-size: var(--size-lead); line-height: var(--leading-lead); }
+.statement { font-size: var(--size-h3); font-weight: var(--weight-semibold); line-height: var(--leading-lead); }
+.subtitle { font-size: var(--size-subtitle); font-weight: var(--weight-semibold); line-height: var(--leading-body); }
+.tagline { font-family: var(--font-heading); font-size: var(--size-tagline); font-weight: var(--weight-bold); line-height: var(--leading-heading); }
+.eyebrow {
+  display: block;
+  font-family: var(--font-label);
+  font-size: var(--size-eyebrow);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-heading);
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+.text-accent { color: var(--color-red); }
+
+/* Section backgrounds. Text on charcoal is white. */
+.bg-charcoal { background-color: var(--color-charcoal); color: var(--color-white); }
+.bg-wash { background-image: var(--gradient-wash); }
+.bg-charcoal .eyebrow { color: var(--color-white); }

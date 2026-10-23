@@ -45,9 +45,9 @@ Better to iteratively improve and not get it fully right first time as we don't 
 Naming of class colours needs to be more what they are for if they have a function. and shades of colour can use the number system if they are not functional.
 
 Get minimum thing going.
-- [ ] Prayer.Global
-- [ ] Gospel Ambition from prospectus.
-- [ ] Disciple.Tools
+- [x] Prayer.Global
+- [x] Gospel Ambition from prospectus.
+- [x] Disciple.Tools
 - [ ] Empty Prayer.Tools and see if Chad can suck his brand from a design file into the design guide.
 
 and then see if Chad can do a second pass before doing some more.
