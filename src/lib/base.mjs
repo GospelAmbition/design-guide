@@ -1,0 +1,3 @@
+// The site is served under a subpath on GitHub Pages. Brand sources link to /brands/… and /system/…
+// as they are in the repo, so add the base to those links where the site renders them.
+export const withBase = (base, s) => s.replace(/(["'(\s])\/(brands|system)\//g, `$1${base.replace(/\/$/, '')}/$2/`);

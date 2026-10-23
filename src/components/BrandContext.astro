@@ -5,20 +5,22 @@
 // Fonts are loaded in the document <head> by the page (fonts don't load from inside shadow DOM).
 // The CSS is embedded rather than fetched: in dev, Vite answers .css URLs with a JS module.
 import { read, fontHref, isUrl } from '../../scripts/lib/brands.mjs';
+import { withBase } from '../lib/base.mjs';
 const { brand, css = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
 // Self-hosted font stylesheets can also carry classes (an icon font's .icon rules), which don't reach
 // into shadow DOM, so embed them too, with url()s made absolute.
 const fonts = (brand.meta.fonts ?? []).filter((u) => !isUrl(u)).map((u) => {
   const path = fontHref(brand, u);
   const dir = path.slice(0, path.lastIndexOf('/') + 1);
-  return read(path).replace(/url\(\s*(['"]?)(?!data:|https?:|\/)([^'")]+)\1\s*\)/g, (_, q, f) => `url(${q}/${dir}${f}${q})`);
+  return read(path).replace(/url\(\s*(['"]?)(?!data:|https?:|\/)([^'")]+)\1\s*\)/g, (_, q, f) => `url(${q}${base.replace(/\/$/, '')}/${dir}${f}${q})`);
 }).join('\n');
 const json = JSON.stringify({
   fonts,
   tokens: read(`${brand.dir}/tokens.css`),
   // base.css styles `body`; inside a preview the canvas plays the body's role.
   base: read(brand.base).replace(/(?<![-\w])body(?![-\w])/g, '.canvas'),
-  components: css,
+  components: withBase(base, css),
 }).replace(/</g, '\\u003c');
 ---
 <div data-brand={brand.id} data-modes={['light', ...brand.modes.map((m) => m.mode)].join(' ')}>

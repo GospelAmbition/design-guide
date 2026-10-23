@@ -7,7 +7,7 @@ Brand guides as plain files that AI agents (and people) can read and edit direct
 ## Run it
 ```
 npm install      # also installs the pre-commit hook
-npm run dev      # http://localhost:4321 — regenerates and reloads as you edit brands/ or system/
+npm run dev      # http://localhost:4321/design-guide/ — regenerates and reloads as you edit brands/ or system/
 npm run check    # validate brands, fail if generated files are stale
 npm run build    # static site in dist/
 ```

@@ -12,6 +12,7 @@ import { getCollection, render } from 'astro:content';
 import { loadAll, read, fences, KINDS, fontHref, isUrl, iconSets } from '../../../scripts/lib/brands.mjs';
 import BrandContext from '../../components/BrandContext.astro';
 import Tokens from '../../components/Tokens.astro';
+import { withBase } from '../../lib/base.mjs';
 
 export function getStaticPaths() {
   const { brands } = loadAll();
@@ -25,6 +26,7 @@ export function getStaticPaths() {
 }
 
 const { id, view, kind, name } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const brand = loadAll().brands.find((b) => b.id === id);
 const m = brand.meta;
 
@@ -41,7 +43,7 @@ let title = m.name, description = m.summary, Content = null, css = '', doc = nul
 if (view === 'overview') {
   Content = await entryFor(`brands/${id}/guidelines.md`);
   css = brand.components.map(cssOf).join('\n');
-  overview = brand.components.map((d) => fences(d.body).find((f) => f.lang === 'html')?.code ?? '').join('\n');
+  overview = withBase(base, brand.components.map((d) => fences(d.body).find((f) => f.lang === 'html')?.code ?? '').join('\n'));
 } else if (view === 'tokens') {
   title = `${m.name} tokens`;
 } else if (view === 'assets') {
@@ -57,7 +59,7 @@ if (view === 'overview') {
   css = [...(doc.data.uses ?? []).map(byName).filter(Boolean), doc].map(cssOf).join('\n');
 }
 
-const head = (m.fonts ?? []).map((u) => ({ tag: 'link', attrs: { rel: 'stylesheet', href: isUrl(u) ? u : `/${fontHref(brand, u)}` } }));
+const head = (m.fonts ?? []).map((u) => ({ tag: 'link', attrs: { rel: 'stylesheet', href: isUrl(u) ? u : `${base}/${fontHref(brand, u)}` } }));
 const icons = iconSets(m);
 const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
 ---
@@ -99,7 +101,7 @@ const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
         </p>
         <p>
           <button type="button" data-copy>Copy brief</button>
-          <a href={`/brands/${id}/brief.md`}>Raw .md</a> · <a href={`/brands/${id}/tokens.css`}>tokens.css</a>
+          <a href={`${base}/brands/${id}/brief.md`}>Raw .md</a> · <a href={`${base}/brands/${id}/tokens.css`}>tokens.css</a>
         </p>
         <pre>{brief}</pre>
       </div>

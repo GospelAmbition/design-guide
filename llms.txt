@@ -40,7 +40,7 @@
 - Component CSS may only use the brand's CSS variables for colours, fonts, weights, sizes, spacing and radii. Small structural values (`0`, `1px` borders, `100%`) are fine. A `var(--name, fallback)` with a fallback is a setting and may use any name; a `var()` without one must be a brand token.
 - To add a brand, create `brands/<id>/` with `guidelines.md`, `tokens.json` and `assets/assets.md` (copy an existing brand), then run `npm run generate`.
 - Run `npm run check` before committing. It validates every brand and fails if generated files are stale. The same check runs as a pre-commit hook and in CI.
-- To see the result, run `npm run dev` and open http://localhost:4321/guide/<id>/. Restart the server after adding or removing a brand or component file.
+- To see the result, run `npm run dev` and open http://localhost:4321/design-guide/guide/<id>/. Restart the server after adding or removing a brand or component file.
 
 <!-- BEGIN GENERATED: npm run generate -->
 ## Brands

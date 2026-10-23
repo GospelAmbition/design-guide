@@ -8,6 +8,10 @@ import { ROOT, loadAll } from './scripts/lib/brands.mjs';
 import { buildOutputs } from './scripts/generate.mjs';
 import remarkLivePreview from './src/plugins/remark-live-preview.mjs';
 
+// GitHub Pages serves the site at https://gospelambition.github.io/design-guide/.
+const site = 'https://gospelambition.github.io';
+const base = '/design-guide';
+
 const { brands } = loadAll();
 
 const badge = (d) => ({ override: 'override', brand: 'brand only' })[d.origin];
@@ -67,7 +71,9 @@ const liveSources = {
 };
 
 export default defineConfig({
-  markdown: { processor: unified({ remarkPlugins: [remarkLivePreview] }) },
+  site,
+  base,
+  markdown: { processor: unified({ remarkPlugins: [[remarkLivePreview, { base }]] }) },
   integrations: [
     starlight({
       title: 'Design System',
