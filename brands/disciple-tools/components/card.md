@@ -1,10 +1,10 @@
 ---
 title: Card
 summary: The testimonial card. White, 7px corners, a soft shadow, with a role, a region, a quote icon and the quote.
-uses: [icon]
+uses: [icon, grid]
 ---
 
-The only card on disciple.tools: the testimonials on the home page. Four sit in a row, then stack below 768px, where their padding drops from 30px to 25px.
+The only card on disciple.tools: the testimonials on the home page. Four sit in a row, then stack below 768px (`--threshold-l`), where their padding drops from 30px to 25px.
 
 ## When to use
 
@@ -18,16 +18,18 @@ The only card on disciple.tools: the testimonials on the home page. Four sit in 
 ## Code
 
 ```html
-<figure class="card" style="max-width: 265px">
+<div class="grid" style="--grid-min: var(--threshold-s)">
+<figure class="card">
   <figcaption class="card__head">
     <h5>A field worker</h5>
     <p>in the Middle East</p>
   </figcaption>
-  <i class="fas fa-quote-left icon-quote" aria-hidden="true"></i>
+  <i class="fas fa-quote-left icon" data-variant="quote" aria-hidden="true"></i>
   <blockquote>
     <p>Our team is made up of a small group of nationals and expats. Disciple.Tools gives us an easy and secure way to track conversations.</p>
   </blockquote>
 </figure>
+</div>
 ```
 
 ```css
@@ -43,5 +45,5 @@ The only card on disciple.tools: the testimonials on the home page. Four sit in 
 .card__head { text-align: center; }
 .card__head p { margin: 0; }
 .card blockquote { margin: 0; }
-@media (max-width: 767px) { .card { padding: var(--space-band); } }
+@container (width < 48rem) { .card { padding: var(--space-band); } }
 ```

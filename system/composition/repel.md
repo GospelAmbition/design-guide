@@ -21,7 +21,7 @@ Add `data-nowrap` to keep the items on one line.
 ## Code
 
 ```html
-<div class="repel" style="width: 100%">
+<div class="repel demo-fill">
   <strong>Left item</strong>
   <span>Right item</span>
 </div>

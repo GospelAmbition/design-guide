@@ -9,7 +9,7 @@ From the contact form on the Join the Community page.
 ## Do
 
 - Put a visible label above every field. Labels are larger than the field text (19.2px against 16px).
-- End a form with one `.btn-blue` submit button.
+- End a form with one blue submit button (`class="btn" data-variant="blue" type="submit"`). The form gives it its own padding.
 
 ## Don't
 
@@ -21,7 +21,7 @@ From the contact form on the Join the Community page.
 <form class="form">
   <label class="field">
     <span class="field__label">Name</span>
-    <input class="input" type="text" name="name" />
+    <input class="input" type="text" name="name" autocomplete="name" />
   </label>
   <label class="field">
     <span class="field__label">Email</span>
@@ -35,7 +35,7 @@ From the contact form on the Join the Community page.
     <span class="field__label">Comments</span>
     <textarea class="input" rows="3"></textarea>
   </label>
-  <button class="btn btn-blue btn-submit" type="submit">Submit</button>
+  <button class="btn" data-variant="blue" type="submit">Submit</button>
 </form>
 ```
 
@@ -63,5 +63,5 @@ From the contact form on the Join the Community page.
 input.input, select.input { height: var(--size-field); }
 select.input { box-shadow: none; }
 .input:focus { outline: none; box-shadow: var(--shadow-field-focus); }
-.btn-submit { justify-self: start; padding: var(--space-submit); font-size: var(--size-body); }
+.form > [type="submit"] { justify-self: start; padding: var(--space-submit); font-size: var(--size-body); }
 ```

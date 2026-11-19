@@ -4,7 +4,7 @@ summary: "A grey swoosh into the wash, then a heading, a one-line intro and a wi
 uses: [container, flow, swoosh]
 ---
 
-"We are in an extraordinary moment." The section opens with a [swoosh](../../components/swoosh/) and sits on the grey wash (`.bg-wash`). The heading is Bold 56px, the intro Regular 32px, then a full-width panel with 16px corners. In the design the panel is a screenshot of the live "Disciples multiplying disciples" chart (an interactive embed with its own styling); in a build, put the embed there.
+"We are in an extraordinary moment." The section opens with a [swoosh](../../components/swoosh/) and sits on the grey wash (`.surface-wash`). The heading is Bold 56px, the intro Regular 32px, then a full-width panel with 16px corners. In the design the panel is a screenshot of the live "Disciples multiplying disciples" chart (an interactive embed with its own styling); in a build, put the embed there.
 
 ## Do
 
@@ -14,7 +14,7 @@ uses: [container, flow, swoosh]
 ## Code
 
 ```html
-<section class="stats bg-wash">
+<section class="stats surface-wash">
   <svg class="swoosh" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>

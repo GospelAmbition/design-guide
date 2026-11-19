@@ -35,16 +35,18 @@ Plain, practical and warm. Disciple.Tools explains software to people whose job 
 ## Do
 
 - Use Open Sans 800 (`--font-heading`, `--weight-heavy`) in `--color-blue` for section headings, and Roboto (`--font-body`) for everything else.
-- Use `.btn-green` for the first step (Get Started, Demo) and `.btn-blue` for the rest. Pair a filled button with `.btn-outline` when there are two.
+- Use `data-variant="green"` buttons for the first step (Get Started, Demo) and `data-variant="blue"` for the rest. Pair a filled button with `data-variant="outline"` when there are two.
 - Make text links bold and blue. They turn green and underline on hover.
 - Put a blue title band (`.title-band`) above each chapter of a long page, and close a page with the green link band ("Dig in!").
+- Give each coloured section a surface: `.surface-blue` for blue bands, `.surface-green` for green bands, `.surface-grey-light` and `.surface-grey-lightest` for the grey sections. The surface sets the text, heading and link colours that pass contrast on it.
+- Lay sections out with the composition primitives. Columns switch at the threshold tokens: `--threshold-l` (768px) for most rows, `--threshold-m` (640px) for the footer, `--threshold-s` (320px) for a pair of buttons.
 - Give app screenshots the `--shadow-media` shadow.
 - Build new pages from this guide's tokens, composition and components. When adding to an existing site, adapt them to that site's own classes; don't paste the guide's markup in as-is.
 - Use the full-colour logo (`logo.png`, `logo-blue.png`) on white, and `logo-white.png` on blue.
 
 ## Don't
 
-- Don't use green for text on white, or white text on green at body size. Both fail contrast (see below).
+- Don't use green for text on white, or white or blue text on green. All fail contrast (see below). On green, text, headings and links are near-black (`.surface-green`).
 - Don't use the sky blue (`--color-sky`) outside nav hover.
 - Don't round corners beyond `--radius-card` (7px). Buttons and fields are almost square (3px).
 - Don't name testimonial authors where it could put them at risk. Use their role and region.
@@ -54,11 +56,11 @@ Plain, practical and warm. Disciple.Tools explains software to people whose job 
 
 These are facts from the scrape, recorded so builds don't copy them by accident:
 
-- White on `--color-green` is 2.1:1. It fails WCAG AA even for large text (3:1), which affects the Get Started and Demo buttons and the white headings on green bands. Raise this with the team before using green behind text; a darker green would fix it.
-- `--color-blue` on `--color-green` (link-band column headings) is 2.4:1, and green link hover on white is 2.1:1. Both fail.
+- White on `--color-green` is 2.1:1. It fails WCAG AA even for large text (3:1), which affects the Get Started and Demo buttons and the white headings on green bands. This guide's green surface uses near-black text (9.4:1) instead of white until the team decides; a darker green would let it go back to white. The green buttons still have white labels, as on the site.
+- `--color-blue` on `--color-green` (link-band column headings) is 2.4:1, and green link hover on white is 2.1:1. Both fail. The link band's headings are near-black here.
 - White on `--color-sky` (nav hover) is 2.5:1. It fails.
 - Blue text on the note tint is 3.5:1. It fails for body-size text.
-- Blue on `--color-grey-light` is 4.3:1: fine for the 32px headings in the icon grid, not for body text.
+- Blue on `--color-grey-light` is 4.3:1: fine for the 32px headings in the icon grid, not for body text. The grey-light surface has it only as `heading-large` and no link colour.
 - Body text on white (19.8:1) and white on blue (5.1:1) pass.
 - Elementor buttons only underline on hover; there is no colour change. The nav Demo button turns blue on hover.
 - The contact form's textarea renders in Arial at 19.2px while the other fields are Roboto at 16px. The Input component uses Roboto for all fields.

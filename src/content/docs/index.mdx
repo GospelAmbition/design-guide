@@ -10,6 +10,7 @@ This design system holds several brand guides. Pick a brand in the sidebar to se
 1. **Plain files are the source of truth.** Each brand is one folder in `brands/`: `guidelines.md`, `tokens.json`, `components/`, `assets/`. Shared components live in `system/`.
 2. **Brands inherit shared components.** A brand can replace one with its own file of the same name, add its own, or exclude one.
 3. **Every component is one markdown file** with guidance and the exact HTML and CSS. The previews on this site are rendered from that same code, inside an isolated canvas that only sees the brand's styles.
-4. **A generated brief per brand** (`brands/<id>/brief.md`) merges everything into one file for AI agents. `npm run check` keeps it in sync.
+4. **A generated brief per brand** (`brands/<id>/brief.md`) merges everything into one file for AI agents, and a generated `brands/<id>/brand.css` holds all of the brand's CSS for pages to link. `npm run check` keeps them in sync.
+5. **Pages are built outside this repo**, by people or agents following `build-a-page.md`. See [Building a page with AI](build-a-page/).
 
 This site is a viewer. To change a brand, edit its files (or ask an AI agent to), and the site updates.

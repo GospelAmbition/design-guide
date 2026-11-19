@@ -1,10 +1,10 @@
 ---
 title: Movement band
 summary: Navy section with a Bebas Kai title and short text on the left, an uppercase list with prayer icons on the right, and two buttons underneath.
-uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
+uses: [button, icon, container, flow, switcher]
 ---
 
-"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-xl`).
+"Mobilize a movement of prayer" on the home page (`section.brand-bg.py-xl`), on `.surface-brand`.
 
 ## When to use
 
@@ -12,7 +12,7 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 
 ## Do
 
-- Pair `.btn-primary-light` with `.btn-outline-light` underneath.
+- Pair a `primary-light` button with an `outline-light` one underneath.
 - Use `ul role="list"` so the list shows icons, not bullets.
 
 ## Don't
@@ -22,10 +22,10 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 ## Code
 
 ```html
-<section class="brand-bg py-xl" style="width: 100%">
-  <div class="flow-medium container white">
-    <div class="switcher switcher-md">
-      <div class="flow-medium grow-3">
+<section class="surface-brand py-xl">
+  <div class="flow container">
+    <div class="switcher" style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
+      <div class="flow grow-3">
         <h2>Mobilize a movement of prayer</h2>
         <div>Use Prayer.Global to rally your church, conference, or group around a mission to pray a full lap around the world. Every prayer moves us closer to seeing the nations reached!</div>
       </div>
@@ -37,8 +37,8 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
       </ul>
     </div>
     <span class="switcher" style="--gutter: var(--space-xs)">
-      <a class="btn btn-primary-light uppercase" href="#">Create prayer relay</a>
-      <a class="btn btn-outline-light uppercase" href="#">Information for leaders</a>
+      <a class="btn uppercase" data-variant="primary-light" href="/challenges/create/">Create prayer relay</a>
+      <a class="btn uppercase" data-variant="outline-light" href="/leaders/">Information for leaders</a>
     </span>
   </div>
 </section>
@@ -47,5 +47,6 @@ uses: [button, icon, container, flow, switcher, switcher-variants, utilities]
 ```css
 .movement-list { font-size: var(--size-one-em); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0; }
 .movement-list li { display: flex; align-items: center; gap: var(--space-xs); }
-@media (max-width: 768px) { .movement-list { font-size: 1em; } }
+/* The site's 768px breakpoint, as a container query at --threshold-l. */
+@container (width <= 48rem) { .movement-list { font-size: 1em; } }
 ```

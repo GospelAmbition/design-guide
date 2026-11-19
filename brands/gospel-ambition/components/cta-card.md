@@ -11,6 +11,7 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
 - Write the eyebrow as the job ("Equip your ministry", "Pay it forward") and the title as the promise ("Find the right tools.", "Help equip more disciple-makers.").
 - End titles with a full stop, as the design does.
 - Use a photo of people, ideally in a group or in conversation.
+- Put it on `.surface-dark` or a dark photo. The card stays white, so its eyebrow stays red there.
 
 ## Don't
 
@@ -19,13 +20,13 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
 ## Code
 
 ```html
-<div class="bg-charcoal" style="padding: 1.5rem">
-  <article class="cta-card" style="max-width: 51rem">
+<div class="surface-dark p-s">
+  <article class="cta-card center" style="--measure: var(--size-measure)">
     <div class="cta-card__body">
       <span class="eyebrow">Equip your ministry</span>
       <h3>Find the right tools.</h3>
       <p>Answer a few simple questions and discover free tools and training that fit the work God has given you.</p>
-      <a class="btn btn-primary" href="#">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="primary" href="/tools/">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
     <img class="cta-card__image" src="/brands/gospel-ambition/assets/photos/cta-tools.jpg" alt="Young men looking at a tablet together" />
   </article>
@@ -37,8 +38,8 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
   display: flex;
   flex-wrap: wrap-reverse;
   overflow: hidden;
-  color: var(--color-text);
-  background: var(--color-white);
+  color: var(--surface-default-text);
+  background: var(--surface-default-background);
   border: 1px solid var(--color-grey-dark);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
@@ -51,6 +52,8 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
   gap: var(--space-xs);
   padding: var(--space-m);
 }
+.cta-card .eyebrow { color: var(--surface-default-eyebrow); }
+.cta-card .text-accent { color: var(--surface-default-accent); }
 .cta-card__body .eyebrow { margin-block-end: calc(var(--space-xxs) - var(--space-xs)); }
 .cta-card__body .btn { margin-block-start: var(--space-xs); }
 .cta-card__image {

@@ -46,11 +46,13 @@ img { max-width: 100%; height: auto; }
   font-weight: var(--weight-regular);
   line-height: var(--leading-heading);
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--surface-default-eyebrow);
 }
-.text-accent { color: var(--color-red); }
+.text-accent { color: var(--surface-default-accent); }
 
-/* Section backgrounds. Text on charcoal is white. */
-.bg-charcoal { background-color: var(--color-charcoal); color: var(--color-white); }
-.bg-wash { background-image: var(--gradient-wash); }
-.bg-charcoal .eyebrow { color: var(--color-white); }
+/* Section backgrounds are surfaces (.surface-default, .surface-wash, .surface-dark, .surface-red),
+   generated from tokens.json. Red text fails on charcoal, so eyebrows and accents turn white there. */
+.surface-wash .eyebrow { color: var(--surface-wash-eyebrow); }
+.surface-wash .text-accent { color: var(--surface-wash-accent); }
+.surface-dark .eyebrow { color: var(--surface-dark-eyebrow); }
+.surface-dark .text-accent { color: var(--surface-dark-accent); }

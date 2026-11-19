@@ -17,7 +17,7 @@ CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between
 
 ## Do
 
-- Change the rhythm for one section with `style="--flow-space: var(--space-l)"` or in that block's CSS, rather than adding margins to children.
+- Change the rhythm for one section with `style="--flow-space: var(--space-l)"` (a setting, set to a space token) or in that block's CSS, rather than adding margins to children.
 - Set `--flow-space` on a single child to change the gap above just that child.
 
 ## Don't
@@ -27,7 +27,7 @@ CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between
 ## Code
 
 ```html
-<div class="flow" style="max-width: 32rem">
+<div class="flow">
   <h3>A heading</h3>
   <p>Each child is separated by the same space, taken from the brand's space scale.</p>
   <p>No margin before the first child or after the last.</p>

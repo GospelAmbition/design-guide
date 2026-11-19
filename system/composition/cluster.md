@@ -24,13 +24,13 @@ Every Layout's Cluster, as used in CUBE CSS.
 ## Code
 
 ```html
-<div class="cluster" role="list" style="padding: 0; margin: 0; list-style: none">
-  <div>First</div>
-  <div>Second item</div>
-  <div>Third</div>
-  <div>A longer fourth item</div>
-  <div>Fifth</div>
-</div>
+<ul class="cluster" role="list">
+  <li class="demo-box">First</li>
+  <li class="demo-box">Second item</li>
+  <li class="demo-box">Third</li>
+  <li class="demo-box">A longer fourth item</li>
+  <li class="demo-box">Fifth</li>
+</ul>
 ```
 
 ```css

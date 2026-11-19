@@ -3,7 +3,14 @@
 import { join } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 import { ROOT, KINDS, REQUIRED_SPACE, read, exists, fences, flattenTokens, loadSystem, loadBrand, resolveBrand, brandIds, isUrl, fontHref } from './lib/brands.mjs';
-import { buildOutputs } from './generate.mjs';
+import { buildOutputs, surfaceContrast } from './generate.mjs';
+import { surfaces, utilityRules } from './lib/brand-css.mjs';
+import { newReport, cssModel, checkHtml as checkPageHtml, withFontClasses } from './lib/page-rules.mjs';
+import { parseCss, walk, selectorClasses } from './lib/css.mjs';
+
+// Every brand defines these, so shared examples and pages can rely on them.
+const REQUIRED_THRESHOLD = ['s', 'm', 'l'];
+const REQUIRED_SURFACE_ROLES = ['background', 'text'];
 
 const errors = [];
 const err = (where, msg) => errors.push(`${where}: ${msg}`);
@@ -80,6 +87,22 @@ for (const id of brandIds()) {
   for (const t of base) if (!t.type) err(`${dir}/tokens.json`, `token ${t.name} has no $type.`);
   const baseNames = new Set(base.map((t) => t.name));
   for (const step of REQUIRED_SPACE) if (!baseNames.has(`space-${step}`)) err(`${dir}/tokens.json`, `missing space.${step}. Every brand defines space ${REQUIRED_SPACE.join(', ')} (and may add more).`);
+  for (const step of REQUIRED_THRESHOLD) if (!baseNames.has(`threshold-${step}`)) err(`${dir}/tokens.json`, `missing threshold.${step}. Every brand defines threshold ${REQUIRED_THRESHOLD.join(', ')}: the container widths layouts switch at, used for --threshold, --sidebar-width, --grid-min and @container queries.`);
+  const surfaceList = surfaces(brand);
+  if (!surfaceList.some((x) => x.name === 'default')) err(`${dir}/tokens.json`, 'missing surface.default. Every brand defines surfaces: surface.<name>.background and .text (plus .link and other colours that go on it), and at least "default".');
+  for (const { name, roles } of surfaceList) {
+    for (const r of REQUIRED_SURFACE_ROLES) if (!roles.includes(r)) err(`${dir}/tokens.json`, `surface.${name} needs a "${r}".`);
+    for (const r of roles.filter((x) => x !== 'background')) {
+      const ratio = surfaceContrast(brand, name, r);
+      const min = r.endsWith('-large') ? 3 : 4.5;
+      if (ratio === null) err(`${dir}/tokens.json`, `surface.${name}.${r}: can't work out its contrast. Use plain colours (hex or rgb) or gradients of them, through references.`);
+      else if (ratio < min) err(`${dir}/tokens.json`, `surface.${name}.${r} has contrast ${ratio.toFixed(2)}:1 on its background; it needs ${min}:1${r.endsWith('-large') ? '' : ' (name the role "<role>-large" if it is only for large text, which needs 3:1)'}.`);
+    }
+  }
+  for (const u of brand.utilitiesConfig) {
+    if (!u.name) err(`${dir}/utilities.json`, 'every entry needs a "name".');
+    else if (!u.remove && !u.tokens && !u.values && !u.class) err(`${dir}/utilities.json`, `"${u.name}" needs "tokens", "values" or "class" (or "remove": true).`);
+  }
   for (const m of brand.modes) {
     const names = new Set(flattenTokens(m.tokens).map((t) => t.name));
     for (const n of names) if (!baseNames.has(n)) err(m.path, `token ${n} is not in tokens.json.`);
@@ -131,14 +154,36 @@ for (const b of brands) {
   const names = [...rootBlock.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]);
   for (const n of names.filter((n, i) => names.indexOf(n) !== i)) err(`${b.dir}/tokens.json`, `two tokens both become ${n}. Rename one.`);
   const defined = new Set(names);
+  const thresholds = [...rootBlock.matchAll(/(--threshold-[\w-]+)\s*:\s*([^;]+);/g)].map((m) => m[2].trim());
   checkCss(b.base, read(b.base), defined);
   const known = new Set(KINDS.flatMap((k) => b[k].map((d) => d.name)));
+  // The page rules, applied to every example: agents copy this HTML, so it must pass the page check.
+  const fontCss = (b.meta.fonts ?? []).filter((u) => !isUrl(u)).map((u) => fontHref(b, u)).filter(exists).map(read);
+  const model = withFontClasses(cssModel(outputs[`${b.dir}/brand.css`] ?? '', 'brand'), fontCss);
+  const generated = new Set(utilityRules(b).map((r) => r.cls));
   for (const kind of KINDS) {
     for (const d of b[kind]) {
       const where = d.origin === 'shared' ? `${d.path} (for ${b.id})` : d.path;
       for (const f of fences(d.body)) {
-        if (f.lang === 'css') checkCss(where, f.code, defined);
-        if (f.lang === 'html') checkHtml(where, f.code);
+        if (f.lang === 'css') {
+          checkCss(where, f.code, defined);
+          walk(parseCss(f.code), (node) => {
+            if (node.type === 'at' && node.name === 'container') {
+              for (const m of node.prelude.matchAll(/\d*\.?\d+[a-z%]+/gi)) {
+                if (!thresholds.includes(m[0])) err(where, `@container ${node.prelude}: ${m[0]} is not one of ${b.id}'s thresholds (${thresholds.join(', ')}).`);
+              }
+            }
+            if (node.type !== 'rule') return;
+            const first = selectorClasses(node.selector)[0];
+            if (generated.has(first)) err(where, `defines .${first}, which is now a generated utility (system/utilities.json or ${b.dir}/utilities.json). Remove it here.`);
+          });
+        }
+        if (f.lang === 'html') {
+          checkHtml(where, f.code);
+          const r = newReport();
+          checkPageHtml(f.code, model, null, r, { file: where, fragment: true, allowDemo: true });
+          for (const e of r.errors) errors.push(`${e} (in an html example)`);
+        }
       }
       for (const u of d.data.uses ?? []) if (!known.has(u)) err(where, `uses "${u}", which ${b.id} does not have.`);
     }

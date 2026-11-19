@@ -1,10 +1,10 @@
 ---
 title: Feature section
 summary: White section. Clipped image panel on the left, Bebas Kai title with icon, short copy and one button on the right.
-uses: [button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities]
+uses: [button, icon, image-panel, container, flow, switcher]
 ---
 
-"Prayer fuel" and "My prayer activity" on the home page. It's the [Feature band](../feature-band/) on white, with the columns reversed (`.switcher-reverse`).
+"Prayer fuel" and "My prayer activity" on the home page. It's the [Feature band](../feature-band/) on white, with the columns reversed (`data-reverse` on the switcher).
 
 ## When to use
 
@@ -12,7 +12,7 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 
 ## Do
 
-- Use `.clip-rounded-end` here: the curve faces the text.
+- Use the image panel with `data-curve="end"` here: the curve faces the text.
 - Keep copy to one short paragraph or a list of up to four items.
 
 ## Don't
@@ -22,14 +22,14 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 ## Code
 
 ```html
-<section class="py-xl" style="width: 100%">
-  <div class="container switcher switcher-md switcher-reverse align-items-center">
-    <div class="flow-xsmall">
-      <h2 class="text-center">Prayer fuel <i class="icon icon-small pg-pray-hands-light" aria-hidden="true"></i></h2>
+<section class="py-xl">
+  <div class="container switcher align-items-center" data-reverse style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
+    <div class="flow" style="--flow-space: var(--space-xs)">
+      <h2 class="text-center">Prayer fuel <i class="icon pg-pray-hands-light" data-size="small" aria-hidden="true"></i></h2>
       <p>We'll give you location specific prayer prompts, scripture and images to help guide your prayers for each of the 4,770 states.</p>
-      <a class="btn btn-cta btn-lg center w-fit mx-auto px-s" href="#">Start praying</a>
+      <p class="text-center"><a class="btn px-s" data-variant="cta" data-size="large" href="/newest/lap/">Start praying</a></p>
     </div>
-    <div class="drop-shadow"><img class="clip-rounded-end" src="/brands/prayer-global/assets/photos/panel-prayer-fuel.jpg" alt="" /></div>
+    <div class="image-panel" data-curve="end"><img src="/brands/prayer-global/assets/photos/panel-prayer-fuel.jpg" alt="" /></div>
   </div>
 </section>
 ```

@@ -19,8 +19,8 @@ Replaces the shared Container because the site's content column is narrower and 
 ## Code
 
 ```html
-<section style="width: 100%; outline: 1px dashed currentColor">
-  <div class="container" style="outline: 1px dashed currentColor">Content stays within 1140px, 10px from the edge.</div>
+<section class="demo-box demo-fill">
+  <div class="container demo-box">Content stays within 1140px, 10px from the edge.</div>
 </section>
 ```
 

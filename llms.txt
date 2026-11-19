@@ -2,29 +2,36 @@
 
 > Brand guides for building on-brand websites, written to be read and edited by AI agents. Each brand defines its tokens, voice, rules, components and assets as plain files. The Starlight site in src/ is only a viewer for humans; everything you need is in brands/ and system/.
 
+**Building a page or site for a brand? Read [`build-a-page.md`](build-a-page.md) and follow its steps.** Don't build pages inside this repo.
+
 ## To build or review something for a brand
 
 1. Find the brand in the list below.
 2. Read `brands/<id>/brief.md`. It is the whole brand in one file, with shared components and brand overrides already merged. You normally need nothing else.
-3. Follow the brief exactly: load its fonts, `brands/<id>/tokens.css` and the base styles, and copy component HTML/CSS from it. Use only the CSS variables, never raw colours or font names.
+3. Follow the brief exactly: load its fonts and `brands/<id>/brand.css`, and copy component HTML from it (never its CSS, which is all in brand.css). Anything else goes in the page's own `site.css`, using only the CSS variables, never raw colours, sizes or font names. `build-a-page.md` has the full process and `scripts/check-page.mjs` checks the result.
 4. If the brief doesn't cover something (a component it doesn't have, a missing rule), say so instead of inventing brand decisions.
 
 ## How the source is organised
 
-- `system/composition/<name>.md` — shared layout primitives every brand gets (Every Layout / CUBE CSS: flow, cluster, repel, switcher, center, container). Same format as components. Each primitive is tuned with its own custom properties (`--flow-space`, `--gutter`, `--threshold`, …), set on the element or in a block's CSS; when unset they fall back to the brand's space tokens.
+- `system/composition/<name>.md` — shared layout primitives every brand gets (Every Layout / CUBE CSS: flow, cluster, repel, switcher, sidebar, grid, frame, cover, reel, imposter, center, box, container, with-icon). Same format as components. Each primitive is tuned with its own settings: custom properties read with a fallback (`--flow-space`, `--gutter`, `--threshold`, …), set inline on the element (to tokens only) or in a block's CSS; when unset they fall back to the brand's tokens.
 - `system/components/<name>.md` — shared components every brand gets. Each file has guidance, then one `css` block and one or more `html` example blocks. The site renders live previews from exactly these blocks.
 - `system/patterns/<name>.md` — shared page patterns (hero, sign-up form, …), same format as components. Empty for now.
 - `system/base.css` — base element styles (body, headings, links). Tokens only.
+- `system/reset.css` — a small structural reset, first in every brand.css.
+- `system/utilities.json` — the utility classes every brand gets, generated from its tokens (`.py-xl`, `.weight-bold`, `.text-center`, `.visually-hidden`, …). A brand adds or changes them in `brands/<id>/utilities.json`.
 - `brands/<id>/guidelines.md` — frontmatter (`name`, `summary`, `fonts`, `icons`, `exclude`) plus voice, principles, do and don't.
   - `fonts`: a list of stylesheets. Each is a URL (e.g. Google Fonts) or a path inside the brand folder for self-hosted fonts (e.g. `assets/fonts/fonts.css`).
   - `icons`: one line of text, or a list of icon sets, each `{ name, use, source?, files? }`, where `use` says when to pick that set.
 - `brands/<id>/tokens.json` — design tokens (DTCG format). Groups are free-form: besides colour, font, size and so on, a brand can define `gradient` and `shadow` tokens, whose values may reference colour tokens (`linear-gradient({color.a}, {color.b})`). `brands/<id>/tokens.<mode>.json` holds the overrides for a mode such as dark; it must define every colour token.
-  - Spacing is a named scale. Every brand must define `space.xs`, `s`, `m`, `l` and `xl`, so shared CSS means the same step everywhere; a brand may add more steps at either end (`xxs`, `xxxs`, `xxl`, …). Never add an in-between step such as `s-m`: if a site needs a size between two steps, keep `m` where it is and shift the names on that side outwards (a new step between `s` and `m` becomes `s`, the old `s` becomes `xs`, and so on), so the scale stays one sequence. Classes named after a size (`.switcher-md`, `.flow-xsmall`) use the token of that name. There is no numbered `--space-1` scale.
+  - Every brand defines `threshold.s`, `m` and `l`: the container widths layouts switch at. Pages use them for `--threshold`, `--sidebar-width`, `--grid-min` and as the only values in `@container` queries.
+  - Every brand defines surfaces: `surface.<name>.background` and `.text`, plus `.link` and any other colour that sits on that background, each referencing a colour token, and at least `surface.default`. Each becomes a `.surface-<name>` utility. `npm run check` fails any role under 4.5:1 contrast (3:1 for a role named `<x>-large`, for large text only).
+  - Spacing is a named scale. Every brand must define `space.xs`, `s`, `m`, `l` and `xl`, so shared CSS means the same step everywhere; a brand may add more steps at either end (`xxs`, `xxxs`, `xxl`, …). Never add an in-between step such as `s-m`: if a site needs a size between two steps, keep `m` where it is and shift the names on that side outwards (a new step between `s` and `m` becomes `s`, the old `s` becomes `xs`, and so on), so the scale stays one sequence. Utilities named after a size (`.py-m`) use the token of that name. There is no numbered `--space-1` scale.
 - `brands/<id>/composition/<name>.md` — brand composition primitives: overrides of shared ones or brand-only additions.
 - `brands/<id>/components/<name>.md` — brand components, same format as shared ones.
 - `brands/<id>/patterns/<name>.md` — brand patterns.
 - `brands/<id>/assets/` — logos and images, each described in `assets/assets.md` (what it is, where to use it, minimum size, clear space).
 - `brands/<id>/base.css` — optional; replaces `system/base.css` for that brand.
+- `brands/<id>/utilities.json` — optional; adds to or changes the shared utilities.
 
 ### Resolution rules
 
@@ -33,10 +40,18 @@
 - A brand file with a new name is unique to that brand.
 - A file's `uses: [...]` frontmatter lists the other primitives and components whose CSS it needs.
 
+### CSS conventions (CUBE CSS)
+
+- Order: composition, then utilities, then blocks, then exceptions. `brand.css` puts them in cascade layers (reset, tokens, base, composition, components, patterns, utilities), so a page's unlayered `site.css` always wins without specificity fights.
+- A block's variants are exceptions written as data attributes on the block: `class="btn" data-variant="primary"`, `data-size="small"`. Never modifier classes (`.btn-primary`). States use ARIA (`aria-expanded`, `aria-current`, `aria-selected`) or `data-state`.
+- Size variants of a primitive are settings, not classes: `style="--threshold: var(--threshold-m)"`, not `.switcher-md`.
+- Inline styles only set settings, to tokens. No viewport media queries: layouts are intrinsic, or use `@container` at a threshold.
+- The html examples in every component and pattern must pass the page checker (`scripts/lib/page-rules.mjs`): real links, valid classes and variants, settings-only inline styles, accessible markup. Agents copy them. In layout examples, `demo-box` and `demo-fill` are preview-only helpers for showing boxes.
+
 ## Editing the design system
 
-- Edit only source files: `system/`, `brands/<id>/guidelines.md`, `tokens*.json`, `composition/`, `components/`, `patterns/`, `assets/`, `base.css`, and the hand-written part of this file.
-- Never edit generated files: `brands/<id>/brief.md`, `brands/<id>/tokens.css`, and the GENERATED block below. Run `npm run generate` after editing sources.
+- Edit only source files: `system/`, `brands/<id>/guidelines.md`, `tokens*.json`, `utilities.json`, `composition/`, `components/`, `patterns/`, `assets/`, `base.css`, `build-a-page.md`, and the hand-written part of this file.
+- Never edit generated files: `brands/<id>/brief.md`, `brands/<id>/tokens.css`, `brands/<id>/brand.css`, `brands/<id>/kit.json`, and the GENERATED block below. Run `npm run generate` after editing sources.
 - Component CSS may only use the brand's CSS variables for colours, fonts, weights, sizes, spacing and radii. Small structural values (`0`, `1px` borders, `100%`) are fine. A `var(--name, fallback)` with a fallback is a setting and may use any name; a `var()` without one must be a brand token.
 - To add a brand, create `brands/<id>/` with `guidelines.md`, `tokens.json` and `assets/assets.md` (copy an existing brand), then run `npm run generate`.
 - Run `npm run check` before committing. It validates every brand and fails if generated files are stale. The same check runs as a pre-commit hook and in CI.
@@ -46,20 +61,28 @@
 ## Brands
 
 - **Disciple.Tools** — Clear, practical and free. Blue and green on white, heavy Open Sans headings over Roboto, for presenting the Disciple.Tools software to disciple-making teams.
-  Start with `brands/disciple-tools/brief.md`. Source folder: `brands/disciple-tools/`.
+  Start with `brands/disciple-tools/brief.md`. Stylesheet for pages: `brands/disciple-tools/brand.css`. Source folder: `brands/disciple-tools/`.
 - **Gospel Ambition** — Confident, warm and mission-driven. Brand red and charcoal on white, heavy Poppins headlines and sweeping red curves, for inviting ministries to use free disciple-making tools.
-  Start with `brands/gospel-ambition/brief.md`. Source folder: `brands/gospel-ambition/`.
+  Start with `brands/gospel-ambition/brief.md`. Stylesheet for pages: `brands/gospel-ambition/brand.css`. Source folder: `brands/gospel-ambition/`.
 - **Prayer.Global** — Bold, hopeful and mission-driven. Navy and orange, all-caps Bebas Kai headings, for mobilising people to pray for every place on earth.
-  Start with `brands/prayer-global/brief.md`. Source folder: `brands/prayer-global/`.
+  Start with `brands/prayer-global/brief.md`. Stylesheet for pages: `brands/prayer-global/brand.css`. Source folder: `brands/prayer-global/`.
 
 ## Shared composition
 
+- `system/composition/box.md` — Padding and an optional border around content. Add a surface utility to give it a background.
 - `system/composition/center.md` — Centres a block horizontally with a maximum width, such as a readable column of text.
 - `system/composition/cluster.md` — A row of items that wraps onto new lines, with even gaps. For tags, buttons, links and icons.
 - `system/composition/container.md` — The page-width wrapper. Centres a section's content at a maximum width with side padding.
+- `system/composition/cover.md` — A block at least as tall as a minimum height (by default the screen), with one child centred vertically and others pinned to the top and bottom.
 - `system/composition/flow.md` — Even vertical space between the children of an element. The default rhythm for any run of content.
+- `system/composition/frame.md` — Crops an image or video to a fixed aspect ratio, such as 16:9 or square, without stretching it.
+- `system/composition/grid.md` — Equal columns that fit as many items per row as there is room for, then wrap. For cards, logos and any list of like items.
+- `system/composition/imposter.md` — Centres one element over another, such as a label over an image or a dialog over the page.
+- `system/composition/reel.md` — A row that scrolls sideways instead of wrapping, such as a strip of photos or cards.
 - `system/composition/repel.md` — Pushes items to opposite ends of a row, and lets them wrap when there isn't room.
+- `system/composition/sidebar.md` — A narrow item beside a wide one, such as an image beside text. They stack when the wide one would get too narrow. No media queries.
 - `system/composition/switcher.md` — Items sit side by side, and all stack at once when the container gets narrower than a threshold. No media queries.
+- `system/composition/with-icon.md` — An icon beside a short piece of text, sized to the text's capitals and lined up with it.
 
 ## Shared components
 

@@ -1,7 +1,7 @@
 ---
 title: Feature band
 summary: Navy-to-orange gradient band. White text with a Bebas Kai title and icon on the left, a clipped image panel on the right.
-uses: [button, icon, image-panel, center, container, flow, switcher, switcher-variants, utilities]
+uses: [button, icon, image-panel, container, flow, switcher]
 ---
 
 "How it works" and "Prayer relays" on the home page (`section.brand-lightest-bg.blue-orange-gradient.py-xl`). Alternate it with the white [Feature section](../feature-section/).
@@ -13,7 +13,8 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 ## Do
 
 - Keep the text on the left, over the navy end of the gradient.
-- Use `.btn-primary-light` for its button.
+- Use the `primary-light` button.
+- Put it on `.surface-band`. The gradient only shows once the band is at least `--threshold-l` (48rem) wide, when the columns sit side by side and the text stays on the navy end. Narrower, the columns stack and the band is plain dark blue, because white text on the orange end is only 2.3:1.
 
 ## Don't
 
@@ -23,22 +24,32 @@ uses: [button, icon, image-panel, center, container, flow, switcher, switcher-va
 ## Code
 
 ```html
-<section class="brand-lightest-bg blue-orange-gradient py-xl" style="width: 100%">
+<section class="feature-band surface-band py-xl">
   <div class="container">
-    <div class="switcher switcher-md align-items-center">
-      <div class="flow-xsmall white">
-        <h2 class="text-center">How it works <i class="icon icon-small pg-logo-prayer" aria-hidden="true"></i></h2>
+    <div class="switcher align-items-center" style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
+      <div class="flow" style="--flow-space: var(--space-xs)">
+        <h2 class="text-center">How it works <i class="icon pg-logo-prayer" data-size="small" aria-hidden="true"></i></h2>
         <p>Prayer.Global has broken the world down into 4,770 states based on geographical and governmental boundaries.</p>
         <p>Pray for all 4,770…complete a "prayer lap" around the world!</p>
         <p>An interactive map tracks your prayers in real time.</p>
-        <a class="btn btn-primary-light uppercase center w-fit mx-auto px-s" href="#">View prayer map</a>
+        <p class="text-center"><a class="btn uppercase px-s" data-variant="primary-light" href="/map/">View prayer map</a></p>
       </div>
-      <div class="drop-shadow"><img class="clip-rounded-start" src="/brands/prayer-global/assets/photos/panel-how-it-works.jpg" alt="" /></div>
+      <div class="image-panel" data-curve="start"><img src="/brands/prayer-global/assets/photos/panel-how-it-works.jpg" alt="" /></div>
     </div>
   </div>
 </section>
 ```
 
 ```css
-.blue-orange-gradient { background-image: var(--gradient-blue-orange); }
+.feature-band { position: relative; isolation: isolate; }
+/* The navy-to-orange gradient, only once the columns sit side by side (--threshold-l), so text never sits on the orange end. */
+@container (width >= 48rem) {
+  .feature-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--gradient-blue-orange);
+  }
+}
 ```

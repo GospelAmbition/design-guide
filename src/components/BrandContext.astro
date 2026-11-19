@@ -1,12 +1,12 @@
 ---
-// Wraps a brand page. Provides the brand, its modes, base stylesheet and resolved component CSS
-// to every <ds-preview> inside, and defines that element.
+// Wraps a brand page. Provides the brand, its modes and its brand.css to every <ds-preview> inside,
+// and defines that element. Previews use the same brand.css a page links, so what you see is what agents get.
 // Previews render in shadow DOM with only the brand's CSS, so Starlight styles can't leak in.
 // Fonts are loaded in the document <head> by the page (fonts don't load from inside shadow DOM).
 // The CSS is embedded rather than fetched: in dev, Vite answers .css URLs with a JS module.
 import { read, fontHref, isUrl } from '../../scripts/lib/brands.mjs';
-import { withBase } from '../lib/base.mjs';
-const { brand, css = '' } = Astro.props;
+import { brandCss } from '../../scripts/lib/brand-css.mjs';
+const { brand } = Astro.props;
 const base = import.meta.env.BASE_URL;
 // Self-hosted font stylesheets can also carry classes (an icon font's .icon rules), which don't reach
 // into shadow DOM, so embed them too, with url()s made absolute.
@@ -17,10 +17,8 @@ const fonts = (brand.meta.fonts ?? []).filter((u) => !isUrl(u)).map((u) => {
 }).join('\n');
 const json = JSON.stringify({
   fonts,
-  tokens: read(`${brand.dir}/tokens.css`),
   // base.css styles `body`; inside a preview the canvas plays the body's role.
-  base: read(brand.base).replace(/(?<![-\w])body(?![-\w])/g, '.canvas'),
-  components: withBase(base, css),
+  css: brandCss(brand, read(`${brand.dir}/tokens.css`), { preview: { assetBase: `${base.replace(/\/$/, '')}/${brand.dir}/` } }),
 }).replace(/</g, '\\u003c');
 ---
 <div data-brand={brand.id} data-modes={['light', ...brand.modes.map((m) => m.mode)].join(' ')}>
@@ -39,6 +37,9 @@ const json = JSON.stringify({
     .canvas > * { margin: 0; }
     /* Page sections span the canvas as they would span a page, instead of shrinking to their content. */
     .canvas > :is(section, header, footer, nav, main) { flex: 1 1 100%; }
+    /* Preview-only helpers for layout examples. Pages never use them. */
+    .demo-box { outline: 1px dashed currentColor; outline-offset: -1px; padding: 1rem; }
+    .demo-fill { flex: 1 1 100%; inline-size: 100%; }
   `;
 
   class DsPreview extends HTMLElement {
@@ -51,9 +52,10 @@ const json = JSON.stringify({
       const starlightDark = document.documentElement.dataset.theme === 'dark';
       this.dataset.mode = starlightDark && modes.includes('dark') ? 'dark' : 'light';
 
-      const { fonts, tokens, base, components } = JSON.parse(ctx.querySelector('.ds-css').textContent);
+      const { fonts, css } = JSON.parse(ctx.querySelector('.ds-css').textContent);
 
-      root.innerHTML = `<style>${VIEWER_CSS}</style><style>${fonts}</style><style>${tokens}</style><style>${base}</style><style>${components}</style>`;
+      // The viewer chrome goes after brand.css: brand.css is layered, so unlayered viewer rules win.
+      root.innerHTML = `<style>${fonts}</style><style>${css}</style><style>${VIEWER_CSS}</style>`;
       if (modes.length > 1) {
         const bar = document.createElement('div');
         bar.className = 'bar';

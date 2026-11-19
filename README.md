@@ -4,25 +4,36 @@ Brand guides as plain files that AI agents (and people) can read and edit direct
 
 **Agents: read [`llms.txt`](llms.txt) first.** It explains the layout, the override rules and how to edit.
 
+**Building a page for a brand:** follow [`build-a-page.md`](build-a-page.md). Pages are built outside this repo, from the generated `brands/<id>/brand.css`, and checked with `node scripts/check-page.mjs <folder>`. Fixed test briefs for the process are in [`test-briefs/`](test-briefs/).
+
 ## Run it
 ```
 npm install      # also installs the pre-commit hook
 npm run dev      # http://localhost:4321/design-guide/ — regenerates and reloads as you edit brands/ or system/
 npm run check    # validate brands, fail if generated files are stale
 npm run build    # static site in dist/
+
+# Pages (no npm install needed)
+node scripts/new-page.mjs <brand-id> ../my-page     # start a page folder
+node scripts/check-page.mjs ../my-page              # check it against the brand
+node scripts/screenshot-page.mjs ../my-page         # 375/768/1280px screenshots (needs Playwright)
 ```
 
 ## Layout
 ```
 llms.txt                  entry point for agents (brand list is generated)
-system/                   shared: composition/, components/, patterns/, base.css
+build-a-page.md           the process every agent follows to build a page from a brand
+system/                   shared: composition/, components/, patterns/, base.css, reset.css, utilities.json
 brands/<id>/              one folder per brand
   guidelines.md           name, summary, fonts, icons, exclude + voice and rules
-  tokens.json             DTCG tokens; tokens.<mode>.json for modes like dark
+  tokens.json             DTCG tokens (incl. threshold.* and surface.*); tokens.<mode>.json for modes like dark
+  utilities.json          optional: brand additions to the generated utilities
   composition/ components/ patterns/   overrides (same name as shared) and brand-only items
   assets/                 logos and images, described in assets.md
-  brief.md, tokens.css    GENERATED (committed): never edit by hand
-scripts/                  generate.mjs, check.mjs, lib/brands.mjs
+  brief.md, tokens.css,   GENERATED (committed): never edit by hand
+  brand.css, kit.json
+scripts/                  generate.mjs, check.mjs, check-page.mjs, new-page.mjs, screenshot-page.mjs, lib/
+test-briefs/              fixed briefs and a results log for testing build-a-page.md
 src/                      the Starlight viewer
 ```
 

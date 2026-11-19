@@ -4,6 +4,7 @@
 // /guide/<id>/tokens/                swatches, type, token table
 // /guide/<id>/components/<name>/     the resolved component (shared, override or brand-only)
 // /guide/<id>/patterns/<name>/
+// /guide/<id>/utilities/            generated utilities and surfaces
 // /guide/<id>/assets/
 // /guide/<id>/brief/                 the generated brief, for copy-paste
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
@@ -13,12 +14,15 @@ import { loadAll, read, fences, KINDS, fontHref, isUrl, iconSets } from '../../.
 import BrandContext from '../../components/BrandContext.astro';
 import Tokens from '../../components/Tokens.astro';
 import { withBase } from '../../lib/base.mjs';
+import { utilityRules, surfaces } from '../../../scripts/lib/brand-css.mjs';
+import { surfaceContrast } from '../../../scripts/generate.mjs';
 
 export function getStaticPaths() {
   const { brands } = loadAll();
   return brands.flatMap((b) => [
     { params: { page: b.id }, props: { id: b.id, view: 'overview' } },
     { params: { page: `${b.id}/tokens` }, props: { id: b.id, view: 'tokens' } },
+    { params: { page: `${b.id}/utilities` }, props: { id: b.id, view: 'utilities' } },
     { params: { page: `${b.id}/assets` }, props: { id: b.id, view: 'assets' } },
     { params: { page: `${b.id}/brief` }, props: { id: b.id, view: 'brief' } },
     ...KINDS.flatMap((kind) => b[kind].map((d) => ({ params: { page: `${b.id}/${kind}/${d.name}` }, props: { id: b.id, view: 'doc', kind, name: d.name } }))),
@@ -35,17 +39,14 @@ const entryFor = async (path) => {
   const e = entries.find((x) => x.filePath?.replaceAll('\\', '/').endsWith(path));
   return e ? (await render(e)).Content : null;
 };
-const cssOf = (d) => fences(d.body).filter((f) => f.lang === 'css').map((f) => f.code).join('\n');
-const all = KINDS.flatMap((k) => brand[k]);
-const byName = (n) => all.find((d) => d.name === n);
-
-let title = m.name, description = m.summary, Content = null, css = '', doc = null, overview = '';
+let title = m.name, description = m.summary, Content = null, doc = null, overview = '';
 if (view === 'overview') {
   Content = await entryFor(`brands/${id}/guidelines.md`);
-  css = brand.components.map(cssOf).join('\n');
   overview = withBase(base, brand.components.map((d) => fences(d.body).find((f) => f.lang === 'html')?.code ?? '').join('\n'));
 } else if (view === 'tokens') {
   title = `${m.name} tokens`;
+} else if (view === 'utilities') {
+  title = `${m.name} utilities and surfaces`;
 } else if (view === 'assets') {
   title = `${m.name} assets`;
   Content = await entryFor(`brands/${id}/assets/assets.md`);
@@ -56,15 +57,20 @@ if (view === 'overview') {
   title = `${m.name}: ${doc.data.title ?? doc.name}`;
   description = doc.data.summary;
   Content = await entryFor(doc.path);
-  css = [...(doc.data.uses ?? []).map(byName).filter(Boolean), doc].map(cssOf).join('\n');
 }
 
 const head = (m.fonts ?? []).map((u) => ({ tag: 'link', attrs: { rel: 'stylesheet', href: isUrl(u) ? u : `${base}/${fontHref(brand, u)}` } }));
 const icons = iconSets(m);
+const utilities = view === 'utilities' ? utilityRules(brand) : [];
+const surfaceList = view === 'utilities' ? surfaces(brand).map((x) => ({
+  ...x,
+  ratios: x.roles.filter((r) => r !== 'background').map((r) => `${r} ${surfaceContrast(brand, x.name, r)?.toFixed(1) ?? '?'}:1`).join(', '),
+})) : [];
+const surfaceDemo = surfaceList.map((x) => `<div class="surface-${x.name} box demo-fill"><strong>.surface-${x.name}</strong> Text on this surface${x.roles.includes('link') ? ' with <a href="/">a link</a>' : ''}.</div>`).join('\n');
 const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
 ---
 <StarlightPage frontmatter={{ title, description, head }}>
-  <BrandContext brand={brand} css={css}>
+  <BrandContext brand={brand}>
     {view === 'overview' && (
       <>
         <p>{m.summary}</p>
@@ -84,6 +90,23 @@ const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
         <p class="ds-source">Source: <code>brands/{id}/tokens.json</code>{brand.modes.map((x) => <>, <code>{x.path}</code></>)}</p>
       </>
     )}
+    {view === 'utilities' && (
+      <>
+        <p>Generated into <code>brand.css</code> from the tokens, by <code>system/utilities.json</code>{brand.utilitiesConfig.length > 0 && <> and <code>{brand.dir}/utilities.json</code></>}. One class, one job. Use them in the HTML instead of writing CSS.</p>
+        <h2>Surfaces</h2>
+        <p>A background with the text and link colours that pass contrast on it. Set from <code>surface.*</code> in <code>tokens.json</code>.</p>
+        <ds-preview><template set:html={surfaceDemo} /></ds-preview>
+        <table>
+          <thead><tr><th>Class</th><th>Contrast</th><th>Notes</th></tr></thead>
+          <tbody>{surfaceList.map((x) => <tr><td><code>.surface-{x.name}</code></td><td>{x.ratios}</td><td>{x.description}</td></tr>)}</tbody>
+        </table>
+        <h2>Utilities</h2>
+        <table>
+          <thead><tr><th>Class</th><th>CSS</th></tr></thead>
+          <tbody>{utilities.map((u) => <tr><td><code>.{u.cls}</code></td><td><code>{Object.entries(u.decls).map(([p, v]) => `${p}: ${v}`).join('; ')}</code></td></tr>)}</tbody>
+        </table>
+      </>
+    )}
     {view === 'assets' && (Content ? <Content /> : <p>No assets yet.</p>)}
     {view === 'doc' && (
       <>
@@ -101,7 +124,7 @@ const brief = view === 'brief' ? read(`brands/${id}/brief.md`) : '';
         </p>
         <p>
           <button type="button" data-copy>Copy brief</button>
-          <a href={`${base}/brands/${id}/brief.md`}>Raw .md</a> · <a href={`${base}/brands/${id}/tokens.css`}>tokens.css</a>
+          <a href={`${base}/brands/${id}/brief.md`}>Raw .md</a> · <a href={`${base}/brands/${id}/brand.css`}>brand.css</a> · <a href={`${base}/brands/${id}/tokens.css`}>tokens.css</a>
         </p>
         <pre>{brief}</pre>
       </div>

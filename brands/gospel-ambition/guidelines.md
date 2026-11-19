@@ -38,15 +38,16 @@ Confident, warm and inclusive. Gospel Ambition speaks as experienced practitione
 - Use Poppins for everything except eyebrows, which are Bebas Neue (`--font-label`) in red.
 - Put the key phrase of a heading in red with `.text-accent`: "motive, mission and vision.", "with you.", "go.".
 - Open each chapter of a long page with a red [ribbon](components/ribbon/), and separate other sections with the grey [swoosh](components/swoosh/).
-- Use one `.btn-primary` per block, with the arrow, and `.btn-light` or `.btn-grey` for the second action.
-- Put tool cards on the grey wash (`.bg-wash`) and call-to-action cards on a darkened photo.
-- Keep `body` (or the page's outer wrapper) an inline-size container, as `base.css` does. Fluid sizes use `cqi` and breakpoints use `@container`, so they follow the width of the page, or of a preview or embed.
+- Use one primary button (`class="btn" data-variant="primary"`) per block, with the arrow, and `data-variant="light"` or `"grey"` for the second action.
+- Give each section a surface: `.surface-default` (white), `.surface-wash` (the grey wash), `.surface-dark` (charcoal) or `.surface-red`. Text, eyebrow and accent colours follow the surface.
+- Put tool cards on `.surface-wash` and call-to-action cards on a darkened photo over `.surface-dark`.
+- Keep `body` (or the page's outer wrapper) an inline-size container, as `base.css` does. Fluid sizes use `cqi` and breakpoints use `@container` at a threshold (`--threshold-s` 28rem, `-m` 48rem, `-l` 60rem), so they follow the width of the page, or of a preview or embed.
 - Build new pages from this guide's tokens, composition and components. When adding to an existing site, adapt them to that site's own classes; don't paste the guide's markup in as-is.
 - Use the full-colour logo (`logo.png`) on white only. A reversed logo for red, charcoal or photos doesn't exist yet (see the assets page).
 
 ## Don't
 
-- Don't use red text on charcoal at any size. It fails contrast (see below), including the design's own red "go.".
+- Don't use red text on charcoal at any size. It fails contrast (see below), including the design's own red "go.". On `.surface-dark`, `.text-accent` and eyebrows are white.
 - Don't use colours outside the palette. The design file also saves cyan, gold, blue and navy swatches; they aren't used on the page and aren't part of this guide.
 - Don't square off corners: buttons and fields are pills, cards are 16px or 25px.
 - Don't add shadows to tool cards or panels. Only the nav bar, the call-to-action cards and the chat button have one.
@@ -57,7 +58,7 @@ Confident, warm and inclusive. Gospel Ambition speaks as experienced practitione
 
 These are facts from the XD file, recorded so builds don't copy them by accident:
 
-- Red on charcoal is 2.2:1. The red "go." in "Let's go." fails WCAG AA even for large text (3:1). Make it white or raise it with the team.
+- Red on charcoal is 2.2:1. The red "go." in "Let's go." fails WCAG AA even for large text (3:1). This guide makes it white (the dark surface's accent is white); raise it with the team.
 - The 1px `--color-grey` outlines on the light and grey buttons and the search field are 1.7:1 against white. The search field's edge fails the 3:1 non-text contrast rule; consider a darker outline for form fields.
 - The call-to-action cards have a 1px `--color-grey-dark` outline (XD's default stroke) that barely shows on the dark photo. It is kept in the card, but it may be unintended.
 - The nav bar reads "FOR YOUR MINSITRY". The guide spells it "For your ministry".

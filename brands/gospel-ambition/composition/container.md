@@ -16,13 +16,13 @@ The design has no mobile layout. The side padding is a proposal: 1rem on phones,
 
 ## Do
 
-- Put the background (colour, wash, photo, ribbon) on the full-width section and the `.container` inside it.
+- Put the background (a surface such as `.surface-wash`, a photo or a ribbon) on the full-width section and the `.container` inside it.
 
 ## Code
 
 ```html
-<section style="width: 100%; outline: 1px dashed currentColor">
-  <div class="container" style="outline: 1px dashed currentColor">Content stays within 1640px.</div>
+<section class="demo-box demo-fill">
+  <div class="container demo-box">Content stays within 1640px.</div>
 </section>
 ```
 

@@ -11,8 +11,8 @@ The design floats a 119px red circle (`--size-chat`) with a white speech-bubble 
 
 ## Approximate
 
-- The design shows it only at 1920px. Below 48rem it shrinks to 4rem here; that is a proposal.
-- The example is shown in place; add `.chat-button--fixed` in a build to fix it to the corner.
+- The design shows it only at 1920px. Below 48rem (`--threshold-m`) it shrinks to 4rem here; that is a proposal.
+- The example is shown in place; add `data-position="fixed"` in a build to fix it to the corner.
 
 ## Code
 
@@ -35,9 +35,9 @@ The design floats a 119px red circle (`--size-chat`) with a white speech-bubble 
 }
 .chat-button:hover { background: var(--color-red-dark); }
 .chat-button__bubble { inline-size: 41%; aspect-ratio: 1; background: var(--color-white); border-radius: 50% 50% 0 50%; }
-.chat-button--fixed { position: fixed; inset: auto var(--space-m) var(--space-m) auto; z-index: 10; }
+.chat-button[data-position="fixed"] { position: fixed; inset: auto var(--space-m) var(--space-m) auto; z-index: 10; }
 @container (max-width: 48rem) {
   .chat-button { inline-size: var(--space-l); block-size: var(--space-l); }
-  .chat-button--fixed { inset: auto var(--space-xs) var(--space-xs) auto; }
+  .chat-button[data-position="fixed"] { inset: auto var(--space-xs) var(--space-xs) auto; }
 }
 ```

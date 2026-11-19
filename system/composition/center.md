@@ -12,7 +12,7 @@ Every Layout's Center. It centres the box itself, not the text inside it.
 | `--measure` | `60ch` | Maximum width of the content. |
 | `--gutter` | `0` | Minimum space on each side on narrow screens. |
 
-Add `data-intrinsic` to also centre the children by their own width, for example a button below a paragraph.
+Add `data-intrinsic` to also centre the children by their own width, for example a button below a paragraph. Add `data-align="start"` to keep the column at a readable width but on the left, in line with the rest of a left-aligned page.
 
 ## When to use
 
@@ -25,9 +25,9 @@ Add `data-intrinsic` to also centre the children by their own width, for example
 ## Code
 
 ```html
-<div class="center" data-intrinsic style="outline: 1px dashed currentColor; width: 100%">
+<div class="center demo-box demo-fill" data-intrinsic>
   <p>A centred column, at most 60 characters wide.</p>
-  <span style="outline: 1px dashed currentColor">Intrinsic child</span>
+  <span class="demo-box">Intrinsic child</span>
 </div>
 ```
 
@@ -38,6 +38,7 @@ Add `data-intrinsic` to also centre the children by their own width, for example
   margin-inline: auto;
   padding-inline: var(--gutter, 0);
 }
+.center[data-align="start"] { margin-inline: 0; }
 .center[data-intrinsic] {
   display: flex;
   flex-direction: column;

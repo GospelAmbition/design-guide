@@ -1,7 +1,7 @@
 ---
 title: Input
 summary: Text fields with a 2px grey border, 10px corners and a soft shadow, plus the site's custom checkbox.
-uses: [button]
+uses: [button, center]
 ---
 
 From the Contact Us form. The site styles fields by type (`input[type="text"]`, `input[type="email"]`, `textarea[type="text"]`…), so plain fields pick up the style with no class. Add `.input` to anything else, such as a `<textarea>` without `type="text"`.
@@ -18,17 +18,17 @@ From the Contact Us form. The site styles fields by type (`input[type="text"]`, 
 ## Don't
 
 - Don't use placeholder text as the label.
-- Don't go wider than 600px. The contact form is capped there.
+- Don't go wider than the contact form (600px on the site). Put the form in a Center set to `--measure: var(--threshold-s)` (36rem).
 
 ## Code
 
 ```html
-<form style="max-width: 600px; width: 100%">
+<form class="center demo-fill" style="--measure: var(--threshold-s)" action="/contact-us/" method="post">
   <p><label class="field">Name<br /><input type="text" /></label></p>
   <p><label class="field">Email<br /><input type="email" /></label></p>
   <p><label class="field">Question or comment<br /><textarea type="text" rows="4"></textarea></label></p>
   <p><label><input type="checkbox" checked /> Sign up for Prayer.Global news and opportunities</label></p>
-  <p><button class="btn btn-primary-light uppercase" type="submit">Submit</button></p>
+  <p><button class="btn uppercase" data-variant="primary-light" type="submit">Submit</button></p>
 </form>
 ```
 

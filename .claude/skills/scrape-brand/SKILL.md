@@ -64,19 +64,25 @@ Then run one assumption round (brand id, branch, what to do with logos and icon 
 
 **Independence from the site's implementation.** The guide is mainly for building new things in the brand, so it must be consistent with itself:
 - No Bootstrap (or other framework) naming, numbering or colours: no `.px-4` / `.py-5`, no `#f8f9fa` "light", no black hover text. Fold framework-only colours into the nearest brand colours.
-- Use the shared `system/composition/` primitives (flow, cluster, repel, switcher, center, container). Override one only when the site's own composition CSS genuinely behaves differently, and add brand-only primitives for extras. Never override with framework versions (e.g. a Bootstrap breakpoint `.container`).
-- Utility classes are named after the space tokens (`.py-xl`, `.px-m`). Patterns `uses:` every primitive, component and utilities file whose CSS they need.
+- Use the shared `system/composition/` primitives (flow, cluster, repel, switcher, sidebar, grid, frame, cover, reel, imposter, center, box, container, with-icon). Override one only when the site's own composition CSS genuinely behaves differently, and add brand-only primitives for extras. Never override with framework versions (e.g. a Bootstrap breakpoint `.container`). Size variants of a primitive are settings set inline to tokens (`style="--threshold: var(--threshold-m)"`), never size-named classes like `.switcher-md`.
+- Utilities are generated from the tokens by `system/utilities.json` (padding, weight, font, leading, radius, shadow, text alignment, `mx-auto`, `italic`, `uppercase`, `visually-hidden`). Don't hand-write utility classes: add anything else the site needs to `brands/<id>/utilities.json`, based on tokens. Patterns `uses:` every primitive and component whose CSS they need.
+- CUBE CSS exceptions: a block's variants are data attributes (`class="btn" data-variant="primary"`, `data-size="small"`), never modifier classes like `.btn-primary`. States use ARIA (`aria-current`, `aria-expanded`) or `data-state`.
+- Section backgrounds are surfaces (see Tokens), used as `.surface-<name>`, never hand-written `.bg-*` classes.
+- No viewport media queries where the site's behaviour can be had intrinsically (primitives) or with `@container` at a threshold token. Keep the look the same.
+- Every ```html example must pass the page rules `npm run check` applies (agents copy them): real link URLs (never `href="#"`), no inline styles except settings set to tokens (content background images become a setting, e.g. `style="--hero-image: url(…)"`), every class defined, `alt` on images, `aria-hidden` on decorative SVGs, labels on fields. Use `demo-box` / `demo-fill` only to show layout boxes in composition examples.
 - Guidelines tell agents to build from the guide and adapt to a target site's own classes, never to paste the guide's markup in.
 
 **Tokens**
-- Every brand must define `space.xs`, `s`, `m`, `l` and `xl` (named, never numbered), and may add steps at either end (`xxs`, `xxl`…), never in between (no `s-m`). Map the site's real gaps onto one continuous sequence. If a gap falls between two steps, keep `m` fixed and shift the names on that side outwards (`s`→`xs`, `xs`→`xxs`…). Size-named classes (`.switcher-md`) use the token of the same name.
+- Every brand must define `space.xs`, `s`, `m`, `l` and `xl` (named, never numbered), and may add steps at either end (`xxs`, `xxl`…), never in between (no `s-m`). Map the site's real gaps onto one continuous sequence. If a gap falls between two steps, keep `m` fixed and shift the names on that side outwards (`s`→`xs`, `xs`→`xxs`…).
+- Every brand must define `threshold.s`, `m` and `l`: the widths the site's layouts switch at (its switcher thresholds and main breakpoints), as container widths.
+- Every brand must define surfaces: `surface.<name>.background`, `.text`, and `.link` and any other colour used on that background, referencing colour tokens; at least `default`, plus one per section background the site uses. `npm run check` enforces 4.5:1 contrast (3:1 for a role named `<x>-large`). Where the live site fails, don't fake a pass: use the nearest passing brand colour or a `-large` role, and record it under "Known issues on the live site".
 - Gradients and shadows are tokens and may reference colours: `linear-gradient({color.a}, {color.b})`.
 - Self-hosted fonts: copy only woff2 and woff, write `assets/fonts/fonts.css`, and list it in the `fonts` frontmatter as a path. Icon fonts ship with their class stylesheet, also listed in `fonts`, and get a font token for any `content:` glyphs.
 - Leave colour naming close to the site's for a first scrape (renaming to roles or a 100–900 scale is a later clean-up), but keep descriptions free of framework references.
 
 **Guidelines, assets, icons**
 - Voice, principles and do/don't: drafted from the site's copy, quoting real phrases, with a "draft" banner.
-- Compute contrast for key text and background pairs (WCAG formula). Record failures under "Known issues on the live site". Don't silently change brand colours.
+- Contrast for surfaces is checked by `npm run check`. Compute it for any other key text and background pairs (WCAG formula). Record failures under "Known issues on the live site". Don't silently change brand colours.
 - `icons` frontmatter: a list of sets with `name`, `use`, `source` and `files`. Name the primary set first, and the fallback set with the exact symbols the site uses from it.
 - Logos: show white or reversed logos inside `<div class="ds-on-dark">` in `assets.md`. Missing masters (full-colour, one-colour, wordmark lockup, vectors) go in a **To obtain** note at the top of `assets.md` and in your final report.
 - Describe every asset in `assets.md` (what it is, where to use it, minimum size, clear space). Copy only what patterns and brand use need: resize big mockups, skip the site's content images unless a pattern previews them.

@@ -65,7 +65,7 @@ There is no wordmark file. The site sets "PRAYER.GLOBAL" as live text in Bebas K
 
 ## Photos
 
-- **Folder:** `photos/` — the home page's feature images, for previews and reference: `panel-how-it-works.jpg`, `panel-prayer-fuel.jpg`, `panel-prayer-relays.jpg`, `panel-prayer-activity.jpg` (all about 4:3, for `.clip-rounded-*`), `panel-donate.jpg` (donate band) and `app-phones.png` (two-phone app mockup, resized to 900px wide).
+- **Folder:** `photos/` — the home page's feature images, for previews and reference: `panel-how-it-works.jpg`, `panel-prayer-fuel.jpg`, `panel-prayer-relays.jpg`, `panel-prayer-activity.jpg` (all about 4:3, for the Image panel), `panel-donate.jpg` (donate band) and `app-phones.png` (two-phone app mockup, resized to 900px wide).
 
 ## App store badges
 

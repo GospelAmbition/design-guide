@@ -1,10 +1,10 @@
 ---
 title: Testimonials
 summary: "Two testimonials side by side on white, the second set lower than the first."
-uses: [container, switcher, testimonial, utilities]
+uses: [container, switcher, testimonial]
 ---
 
-Two [testimonials](../../components/testimonial/) share the row. The design staggers them: the right one starts about 160px lower, which keeps two large italic quotes from reading as a table. They stack below about 50rem.
+Two [testimonials](../../components/testimonial/) share the row. The design staggers them: the right one starts about 160px lower, which keeps two large italic quotes from reading as a table. They stack below 48rem (`--threshold-m`), and are staggered only above 60rem (`--threshold-l`).
 
 ## Do
 
@@ -30,8 +30,8 @@ Two [testimonials](../../components/testimonial/) share the row. The design stag
 ```
 
 ```css
-.testimonials .switcher { --threshold: 50rem; --gutter: calc(var(--space-xxl) + var(--space-l)); align-items: flex-start; }
-@container (min-width: 64rem) {
+.testimonials .switcher { --threshold: var(--threshold-m); --gutter: calc(var(--space-xxl) + var(--space-l)); align-items: flex-start; }
+@container (min-width: 60rem) {
   .testimonials .switcher > :nth-child(2) { margin-block-start: calc(var(--space-xl) + var(--space-l)); }
 }
 ```

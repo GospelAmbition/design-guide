@@ -4,7 +4,7 @@ summary: White top bar, 1200px wide. Logo on the left, centred menu with blue dr
 uses: [button, repel, cluster]
 ---
 
-The site's top bar (theme `parts/nav-offcanvas-topbar.php`). Menu items are black, regular weight; hovering or opening one fills it with sky blue (`--color-sky`) and turns the text white. Items with a submenu show a small blue triangle. Below 640px the menu collapses into an off-canvas panel behind a menu button; that panel is not covered yet.
+The site's top bar (theme `parts/nav-offcanvas-topbar.php`). Menu items are black, regular weight; hovering or opening one fills it with sky blue (`--color-sky`) and turns the text white. Items with a submenu show a small blue triangle: mark the link `data-submenu`. Below 640px the menu collapses into an off-canvas panel behind a menu button; that panel is not covered yet.
 
 Menu on the live site: About, Pricing (Free), Software, Resources, Join the Community, News, then the Demo button.
 
@@ -21,15 +21,15 @@ Menu on the live site: About, Pricing (Free), Software, Resources, Join the Comm
 ```html
 <header class="nav-bar">
   <nav class="nav-bar__inner repel" aria-label="Main">
-    <a href="#"><img class="nav-bar__logo" src="/brands/disciple-tools/assets/logo.png" alt="Disciple.Tools" /></a>
+    <a href="/"><img class="nav-bar__logo" src="/brands/disciple-tools/assets/logo.png" alt="Disciple.Tools" /></a>
     <ul class="nav-bar__menu cluster" role="list">
-      <li><a class="has-submenu" href="#">About</a></li>
-      <li><a class="has-submenu" href="#">Pricing (Free)</a></li>
-      <li><a class="has-submenu" href="#">Software</a></li>
-      <li><a href="#">Join the Community</a></li>
-      <li><a href="#">News</a></li>
+      <li><a href="/about/" data-submenu>About</a></li>
+      <li><a href="/pricing/" data-submenu>Pricing (Free)</a></li>
+      <li><a href="/features/" data-submenu>Software</a></li>
+      <li><a href="/join-the-community/">Join the Community</a></li>
+      <li><a href="/news/">News</a></li>
     </ul>
-    <a class="btn btn-nav" href="#">Demo</a>
+    <a class="btn" data-variant="nav" href="/demo/">Demo</a>
   </nav>
 </header>
 ```
@@ -57,8 +57,8 @@ Menu on the live site: About, Pricing (Free), Software, Resources, Join the Comm
 }
 .nav-bar__menu a:not(.btn):hover,
 .nav-bar__menu a:not(.btn):focus { color: var(--color-white); background: var(--color-sky); text-decoration: none; }
-.nav-bar__menu a.has-submenu { position: relative; padding-right: var(--space-button-x); }
-.nav-bar__menu a.has-submenu::after {
+.nav-bar__menu a[data-submenu] { position: relative; padding-right: var(--space-button-x); }
+.nav-bar__menu a[data-submenu]::after {
   content: "";
   position: absolute;
   right: var(--space-xxxs);

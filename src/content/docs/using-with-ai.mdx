@@ -3,6 +3,10 @@ title: Using this with AI
 description: How to get on-brand output from an AI assistant.
 ---
 
+## Building a page
+
+To have an agent build a page or a small site for a brand, see [Building a page with AI](../build-a-page/). The agent follows `build-a-page.md` and checks its work with `scripts/check-page.mjs`.
+
 ## Agents working in this repo (or through a file/GitHub MCP)
 
 Point the agent at the repo. It should read `llms.txt` first (`AGENTS.md` and `CLAUDE.md` tell it to). From there it finds each brand's `brief.md`, which has everything in one file: setup, voice, rules, tokens, assets and component code with overrides already applied.
@@ -25,5 +29,6 @@ The site serves the same paths as the repo, under https://gospelambition.github.
 
 - `/llms.txt`: the index
 - `/brands/<id>/brief.md`: one brand, resolved
+- `/brands/<id>/brand.css`: everything a page needs (tokens, base, layout, components, patterns, utilities)
 - `/brands/<id>/tokens.css`: drop-in CSS variables
 - `/brands/<id>/...` and `/system/...`: every source file

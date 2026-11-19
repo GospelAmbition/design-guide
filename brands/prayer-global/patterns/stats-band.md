@@ -1,7 +1,7 @@
 ---
 title: Stats band
 summary: The blue world map beside a Europa statement heading, then three live stats and one orange CTA on a faint grey wash.
-uses: [button, stat, center, container, flow, switcher, switcher-variants, utilities]
+uses: [button, stat, container, flow, switcher]
 ---
 
 "Join thousands of intercessors praying daily for the nations" on the home page.
@@ -13,7 +13,8 @@ uses: [button, stat, center, container, flow, switcher, switcher-variants, utili
 ## Do
 
 - Use real, live numbers. The site loads them from its stats API.
-- Write the heading as one sentence in `.h2.font-base`, regular weight.
+- Write the heading as one sentence in `.h2.font-body`, regular weight.
+- Put the stats and the button on `.surface-wash`, the faint grey wash.
 
 ## Don't
 
@@ -22,22 +23,22 @@ uses: [button, stat, center, container, flow, switcher, switcher-variants, utili
 ## Code
 
 ```html
-<section class="flow-medium pt-xl" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center">
-    <div><img class="w-90" src="/brands/prayer-global/assets/world-map-blue.png" alt="" /></div>
-    <h2 class="font-base h2">Join thousands of intercessors praying daily for the nations.</h2>
+<section class="flow pt-xl">
+  <div class="container switcher align-items-center" style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
+    <div><img class="stats-band__map" src="/brands/prayer-global/assets/world-map-blue.png" alt="" /></div>
+    <h2 class="font-body h2">Join thousands of intercessors praying daily for the nations.</h2>
   </div>
-  <div class="flow-medium grey-gradient pb-xl">
-    <div class="container switcher switcher-md">
+  <div class="flow surface-wash pb-xl">
+    <div class="container switcher" style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
       <div class="stat"><span class="stat__value">32%</span><p class="stat__label">Current lap status</p></div>
       <div class="stat"><span class="stat__value">63</span><p class="stat__label">Laps completed</p></div>
       <div class="stat"><span class="stat__value">33,759</span><p class="stat__label">Total intercessors</p></div>
     </div>
-    <a class="btn btn-cta btn-lg center w-fit mx-auto px-s" href="#">Start praying</a>
+    <p class="text-center"><a class="btn px-s" data-variant="cta" data-size="large" href="/newest/lap/">Start praying</a></p>
   </div>
 </section>
 ```
 
 ```css
-.grey-gradient { background-image: var(--gradient-grey); }
+.stats-band__map { width: 90%; }
 ```

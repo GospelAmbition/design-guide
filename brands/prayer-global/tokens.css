@@ -3,45 +3,45 @@
 :root, :host {
   --color-background: #ffffff; /** Page background. */
   --color-text: #1a3b70; /** Body text and headings (body colour on the site). Same value as brand-light. */
-  --color-brand: #11224e; /** --pg-brand-color. Navy: nav bar on dark pages, footer, .brand-bg sections, text on .btn-white. */
+  --color-brand: #11224e; /** --pg-brand-color. Navy: .surface-brand (dark nav bar, footer, navy sections), text on the white button. */
   --color-brand-light: #1a3b70; /** --pg-brand-color-light. Body text, outline buttons, rules. */
-  --color-brand-lighter: #2c599d; /** --pg-brand-color-lighter. Links, .btn-primary, hover on light-blue buttons, checkbox tick. */
-  --color-brand-lightest: #5c83c4; /** --pg-brand-color-lightest. .btn-primary-light, link hover, donate band, back-to-top button. */
+  --color-brand-lighter: #2c599d; /** --pg-brand-color-lighter. Links, the primary button, hover on light-blue buttons, checkbox tick, .surface-blue. */
+  --color-brand-lightest: #5c83c4; /** --pg-brand-color-lightest. The primary-light button, link hover, the site's donate band, back-to-top button. */
   --color-brand-highlight: #aec5eb; /** --pg-brand-color-highlight. Hero sub-heading, links in the footer. */
   --color-brand-very-light: #f1f7ff; /** --pg-brand-color-very-light. Pale blue tint. */
-  --color-dark: #0a1227; /** .dark-bg. Hero background behind the world map. */
-  --color-secondary: #f2944a; /** --pg-secondary-color. Brand orange: .btn-secondary, focus outline. */
+  --color-dark: #0a1227; /** The site's .dark-bg: .surface-dark, the hero background behind the world map. */
+  --color-secondary: #f2944a; /** --pg-secondary-color. Brand orange: the secondary button, focus outline. */
   --color-secondary-lighter: #edab77; /** --pg-secondary-color-lighter. */
-  --color-secondary-darker: #d28041; /** --pg-secondary-color-darker. Hover on .btn-secondary. */
+  --color-secondary-darker: #d28041; /** --pg-secondary-color-darker. Hover on the secondary button. */
   --color-grey: #acabab; /** --pg-grey. Form field borders, disabled buttons, list dividers. */
   --color-grey-light: #f3f5f8; /** --pg-grey-light. */
   --color-white: #ffffff; /** Text on dark sections and on every filled button; outline buttons on dark. */
   --color-orange-top: #ffb858; /** First stop of --gradient-orange (CTA buttons). */
   --color-orange-bottom: #ea7519; /** Last stop of --gradient-orange (CTA buttons). */
-  --color-blue-top: #5a81c0; /** First stop of --gradient-blue (.cta-blue). */
-  --color-blue-bottom: #3f5b88; /** Last stop of --gradient-blue (.cta-blue). */
+  --color-blue-top: #5a81c0; /** First stop of --gradient-blue (the cta-blue button). */
+  --color-blue-bottom: #3f5b88; /** Last stop of --gradient-blue (the cta-blue button). */
   --color-band-start: #1d2f57; /** First stop of --gradient-blue-orange (feature bands). */
-  --gradient-orange: linear-gradient(#ffb858, #ea7519); /** --orange-gradient. Every .btn-cta. */
-  --gradient-blue: linear-gradient(#5a81c0, #3f5b88); /** --blue-gradient. .btn-cta.cta-blue. */
-  --gradient-blue-orange: linear-gradient(90deg, #1d2f57, 60%, #f2944a); /** --blue-orange-gradient. Feature bands (.blue-orange-gradient). */
+  --gradient-orange: linear-gradient(#ffb858, #ea7519); /** --orange-gradient. Every cta button. */
+  --gradient-blue: linear-gradient(#5a81c0, #3f5b88); /** --blue-gradient. The cta-blue button. */
+  --gradient-blue-orange: linear-gradient(90deg, #1d2f57, 60%, #f2944a); /** --blue-orange-gradient. Feature bands, behind the image side (see Feature band). */
   --gradient-grey: linear-gradient(0deg, #0A122718, transparent); /** --grey-gradient. Faint wash rising from the bottom of the stats section. */
   --shadow-small: rgba(0, 0, 0, 0.1) 0 3px 4px 1px; /** --small-box-shadow. Buttons (except CTA) and form fields. */
-  --shadow-drop: 0 4px 2px #0004; /** .drop-shadow, used as filter: drop-shadow(var(--shadow-drop)) around clipped images. */
+  --shadow-drop: 0 4px 2px #0004; /** The site's .drop-shadow: filter: drop-shadow(var(--shadow-drop)) on the Image panel. */
   --font-heading: 'Bebas Kai', Arial, sans-serif; /** --pg-font-family-title. h1–h3. Caps-only, one weight. */
-  --font-body: 'Europa', Arial, sans-serif; /** --pg-font-family-base. Everything else, including h4, h5 and .font-base headings. */
+  --font-body: 'Europa', Arial, sans-serif; /** --pg-font-family-base. Everything else, including h4, h5 and .font-body headings. */
   --font-icons: 'PrayerGlobal'; /** The icon font. Only for icon glyphs drawn with CSS content (e.g. the topic-link chevron). */
   --weight-regular: 400; /** Body and headings. The site's CSS says 300, but only Europa Regular (400) ships, so 400 is what renders. */
-  --weight-strong: 700; /** Buttons, h4, h5, .font-weight-bold. The CTA's 600 also renders as this. */
+  --weight-strong: 700; /** Buttons, h4, h5, .weight-strong. The CTA's 600 also renders as this. */
   --weight-heading: 400; /** Bebas Kai's only weight. */
   --leading-body: 1.8; /** Body text (--bs-body-line-height). */
   --leading-heading: 1.2; /** h1, h3–h5. */
   --leading-title: 1.1; /** h2 and .h2. */
-  --leading-base: 1.5; /** Buttons and .lh-base (stats). */
+  --leading-base: 1.5; /** Buttons and stats. */
   --leading-tight: 1; /** Icons (.icon). */
   --size-body: 1.125rem; /** Body text, 18px (--bs-body-font-size). */
   --size-small: 1rem; /** Buttons. */
-  --size-large: 1.25rem; /** .btn-lg, topic links (20px). */
-  --size-footer: 1.2rem; /** .one-rem: footer text. */
+  --size-large: 1.25rem; /** Large buttons (data-size="large"), topic links (20px). */
+  --size-footer: 1.2rem; /** Footer text. */
   --size-nav-title: 1.3rem; /** The outlined Prayer.Global title in the nav bar. */
   --size-h1: 6rem; /** h1. 4rem at ≤768px (--size-h1-md), 3rem at ≤576px (--size-h1-sm). */
   --size-h1-md: 4rem; /** h1 at ≤768px. */
@@ -52,10 +52,10 @@
   --size-h3: 2rem; /** h3. */
   --size-h4: 1.8rem; /** h4: Europa bold uppercase. */
   --size-h5: 1.1rem; /** h5: Europa bold uppercase. */
-  --size-one-em: 1.5em; /** .one-em: stat labels, the movement list. 1em at ≤768px. */
-  --size-four-em: 4em; /** .four-em: stat numbers. 3rem at ≤768px. */
-  --size-icon: 3rem; /** .icon-small: icons beside section titles, topic-link icons, the hero chevron. */
-  --size-icon-nav: 2rem; /** .two-rem: nav bar icon buttons. */
+  --size-one-em: 1.5em; /** Stat labels, the movement list. 1em at ≤48rem. */
+  --size-four-em: 4em; /** Stat numbers. 3rem at ≤48rem. */
+  --size-icon: 3rem; /** Icons at data-size="small": beside section titles, topic-link icons, the hero chevron. */
+  --size-icon-nav: 2rem; /** Icons at data-size="nav": nav bar icon buttons. */
   --size-hero-title: 12vh; /** Hero h1. 62px below 768px. */
   --size-hero-subtitle: 6vh; /** Hero tagline. 32px below 768px. */
   --size-hero-logo: 24vh; /** Logo mark in the hero. */
@@ -66,11 +66,35 @@
   --radius-pill: 100px; /** Every button. */
   --space-xxxs: 0.25rem;
   --space-xxs: 0.5rem; /** Button padding-y, tight list gaps. */
-  --space-xs: 1rem; /** Button padding-x, .flow-xsmall, nav padding. */
+  --space-xs: 1rem; /** Button padding-x, text-column flow, nav padding. */
   --space-s: 1.5rem; /** Container side padding (gutter 3rem). */
-  --space-m: 2rem; /** .flow-medium, .switcher-md gap. */
+  --space-m: 2rem; /** Default flow, two-column switcher gap. */
   --space-l: 3rem; /** Footer and donate band padding (.py-l). */
   --space-xl: 4rem; /** Section padding (.py-xl), image overlap margin. */
   --space-input-y: 5px; /** Form field padding top and bottom. */
   --space-input-x: 10px; /** Form field padding left and right. */
+  --threshold-xs: 27rem; /** The site's default switcher threshold (.switcher). */
+  --threshold-s: 36rem; /** The site's 576px breakpoint: h1 drops to 3rem, the nav title hides. */
+  --threshold-m: 40rem; /** Two-column sections stack below this (the site's .switcher-md). */
+  --threshold-l: 48rem; /** The site's 768px breakpoint: h1, h2, stats, icons and the hero change size. */
+  --threshold-xl: 55rem; /** Wide two-column sections stack below this (the site's .switcher-lg). */
+  --surface-default-background: #ffffff;
+  --surface-default-text: #1a3b70;
+  --surface-default-link: #2c599d;
+  --surface-brand-background: #11224e;
+  --surface-brand-text: #ffffff;
+  --surface-brand-link: #aec5eb;
+  --surface-dark-background: #0a1227;
+  --surface-dark-text: #ffffff;
+  --surface-dark-link: #aec5eb;
+  --surface-dark-accent: #aec5eb;
+  --surface-blue-background: #2c599d;
+  --surface-blue-text: #ffffff;
+  --surface-blue-link: #ffffff;
+  --surface-band-background: #1d2f57;
+  --surface-band-text: #ffffff;
+  --surface-band-link: #aec5eb;
+  --surface-wash-background: linear-gradient(0deg, #0A122718, transparent);
+  --surface-wash-text: #1a3b70;
+  --surface-wash-link: #2c599d;
 }

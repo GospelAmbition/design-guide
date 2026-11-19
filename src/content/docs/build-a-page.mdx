@@ -1,0 +1,46 @@
+---
+title: Building a page with AI
+description: How to get a finished, on-brand page from an AI agent, with CSS you won't need to fix.
+---
+
+Any agent that can read a GitHub repo and run commands (ChatGPT with Codex, Claude Code, and similar) can build a page from one of these brands. The agent follows [`build-a-page.md`](https://github.com/GospelAmbition/design-guide/blob/main/build-a-page.md), and a checker in this repo makes sure the result follows the brand.
+
+## What you get
+
+One folder that opens in a browser with a double-click:
+
+- `index.html`, the page
+- `brand.css`, the brand's styles, copied in and never edited
+- `site.css`, the little CSS the page needed that the brand doesn't have yet, each piece with a note saying why
+- `GAPS.md`, a short list of what's placeholder, what copy is a draft, and what the brand didn't cover
+- `screenshots/`, the page on a phone, a tablet and a desktop
+
+## Starting
+
+Paste something like this into the agent:
+
+> Clone https://github.com/GospelAmbition/design-guide and follow build-a-page.md to build a page for the **Gospel Ambition** brand. It's a landing page for our new prayer course. Ask me questions first.
+
+Or, if you already know what goes on the page:
+
+> Clone https://github.com/GospelAmbition/design-guide and follow build-a-page.md to build a **Prayer.Global** page from this outline: …
+
+## What to expect
+
+1. **Questions.** If you start with an idea, the agent asks a few short rounds of questions (what the page is for, who it's for, what content you have). Reply with the letters or in your own words.
+2. **A plan.** Before building, it shows a table of the page's sections, top to bottom, and which part of the brand each one uses. Change anything you like here: it's much cheaper than changing the page later.
+3. **The page.** It builds the page, runs the checker and takes screenshots, then tells you what's still placeholder.
+
+## Asking for changes
+
+Ask in terms of content and sections: "swap sections 3 and 4", "make the schedule a list instead of cards", "add a sign-up form under the opening section". Start change requests with:
+
+> Follow build-a-page.md for this change, and run the check and screenshots again afterwards.
+
+That keeps a later chat (or a different agent) to the same rules.
+
+## When something looks off
+
+- **It doesn't look like the brand.** Ask the agent which pattern it used for that section and whether a closer one exists in the brief.
+- **Something is in GAPS.md under "New blocks".** The brand didn't have it. Send the list to whoever looks after the design system: if it comes up often, it should become a component or pattern.
+- **The checker fails and the agent can't fix it.** Ask it to explain the error in plain words and paste that to the design-system team.

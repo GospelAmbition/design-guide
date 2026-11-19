@@ -22,7 +22,7 @@ The shared Flow with a different default. On disciple.tools every block in a col
 ## Code
 
 ```html
-<div class="flow" style="max-width: 32rem">
+<div class="flow">
   <h2>Always free as your team grows</h2>
   <p>Each child is separated by 20px.</p>
   <p>No margin before the first child or after the last.</p>

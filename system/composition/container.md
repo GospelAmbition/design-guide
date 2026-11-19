@@ -23,8 +23,8 @@ CUBE CSS's wrapper, called `container` here.
 ## Code
 
 ```html
-<section style="width: 100%; outline: 1px dashed currentColor">
-  <div class="container" style="outline: 1px dashed currentColor">Content stays within the container's maximum width.</div>
+<section class="demo-box demo-fill">
+  <div class="container demo-box">Content stays within the container's maximum width.</div>
 </section>
 ```
 

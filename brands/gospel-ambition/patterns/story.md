@@ -33,7 +33,7 @@ uses: [container, flow, swoosh]
       <p class="story__note">*Samir is a pseudonym. Photograph is illustrative.</p>
     </div>
   </div>
-  <svg class="swoosh swoosh--end" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="swoosh" data-position="end" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>
   </svg>

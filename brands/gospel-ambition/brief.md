@@ -4,15 +4,69 @@
 
 Confident, warm and mission-driven. Brand red and charcoal on white, heavy Poppins headlines and sweeping red curves, for inviting ministries to use free disciple-making tools.
 
+> **Building a page?** Read [`build-a-page.md`](../../build-a-page.md) first and follow its steps. This brief is the reference it points you to.
+
 This file is the whole Gospel Ambition brand in one place, with shared composition, components and patterns and Gospel Ambition's overrides already merged. Use it to build or review anything for Gospel Ambition. Follow it exactly.
 
 ## Setup
 
 1. Load the fonts:
    `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,800&display=swap">`
-2. Load the variables: `brands/gospel-ambition/tokens.css` (copy also at the end of this file).
-3. Load the base element styles: `brands/gospel-ambition/base.css`.
-4. Copy the CSS of each composition primitive and component you use from the Composition and Components sections. Use only the CSS variables, never raw colours or font names.
+2. Link `brands/gospel-ambition/brand.css`. It holds everything below as CSS, in CUBE CSS order: reset, tokens, base, composition, components, patterns, utilities and surfaces.
+3. Link the page's own `site.css` after it, for anything the brand doesn't cover.
+4. Copy the **HTML** of the examples below and change only the content. Their CSS is already in brand.css: components and patterns are listed here without it, and layout primitives show theirs only so you can see what each setting does. Never copy CSS into a page.
+
+## How to style anything (CUBE CSS)
+
+Reach for these in order, and stop at the first that works:
+
+1. **A pattern** below, as it is.
+2. **A pattern or component plus utilities, surfaces and settings**: `class="… py-xl surface-dark"`, `style="--gutter: var(--space-s)"`.
+3. **Composition primitives** (flow, cluster, switcher, sidebar, grid, …) holding **components**.
+4. **A new block in site.css**, built only from tokens, with a comment saying why 1–3 didn't work.
+
+Variants are exceptions written as data attributes on the block (`class="btn" data-variant="primary"`); states use ARIA or `data-state`. Inline styles may only set a primitive's or component's settings (the custom properties in its Settings table) to tokens. No media queries: layouts respond to their container.
+
+## Utilities
+
+Generated from the tokens. One class, one job.
+
+- Padding on every side.: `.p-xxs`, `.p-xs`, `.p-s`, `.p-m`, `.p-l`, `.p-xl`, `.p-xxl` (e.g. `.p-xxs` is `padding: var(--space-xxs)`)
+- Padding left and right.: `.px-xxs`, `.px-xs`, `.px-s`, `.px-m`, `.px-l`, `.px-xl`, `.px-xxl` (e.g. `.px-xxs` is `padding-inline: var(--space-xxs)`)
+- Padding top and bottom. The usual way to space a section.: `.py-xxs`, `.py-xs`, `.py-s`, `.py-m`, `.py-l`, `.py-xl`, `.py-xxl` (e.g. `.py-xxs` is `padding-block: var(--space-xxs)`)
+- Padding on top.: `.pt-xxs`, `.pt-xs`, `.pt-s`, `.pt-m`, `.pt-l`, `.pt-xl`, `.pt-xxl` (e.g. `.pt-xxs` is `padding-block-start: var(--space-xxs)`)
+- Padding at the bottom.: `.pb-xxs`, `.pb-xs`, `.pb-s`, `.pb-m`, `.pb-l`, `.pb-xl`, `.pb-xxl` (e.g. `.pb-xxs` is `padding-block-end: var(--space-xxs)`)
+- Font weight.: `.weight-regular`, `.weight-medium`, `.weight-semibold`, `.weight-bold`, `.weight-heavy` (e.g. `.weight-regular` is `font-weight: var(--weight-regular)`)
+- Font family.: `.font-body`, `.font-heading`, `.font-label` (e.g. `.font-body` is `font-family: var(--font-body)`)
+- Line height.: `.leading-body`, `.leading-lead`, `.leading-heading`, `.leading-quote`, `.leading-story`, `.leading-display` (e.g. `.leading-body` is `line-height: var(--leading-body)`)
+- Rounded corners.: `.radius-md`, `.radius-lg`, `.radius-pill` (e.g. `.radius-md` is `border-radius: var(--radius-md)`)
+- Shadow.: `.shadow-nav`, `.shadow-card`, `.shadow-float` (e.g. `.shadow-nav` is `box-shadow: var(--shadow-nav)`)
+- Text alignment.: `.text-start`, `.text-center`, `.text-end` (e.g. `.text-start` is `text-align: start`)
+- Centres a block that has a width.: `.mx-auto` (`margin-inline: auto`)
+- Italic text.: `.italic` (`font-style: italic`)
+- Capitals.: `.uppercase` (`text-transform: uppercase`)
+- Hides text on screen but keeps it for screen readers, such as a label for an icon-only link.: `.visually-hidden` (`position: absolute; inline-size: 1px; block-size: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0`)
+
+## Text styles
+
+Classes from the base styles for text that isn't a plain heading or paragraph. Use them anywhere, including to give a heading the look of another level.
+
+- `.display`: `font-family: var(--font-heading); font-size: var(--size-display); font-weight: var(--weight-heavy); line-height: var(--leading-display)`
+- `.lead`: `font-size: var(--size-lead); line-height: var(--leading-lead)`
+- `.statement`: `font-size: var(--size-h3); font-weight: var(--weight-semibold); line-height: var(--leading-lead)`
+- `.subtitle`: `font-size: var(--size-subtitle); font-weight: var(--weight-semibold); line-height: var(--leading-body)`
+- `.tagline`: `font-family: var(--font-heading); font-size: var(--size-tagline); font-weight: var(--weight-bold); line-height: var(--leading-heading)`
+- `.eyebrow`: `display: block; font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-regular); line-height: var(--leading-heading); text-transform: uppercase; color: var(--surface-default-eyebrow)`
+- `.text-accent`: `color: var(--surface-default-accent)`
+
+## Surfaces
+
+A surface sets a background with the text and link colours that pass contrast on it. Put sections and boxes on a surface instead of picking colours one by one.
+
+- `.surface-default` — The white page. Tool cards and call-to-action cards are white too. Contrast on it: text 13.7:1, accent 6.2:1, eyebrow 6.2:1.
+- `.surface-wash` — The grey wash behind the stats and tools sections. Tool cards sit on it. Contrast on it: text 11.1:1, accent 5.0:1, eyebrow 5.0:1.
+- `.surface-dark` — Charcoal: the ministries section, and under the darkened photo of the call-to-action section. No red text on it. Contrast on it: text 13.7:1, accent 13.7:1, eyebrow 13.7:1.
+- `.surface-red` — Brand red: the ministries logo panel, and the ribbon's plain band on small screens. Contrast on it: text 6.2:1.
 
 ## Icons
 
@@ -49,15 +103,16 @@ Confident, warm and inclusive. Gospel Ambition speaks as experienced practitione
 - Use Poppins for everything except eyebrows, which are Bebas Neue (`--font-label`) in red.
 - Put the key phrase of a heading in red with `.text-accent`: "motive, mission and vision.", "with you.", "go.".
 - Open each chapter of a long page with a red [ribbon](components/ribbon/), and separate other sections with the grey [swoosh](components/swoosh/).
-- Use one `.btn-primary` per block, with the arrow, and `.btn-light` or `.btn-grey` for the second action.
-- Put tool cards on the grey wash (`.bg-wash`) and call-to-action cards on a darkened photo.
-- Keep `body` (or the page's outer wrapper) an inline-size container, as `base.css` does. Fluid sizes use `cqi` and breakpoints use `@container`, so they follow the width of the page, or of a preview or embed.
+- Use one primary button (`class="btn" data-variant="primary"`) per block, with the arrow, and `data-variant="light"` or `"grey"` for the second action.
+- Give each section a surface: `.surface-default` (white), `.surface-wash` (the grey wash), `.surface-dark` (charcoal) or `.surface-red`. Text, eyebrow and accent colours follow the surface.
+- Put tool cards on `.surface-wash` and call-to-action cards on a darkened photo over `.surface-dark`.
+- Keep `body` (or the page's outer wrapper) an inline-size container, as `base.css` does. Fluid sizes use `cqi` and breakpoints use `@container` at a threshold (`--threshold-s` 28rem, `-m` 48rem, `-l` 60rem), so they follow the width of the page, or of a preview or embed.
 - Build new pages from this guide's tokens, composition and components. When adding to an existing site, adapt them to that site's own classes; don't paste the guide's markup in as-is.
 - Use the full-colour logo (`logo.png`) on white only. A reversed logo for red, charcoal or photos doesn't exist yet (see the assets page).
 
 ### Don't
 
-- Don't use red text on charcoal at any size. It fails contrast (see below), including the design's own red "go.".
+- Don't use red text on charcoal at any size. It fails contrast (see below), including the design's own red "go.". On `.surface-dark`, `.text-accent` and eyebrows are white.
 - Don't use colours outside the palette. The design file also saves cyan, gold, blue and navy swatches; they aren't used on the page and aren't part of this guide.
 - Don't square off corners: buttons and fields are pills, cards are 16px or 25px.
 - Don't add shadows to tool cards or panels. Only the nav bar, the call-to-action cards and the chat button have one.
@@ -68,7 +123,7 @@ Confident, warm and inclusive. Gospel Ambition speaks as experienced practitione
 
 These are facts from the XD file, recorded so builds don't copy them by accident:
 
-- Red on charcoal is 2.2:1. The red "go." in "Let's go." fails WCAG AA even for large text (3:1). Make it white or raise it with the team.
+- Red on charcoal is 2.2:1. The red "go." in "Let's go." fails WCAG AA even for large text (3:1). This guide makes it white (the dark surface's accent is white); raise it with the team.
 - The 1px `--color-grey` outlines on the light and grey buttons and the search field are 1.7:1 against white. The search field's edge fails the 3:1 non-text contrast rule; consider a darker outline for form fields.
 - The call-to-action cards have a 1px `--color-grey-dark` outline (XD's default stroke) that barely shows on the dark photo. It is kept in the card, but it may be unintended.
 - The nav bar reads "FOR YOUR MINSITRY". The guide spells it "For your ministry".
@@ -163,6 +218,29 @@ These are facts from the XD file, recorded so builds don't copy them by accident
 - `--space-l`: `4rem` — 64px. Space under the button in a tool card; between a heading block and a grid.
 - `--space-xl`: `6rem` — 96px. Section padding top and bottom.
 - `--space-xxl`: `8.75rem` — 140px. The scripture block's indent (131px in the design).
+
+### threshold
+
+- `--threshold-s`: `28rem` — 448px. The narrowest a tool card gets before the tools grid drops a column. Also for sidebars, reel items and grid columns.
+- `--threshold-m`: `48rem` — 768px. Where the hero, story, ribbon, scripture indent, ministries panel and chat button switch to their small-screen layouts, and where two testimonials stack.
+- `--threshold-l`: `60rem` — 960px. Where the two call-to-action cards stack. Above it the testimonials are staggered.
+
+### surface
+
+- `--surface-default-background`: `{color.background}`
+- `--surface-default-text`: `{color.text}`
+- `--surface-default-accent`: `{color.red}` — Highlighted words in headings (.text-accent).
+- `--surface-default-eyebrow`: `{color.red}` — Bebas eyebrows.
+- `--surface-wash-background`: `linear-gradient({color.grey-wash}, {color.white})`
+- `--surface-wash-text`: `{color.text}`
+- `--surface-wash-accent`: `{color.red}`
+- `--surface-wash-eyebrow`: `{color.red}`
+- `--surface-dark-background`: `{color.charcoal}`
+- `--surface-dark-text`: `{color.white}`
+- `--surface-dark-accent`: `{color.white}` — Red is 2.2:1 on charcoal, so highlighted words stay white here.
+- `--surface-dark-eyebrow`: `{color.white}`
+- `--surface-red-background`: `{color.red}`
+- `--surface-red-text`: `{color.white}`
 
 
 ## Assets
@@ -286,6 +364,39 @@ Used in the pattern previews. Resized from the images embedded in the XD file; g
 
 ## Composition
 
+### Box
+
+Padding and an optional border around content. Add a surface utility to give it a background. Shared (`system/composition/box.md`).
+
+Every Layout's Box. It only pads and outlines: colours come from a surface (`.surface-*`), so text on it always has enough contrast.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--box-padding` | `var(--space-m)` | Padding on every side. |
+| `--box-border-width` | `0` | Border width. The border takes the text colour. |
+
+#### When to use
+
+- A callout, a panel of related links, a boxed quote. For a full card with an image and actions, use the brand's Card.
+
+#### Code
+
+```html
+<div class="box demo-fill" style="--box-border-width: 1px">A box with a border in the text colour.</div>
+```
+
+```css
+.box {
+  padding: var(--box-padding, var(--space-m));
+  border: var(--box-border-width, 0) solid currentColor;
+  /* Keeps the box visible in Windows high contrast mode, where backgrounds are removed. */
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+}
+```
+
 ### Center
 
 Centres a block horizontally with a maximum width, such as a readable column of text. Shared (`system/composition/center.md`).
@@ -299,7 +410,7 @@ Every Layout's Center. It centres the box itself, not the text inside it.
 | `--measure` | `60ch` | Maximum width of the content. |
 | `--gutter` | `0` | Minimum space on each side on narrow screens. |
 
-Add `data-intrinsic` to also centre the children by their own width, for example a button below a paragraph.
+Add `data-intrinsic` to also centre the children by their own width, for example a button below a paragraph. Add `data-align="start"` to keep the column at a readable width but on the left, in line with the rest of a left-aligned page.
 
 #### When to use
 
@@ -312,9 +423,9 @@ Add `data-intrinsic` to also centre the children by their own width, for example
 #### Code
 
 ```html
-<div class="center" data-intrinsic style="outline: 1px dashed currentColor; width: 100%">
+<div class="center demo-box demo-fill" data-intrinsic>
   <p>A centred column, at most 60 characters wide.</p>
-  <span style="outline: 1px dashed currentColor">Intrinsic child</span>
+  <span class="demo-box">Intrinsic child</span>
 </div>
 ```
 
@@ -325,6 +436,7 @@ Add `data-intrinsic` to also centre the children by their own width, for example
   margin-inline: auto;
   padding-inline: var(--gutter, 0);
 }
+.center[data-align="start"] { margin-inline: 0; }
 .center[data-intrinsic] {
   display: flex;
   flex-direction: column;
@@ -357,13 +469,13 @@ Every Layout's Cluster, as used in CUBE CSS.
 #### Code
 
 ```html
-<div class="cluster" role="list" style="padding: 0; margin: 0; list-style: none">
-  <div>First</div>
-  <div>Second item</div>
-  <div>Third</div>
-  <div>A longer fourth item</div>
-  <div>Fifth</div>
-</div>
+<ul class="cluster" role="list">
+  <li class="demo-box">First</li>
+  <li class="demo-box">Second item</li>
+  <li class="demo-box">Third</li>
+  <li class="demo-box">A longer fourth item</li>
+  <li class="demo-box">Fifth</li>
+</ul>
 ```
 
 ```css
@@ -393,13 +505,13 @@ The design has no mobile layout. The side padding is a proposal: 1rem on phones,
 
 #### Do
 
-- Put the background (colour, wash, photo, ribbon) on the full-width section and the `.container` inside it.
+- Put the background (a surface such as `.surface-wash`, a photo or a ribbon) on the full-width section and the `.container` inside it.
 
 #### Code
 
 ```html
-<section style="width: 100%; outline: 1px dashed currentColor">
-  <div class="container" style="outline: 1px dashed currentColor">Content stays within 1640px.</div>
+<section class="demo-box demo-fill">
+  <div class="container demo-box">Content stays within 1640px.</div>
 </section>
 ```
 
@@ -411,6 +523,53 @@ The design has no mobile layout. The side padding is a proposal: 1rem on phones,
   max-width: var(--container-max, var(--size-container));
   padding-inline: var(--gutter, clamp(var(--space-xs), 4cqi, var(--space-m)));
 }
+```
+
+### Cover
+
+A block at least as tall as a minimum height (by default the screen), with one child centred vertically and others pinned to the top and bottom. Shared (`system/composition/cover.md`).
+
+Every Layout's Cover. For a full-screen opening section: the main message sits in the middle, with a small header above it and a "scroll down" link or credits below.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--cover-min-height` | `100vh` | The least height of the block. Set it to a size token for a shorter block. |
+| `--cover-padding` | `var(--space-m)` | Padding on every side. |
+| `--cover-gap` | `var(--space-s)` | Least space between the children. |
+
+Mark the child to centre with `data-centre`. Without one, the children stack from the top.
+
+#### When to use
+
+- An opening section with one big message, an event page's title screen, a "coming soon" page.
+
+#### Don't
+
+- Don't put long content in it. If the content is taller than the screen, the block grows and the centring stops meaning anything.
+
+#### Code
+
+```html
+<div class="cover demo-box demo-fill" style="--cover-min-height: var(--threshold-s)">
+  <p>Small header</p>
+  <h2 data-centre>The one centred message</h2>
+  <p>Footer line</p>
+</div>
+```
+
+```css
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--cover-min-height, 100vh);
+  padding: var(--cover-padding, var(--space-m));
+}
+.cover > * { margin-block: var(--cover-gap, var(--space-s)); }
+.cover > :first-child:not([data-centre]) { margin-block-start: 0; }
+.cover > :last-child:not([data-centre]) { margin-block-end: 0; }
+.cover > [data-centre] { margin-block: auto; }
 ```
 
 ### Flow
@@ -431,7 +590,7 @@ CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between
 
 #### Do
 
-- Change the rhythm for one section with `style="--flow-space: var(--space-l)"` or in that block's CSS, rather than adding margins to children.
+- Change the rhythm for one section with `style="--flow-space: var(--space-l)"` (a setting, set to a space token) or in that block's CSS, rather than adding margins to children.
 - Set `--flow-space` on a single child to change the gap above just that child.
 
 #### Don't
@@ -441,7 +600,7 @@ CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between
 #### Code
 
 ```html
-<div class="flow" style="max-width: 32rem">
+<div class="flow">
   <h3>A heading</h3>
   <p>Each child is separated by the same space, taken from the brand's space scale.</p>
   <p>No margin before the first child or after the last.</p>
@@ -452,34 +611,87 @@ CUBE CSS's flow utility (Every Layout calls it the Stack). It adds space between
 .flow > * + * { margin-block-start: var(--flow-space, var(--space-m)); }
 ```
 
+### Frame
+
+Crops an image or video to a fixed aspect ratio, such as 16:9 or square, without stretching it. Shared (`system/composition/frame.md`).
+
+Every Layout's Frame. The frame keeps its ratio at any width and the image inside fills it, cropped rather than squashed.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--frame-ratio` | `16 / 9` | Width / height. Write it unitless: `4 / 3`, `1`. |
+| `--frame-position` | `50% 50%` | Which part of the image stays in view when it is cropped (`object-position`). |
+
+#### When to use
+
+- Photos in cards, video embeds, a row of images that must line up.
+
+#### Do
+
+- Give the image real `alt` text, or `alt=""` if it is decoration. The frame doesn't change what the image means.
+
+#### Code
+
+```html
+<div class="frame demo-fill" style="--frame-ratio: 4 / 3">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23888'/%3E%3C/svg%3E" alt="" />
+</div>
+```
+
+```css
+.frame {
+  position: relative;
+  aspect-ratio: var(--frame-ratio, 16 / 9);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frame > img,
+.frame > video,
+.frame > iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--frame-position, 50% 50%);
+}
+```
+
 ### Grid
 
-Equal columns that fit as many items per row as there is room for, then wrap. For the tool cards. Gospel Ambition-only (`brands/gospel-ambition/composition/grid.md`).
+Equal columns that fit as many items per row as there is room for, then wrap. For cards, logos and any list of like items. Shared (`system/composition/grid.md`).
 
-Brand-only primitive (Every Layout's Grid). The tool section shows six cards three to a row, which the Switcher can't do: it stacks everything once there are more than four items. The Grid fits as many columns as fit at a minimum width and wraps the rest, so six cards become 3 + 3 on a wide screen, 2 + 2 + 2 on a tablet and one column on a phone.
+Every Layout's Grid. It fits as many columns as there is room for at a minimum width and wraps the rest, so six cards become 3 + 3 on a wide screen, 2 + 2 + 2 on a tablet and one column on a phone. No media queries.
 
 #### Settings
 
 | Property | Default | What it does |
 | --- | --- | --- |
 | `--grid-min` | `20rem` | The narrowest a column may get before the grid drops a column. |
-| `--gutter` | `var(--space-s)` | Gap between columns and rows (28px, as between the tool cards). |
+| `--gutter` | `var(--space-s)` | Gap between columns and rows. |
+
+#### When to use
+
+- A set of cards, a logo wall, a gallery: any number of items that should all be the same width.
 
 #### Don't
 
-- Don't put a grid directly in a flex row (a cluster, or a flex wrapper) without giving it a width. It has no intrinsic width of its own, so a shrink-to-fit parent collapses it to one column. Inside a section or `.container` it fills the width by itself.
+- Don't use it for two to four items that should all stack at once. Use the Switcher.
+- Don't put a grid directly in a flex row (a cluster, or a flex wrapper) without giving it a width. It has no intrinsic width, so a shrink-to-fit parent collapses it to one column. Inside a section or `.container` it fills the width by itself.
 
 #### Code
 
 ```html
-<div class="grid" style="--grid-min: 10rem; width: 100%">
-  <div style="outline: 1px dashed currentColor; padding: 1rem">One</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Two</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Three</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Four</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Five</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Six</div>
-</div>
+<ul class="grid demo-fill" role="list" style="--grid-min: var(--threshold-s)">
+  <li class="demo-box">One</li>
+  <li class="demo-box">Two</li>
+  <li class="demo-box">Three</li>
+  <li class="demo-box">Four</li>
+  <li class="demo-box">Five</li>
+  <li class="demo-box">Six</li>
+</ul>
 ```
 
 ```css
@@ -488,6 +700,100 @@ Brand-only primitive (Every Layout's Grid). The tool section shows six cards thr
   grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 20rem), 100%), 1fr));
   gap: var(--gutter, var(--space-s));
 }
+```
+
+### Imposter
+
+Centres one element over another, such as a label over an image or a dialog over the page. Shared (`system/composition/imposter.md`).
+
+Every Layout's Imposter. It sits in the middle of the nearest positioned ancestor (`.container`, `.frame`, or anything with `position: relative`) and never grows bigger than it.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--imposter-margin` | `0px` | Least space between the imposter and the edges of what it covers. |
+
+Add `data-fixed` to centre it on the screen instead, for a dialog.
+
+#### Do
+
+- Put it inside a positioned parent. Without one it centres on the whole page.
+
+#### Don't
+
+- Don't cover text people need to read with it.
+
+#### Code
+
+```html
+<div class="frame demo-fill" style="--frame-ratio: 3">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 1'%3E%3Crect width='3' height='1' fill='%23888'/%3E%3C/svg%3E" alt="" />
+  <p class="imposter demo-box">Centred over the image</p>
+</div>
+```
+
+```css
+.imposter {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  max-inline-size: calc(100% - var(--imposter-margin, 0px) * 2);
+  max-block-size: calc(100% - var(--imposter-margin, 0px) * 2);
+  overflow: auto;
+}
+.imposter[data-fixed] { position: fixed; }
+```
+
+### Reel
+
+A row that scrolls sideways instead of wrapping, such as a strip of photos or cards. Shared (`system/composition/reel.md`).
+
+Every Layout's Reel. Items stay on one line at their own width and the row scrolls horizontally. Each item snaps into place.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--reel-item-width` | `auto` | Width of each item. Set it to a size token so cards line up. |
+| `--gutter` | `var(--space-s)` | Gap between items. |
+
+#### Do
+
+- Make the reel reachable by keyboard and named for screen readers: `tabindex="0"`, `role="region"` and an `aria-label` saying what is in it.
+- Leave part of the next item visible at the edge, so people can see there is more.
+
+#### Don't
+
+- Don't hide important content in a reel. Many people never scroll sideways. Use the Grid when everything must be seen.
+
+#### Code
+
+```html
+<ul class="reel demo-fill" role="list" tabindex="0" aria-label="Example items" style="--reel-item-width: var(--threshold-s)">
+  <li class="demo-box">One</li>
+  <li class="demo-box">Two</li>
+  <li class="demo-box">Three</li>
+  <li class="demo-box">Four</li>
+  <li class="demo-box">Five</li>
+</ul>
+```
+
+```css
+.reel {
+  display: flex;
+  gap: var(--gutter, var(--space-s));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.reel > * {
+  flex: 0 0 var(--reel-item-width, auto);
+  scroll-snap-align: start;
+}
+.reel > img { block-size: 100%; flex-basis: auto; inline-size: auto; }
 ```
 
 ### Repel
@@ -512,7 +818,7 @@ Add `data-nowrap` to keep the items on one line.
 #### Code
 
 ```html
-<div class="repel" style="width: 100%">
+<div class="repel demo-fill">
   <strong>Left item</strong>
   <span>Right item</span>
 </div>
@@ -527,6 +833,70 @@ Add `data-nowrap` to keep the items on one line.
   gap: var(--gutter, var(--space-s));
 }
 .repel[data-nowrap] { flex-wrap: nowrap; }
+```
+
+### Sidebar
+
+A narrow item beside a wide one, such as an image beside text. They stack when the wide one would get too narrow. No media queries. Shared (`system/composition/sidebar.md`).
+
+Every Layout's Sidebar. The first child is the sidebar, with a preferred width. The second child takes the rest of the row, and the two stack as soon as the second would get narrower than `--sidebar-content-min` of the row.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--sidebar-width` | `20rem` | Preferred width of the sidebar. When stacked it fills the row. |
+| `--sidebar-content-min` | `50%` | The narrowest the main item may get before the two stack. |
+| `--gutter` | `var(--space-m)` | Gap between the two, across and down. |
+| `--sidebar-vertical-alignment` | `stretch` | `align-items` of the row. Use `center` to centre text beside an image. |
+
+Add `data-side="end"` to make the **last** child the sidebar, so the narrow item sits on the right while staying second in the reading order.
+
+#### When to use
+
+- An image or icon beside a paragraph, a form beside its explanation, a list of filters beside results.
+- Any two-column layout where the columns should not be equal. For equal columns use the Switcher.
+
+#### Don't
+
+- Don't give it more than two children. Wrap each side in its own element.
+
+#### Code
+
+```html
+<div class="sidebar demo-fill" style="--sidebar-width: var(--threshold-s)">
+  <div class="demo-box">Sidebar: a photo, an icon, or a short list</div>
+  <div class="demo-box">The main content takes the rest of the row, and the two stack when it would get narrower than half the row.</div>
+</div>
+```
+
+```html
+<div class="sidebar demo-fill" data-side="end" style="--sidebar-vertical-alignment: center">
+  <div class="demo-box">Main content first in the source, on the left.</div>
+  <div class="demo-box">Sidebar on the right</div>
+</div>
+```
+
+```css
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-m));
+  align-items: var(--sidebar-vertical-alignment, stretch);
+}
+/* The sidebar: the first child, or the last with data-side="end". */
+.sidebar:not([data-side="end"]) > :first-child,
+.sidebar[data-side="end"] > :last-child {
+  flex-basis: var(--sidebar-width, 20rem);
+  flex-grow: 1;
+}
+/* The main item takes the rest, and wraps below the sidebar when it would get too narrow. */
+.sidebar:not([data-side="end"]) > :last-child,
+.sidebar[data-side="end"] > :first-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: var(--sidebar-content-min, 50%);
+}
 ```
 
 ### Switcher
@@ -555,10 +925,10 @@ Five or more children always stack. The Switcher is for two to four items.
 #### Code
 
 ```html
-<div class="switcher" style="width: 100%">
-  <div style="outline: 1px dashed currentColor; padding: 1rem">One</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Two</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Three</div>
+<div class="switcher demo-fill">
+  <div class="demo-box">One</div>
+  <div class="demo-box">Two</div>
+  <div class="demo-box">Three</div>
 </div>
 ```
 
@@ -578,24 +948,61 @@ Five or more children always stack. The Switcher is for two to four items.
 }
 ```
 
+### With icon
+
+An icon beside a short piece of text, sized to the text's capitals and lined up with it. Shared (`system/composition/with-icon.md`).
+
+Every Layout's Icon, named `with-icon` here because brands have their own `.icon` class for their icon fonts. The icon is as tall as the text's capital letters and sits on the same baseline, at any font size.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--with-icon-gap` | `0.5em` | Space between the icon and the text. |
+
+#### Do
+
+- Use it for a link or label with an icon: "Download the app", a phone number, a list of features.
+- Hide decorative icons from screen readers with `aria-hidden="true"`. If the icon is the only content, give the link an `aria-label` or a `.visually-hidden` label instead.
+
+#### Code
+
+```html
+<a class="with-icon" href="/contact/"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><circle cx="8" cy="8" r="8" /></svg>Contact us</a>
+```
+
+```css
+.with-icon {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--with-icon-gap, 0.5em);
+}
+.with-icon > :is(svg, img) {
+  flex: none;
+  block-size: 0.75em;
+  block-size: 1cap;
+  inline-size: auto;
+}
+```
+
 ## Components
 
 ### Button
 
-Uppercase Poppins SemiBold pills with a right arrow. Red is the main action; white, grey, red-outline and white-outline pills are for the rest. Brand override (`brands/gospel-ambition/components/button.md`), replaces `system/components/button.md`.
+Uppercase Poppins SemiBold pills with a right arrow. Red is the main action; white, grey, red-outline and white-outline pills are for the rest. Brand override (`brands/gospel-ambition/components/button.md`), replaces `system/components/button.md`. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/button.md */`).
 
 Every button in the design is a pill (`--radius-pill`) with an uppercase SemiBold label, and all but the nav's Give pill end with a right arrow. Full-size buttons are 65px tall at 1920px (20px label on a 30px line). The design gives them fixed widths (332–380px); here that becomes a minimum width of 16.5em.
 
 #### Variants
 
-| Class | Where the design uses it | Example |
+| Attribute | Where the design uses it | Example |
 | --- | --- | --- |
-| `.btn-primary` | The main action: in the hero and on call-to-action cards. | Our tools & trainings, Find my tools |
-| `.btn-light` | The second action beside a primary one, on white. White with a grey outline. | Our story |
-| `.btn-grey` | A quiet "read more" at the end of a section. | More about us |
-| `.btn-outline` | One per tool card. Red outline and label, 18px. | Explore Zume.Training |
-| `.btn-outline-light` | On charcoal or dark photos. | Receive updates |
-| `.btn-sm` | Add to `.btn-primary` for the nav bar's Give pill: 18px, 32px tall, no arrow. | Give |
+| `data-variant="primary"` | The main action: in the hero and on call-to-action cards. Red. | Our tools & trainings, Find my tools |
+| `data-variant="light"` | The second action beside a primary one, on white. White with a grey outline. | Our story |
+| `data-variant="grey"` | A quiet "read more" at the end of a section. | More about us |
+| `data-variant="outline"` | One per tool card. Red outline and label, 18px. | Explore Zume.Training |
+| `data-variant="outline-light"` | On `.surface-dark` or dark photos. | Receive updates |
+| `data-size="small"` | Add to a primary button for the nav bar's Give pill: 18px, 32px tall, no arrow. | Give |
 
 The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), inlined so it takes the label colour.
 
@@ -603,12 +1010,13 @@ The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), i
 
 - Write labels as short verb phrases; the CSS uppercases them: "Find my tools", "Start praying", "Partner with us".
 - Use `<a>` for navigation (nearly every button opens another page) and `<button>` for actions.
-- Keep one `.btn-primary` per card or block. Pair it with `.btn-light`, not a second red pill.
+- Keep one primary button per card or block. Pair it with `data-variant="light"`, not a second red pill.
 
 #### Don't
 
 - Don't leave out the arrow on full-size buttons. Only the Give pill has none.
-- Don't use `.btn-outline` outside a white card. It is the tool card's button.
+- Don't use `data-variant="outline"` outside a white card. It is the tool card's button.
+- Don't write modifier classes such as `.btn-primary` or `.btn-sm`. Variants and sizes are attributes.
 
 #### Approximate
 
@@ -618,61 +1026,24 @@ The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), i
 #### Code
 
 ```html
-<a class="btn btn-primary" href="#">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn btn-light" href="#">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn btn-grey" href="#">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn btn-outline" href="#">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn btn-primary btn-sm" href="#">Give</a>
+<a class="btn" data-variant="primary" href="/tools/">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="light" href="/about/">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="outline" href="https://zume.training/">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
 ```
 
 ```html
-<div class="bg-charcoal" style="padding: 1.5rem">
-  <a class="btn btn-outline-light" href="#">Receive updates <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<div class="surface-dark p-s">
+  <a class="btn" data-variant="outline-light" href="/updates/">Receive updates <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
 </div>
-```
-
-```css
-.btn {
-  --btn-color: var(--color-white);
-  --btn-bg: var(--color-red);
-  --btn-border: var(--color-red);
-  --btn-hover-color: var(--btn-color);
-  --btn-hover-bg: var(--btn-bg);
-  --btn-hover-border: var(--btn-border);
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7em;
-  min-inline-size: 16.5em;
-  padding: 0.85em var(--space-s);
-  font: var(--weight-semibold) var(--size-body) / var(--leading-body) var(--font-body);
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--btn-color);
-  background-color: var(--btn-bg);
-  border: 1px solid var(--btn-border);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-}
-.btn:hover { color: var(--btn-hover-color); background-color: var(--btn-hover-bg); border-color: var(--btn-hover-border); }
-.btn:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-.btn__icon { flex: none; inline-size: var(--size-icon); block-size: auto; fill: currentColor; }
-
-.btn-primary { --btn-hover-bg: var(--color-red-dark); --btn-hover-border: var(--color-red-dark); }
-.btn-light { --btn-color: var(--color-charcoal); --btn-bg: var(--color-white); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-.btn-grey { --btn-color: var(--color-charcoal); --btn-bg: var(--color-grey-light); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-.btn-outline { --btn-color: var(--color-red); --btn-bg: var(--color-white); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-red); font-size: var(--size-small); }
-.btn-outline-light { --btn-color: var(--color-white); --btn-bg: transparent; --btn-border: var(--color-white); --btn-hover-color: var(--color-charcoal); --btn-hover-bg: var(--color-white); }
-.btn-sm { min-inline-size: 0; padding: 0.15em 1.3em; font-size: var(--size-small); }
 ```
 
 ### Card
 
-The tool card. A white, 25px-rounded panel with a category word, the tool's logo, a short description and a red outline button at the bottom. Brand override (`brands/gospel-ambition/components/card.md`), replaces `system/components/card.md`. Also needs the CSS from: button.
+The tool card. A white, 25px-rounded panel with a category word, the tool's logo, a short description and a red outline button at the bottom. Brand override (`brands/gospel-ambition/components/card.md`), replaces `system/components/card.md`. Works with: button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/card.md */`).
 
-Replaces the shared Card. The design's tool grid ("Tools made on our mission field") is six of these on the grey wash: 528×576px at 1920px, no border and no shadow, so they only work on a tinted background (`.bg-wash`). The category is one verb (Multiply, Pray, Steward, Engage, Evaluate) in Poppins Medium 36px, then the tool's logo at 90px tall, a three- to five-line description in Poppins Medium 20px, and the button pinned to the bottom so buttons line up across a row.
+Replaces the shared Card. The design's tool grid ("Tools made on our mission field") is six of these on the grey wash: 528×576px at 1920px, no border and no shadow, so they only work on a tinted background (`.surface-wash`). The category is one verb (Multiply, Pray, Steward, Engage, Evaluate) in Poppins Medium 36px, then the tool's logo at 90px tall, a three- to five-line description in Poppins Medium 20px, and the button pinned to the bottom so buttons line up across a row.
 
 For the photo-and-text cards in the call-to-action section, use [CTA card](../cta-card/).
 
@@ -680,46 +1051,29 @@ For the photo-and-text cards in the call-to-action section, use [CTA card](../ct
 
 - Use the tool's own logo file (see the assets page) and keep it 90px tall (`--size-tool-logo`).
 - Start the description with a verb: "Trains ordinary believers…", "Equips leaders…", "Helps prayer champions…".
-- Put cards on `.bg-wash`, never on white.
+- Put cards on `.surface-wash`, never on white.
 
 #### Don't
 
 - Don't add a shadow or border. The design's cards have neither.
-- Don't use a filled button in a tool card. It is always `.btn-outline`.
+- Don't use a filled button in a tool card. It is always `data-variant="outline"`.
 
 #### Code
 
 ```html
-<div class="bg-wash" style="padding: 1.5rem">
-  <article class="card" style="max-width: 33rem">
+<div class="surface-wash p-s">
+  <article class="card center" style="--measure: var(--threshold-s)">
     <h3 class="card__category">Multiply</h3>
     <img class="card__logo" src="/brands/gospel-ambition/assets/tools/zume-training.png" alt="Zúme Training" />
     <p class="card__text">Trains ordinary believers to make disciples who make disciples. Small groups, self-paced, in 50+ languages. Free. Anytime. Anywhere.</p>
-    <a class="btn btn-outline" href="#">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+    <a class="btn" data-variant="outline" href="https://zume.training/">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
   </article>
 </div>
 ```
 
-```css
-.card {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-xs);
-  padding: var(--space-m) var(--space-m) var(--space-l);
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-}
-.card__category { font-size: var(--size-h3); font-weight: var(--weight-medium); }
-.card__logo { display: block; block-size: var(--size-tool-logo); inline-size: auto; max-inline-size: 100%; object-fit: contain; object-position: left center; }
-.card__text { font-weight: var(--weight-medium); margin-block-end: var(--space-m); }
-.card .btn { margin-block-start: auto; align-self: center; inline-size: min(100%, 21em); }
-```
-
 ### Chat button
 
-A floating red circle with a white speech bubble, fixed to the bottom right of the screen. Gospel Ambition-only (`brands/gospel-ambition/components/chat-button.md`).
+A floating red circle with a white speech bubble, fixed to the bottom right of the screen. Gospel Ambition-only (`brands/gospel-ambition/components/chat-button.md`). Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/chat-button.md */`).
 
 The design floats a 119px red circle (`--size-chat`) with a white speech-bubble shape over the bottom right of the hero, 50px from the edge, with a darker shadow than anything else (`--shadow-float`). The bubble is a 49px square rounded on three corners, which makes the tail. In a build it stays fixed while the page scrolls and opens the help chat.
 
@@ -729,8 +1083,8 @@ The design floats a 119px red circle (`--size-chat`) with a white speech-bubble 
 
 #### Approximate
 
-- The design shows it only at 1920px. Below 48rem it shrinks to 4rem here; that is a proposal.
-- The example is shown in place; add `.chat-button--fixed` in a build to fix it to the corner.
+- The design shows it only at 1920px. Below 48rem (`--threshold-m`) it shrinks to 4rem here; that is a proposal.
+- The example is shown in place; add `data-position="fixed"` in a build to fix it to the corner.
 
 #### Code
 
@@ -738,31 +1092,9 @@ The design floats a 119px red circle (`--size-chat`) with a white speech-bubble 
 <button class="chat-button" type="button" aria-label="Chat with us"><span class="chat-button__bubble"></span></button>
 ```
 
-```css
-.chat-button {
-  display: inline-grid;
-  place-items: center;
-  inline-size: var(--size-chat);
-  block-size: var(--size-chat);
-  padding: 0;
-  background: var(--color-red);
-  border: 0;
-  border-radius: 50%;
-  box-shadow: var(--shadow-float);
-  cursor: pointer;
-}
-.chat-button:hover { background: var(--color-red-dark); }
-.chat-button__bubble { inline-size: 41%; aspect-ratio: 1; background: var(--color-white); border-radius: 50% 50% 0 50%; }
-.chat-button--fixed { position: fixed; inset: auto var(--space-m) var(--space-m) auto; z-index: 10; }
-@container (max-width: 48rem) {
-  .chat-button { inline-size: var(--space-l); block-size: var(--space-l); }
-  .chat-button--fixed { inset: auto var(--space-xs) var(--space-xs) auto; }
-}
-```
-
 ### CTA card
 
-A white call-to-action card with a red Bebas eyebrow, a bold title, one line of text and a red button, and a photo filling its right side. Gospel Ambition-only (`brands/gospel-ambition/components/cta-card.md`). Also needs the CSS from: button.
+A white call-to-action card with a red Bebas eyebrow, a bold title, one line of text and a red button, and a photo filling its right side. Gospel Ambition-only (`brands/gospel-ambition/components/cta-card.md`). Works with: button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/cta-card.md */`).
 
 Two of these sit side by side in the "Let's go." section, over the darkened photo: 812×433px at 1920px, 16px corners, a soft shadow (`--shadow-card`) and a 1px `--color-grey-dark` outline. The text column is about 54% of the card; the photo takes the rest, and the card's rounded corners clip it. Below about 40rem the photo moves on top.
 
@@ -771,6 +1103,7 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
 - Write the eyebrow as the job ("Equip your ministry", "Pay it forward") and the title as the promise ("Find the right tools.", "Help equip more disciple-makers.").
 - End titles with a full stop, as the design does.
 - Use a photo of people, ideally in a group or in conversation.
+- Put it on `.surface-dark` or a dark photo. The card stays white, so its eyebrow stays red there.
 
 #### Don't
 
@@ -779,51 +1112,22 @@ Two of these sit side by side in the "Let's go." section, over the darkened phot
 #### Code
 
 ```html
-<div class="bg-charcoal" style="padding: 1.5rem">
-  <article class="cta-card" style="max-width: 51rem">
+<div class="surface-dark p-s">
+  <article class="cta-card center" style="--measure: var(--size-measure)">
     <div class="cta-card__body">
       <span class="eyebrow">Equip your ministry</span>
       <h3>Find the right tools.</h3>
       <p>Answer a few simple questions and discover free tools and training that fit the work God has given you.</p>
-      <a class="btn btn-primary" href="#">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="primary" href="/tools/">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
     <img class="cta-card__image" src="/brands/gospel-ambition/assets/photos/cta-tools.jpg" alt="Young men looking at a tablet together" />
   </article>
 </div>
 ```
 
-```css
-.cta-card {
-  display: flex;
-  flex-wrap: wrap-reverse;
-  overflow: hidden;
-  color: var(--color-text);
-  background: var(--color-white);
-  border: 1px solid var(--color-grey-dark);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-}
-.cta-card__body {
-  flex: 54 1 18rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-xs);
-  padding: var(--space-m);
-}
-.cta-card__body .eyebrow { margin-block-end: calc(var(--space-xxs) - var(--space-xs)); }
-.cta-card__body .btn { margin-block-start: var(--space-xs); }
-.cta-card__image {
-  flex: 46 1 16rem;
-  min-inline-size: 0;
-  min-block-size: 14rem;
-  object-fit: cover;
-}
-```
-
 ### Input
 
-The search field. A small white pill with a grey outline and a grey search icon, as in the nav bar. Brand override (`brands/gospel-ambition/components/input.md`), replaces `system/components/input.md`.
+The search field. A small white pill with a grey outline and a grey search icon, as in the nav bar. Brand override (`brands/gospel-ambition/components/input.md`), replaces `system/components/input.md`. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/input.md */`).
 
 Replaces the shared Input. The only field in the design is the search box in the nav bar: 143×32px, white, a 1px `--color-grey` outline, fully rounded, with the 16px search icon 13px from its left edge. The design shows no text in it.
 
@@ -843,37 +1147,9 @@ The design has no forms. For a sign-up or contact form, ask for a design rather 
 </label>
 ```
 
-```css
-.search {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xxs);
-  inline-size: 9rem;
-  block-size: 2rem;
-  padding-inline: 0.8rem var(--space-xs);
-  background: var(--color-white);
-  border: 1px solid var(--color-grey);
-  border-radius: var(--radius-pill);
-}
-.search:focus-within { outline: 2px solid var(--color-red); outline-offset: 2px; }
-.search__icon { flex: none; inline-size: 1rem; block-size: 1rem; fill: var(--color-grey); }
-.search__input {
-  flex: 1;
-  min-inline-size: 0;
-  padding: 0;
-  font: var(--weight-regular) var(--size-small) / var(--leading-body) var(--font-body);
-  color: var(--color-text);
-  background: transparent;
-  border: 0;
-  outline: 0;
-}
-.visually-hidden { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-```
-
 ### Nav bar
 
-A red arch across the top of the page, then a white bar with the logo on the left and uppercase links, a red Give pill and the search field on the right. Gospel Ambition-only (`brands/gospel-ambition/components/nav-bar.md`). Also needs the CSS from: container, button, input.
+A red arch across the top of the page, then a white bar with the logo on the left and uppercase links, a red Give pill and the search field on the right. Gospel Ambition-only (`brands/gospel-ambition/components/nav-bar.md`). Works with: container, button, input. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/nav-bar.md */`).
 
 The top of every page. A red band arches across the very top (73px at the edges, 13px in the middle, at 1920px), and the white bar below it (187px in all) holds the logo at 93px tall (`--size-logo`) and the menu. Links are Poppins SemiBold 18px in charcoal, uppercase, about 56px apart. The Give pill is the only red item; the search field closes the row. The bar has a faint shadow (`--shadow-nav`).
 
@@ -882,7 +1158,7 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
 #### Do
 
 - Keep the menu to four or five short items. The design has About, Tools & trainings, Impact, For your ministry.
-- Keep Give as the last link, as a `.btn-primary.btn-sm` pill.
+- Keep Give as the last link, as a small primary pill: `class="btn" data-variant="primary" data-size="small"`. Give and the search field sit together in a cluster, 28px apart (half the gap between links), so they wrap as a pair on narrow screens.
 
 #### Approximate
 
@@ -895,63 +1171,42 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
 <header class="nav-bar">
   <svg class="nav-bar__arch" viewBox="0 0 1920 73" preserveAspectRatio="none" aria-hidden="true"><path d="M1920 73.3C1920 73.3 1619.9 12.7 962.3 12.7 325.9 12.7 0 73.3 0 73.3V0h1920Z"/></svg>
   <div class="container nav-bar__inner">
-    <a class="nav-bar__logo" href="#"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" /></a>
+    <a class="nav-bar__logo" href="/"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" /></a>
     <nav class="nav-bar__menu" aria-label="Main">
-      <a href="#">About</a>
-      <a href="#">Tools &amp; trainings</a>
-      <a href="#">Impact</a>
-      <a href="#">For your ministry</a>
-      <a class="btn btn-primary btn-sm" href="#">Give</a>
-      <label class="search">
-        <svg class="search__icon" viewBox="0 0 16.19 16.19" aria-hidden="true"><path d="M11.88 10.46a6.57 6.57 0 1 0-1.41 1.42h-.01l.1.12 3.9 3.89a1.01 1.01 0 0 0 1.43-1.43L12 10.56a1 1 0 0 0-.12-.1Zm.26-3.89a5.57 5.57 0 1 1-11.13 0 5.57 5.57 0 0 1 11.13 0Z"/></svg>
-        <span class="visually-hidden">Search</span>
-        <input class="search__input" type="search" />
-      </label>
+      <a href="/about/">About</a>
+      <a href="/tools/">Tools &amp; trainings</a>
+      <a href="/impact/">Impact</a>
+      <a href="/for-your-ministry/">For your ministry</a>
+      <div class="cluster" style="--gutter: var(--space-s)">
+        <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
+        <form role="search" action="/search/">
+          <label class="search">
+            <svg class="search__icon" viewBox="0 0 16.19 16.19" aria-hidden="true"><path d="M11.88 10.46a6.57 6.57 0 1 0-1.41 1.42h-.01l.1.12 3.9 3.89a1.01 1.01 0 0 0 1.43-1.43L12 10.56a1 1 0 0 0-.12-.1Zm.26-3.89a5.57 5.57 0 1 1-11.13 0 5.57 5.57 0 0 1 11.13 0Z"/></svg>
+            <span class="visually-hidden">Search</span>
+            <input class="search__input" type="search" name="q" />
+          </label>
+        </form>
+      </div>
     </nav>
   </div>
 </header>
 ```
 
-```css
-.nav-bar { position: relative; background: var(--color-white); box-shadow: var(--shadow-nav); }
-.nav-bar__arch { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1920 / 73; fill: var(--color-red); }
-.nav-bar__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-xs) var(--space-l);
-  padding-block: var(--space-xxs) var(--space-s);
-}
-.nav-bar__logo { display: block; flex: none; }
-.nav-bar__logo img { display: block; block-size: var(--size-logo); inline-size: auto; }
-.nav-bar__menu { display: flex; flex-wrap: wrap; align-items: center; column-gap: calc(var(--space-s) * 2); row-gap: var(--space-xs); }
-.nav-bar__menu > a:not(.btn) {
-  font-size: var(--size-small);
-  font-weight: var(--weight-semibold);
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--color-text);
-}
-.nav-bar__menu > a:not(.btn):hover { color: var(--color-red); }
-/* The Give pill and the search field sit closer: 28px instead of 56px. */
-.nav-bar__menu > .btn,
-.nav-bar__menu > .search { margin-inline-start: calc(var(--space-s) * -1); }
-```
-
 ### Ribbon
 
-The red swoosh band. A full-width red ribbon, tall on the left and thin on the right, that carries a white title and subtitle and overlaps the photo above it. Gospel Ambition-only (`brands/gospel-ambition/components/ribbon.md`). Also needs the CSS from: container.
+The red swoosh band. A full-width red ribbon, tall on the left and thin on the right, that carries a white title and subtitle and overlaps the photo above it. Gospel Ambition-only (`brands/gospel-ambition/components/ribbon.md`). Works with: container. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/ribbon.md */`).
 
 The design's signature shape, used twice on the home page: once under the hero ("Understand the calling.") and once under the photo band ("See what is free."). It is one exact curve from the XD file, 1924×664 at 1920px: the top edge dips and rises to the top right corner, the bottom edge falls from a third of the height on the right to the full height on the left. White ExtraBold title, white SemiBold subtitle, both on the tall left side.
 
 The shape is an inline SVG stretched to the band (`preserveAspectRatio="none"`), so it keeps the curve at any width. The content's padding scales with the viewport so the text stays inside the tall part.
 
+Add `data-overlap` to lay the ribbon over the bottom of the section above (the hero photo, the photo band), as the design does both times.
+
 #### Settings
 
 | Property | Default | What it does |
 | --- | --- | --- |
-| `--ribbon-overlap` | `0` | Negative top margin, to lay the ribbon over the bottom of the section above (the hero photo, the photo band). The design overlaps by about 13cqi. |
+| `--ribbon-overlap` | `-13.4cqi` | With `data-overlap`: the negative top margin. The design's overlap; you rarely need to change it. |
 | `--ribbon-below` | `transparent` | Fill for the area under the ribbon's bottom edge. Set it to the next section's top colour when the next section starts behind the ribbon (`var(--color-grey-wash)` before the tools section). |
 
 #### Do
@@ -966,15 +1221,9 @@ The shape is an inline SVG stretched to the band (`preserveAspectRatio="none"`),
 
 #### Approximate
 
-- Below 48rem (no mobile design) the ribbon would get too thin on the right for its text, so it becomes a plain red band with the curve dropped. This is a proposal.
+- Below 48rem (`--threshold-m`, no mobile design) the ribbon would get too thin on the right for its text, so it becomes a plain red band with the curve dropped. This is a proposal.
 
 #### Code
-
-The shape on its own, at the design's proportions:
-
-```html
-<svg viewBox="0 0 1924.5 664.5" style="display: block; width: 100%; height: auto; fill: var(--color-red)" aria-hidden="true"><path d="M0 110C0 110 997.3 342.9 1924.5 0V248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5Z"/></svg>
-```
 
 The ribbon with its content. In a narrow preview it shows the small-screen fallback:
 
@@ -991,32 +1240,13 @@ The ribbon with its content. In a narrow preview it shows the small-screen fallb
 </section>
 ```
 
-```css
-.ribbon {
-  position: relative;
-  z-index: 1;
-  margin-block-start: var(--ribbon-overlap, 0);
-  color: var(--color-white);
-}
-.ribbon__shape { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; fill: var(--color-red); }
-.ribbon__shape .ribbon__below { fill: var(--ribbon-below, transparent); }
-.ribbon__content { padding-block: 20cqi 7cqi; }
-.ribbon__content > * { max-inline-size: var(--size-measure); }
-.ribbon__title { font-size: var(--size-h1); font-weight: var(--weight-heavy); margin-block-end: var(--space-xxs); }
-@container (max-width: 48rem) {
-  .ribbon { background: var(--color-red); margin-block-start: 0; }
-  .ribbon__shape { display: none; }
-  .ribbon__content { padding-block: var(--space-l); }
-}
-```
-
 ### Swoosh
 
-The soft section edge. A light grey crescent that curves across the full width where one section meets the next. Gospel Ambition-only (`brands/gospel-ambition/components/swoosh.md`).
+The soft section edge. A light grey crescent that curves across the full width where one section meets the next. Gospel Ambition-only (`brands/gospel-ambition/components/swoosh.md`). Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/swoosh.md */`).
 
 Between most sections the design doesn't use a straight edge. A `--color-grey-light` crescent sweeps across the page: its top edge falls from the top left corner to two thirds of the way down on the right, and its bottom edge arches up in the middle. The section above fills the area over the crescent, and the section below shows through under the arch. The curve is the design's own, 1946×342 at 1920px, drawn as an inline SVG.
 
-Place the swoosh as the first child of the lower section. It sits over that section's top, so give the section enough top padding to clear it (about 18cqi).
+Place the swoosh as the first child of the lower section. It sits over that section's top, so the section needs `position: relative` and enough top padding to clear it (about 18cqi). Add `.swoosh-section` to the section for both, or set them in the section's own pattern CSS.
 
 #### Settings
 
@@ -1025,7 +1255,7 @@ Place the swoosh as the first child of the lower section. It sits over that sect
 | `--swoosh-above` | `var(--color-white)` | The colour of the section above. Charcoal after the ministries section. |
 | `--swoosh-color` | `var(--color-grey-light)` | The crescent. |
 
-Add `.swoosh--end` to turn it upside down and place it as the last child of the upper section instead. The design does this once, between the story and the testimonials; `--swoosh-above` is then the colour of the section below.
+Add `data-position="end"` to turn it upside down and place it as the last child of the upper section instead. The design does this once, between the story and the testimonials; `--swoosh-above` is then the colour of the section below.
 
 #### Do
 
@@ -1038,8 +1268,8 @@ Add `.swoosh--end` to turn it upside down and place it as the last child of the 
 #### Code
 
 ```html
-<div style="background: var(--color-charcoal); height: 3rem"></div>
-<section class="swoosh-demo" style="position: relative; padding-top: 18cqi; padding-bottom: 2rem">
+<div class="surface-dark py-m"></div>
+<section class="swoosh-section pb-s">
   <svg class="swoosh" style="--swoosh-above: var(--color-charcoal)" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>
@@ -1048,25 +1278,9 @@ Add `.swoosh--end` to turn it upside down and place it as the last child of the 
 </section>
 ```
 
-```css
-.swoosh {
-  position: absolute;
-  inset-block-start: -1px; /* overlaps the seam so no hairline shows between sections */
-  inset-inline: 0;
-  display: block;
-  inline-size: 100%;
-  block-size: auto;
-  aspect-ratio: 1946 / 342;
-  pointer-events: none;
-}
-.swoosh__above { fill: var(--swoosh-above, var(--color-white)); }
-.swoosh__crescent { fill: var(--swoosh-color, var(--color-grey-light)); }
-.swoosh--end { inset-block: auto -1px; transform: rotate(180deg); }
-```
-
 ### Tabs
 
-Text-only tabs on charcoal. The active tab is SemiBold white, the others Regular white at 80%. Gospel Ambition-only (`brands/gospel-ambition/components/tabs.md`).
+Text-only tabs on charcoal. The active tab is SemiBold white, the others Regular white at 80%. Gospel Ambition-only (`brands/gospel-ambition/components/tabs.md`). Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/tabs.md */`).
 
 Above the ministries heading the design offers two views, "Ministries" and "Recent Activity". There is no underline, pill or box. Only weight and opacity show which tab is active. Both are 26px (`--size-subtitle`), about 36px apart.
 
@@ -1074,7 +1288,7 @@ Only the visual state is designed. Wire it up with the usual tab roles (`role="t
 
 #### Do
 
-- Use tabs only on `.bg-charcoal`, and only to switch between two or three views of the same content.
+- Use tabs only on `.surface-dark`, and only to switch between two or three views of the same content.
 
 #### Approximate
 
@@ -1083,33 +1297,17 @@ Only the visual state is designed. Wire it up with the usual tab roles (`role="t
 #### Code
 
 ```html
-<div class="bg-charcoal" style="padding: 1.5rem">
+<div class="surface-dark p-s">
   <div class="tabs" role="tablist" aria-label="Who uses Gospel Ambition">
-    <button class="tabs__tab" role="tab" aria-selected="true">Ministries</button>
-    <button class="tabs__tab" role="tab" aria-selected="false">Recent Activity</button>
+    <button class="tabs__tab" type="button" role="tab" aria-selected="true">Ministries</button>
+    <button class="tabs__tab" type="button" role="tab" aria-selected="false">Recent Activity</button>
   </div>
 </div>
 ```
 
-```css
-.tabs { display: flex; flex-wrap: wrap; gap: var(--space-xs) calc(var(--space-s) + var(--space-xxs)); }
-.tabs__tab {
-  padding: 0;
-  font: var(--weight-regular) var(--size-subtitle) / var(--leading-body) var(--font-body);
-  color: var(--color-white);
-  background: none;
-  border: 0;
-  opacity: 0.8;
-  cursor: pointer;
-}
-.tabs__tab[aria-selected="true"] { font-weight: var(--weight-semibold); opacity: 1; }
-.tabs__tab:hover { opacity: 1; }
-.tabs__tab:focus-visible { outline: 2px solid var(--color-white); outline-offset: 4px; }
-```
-
 ### Testimonial
 
-A centred italic quote in large type, a round photo, then the person's name and role. Gospel Ambition-only (`brands/gospel-ambition/components/testimonial.md`).
+A centred italic quote in large type, a round photo, then the person's name and role. Gospel Ambition-only (`brands/gospel-ambition/components/testimonial.md`). Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/testimonial.md */`).
 
 No card, no quote mark icon: the quote itself is the design. Poppins Italic 36px on a 50px line, centred, with typographic quote marks in the text. Under it a 197px round photo (`--size-avatar`), then the name in SemiBold and the role in Regular below it.
 
@@ -1126,44 +1324,11 @@ No card, no quote mark icon: the quote itself is the design. Poppins Italic 36px
 #### Code
 
 ```html
-<figure class="testimonial" style="max-width: 45rem">
+<figure class="testimonial center" style="--measure: var(--size-measure)">
   <blockquote><p>“We have worked with hundreds of organizations around the world. Pound for pound, the Gospel Ambition team is the most fruitful group in frontier missions I know.”</p></blockquote>
   <img class="testimonial__photo" src="/brands/gospel-ambition/assets/photos/clyde-taber.jpg" alt="" />
   <figcaption><strong class="testimonial__name">Clyde Taber</strong> Director of the Visual Story Network</figcaption>
 </figure>
-```
-
-```css
-.testimonial { display: flex; flex-direction: column; align-items: center; gap: var(--space-m); margin: 0; text-align: center; }
-.testimonial blockquote { margin: 0; font-size: var(--size-h3); font-style: italic; line-height: var(--leading-quote); }
-.testimonial__photo { inline-size: var(--size-avatar); block-size: var(--size-avatar); border-radius: 50%; object-fit: cover; }
-.testimonial figcaption { margin-block-start: calc(var(--space-m) * -1 + var(--space-xs)); font-size: var(--size-subtitle); line-height: var(--leading-body); }
-.testimonial__name { display: block; font-size: var(--size-h3); font-weight: var(--weight-semibold); }
-```
-
-### Utilities
-
-Single-purpose classes for section padding and text alignment. Spacing classes are named after the space tokens (.py-xl, .pt-l). Gospel Ambition-only (`brands/gospel-ambition/components/utilities.md`).
-
-CUBE CSS's utility layer for this brand: one class, one job. Spacing classes are a prefix plus a space token: `p` padding, `y` top and bottom, `t` top, `b` bottom, so `.py-xl` sets top and bottom padding to `--space-xl`. Only the classes the patterns use are defined so far.
-
-#### Code
-
-```html
-<div class="text-center py-m" style="outline: 1px dashed currentColor">
-  <p class="mx-auto" style="outline: 1px dashed currentColor; width: fit-content">.mx-auto inside .py-m .text-center</p>
-</div>
-```
-
-```css
-.text-center { text-align: center; }
-.mx-auto { margin-inline: auto; }
-.py-m { padding-top: var(--space-m); padding-bottom: var(--space-m); }
-.py-l { padding-top: var(--space-l); padding-bottom: var(--space-l); }
-.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
-.pt-l { padding-top: var(--space-l); }
-.pt-xl { padding-top: var(--space-xl); }
-.pb-xl { padding-bottom: var(--space-xl); }
 ```
 
 Not available for Gospel Ambition (excluded on purpose, don't build them): tag.
@@ -1172,9 +1337,17 @@ Not available for Gospel Ambition (excluded on purpose, don't build them): tag.
 
 ### CTA section
 
-'Let's go.' over a darkened photo: a huge display line with a red last word, two call-to-action cards, then a 'stay connected' row with an outline button. Gospel Ambition-only (`brands/gospel-ambition/patterns/cta-section.md`). Also needs the CSS from: container, flow, switcher, repel, swoosh, cta-card, button.
+'Let's go.' over a darkened photo: a huge display line, two call-to-action cards, then a 'stay connected' row with an outline button. Gospel Ambition-only (`brands/gospel-ambition/patterns/cta-section.md`). Works with: container, flow, switcher, repel, swoosh, cta-card, button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/cta-section.md */`).
 
-The close of the home page. A swoosh leads from white into a full-width photo darkened with charcoal at 78% (`--gradient-overlay`). "Let's **go.**" is Poppins ExtraBold 80px (`.display`) in white with "go." in red, then a Medium 36px line and one Regular 20px line. Two [CTA cards](../../components/cta-card/) sit side by side, 16px apart. Under them, a row: Bebas eyebrow and white Bold 36px title on the left, a short line in the middle, and a white outline button on the right.
+The close of the home page. A swoosh leads from white into a full-width photo darkened with charcoal at 78% (`--gradient-overlay`). "Let's **go.**" is Poppins ExtraBold 80px (`.display`) in white, then a Medium 36px line and one Regular 20px line. The design sets "go." in red, which fails contrast on the dark photo (see the guidelines), so `.text-accent` stays white on `.surface-dark`. Two [CTA cards](../../components/cta-card/) sit side by side, 16px apart. Under them, a row: Bebas eyebrow and white Bold 36px title on the left, a short line in the middle, and a white outline button on the right.
+
+Set the photo with `--cta-section-image: url(…)` on the section. It sits on `.surface-dark`, so text, eyebrows and accents take that surface's colours, and the charcoal shows while the photo loads.
+
+#### Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--cta-section-image` | `none` | The background photo, as `url(…)`. It is darkened with charcoal at 78%. |
 
 #### Do
 
@@ -1188,13 +1361,13 @@ The close of the home page. A swoosh leads from white into a full-width photo da
 #### Code
 
 ```html
-<section class="cta-section">
+<section class="cta-section surface-dark" style="--cta-section-image: url(/brands/gospel-ambition/assets/photos/cta-background.jpg)">
   <svg class="swoosh" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>
   </svg>
   <div class="container flow">
-    <p class="display">Let’s <span class="text-accent">go.</span></p>
+    <h2 class="display">Let’s <span class="text-accent">go.</span></h2>
     <p class="cta-section__sub">There’s a place for you in the mission.</p>
     <p>Bring these resources into your ministry and help others discover them.</p>
     <div class="switcher cta-section__cards">
@@ -1203,7 +1376,7 @@ The close of the home page. A swoosh leads from white into a full-width photo da
           <span class="eyebrow">Equip your ministry</span>
           <h3>Find the right tools.</h3>
           <p>Answer a few simple questions and discover free tools and training that fit the work God has given you.</p>
-          <a class="btn btn-primary" href="#">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+          <a class="btn" data-variant="primary" href="/tools/finder/">Find my tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
         </div>
         <img class="cta-card__image" src="/brands/gospel-ambition/assets/photos/cta-tools.jpg" alt="Young men looking at a tablet together" />
       </article>
@@ -1212,7 +1385,7 @@ The close of the home page. A swoosh leads from white into a full-width photo da
           <span class="eyebrow">Pay it forward</span>
           <h3>Help equip more disciple-makers.</h3>
           <p>Position us to make the Church aware of the resources that would help them multiply obedient disciples.</p>
-          <a class="btn btn-primary" href="#">Partner with us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+          <a class="btn" data-variant="primary" href="/give/">Partner with us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
         </div>
         <img class="cta-card__image" src="/brands/gospel-ambition/assets/photos/cta-partner.jpg" alt="An older man and a young man talking outdoors" />
       </article>
@@ -1220,31 +1393,15 @@ The close of the home page. A swoosh leads from white into a full-width photo da
     <div class="repel cta-section__connect">
       <div><span class="eyebrow">Stay connected</span><h3>See what God is doing.</h3></div>
       <p class="cta-section__connect-text">Get stories, updates and opportunities to participate in what God is doing around the world.</p>
-      <a class="btn btn-outline-light" href="#">Receive updates <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="outline-light" href="/updates/">Receive updates <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
   </div>
 </section>
 ```
 
-```css
-.cta-section {
-  position: relative;
-  padding-block: calc(17.6cqi + var(--space-l)) var(--space-xl);
-  color: var(--color-white);
-  background: var(--gradient-overlay), url("/brands/gospel-ambition/assets/photos/cta-background.jpg") center / cover;
-}
-.cta-section .flow { --flow-space: var(--space-xs); }
-.cta-section .display { color: var(--color-white); }
-.cta-section__sub { font-size: var(--size-h3); font-weight: var(--weight-medium); line-height: var(--leading-heading); }
-.cta-section__cards { --threshold: 60rem; --gutter: var(--space-xs); --flow-space: var(--space-s); }
-.cta-section__connect { --flow-space: var(--space-l); --gutter: var(--space-m); }
-.cta-section__connect .eyebrow { margin-block-end: var(--space-xxs); }
-.cta-section__connect-text { max-inline-size: 32rem; }
-```
-
 ### Footer
 
-The tagline again in bold, the logo centred over a faint world map, then a thin bar with the copyright on the left and uppercase links on the right. Gospel Ambition-only (`brands/gospel-ambition/patterns/footer.md`). Also needs the CSS from: container, repel, cluster.
+The tagline again in bold, the logo centred over a faint world map, then a thin bar with the copyright on the left and uppercase links on the right. Gospel Ambition-only (`brands/gospel-ambition/patterns/footer.md`). Works with: container, repel, cluster. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/footer.md */`).
 
 The page ends where it started: "Fulfilling the Great Commission in this generation, **with you.**" in Poppins Bold 44px (`.tagline`), centred, with the last words in red. Below it the logo (the round badge plus the wordmark, 128px tall) sits over a world map in pale grey at half opacity (`assets/world-map.svg`). A white bar closes the page with "© 2026 Gospel Ambition. All rights reserved." in Medium 18px and four SemiBold 18px uppercase links about 64px apart, all in charcoal.
 
@@ -1259,42 +1416,23 @@ The page ends where it started: "Fulfilling the Great Commission in this generat
 <footer class="footer">
   <p class="tagline text-center container">Fulfilling the Great Commission in this generation, <span class="text-accent">with you.</span></p>
   <div class="footer__brand">
-    <a class="footer__logo" href="#"><img src="/brands/gospel-ambition/assets/logo-badge.png" alt="" /><img src="/brands/gospel-ambition/assets/logo-wordmark.png" alt="Gospel Ambition" /></a>
+    <a class="footer__logo" href="/"><img src="/brands/gospel-ambition/assets/logo-badge.png" alt="" /><img src="/brands/gospel-ambition/assets/logo-wordmark.png" alt="Gospel Ambition" /></a>
   </div>
   <div class="container repel footer__bar">
     <p>© 2026 Gospel Ambition. All rights reserved.</p>
     <nav class="cluster footer__links" aria-label="Footer">
-      <a href="#">Free resources</a>
-      <a href="#">Contact</a>
-      <a href="#">Give</a>
-      <a href="#">Privacy</a>
+      <a href="/resources/">Free resources</a>
+      <a href="/contact/">Contact</a>
+      <a href="/give/">Give</a>
+      <a href="/privacy/">Privacy</a>
     </nav>
   </div>
 </footer>
 ```
 
-```css
-.footer { padding-block-start: calc(var(--space-xl) * 3); background: var(--color-white); }
-.footer__brand {
-  display: grid;
-  place-items: center;
-  min-block-size: 30cqi;
-  margin-block-start: var(--space-xs);
-  background: url("/brands/gospel-ambition/assets/world-map.svg") center top / 104% auto no-repeat;
-}
-.footer__logo { display: flex; align-items: center; }
-.footer__logo img { display: block; block-size: clamp(4rem, 6.7cqi, 8rem); inline-size: auto; }
-.footer__logo img + img { margin-inline-start: -0.5%; }
-.footer__bar { padding-block: var(--space-l) var(--space-m); font-size: var(--size-small); }
-.footer__bar p { font-weight: var(--weight-medium); }
-.footer__links { --gutter: var(--space-xs) var(--space-l); }
-.footer__links a { font-weight: var(--weight-semibold); text-transform: uppercase; text-decoration: none; color: var(--color-text); }
-.footer__links a:hover { color: var(--color-red); }
-```
-
 ### Hero
 
-A big italic promise on white, with a photo of people filling the right side and fading in from the left, two buttons, and the red ribbon sweeping across the bottom. Gospel Ambition-only (`brands/gospel-ambition/patterns/hero.md`). Also needs the CSS from: container, cluster, flow, button, ribbon, chat-button.
+A big italic promise on white, with a photo of people filling the right side and fading in from the left, two buttons, and the red ribbon sweeping across the bottom. Gospel Ambition-only (`brands/gospel-ambition/patterns/hero.md`). Works with: container, cluster, flow, button, ribbon, chat-button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/hero.md */`).
 
 The top of the home page, under the nav bar. The title is Poppins ExtraBold Italic 66px with the last words in red ("…in this generation, **with you.**"), then a two-line Medium Italic tagline and the two main buttons. The photo covers the right 73% of the section and fades to white over its left half (`--gradient-fade-hero`), so the text stays on white. The red ribbon overlaps the bottom of the photo and carries the first chapter title. The chat button floats at the bottom right.
 
@@ -1302,7 +1440,8 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
 
 - Write the title as one sentence over three short lines, and put the last few words in `.text-accent`.
 - Choose a photo of a group of people, faces towards the left, with the subject in the right half.
-- Use `.btn-primary` for the main route in and `.btn-light` for the story.
+- Use a primary button for the main route in and a light one (`data-variant="light"`) for the story.
+- Follow it with a ribbon with `data-overlap`, so the ribbon covers the bottom of the photo.
 
 #### Don't
 
@@ -1310,7 +1449,7 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
 
 #### Approximate
 
-- There is no mobile design. Below 48rem the photo moves under the text instead of behind it; this is a proposal.
+- There is no mobile design. Below 48rem (`--threshold-m`) the photo moves under the text instead of behind it; this is a proposal.
 
 #### Code
 
@@ -1321,13 +1460,13 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
     <h1 class="hero__title">Fulfilling the<br />Great Commission<br />in this generation, <span class="text-accent">with you.</span></h1>
     <p class="hero__tagline">Mission experience. Technical expertise.<br />A shared calling to multiply obedient disciples.</p>
     <div class="cluster hero__actions">
-      <a class="btn btn-primary" href="#">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-      <a class="btn btn-light" href="#">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="primary" href="/tools/">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="light" href="/about/">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
     <button class="chat-button hero__chat" type="button" aria-label="Chat with us"><span class="chat-button__bubble"></span></button>
   </div>
 </section>
-<section class="ribbon" style="--ribbon-overlap: -13.4cqi">
+<section class="ribbon" data-overlap>
   <svg class="ribbon__shape" viewBox="0 0 1924.5 664.5" preserveAspectRatio="none" aria-hidden="true">
     <path class="ribbon__below" d="M1924.5 248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5H1924.5Z"/>
     <path d="M0 110C0 110 997.3 342.9 1924.5 0V248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5Z"/>
@@ -1339,30 +1478,11 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
 </section>
 ```
 
-```css
-.hero { position: relative; overflow: hidden; }
-.hero__media { position: absolute; inset: 0 0 0 27%; }
-.hero__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 60% 30%; }
-.hero__media::after { content: ""; position: absolute; inset: 0; background-image: var(--gradient-fade-hero); }
-.hero__content { position: relative; --flow-space: var(--space-xs); padding-block: 12.6cqi; }
-.hero__title { font-style: italic; max-inline-size: 15em; }
-.hero__tagline { font-weight: var(--weight-medium); font-style: italic; max-inline-size: var(--size-measure); }
-.hero__actions { --gutter: var(--space-m); --flow-space: var(--space-xl); }
-.hero__chat { position: absolute; inset: auto var(--space-m) 1cqi auto; z-index: 2; }
-@container (max-width: 48rem) {
-  .hero__media { position: relative; inset: auto; aspect-ratio: 4 / 3; order: 2; }
-  .hero__media::after { background-image: var(--gradient-fade-top); }
-  .hero { display: flex; flex-direction: column; }
-  .hero__content { padding-block: var(--space-l); }
-  .hero__chat { position: static; }
-}
-```
-
 ### Ministries
 
-A charcoal section with tabs, a white heading and a big red panel of partner ministry logos in white. Gospel Ambition-only (`brands/gospel-ambition/patterns/ministries.md`). Also needs the CSS from: container, flow, tabs.
+A charcoal section with tabs, a white heading and a big red panel of partner ministry logos in white. Gospel Ambition-only (`brands/gospel-ambition/patterns/ministries.md`). Works with: container, flow, tabs. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/ministries.md */`).
 
-Social proof after the tools: "Ministries around the globe use Gospel Ambition tools and trainings." On `.bg-charcoal`, [tabs](../../components/tabs/) switch between Ministries and Recent Activity, then a white Bold 56px heading and a full-width red panel with 25px corners holding about 40 ministry logos in white, five columns, each at 90% opacity. The logo wall is one vector file (`assets/ministry-logos.svg`), traced from the design.
+Social proof after the tools: "Ministries around the globe use Gospel Ambition tools and trainings." On `.surface-dark`, [tabs](../../components/tabs/) switch between Ministries and Recent Activity, then a white Bold 56px heading and a full-width red panel (`.surface-red`) with 25px corners holding about 40 ministry logos in white, five columns, each at 90% opacity. The logo wall is one vector file (`assets/ministry-logos.svg`), traced from the design.
 
 The "Recent Activity" view isn't designed.
 
@@ -1373,43 +1493,36 @@ The "Recent Activity" view isn't designed.
 
 #### Don't
 
+- Don't copy the tabs onto a page unless you also build the Recent Activity panel and the script that switches them (`role="tabpanel"`, `aria-controls`). Without them, leave the tabs out.
 - Don't show partner logos in their own colours here. The wall reads as one block because every logo is white.
 
 #### Code
 
 ```html
-<section class="ministries bg-charcoal py-xl">
+<section class="ministries surface-dark py-xl">
   <div class="container flow">
     <div class="tabs" role="tablist" aria-label="Who uses Gospel Ambition">
-      <button class="tabs__tab" role="tab" aria-selected="true">Ministries</button>
-      <button class="tabs__tab" role="tab" aria-selected="false">Recent Activity</button>
+      <button class="tabs__tab" type="button" role="tab" aria-selected="true">Ministries</button>
+      <button class="tabs__tab" type="button" role="tab" aria-selected="false">Recent Activity</button>
     </div>
     <h2 class="ministries__title">Ministries around the globe use Gospel Ambition tools and trainings.</h2>
-    <div class="ministries__panel">
+    <div class="ministries__panel surface-red">
       <img src="/brands/gospel-ambition/assets/ministry-logos.svg" alt="Logos of ministries that use Gospel Ambition tools, including Biglife, Billy Graham Evangelistic Association, Cru, Frontiers, OM, Pioneers, Joshua Project and OneHope" />
     </div>
   </div>
 </section>
 ```
 
-```css
-.ministries .flow { --flow-space: var(--space-xs); }
-.ministries__title { max-inline-size: 26em; }
-.ministries__panel { --flow-space: var(--space-s); padding: var(--space-xl) var(--space-l); background: var(--color-red); border-radius: var(--radius-lg); }
-.ministries__panel img { display: block; inline-size: 100%; }
-@container (max-width: 48rem) { .ministries__panel { padding: var(--space-s); } }
-```
-
 ### Photo band
 
-A full-width photo that fades in from white at the top, cut off at the bottom by the red ribbon with the next chapter's title. Gospel Ambition-only (`brands/gospel-ambition/patterns/photo-band.md`). Also needs the CSS from: container, ribbon.
+A full-width photo that fades in from white at the top, cut off at the bottom by the red ribbon with the next chapter's title. Gospel Ambition-only (`brands/gospel-ambition/patterns/photo-band.md`). Works with: container, ribbon. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/photo-band.md */`).
 
-Between the stats and the tools on the home page: a full-bleed photo of one person using a phone, its top edge fading in from the white section above (`--gradient-fade-top`), and the red ribbon ("See what is free.") laid over its bottom. Under the ribbon's lower edge the grey wash of the next section begins, so the ribbon's `--ribbon-below` is set to `--color-grey-wash`.
+Between the stats and the tools on the home page: a full-bleed photo of one person using a phone, its top edge fading in from the white section above (`--gradient-fade-top`), and the red ribbon ("See what is free.", with `data-overlap`) laid over its bottom. Under the ribbon's lower edge the grey wash of the next section begins, so the ribbon's `--ribbon-below` is set to `--color-grey-wash`.
 
 #### Do
 
 - Use a photo of a real person engaging with a tool (a phone, a Bible, a conversation), with space at the top.
-- Follow it with the [tools grid](../tools-grid/) or another `.bg-wash` section.
+- Follow it with the [tools grid](../tools-grid/) or another `.surface-wash` section.
 
 #### Code
 
@@ -1417,7 +1530,7 @@ Between the stats and the tools on the home page: a full-bleed photo of one pers
 <section class="photo-band">
   <img src="/brands/gospel-ambition/assets/photos/photo-band.jpg" alt="A young man in a striped shirt looking at his phone" />
 </section>
-<section class="ribbon" style="--ribbon-overlap: -13.4cqi; --ribbon-below: var(--color-grey-wash)">
+<section class="ribbon" data-overlap style="--ribbon-below: var(--color-grey-wash)">
   <svg class="ribbon__shape" viewBox="0 0 1924.5 664.5" preserveAspectRatio="none" aria-hidden="true">
     <path class="ribbon__below" d="M1924.5 248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5H1924.5Z"/>
     <path d="M0 110C0 110 997.3 342.9 1924.5 0V248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5Z"/>
@@ -1429,15 +1542,9 @@ Between the stats and the tools on the home page: a full-bleed photo of one pers
 </section>
 ```
 
-```css
-.photo-band { position: relative; }
-.photo-band img { display: block; inline-size: 100%; block-size: 50cqi; min-block-size: 16rem; object-fit: cover; object-position: center 35%; }
-.photo-band::before { content: ""; position: absolute; inset: 0 0 auto; block-size: 20%; background-image: var(--gradient-fade-top); }
-```
-
 ### Scripture section
 
-A bold heading with its key words in red, then a passage of Scripture in large italics, indented, with its reference and a grey button. Gospel Ambition-only (`brands/gospel-ambition/patterns/scripture-section.md`). Also needs the CSS from: container, flow, button, utilities.
+A bold heading with its key words in red, then a passage of Scripture in large italics, indented, with its reference and a grey button. Gospel Ambition-only (`brands/gospel-ambition/patterns/scripture-section.md`). Works with: container, flow, button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/scripture-section.md */`).
 
 Follows the first ribbon on the home page: "Jesus has given us our **motive, mission and vision.**", then Matthew 28:17–20. The heading is Bold 56px; the passage is Poppins Italic 32px, indented 140px (`--space-xxl`) from the heading, with the reference in Regular. A grey "More about us" button closes it, on the same indent.
 
@@ -1449,7 +1556,7 @@ Follows the first ribbon on the home page: "Jesus has given us our **motive, mis
 #### Code
 
 ```html
-<section class="scripture py-xl">
+<section class="py-xl">
   <div class="container flow">
     <h2>Jesus has given us our <span class="text-accent">motive, mission and vision.</span></h2>
     <div class="scripture__body flow">
@@ -1458,25 +1565,17 @@ Follows the first ribbon on the home page: "Jesus has given us our **motive, mis
         <p>Go, then, and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to obey everything I have commanded. And remember: I am with you always, to the end of the age.”</p>
         <cite>Matthew 28:17–20</cite>
       </blockquote>
-      <a class="btn btn-grey" href="#">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
   </div>
 </section>
 ```
 
-```css
-.scripture__body { padding-inline-start: var(--space-xxl); }
-.scripture__quote { margin: 0; font-size: var(--size-lead); line-height: var(--leading-lead); font-style: italic; max-inline-size: 85rem; }
-.scripture__quote p + p, .scripture__quote cite { display: block; margin-block-start: var(--space-s); }
-.scripture__quote cite { font-style: normal; }
-@container (max-width: 48rem) { .scripture__body { padding-inline-start: var(--space-s); } }
-```
-
 ### Stats section
 
-A grey swoosh into the wash, then a heading, a one-line intro and a wide rounded panel for a chart or embed. Gospel Ambition-only (`brands/gospel-ambition/patterns/stats-section.md`). Also needs the CSS from: container, flow, swoosh.
+A grey swoosh into the wash, then a heading, a one-line intro and a wide rounded panel for a chart or embed. Gospel Ambition-only (`brands/gospel-ambition/patterns/stats-section.md`). Works with: container, flow, swoosh. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/stats-section.md */`).
 
-"We are in an extraordinary moment." The section opens with a [swoosh](../../components/swoosh/) and sits on the grey wash (`.bg-wash`). The heading is Bold 56px, the intro Regular 32px, then a full-width panel with 16px corners. In the design the panel is a screenshot of the live "Disciples multiplying disciples" chart (an interactive embed with its own styling); in a build, put the embed there.
+"We are in an extraordinary moment." The section opens with a [swoosh](../../components/swoosh/) and sits on the grey wash (`.surface-wash`). The heading is Bold 56px, the intro Regular 32px, then a full-width panel with 16px corners. In the design the panel is a screenshot of the live "Disciples multiplying disciples" chart (an interactive embed with its own styling); in a build, put the embed there.
 
 #### Do
 
@@ -1486,7 +1585,7 @@ A grey swoosh into the wash, then a heading, a one-line intro and a wide rounded
 #### Code
 
 ```html
-<section class="stats bg-wash">
+<section class="stats surface-wash">
   <svg class="swoosh" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>
@@ -1499,16 +1598,9 @@ A grey swoosh into the wash, then a heading, a one-line intro and a wide rounded
 </section>
 ```
 
-```css
-.stats { position: relative; padding-block: calc(17.6cqi + var(--space-l)) var(--space-xl); }
-.stats .flow { --flow-space: var(--space-xs); }
-.stats__panel { margin-inline: 0; margin-block-end: 0; --flow-space: var(--space-l); }
-.stats__panel img { display: block; inline-size: 100%; border-radius: var(--radius-md); }
-```
-
 ### Story
 
-One person's story in a narrow column on white, beside a large portrait that fades in from the left, between two swooshes. Gospel Ambition-only (`brands/gospel-ambition/patterns/story.md`). Also needs the CSS from: container, flow, swoosh.
+One person's story in a narrow column on white, beside a large portrait that fades in from the left, between two swooshes. Gospel Ambition-only (`brands/gospel-ambition/patterns/story.md`). Works with: container, flow, swoosh. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/story.md */`).
 
 "Behind the numbers are people Jesus loves." After the charcoal ministries section a swoosh leads into white. A Bold 56px heading over a 660px column of story text in Poppins 20px on a loose 1.7 line (`--leading-story`), ending with the tools that helped and an italic footnote. A large portrait fills the right of the section and fades to white towards the text (`--gradient-fade-story`). An upside-down swoosh closes the section.
 
@@ -1539,35 +1631,18 @@ One person's story in a narrow column on white, beside a large portrait that fad
       <p class="story__note">*Samir is a pseudonym. Photograph is illustrative.</p>
     </div>
   </div>
-  <svg class="swoosh swoosh--end" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="swoosh" data-position="end" viewBox="0 0 1946 342" preserveAspectRatio="none" aria-hidden="true">
     <path class="swoosh__above" d="M0 0C826.8 35.9 1165.7 75.5 1165.7 75.5 1463.1 110.2 1946 214.4 1946 214.4V0Z"/>
     <path class="swoosh__crescent" d="M0 285.7C0 285.7 1008.6 165.7 1946 342.3V214.4C1946 214.4 1463.1 110.2 1165.7 75.5 826.8 35.9 0 0 0 0Z"/>
   </svg>
 </section>
 ```
 
-```css
-.story { position: relative; overflow: hidden; padding-block: calc(17.6cqi + var(--space-s)) 17.6cqi; }
-.story__media { position: absolute; inset: 6cqi 0 6cqi 20%; }
-.story__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 70% center; }
-.story__media::after { content: ""; position: absolute; inset: 0; background-image: var(--gradient-fade-story); }
-.story__content { position: relative; }
-.story__content > h2 { max-inline-size: 13em; }
-.story__text { --flow-space: var(--space-s); max-inline-size: 41rem; line-height: var(--leading-story); }
-.story__note { font-style: italic; }
-.story .swoosh { z-index: 1; }
-@container (max-width: 48rem) {
-  .story { display: flex; flex-direction: column; }
-  .story__media { position: relative; inset: auto; order: 2; aspect-ratio: 4 / 3; margin-block-start: var(--space-l); }
-  .story__media::after { background-image: var(--gradient-fade-top); }
-}
-```
-
 ### Testimonials
 
-Two testimonials side by side on white, the second set lower than the first. Gospel Ambition-only (`brands/gospel-ambition/patterns/testimonials.md`). Also needs the CSS from: container, switcher, testimonial, utilities.
+Two testimonials side by side on white, the second set lower than the first. Gospel Ambition-only (`brands/gospel-ambition/patterns/testimonials.md`). Works with: container, switcher, testimonial. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/testimonials.md */`).
 
-Two [testimonials](../../components/testimonial/) share the row. The design staggers them: the right one starts about 160px lower, which keeps two large italic quotes from reading as a table. They stack below about 50rem.
+Two [testimonials](../../components/testimonial/) share the row. The design staggers them: the right one starts about 160px lower, which keeps two large italic quotes from reading as a table. They stack below 48rem (`--threshold-m`), and are staggered only above 60rem (`--threshold-l`).
 
 #### Do
 
@@ -1592,28 +1667,22 @@ Two [testimonials](../../components/testimonial/) share the row. The design stag
 </section>
 ```
 
-```css
-.testimonials .switcher { --threshold: 50rem; --gutter: calc(var(--space-xxl) + var(--space-l)); align-items: flex-start; }
-@container (min-width: 64rem) {
-  .testimonials .switcher > :nth-child(2) { margin-block-start: calc(var(--space-xl) + var(--space-l)); }
-}
-```
-
 ### Tools grid
 
-Two-line heading, intro and a bold statement on the grey wash, then the tool cards three to a row and a plain text link to more tools. Gospel Ambition-only (`brands/gospel-ambition/patterns/tools-grid.md`). Also needs the CSS from: container, flow, grid, card, button, utilities.
+Two-line heading, intro and a bold statement on the grey wash, then the tool cards three to a row and a plain text link to more tools. Gospel Ambition-only (`brands/gospel-ambition/patterns/tools-grid.md`). Works with: container, flow, grid, card, button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/patterns/tools-grid.md */`).
 
 "Tools made on our mission field. Useful on yours." The section continues the wash under the ribbon. Heading Bold 56px, intro Regular 32px, a SemiBold 36px statement ("All free. Most multilingual. Some available in 50+ languages."), then six [tool cards](../../components/card/) in a [grid](../../composition/grid/), 28px apart. A centred, underlined Regular 26px link points to the smaller tools.
 
 #### Do
 
+- Keep the section on `.surface-wash`; the cards are white and need the tint behind them.
 - Order cards by the journey: Multiply, Pray, Pray, Steward, Engage, Evaluate in the design.
 - Give every tool card the same parts in the same order, so rows line up.
 
 #### Code
 
 ```html
-<section class="tools bg-wash">
+<section class="tools surface-wash">
   <div class="container flow">
     <h2>Tools made on our mission field.<br />Useful on yours.</h2>
     <p class="lead">Conceived on the mission field and delivered in difficult places.</p>
@@ -1623,50 +1692,42 @@ Two-line heading, intro and a bold statement on the grey wash, then the tool car
         <h3 class="card__category">Multiply</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/zume-training.png" alt="Zúme Training" />
         <p class="card__text">Trains ordinary believers to make disciples who make disciples. Small groups, self-paced, in 50+ languages. Free. Anytime. Anywhere.</p>
-        <a class="btn btn-outline" href="#">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="https://zume.training/">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
       <article class="card">
         <h3 class="card__category">Pray</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/prayer-global.png" alt="Prayer.Global" />
         <p class="card__text">Equips leaders to mobilize their church in informed, Scripture-guided prayer for real peoples and places. Builds the kind of prayer community that can cover the world and keep going.</p>
-        <a class="btn btn-outline" href="#">Start praying <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="https://prayer.global/">Start praying <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
       <article class="card">
         <h3 class="card__category">Pray</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/prayer-tools.png" alt="Prayer.Tools" />
         <p class="card__text">Helps prayer champions launch, equip, and sustain focused multilingual prayer campaigns, while giving intercessors a simple campaign page and one mobile app through which to pray.</p>
-        <a class="btn btn-outline" href="#">Mobilize prayer <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="https://prayer.tools/">Mobilize prayer <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
       <article class="card">
         <h3 class="card__category">Steward</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/disciple-tools.png" alt="Disciple.Tools" />
         <p class="card__text">Gives teams a secure way to track seekers, disciples, groups, and churches across generations. Free and open-source. Less administration. More time with people.</p>
-        <a class="btn btn-outline" href="#">Explore Disciple.Tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="https://disciple.tools/">Explore Disciple.Tools <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
       <article class="card">
         <h3 class="card__category">Engage</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/kingdom-training.png" alt="Kingdom Training" />
         <p class="card__text">Prepares disciple-makers to use media, advertising, and AI to find spiritually open people and bring them into face-to-face disciple-making relationships.</p>
-        <a class="btn btn-outline" href="#">Equip your ministry <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="https://kingdom.training/">Equip your ministry <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
       <article class="card">
         <h3 class="card__category">Evaluate</h3>
         <img class="card__logo" src="/brands/gospel-ambition/assets/tools/great-commission-benchmark.png" alt="Great Commission Benchmark" />
         <p class="card__text">Tests AI models for faithful, practical Great Commission usefulness. Pinpoints where a model supports the work and where it refuses, softens, or distorts it.</p>
-        <a class="btn btn-outline" href="#">Explore the benchmark <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+        <a class="btn" data-variant="outline" href="/tools/great-commission-benchmark/">Explore the benchmark <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
       </article>
     </div>
-    <p class="tools__more text-center"><a href="#">More tools: the Multiplication Widget and Movement Mapper</a></p>
+    <p class="tools__more text-center"><a href="/tools/">More tools: the Multiplication Widget and Movement Mapper</a></p>
   </div>
 </section>
-```
-
-```css
-.tools { padding-block: var(--space-xl) calc(var(--space-xl) * 2); }
-.tools .flow { --flow-space: var(--space-xs); }
-.tools .statement { --flow-space: var(--space-l); }
-.tools__grid { --grid-min: 28rem; --flow-space: var(--space-s); }
-.tools__more { --flow-space: var(--space-xl); font-size: var(--size-subtitle); }
 ```
 
 ## Base styles (`brands/gospel-ambition/base.css`)
@@ -1720,80 +1781,14 @@ img { max-width: 100%; height: auto; }
   font-weight: var(--weight-regular);
   line-height: var(--leading-heading);
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--surface-default-eyebrow);
 }
-.text-accent { color: var(--color-red); }
+.text-accent { color: var(--surface-default-accent); }
 
-/* Section backgrounds. Text on charcoal is white. */
-.bg-charcoal { background-color: var(--color-charcoal); color: var(--color-white); }
-.bg-wash { background-image: var(--gradient-wash); }
-.bg-charcoal .eyebrow { color: var(--color-white); }
-```
-
-## CSS variables (`brands/gospel-ambition/tokens.css`)
-
-```css
-/* GENERATED by scripts/generate.mjs from brands/gospel-ambition/tokens*.json. Do not edit this file: edit the sources, then run `npm run generate`. */
-
-:root, :host {
-  --color-background: #ffffff; /** Page background, tool cards, call-to-action cards, the nav bar. */
-  --color-text: #2e2d2c; /** Body text and headings on light backgrounds. Same value as charcoal. */
-  --color-red: #bc2026; /** The brand red. Primary buttons, the ribbon bands, the nav arch, highlighted words in headings, eyebrows, outline buttons, the ministries panel, the chat button. */
-  --color-red-dark: #8a1e20; /** A swatch saved in the design file but not used on the page. Used here only for hover on red buttons; the design has no hover states. */
-  --color-charcoal: #2e2d2c; /** Text, the dark ministries section, and the overlay on the call-to-action photo (at 78%). */
-  --color-grey-wash: #e6e7e8; /** Top of the wash gradient behind the stats and tools sections. */
-  --color-grey-light: #f7f7f7; /** The swoosh crescents between sections, and the grey button. */
-  --color-grey: #c7c7c7; /** 1px outlines of the light and grey buttons and the search field, and the search icon. */
-  --color-grey-dark: #707070; /** 1px outline of the call-to-action cards. Barely visible on the dark photo behind them. */
-  --color-white: #ffffff; /** Text on red, charcoal and photos; button labels on red. */
-  --gradient-wash: linear-gradient(#e6e7e8, #ffffff); /** Top-to-bottom wash behind the stats section and the tools section. */
-  --gradient-fade-hero: linear-gradient(90deg, #ffffff 19%, transparent 58%); /** Laid over the hero photo so it fades into the white page on its left. */
-  --gradient-fade-story: linear-gradient(90deg, #ffffff 37%, transparent 60%); /** Laid over the story photo so its left edge fades into white. */
-  --gradient-fade-top: linear-gradient(#ffffff, transparent); /** Laid over the top of a full-width photo band so it fades in from the white section above. */
-  --gradient-overlay: linear-gradient(color-mix(in srgb, #2e2d2c 78%, transparent), color-mix(in srgb, #2e2d2c 78%, transparent)); /** Charcoal at 78%, over the photo behind the call-to-action section. */
-  --shadow-nav: 0 3px 3px rgba(0, 0, 0, 0.05); /** Under the white nav bar. */
-  --shadow-card: 0 3px 3px rgba(0, 0, 0, 0.16); /** Call-to-action cards. Tool cards have no shadow. */
-  --shadow-float: 0 3px 3px rgba(0, 0, 0, 0.35); /** The floating chat button. */
-  --font-body: Poppins, Arial, sans-serif; /** Everything: headings, body, buttons, nav. The design uses Poppins Regular to ExtraBold, with italics. */
-  --font-heading: Poppins, Arial, sans-serif; /** Same family as body; headings differ by weight. */
-  --font-label: 'Bebas Neue', 'Arial Narrow', sans-serif; /** Eyebrows above call-to-action titles only (Equip your ministry, PAY IT FORWARD, STAY CONNECTED). Caps-only, one weight. */
-  --weight-regular: 400; /** Body text, intros, testimonial roles, the inactive tab. */
-  --weight-medium: 500; /** Tool card category and description, the hero tagline, the copyright line. */
-  --weight-semibold: 600; /** Buttons, nav links, subtitles on red ribbons, the active tab, testimonial names. */
-  --weight-bold: 700; /** Section headings (h2), card titles (h3), the footer tagline. */
-  --weight-heavy: 800; /** Page and ribbon titles (h1), the hero title (italic) and the 'Let's go.' display line. */
-  --leading-body: 1.5; /** Body (20/30), buttons, nav, ribbon subtitles (26/39). */
-  --leading-lead: 1.3; /** Intros and statements at 32px and 36px (32/42, 36/47). */
-  --leading-heading: 1.2; /** h1–h3 (56/66, hero 66/78, card titles 36/41). */
-  --leading-quote: 1.4; /** Testimonial quotes (36/50). */
-  --leading-story: 1.7; /** Long-form story text (20/34). */
-  --leading-display: 1; /** 'Let's go.' The design sets 80px type on a 66px line; 1 keeps the descenders clear. */
-  --size-small: 1.125rem; /** 18px. Nav links, outline buttons in cards, footer links and copyright. The nav Give pill is 17px in the design. */
-  --size-body: clamp(1.0625rem, 1rem + 0.25cqi, 1.25rem); /** 20px in the design. Body text, primary buttons, tool card descriptions. */
-  --size-eyebrow: 1.5rem; /** 24px. Bebas Neue eyebrows. */
-  --size-subtitle: clamp(1.25rem, 1.1rem + 0.4cqi, 1.625rem); /** 26px in the design. Subtitles on ribbons, tabs, the 'More tools' link, testimonial roles (25px in the design). */
-  --size-lead: clamp(1.375rem, 1.1rem + 0.75cqi, 2rem); /** 32px in the design. Intros under section headings, the scripture block. */
-  --size-h3: clamp(1.5rem, 1.2rem + 0.9cqi, 2.25rem); /** 36px in the design. Card titles, tool categories, statements, testimonial quotes. Testimonial names are 38px in the design, folded in here. */
-  --size-tagline: clamp(1.75rem, 1.3rem + 1.2cqi, 2.75rem); /** 44px in the design. The footer tagline. */
-  --size-h2: clamp(2rem, 1.3rem + 2.2cqi, 3.5rem); /** 56px in the design. Section headings. */
-  --size-h1: clamp(2.5rem, 1.6rem + 2.6cqi, 4.125rem); /** 66px in the design. The hero title and ribbon titles. */
-  --size-display: clamp(3rem, 1.8rem + 3.3cqi, 5rem); /** 80px in the design. 'Let's go.' */
-  --size-icon: 1.3em; /** Width of the arrow icon in buttons (26px beside 20px text). */
-  --size-logo: 5.8rem; /** 93px. Height of the logo in the nav bar (320×93). */
-  --size-tool-logo: 5.625rem; /** 90px. Height of a tool logo in a tool card. */
-  --size-avatar: 12.3rem; /** 197px. Diameter of a testimonial photo. */
-  --size-chat: 7.4rem; /** 119px. Diameter of the chat button. */
-  --size-measure: 52rem; /** 836px. Width of the hero tagline and ribbon subtitles. */
-  --size-container: 102.5rem; /** 1640px. Width of every section's content (140px margins at 1920px). */
-  --radius-md: 16px; /** Call-to-action cards and their photos, the embedded chart. */
-  --radius-lg: 25px; /** Tool cards and the ministries panel. */
-  --radius-pill: 999px; /** Every button and the search field. */
-  --space-xxs: 0.5rem; /** 8px. Eyebrow to title. */
-  --space-xs: 1rem; /** 16px. Heading to subtitle, small gaps. */
-  --space-s: 1.75rem; /** 28px. Gap between tool cards, between the Give pill and the search field; button padding left and right. */
-  --space-m: 3rem; /** 48px. Card padding (43–50px in the design), the default flow gap. */
-  --space-l: 4rem; /** 64px. Space under the button in a tool card; between a heading block and a grid. */
-  --space-xl: 6rem; /** 96px. Section padding top and bottom. */
-  --space-xxl: 8.75rem; /** 140px. The scripture block's indent (131px in the design). */
-}
+/* Section backgrounds are surfaces (.surface-default, .surface-wash, .surface-dark, .surface-red),
+   generated from tokens.json. Red text fails on charcoal, so eyebrows and accents turn white there. */
+.surface-wash .eyebrow { color: var(--surface-wash-eyebrow); }
+.surface-wash .text-accent { color: var(--surface-wash-accent); }
+.surface-dark .eyebrow { color: var(--surface-dark-eyebrow); }
+.surface-dark .text-accent { color: var(--surface-dark-accent); }
 ```

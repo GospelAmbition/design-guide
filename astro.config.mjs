@@ -19,13 +19,14 @@ const docItems = (b, kind) =>
   b[kind].map((d) => ({ label: d.data.title ?? d.name, link: `/guide/${b.id}/${kind}/${d.name}/`, ...(badge(d) && { badge: badge(d) }) }));
 
 const sidebar = [
-  { label: 'Start here', items: [{ label: 'Overview', slug: 'index' }, { label: 'Using this with AI', slug: 'using-with-ai' }] },
+  { label: 'Start here', items: [{ label: 'Overview', slug: 'index' }, { label: 'Using this with AI', slug: 'using-with-ai' }, { label: 'Building a page with AI', slug: 'build-a-page' }] },
   ...brands.map((b) => ({
     label: b.meta.name ?? b.id,
     collapsed: true,
     items: [
       { label: 'Overview', link: `/guide/${b.id}/` },
       { label: 'Tokens', link: `/guide/${b.id}/tokens/` },
+      { label: 'Utilities & surfaces', link: `/guide/${b.id}/utilities/` },
       ...(b.composition.length ? [{ label: 'Composition', collapsed: true, items: docItems(b, 'composition') }] : []),
       { label: 'Components', collapsed: true, items: docItems(b, 'components') },
       ...(b.patterns.length ? [{ label: 'Patterns', collapsed: true, items: docItems(b, 'patterns') }] : []),
@@ -37,7 +38,7 @@ const sidebar = [
 
 // In dev: regenerate tokens.css / brief.md / llms.txt whenever a source changes, and restart
 // when files are added or removed so the sidebar and routes pick them up.
-const GENERATED = /(^|\/)(brief\.md|tokens\.css|llms\.txt)$/;
+const GENERATED = /(^|\/)(brief\.md|tokens\.css|brand\.css|kit\.json|llms\.txt)$/;
 const liveSources = {
   name: 'design-system-live-sources',
   hooks: {

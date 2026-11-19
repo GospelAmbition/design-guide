@@ -14,9 +14,9 @@ From the Hosting page, where each host lists what it offers.
 
 ```html
 <ul class="icon-list" role="list">
-  <li><i class="far fa-check-circle icon-check" aria-hidden="true"></i><span>Managed WordPress hosting</span></li>
-  <li><i class="far fa-check-circle icon-check" aria-hidden="true"></i><span>Daily backups</span></li>
-  <li><i class="far fa-check-circle icon-check" aria-hidden="true"></i><span>Disciple.Tools pre-installed</span></li>
+  <li><i class="far fa-check-circle icon" data-variant="check" aria-hidden="true"></i><span>Managed WordPress hosting</span></li>
+  <li><i class="far fa-check-circle icon" data-variant="check" aria-hidden="true"></i><span>Daily backups</span></li>
+  <li><i class="far fa-check-circle icon" data-variant="check" aria-hidden="true"></i><span>Disciple.Tools pre-installed</span></li>
 </ul>
 ```
 

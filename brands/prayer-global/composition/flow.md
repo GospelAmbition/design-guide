@@ -1,43 +1,43 @@
 ---
 title: Flow
-summary: Vertical space between children, in four fixed sizes. .flow (4rem), .flow-large (3rem), .flow-medium (2rem), .flow-xsmall (1rem).
+summary: Even vertical space between the children of an element. Like the shared Flow, but it also clears the children's own top and bottom margins.
 ---
 
-Prayer.Global's own flow, from the Composition section of `basic.css`. It replaces the shared Flow because the site's version differs in three ways:
+Prayer.Global's own flow, from the Composition section of the site's `basic.css`. It replaces the shared Flow because the site's version also clears every child's own top and bottom margins, so headings and paragraphs keep exactly the gap you set.
 
-- Each size is its own class, so `.flow-xsmall` works without `.flow`.
-- `.flow` defaults to 4rem.
-- It also clears every child's own top and bottom margins.
+The site has one class per size (`.flow-xsmall`, `.flow-medium`, `.flow-xmedium`, and `.flow` at 4rem). Here there is one `.flow`, and you set the size with the `--flow-space` setting, to a space token.
 
-The site's `--pg-flow-size` override is called `--flow-space` here, as in the shared Flow. The size classes are named after the space token they use, so two differ from the site: its `.flow-small` is `.flow-xsmall` here and its `.flow-xmedium` is `.flow-large`.
+## Settings
+
+| Property | Default | What it does |
+| --- | --- | --- |
+| `--flow-space` | `var(--space-m)` | Space between each child. Set it on the element or on any child. |
 
 ## When to use
 
-- `.flow-xsmall`: inside a text column (heading, paragraphs, button).
-- `.flow-medium`: between groups inside a section.
-- `.flow`: between whole sections stacked in one wrapper.
+- `style="--flow-space: var(--space-xs)"` (1rem): inside a text column (heading, paragraphs, button).
+- No setting (2rem): between groups inside a section.
+- `style="--flow-space: var(--space-xl)"` (4rem): between whole sections stacked in one wrapper.
+
+## Don't
+
+- Don't add margins to the children. Flow owns that space.
 
 ## Code
 
 ```html
-<div class="flow-xsmall" style="max-width: 32rem">
-  <h3>Flow small</h3>
+<div class="flow" style="--flow-space: var(--space-xs)">
+  <h3>Flow, extra small</h3>
   <p>1rem between each child.</p>
   <p>Child margins are cleared.</p>
 </div>
-<div class="flow-medium" style="max-width: 32rem">
-  <h3>Flow medium</h3>
+<div class="flow">
+  <h3>Flow, default</h3>
   <p>2rem between each child.</p>
 </div>
 ```
 
 ```css
-.flow > *,
-.flow-large > *,
-.flow-medium > *,
-.flow-xsmall > * { margin-top: 0; margin-bottom: 0; }
-.flow > * + * { margin-top: var(--flow-space, var(--space-xl)); }
-.flow-large > * + * { margin-top: var(--flow-space, var(--space-l)); }
-.flow-medium > * + * { margin-top: var(--flow-space, var(--space-m)); }
-.flow-xsmall > * + * { margin-top: var(--flow-space, var(--space-xs)); }
+.flow > * { margin-block: 0; }
+.flow > * + * { margin-block-start: var(--flow-space, var(--space-m)); }
 ```

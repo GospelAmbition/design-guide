@@ -25,10 +25,10 @@ Five or more children always stack. The Switcher is for two to four items.
 ## Code
 
 ```html
-<div class="switcher" style="width: 100%">
-  <div style="outline: 1px dashed currentColor; padding: 1rem">One</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Two</div>
-  <div style="outline: 1px dashed currentColor; padding: 1rem">Three</div>
+<div class="switcher demo-fill">
+  <div class="demo-box">One</div>
+  <div class="demo-box">Two</div>
+  <div class="demo-box">Three</div>
 </div>
 ```
 

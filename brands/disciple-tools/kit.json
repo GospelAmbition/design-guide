@@ -1,0 +1,17 @@
+{
+  "brand": "disciple-tools",
+  "name": "Disciple.Tools",
+  "fonts": [
+    "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto:ital,wght@0,400;0,700;0,800;1,700&display=swap",
+    "assets/fonts/font-awesome.css"
+  ],
+  "files": [
+    "assets/fonts/fa-brands-400.woff",
+    "assets/fonts/fa-brands-400.woff2",
+    "assets/fonts/fa-regular-400.woff",
+    "assets/fonts/fa-regular-400.woff2",
+    "assets/fonts/fa-solid-900.woff",
+    "assets/fonts/fa-solid-900.woff2",
+    "assets/fonts/font-awesome.css"
+  ]
+}

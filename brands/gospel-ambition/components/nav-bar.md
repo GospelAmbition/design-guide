@@ -11,7 +11,7 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
 ## Do
 
 - Keep the menu to four or five short items. The design has About, Tools & trainings, Impact, For your ministry.
-- Keep Give as the last link, as a `.btn-primary.btn-sm` pill.
+- Keep Give as the last link, as a small primary pill: `class="btn" data-variant="primary" data-size="small"`. Give and the search field sit together in a cluster, 28px apart (half the gap between links), so they wrap as a pair on narrow screens.
 
 ## Approximate
 
@@ -24,18 +24,22 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
 <header class="nav-bar">
   <svg class="nav-bar__arch" viewBox="0 0 1920 73" preserveAspectRatio="none" aria-hidden="true"><path d="M1920 73.3C1920 73.3 1619.9 12.7 962.3 12.7 325.9 12.7 0 73.3 0 73.3V0h1920Z"/></svg>
   <div class="container nav-bar__inner">
-    <a class="nav-bar__logo" href="#"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" /></a>
+    <a class="nav-bar__logo" href="/"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" /></a>
     <nav class="nav-bar__menu" aria-label="Main">
-      <a href="#">About</a>
-      <a href="#">Tools &amp; trainings</a>
-      <a href="#">Impact</a>
-      <a href="#">For your ministry</a>
-      <a class="btn btn-primary btn-sm" href="#">Give</a>
-      <label class="search">
-        <svg class="search__icon" viewBox="0 0 16.19 16.19" aria-hidden="true"><path d="M11.88 10.46a6.57 6.57 0 1 0-1.41 1.42h-.01l.1.12 3.9 3.89a1.01 1.01 0 0 0 1.43-1.43L12 10.56a1 1 0 0 0-.12-.1Zm.26-3.89a5.57 5.57 0 1 1-11.13 0 5.57 5.57 0 0 1 11.13 0Z"/></svg>
-        <span class="visually-hidden">Search</span>
-        <input class="search__input" type="search" />
-      </label>
+      <a href="/about/">About</a>
+      <a href="/tools/">Tools &amp; trainings</a>
+      <a href="/impact/">Impact</a>
+      <a href="/for-your-ministry/">For your ministry</a>
+      <div class="cluster" style="--gutter: var(--space-s)">
+        <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
+        <form role="search" action="/search/">
+          <label class="search">
+            <svg class="search__icon" viewBox="0 0 16.19 16.19" aria-hidden="true"><path d="M11.88 10.46a6.57 6.57 0 1 0-1.41 1.42h-.01l.1.12 3.9 3.89a1.01 1.01 0 0 0 1.43-1.43L12 10.56a1 1 0 0 0-.12-.1Zm.26-3.89a5.57 5.57 0 1 1-11.13 0 5.57 5.57 0 0 1 11.13 0Z"/></svg>
+            <span class="visually-hidden">Search</span>
+            <input class="search__input" type="search" name="q" />
+          </label>
+        </form>
+      </div>
     </nav>
   </div>
 </header>
@@ -63,7 +67,4 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
   color: var(--color-text);
 }
 .nav-bar__menu > a:not(.btn):hover { color: var(--color-red); }
-/* The Give pill and the search field sit closer: 28px instead of 56px. */
-.nav-bar__menu > .btn,
-.nav-bar__menu > .search { margin-inline-start: calc(var(--space-s) * -1); }
 ```

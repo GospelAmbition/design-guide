@@ -1,19 +1,19 @@
 ---
 title: Steps band
-summary: A green band of numbered steps. Huge white Open Sans numbers beside short white instructions.
-uses: [container, flow, utilities]
+summary: A green band (`.surface-green`) of numbered steps. Huge Open Sans numbers beside short instructions.
+uses: [container, flow]
 ---
 
-"7 Simple Steps to…" on the Hosting page. Each step is a big number (89px, `--size-step`) in a column of its own, with the instruction (Open Sans 400, 20.8px) beside it.
+"7 Simple Steps to…" on the Hosting page. Each step is a big number (89px, `--size-step`) in a column of its own, with the instruction (Open Sans 400, 20.8px) beside it. The site sets them in white; on the green surface they are near-black, because white on green is 2.1:1.
 
 ## Don't
 
-- Don't put long text here. White on green fails contrast for body-size text (see Known issues); the site gets by with 20.8px.
+- Don't put long text here. Keep each step to one line.
 
 ## Code
 
 ```html
-<section class="steps-band bg-green pt-l pb-l">
+<section class="surface-green pt-l pb-l">
   <div class="container flow">
     <h2 class="text-center">7 Simple Steps to Self-Hosting</h2>
     <ol class="steps" role="list">
@@ -35,5 +35,5 @@ uses: [container, flow, utilities]
   line-height: var(--leading-heading);
   text-align: center;
 }
-.steps h4 { font-weight: var(--weight-regular); color: var(--color-white); }
+.steps h4 { font-weight: var(--weight-regular); }
 ```

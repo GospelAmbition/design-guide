@@ -1,0 +1,8 @@
+{
+  "$description": "Prayer.Global's additions to system/utilities.json.",
+  "utilities": [
+    { "name": "align-items", "property": "align-items", "values": { "center": "center" }, "description": "Centres the items of a flex row (a switcher or cluster) vertically." },
+    { "name": "grow", "property": "flex-grow", "values": { "1": "1", "2": "2", "3": "3", "4": "4" }, "description": "How much a switcher child grows compared with its siblings, for unequal columns." },
+    { "name": "bg-cover", "class": "bg-cover", "declarations": { "background-size": "cover", "background-repeat": "no-repeat" }, "description": "Makes a background image cover the whole block." }
+  ]
+}

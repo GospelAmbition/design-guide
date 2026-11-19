@@ -9,7 +9,7 @@ Only the visual state is designed. Wire it up with the usual tab roles (`role="t
 
 ## Do
 
-- Use tabs only on `.bg-charcoal`, and only to switch between two or three views of the same content.
+- Use tabs only on `.surface-dark`, and only to switch between two or three views of the same content.
 
 ## Approximate
 
@@ -18,10 +18,10 @@ Only the visual state is designed. Wire it up with the usual tab roles (`role="t
 ## Code
 
 ```html
-<div class="bg-charcoal" style="padding: 1.5rem">
+<div class="surface-dark p-s">
   <div class="tabs" role="tablist" aria-label="Who uses Gospel Ambition">
-    <button class="tabs__tab" role="tab" aria-selected="true">Ministries</button>
-    <button class="tabs__tab" role="tab" aria-selected="false">Recent Activity</button>
+    <button class="tabs__tab" type="button" role="tab" aria-selected="true">Ministries</button>
+    <button class="tabs__tab" type="button" role="tab" aria-selected="false">Recent Activity</button>
   </div>
 </div>
 ```
@@ -31,7 +31,7 @@ Only the visual state is designed. Wire it up with the usual tab roles (`role="t
 .tabs__tab {
   padding: 0;
   font: var(--weight-regular) var(--size-subtitle) / var(--leading-body) var(--font-body);
-  color: var(--color-white);
+  color: var(--surface-dark-text);
   background: none;
   border: 0;
   opacity: 0.8;

@@ -18,7 +18,7 @@ No card, no quote mark icon: the quote itself is the design. Poppins Italic 36px
 ## Code
 
 ```html
-<figure class="testimonial" style="max-width: 45rem">
+<figure class="testimonial center" style="--measure: var(--size-measure)">
   <blockquote><p>“We have worked with hundreds of organizations around the world. Pound for pound, the Gospel Ambition team is the most fruitful group in frontier missions I know.”</p></blockquote>
   <img class="testimonial__photo" src="/brands/gospel-ambition/assets/photos/clyde-taber.jpg" alt="" />
   <figcaption><strong class="testimonial__name">Clyde Taber</strong> Director of the Visual Story Network</figcaption>

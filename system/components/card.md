@@ -21,7 +21,7 @@ uses: [button]
 <div class="card">
   <h3>Card title</h3>
   <p>Cards group related content on a surface with a border and a medium radius.</p>
-  <button class="btn btn-primary" type="button">Learn more</button>
+  <a class="btn" data-variant="primary" href="/events/">Learn more</a>
 </div>
 ```
 

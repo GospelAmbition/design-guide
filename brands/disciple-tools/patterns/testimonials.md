@@ -1,10 +1,10 @@
 ---
 title: Testimonials
 summary: A green stripe, then a row of up to four testimonial cards on white.
-uses: [card, icon, container, switcher, utilities]
+uses: [card, icon, container, switcher]
 ---
 
-On the home page, after the feature rows. A 30px green stripe (the section's top border) marks the change from product to people, then four [cards](../../components/card/) sit in a row. They stack below 768px.
+On the home page, after the feature rows. A 30px green stripe (the section's top border) marks the change from product to people, then four [cards](../../components/card/) sit in a row. They stack below 768px (`--threshold-l`).
 
 ## Do
 
@@ -18,12 +18,12 @@ On the home page, after the feature rows. A 30px green stripe (the section's top
   <div class="container"><div class="switcher">
     <figure class="card">
       <figcaption class="card__head"><h5>A field worker</h5><p>in the Middle East</p></figcaption>
-      <i class="fas fa-quote-left icon-quote" aria-hidden="true"></i>
+      <i class="fas fa-quote-left icon" data-variant="quote" aria-hidden="true"></i>
       <blockquote><p>Our team is made up of a small group of nationals and expats. Disciple.Tools gives us an easy and secure way to track conversations.</p></blockquote>
     </figure>
     <figure class="card">
       <figcaption class="card__head"><h5>A Team Leader</h5><p>using Disciple.Tools</p></figcaption>
-      <i class="fas fa-quote-left icon-quote" aria-hidden="true"></i>
+      <i class="fas fa-quote-left icon" data-variant="quote" aria-hidden="true"></i>
       <blockquote><p>Disciple.Tools helped organize our team, streamline our communication and follow up with every contact.</p></blockquote>
     </figure>
   </div></div>
@@ -32,5 +32,5 @@ On the home page, after the feature rows. A 30px green stripe (the section's top
 
 ```css
 .testimonials { border-top: var(--space-s) solid var(--color-green); }
-.testimonials .container > .switcher { --threshold: 48rem; --gutter: var(--space-xs); }
+.testimonials .container > .switcher { --threshold: var(--threshold-l); --gutter: var(--space-xs); }
 ```

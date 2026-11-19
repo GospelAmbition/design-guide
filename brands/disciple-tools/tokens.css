@@ -8,7 +8,7 @@
   --color-sky: #00aeff; /** Hover and open background of nav menu items. Used nowhere else. */
   --color-blue-tint: rgba(144, 180, 208, 0.4); /** Background of the note callout (.dt-note): #90B4D0 at 40%. */
   --color-grey-lightest: #f8f8f8; /** Light sections: the partner-logo strip, the footer menu, testimonial section on some pages. */
-  --color-grey-lighter: #f5f5f5; /** Text on blue bands, dividers, striped table rows (the site's #F1F1F1 folded in). */
+  --color-grey-lighter: #f5f5f5; /** Dividers and striped table rows (the site's #F1F1F1 folded in). The site also sets paragraphs on blue bands in it; the blue surface uses white. */
   --color-grey-light: #e9eaec; /** The icon-grid section background and the rules between feature-list rows. */
   --color-grey: #d3d3d3; /** Form field borders, the dropdown menu border and the focus glow (the site's #CACACA/#CCCCCC folded in). */
   --color-grey-dark: #8a8a8a; /** The 1px rule under the nav bar. */
@@ -72,4 +72,26 @@
   --space-footer: 2rem; /** Space above the footer menu columns. */
   --space-copyright: 3rem; /** Padding of the copyright bar. */
   --space-band: 25px; /** Title band padding top and bottom (82px tall with a 32px heading). Card padding below 768px. */
+  --threshold-s: 20rem; /** 320px. A pair of buttons stacks below this (feature rows). */
+  --threshold-m: 40rem; /** 640px. The footer columns stack, and the nav menu collapses on the site. */
+  --threshold-l: 48rem; /** 768px. The site's main breakpoint: feature rows, icon grid, link band and testimonials stack, card padding drops. */
+  --surface-default-background: #ffffff;
+  --surface-default-text: #0a0a0a;
+  --surface-default-heading: #3f729b;
+  --surface-default-link: #3f729b;
+  --surface-blue-background: #3f729b;
+  --surface-blue-text: #ffffff;
+  --surface-blue-heading: #ffffff;
+  --surface-blue-link: #ffffff;
+  --surface-green-background: #8bc34a;
+  --surface-green-text: #0a0a0a;
+  --surface-green-heading: #0a0a0a;
+  --surface-green-link: #0a0a0a;
+  --surface-grey-light-background: #e9eaec;
+  --surface-grey-light-text: #0a0a0a;
+  --surface-grey-light-heading-large: #3f729b;
+  --surface-grey-lightest-background: #f8f8f8;
+  --surface-grey-lightest-text: #0a0a0a;
+  --surface-grey-lightest-heading: #3f729b;
+  --surface-grey-lightest-link: #3f729b;
 }

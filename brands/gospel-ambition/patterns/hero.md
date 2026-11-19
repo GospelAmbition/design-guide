@@ -10,7 +10,8 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
 
 - Write the title as one sentence over three short lines, and put the last few words in `.text-accent`.
 - Choose a photo of a group of people, faces towards the left, with the subject in the right half.
-- Use `.btn-primary` for the main route in and `.btn-light` for the story.
+- Use a primary button for the main route in and a light one (`data-variant="light"`) for the story.
+- Follow it with a ribbon with `data-overlap`, so the ribbon covers the bottom of the photo.
 
 ## Don't
 
@@ -18,7 +19,7 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
 
 ## Approximate
 
-- There is no mobile design. Below 48rem the photo moves under the text instead of behind it; this is a proposal.
+- There is no mobile design. Below 48rem (`--threshold-m`) the photo moves under the text instead of behind it; this is a proposal.
 
 ## Code
 
@@ -29,13 +30,13 @@ The top of the home page, under the nav bar. The title is Poppins ExtraBold Ital
     <h1 class="hero__title">Fulfilling the<br />Great Commission<br />in this generation, <span class="text-accent">with you.</span></h1>
     <p class="hero__tagline">Mission experience. Technical expertise.<br />A shared calling to multiply obedient disciples.</p>
     <div class="cluster hero__actions">
-      <a class="btn btn-primary" href="#">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-      <a class="btn btn-light" href="#">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="primary" href="/tools/">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="light" href="/about/">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
     <button class="chat-button hero__chat" type="button" aria-label="Chat with us"><span class="chat-button__bubble"></span></button>
   </div>
 </section>
-<section class="ribbon" style="--ribbon-overlap: -13.4cqi">
+<section class="ribbon" data-overlap>
   <svg class="ribbon__shape" viewBox="0 0 1924.5 664.5" preserveAspectRatio="none" aria-hidden="true">
     <path class="ribbon__below" d="M1924.5 248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5H1924.5Z"/>
     <path d="M0 110C0 110 997.3 342.9 1924.5 0V248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5Z"/>

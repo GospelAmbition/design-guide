@@ -1,0 +1,22 @@
+/* A small modern reset, first in every brand.css. Structural only: no colours, fonts or sizes.
+   base.css (shared or the brand's own) styles the elements on top of this. */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+img, picture, video, canvas, svg { max-inline-size: 100%; }
+img, video { block-size: auto; }
+input, button, textarea, select { font: inherit; }
+figure { margin: 0; }
+/* Lists given role="list" lose their bullets and indent, for nav menus, clusters and grids of cards. */
+:where(ul, ol)[role="list"] { list-style: none; margin: 0; padding: 0; }
+:target { scroll-margin-block: 5ex; }
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

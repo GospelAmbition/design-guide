@@ -2,6 +2,8 @@
    Load after assets/fonts/fonts.css, assets/fonts/prayer-global-icons.css and tokens.css.
    Based on the rules prayer.global renders, with values as tokens. */
 body {
+  /* So components can switch size with @container queries at a --threshold-* width, instead of viewport breakpoints. */
+  container-type: inline-size;
   margin: 0;
   background: var(--color-background);
   color: var(--color-text);
@@ -22,17 +24,14 @@ h3 { font-size: var(--size-h3); }
 h4, h5 { font-family: var(--font-body); font-weight: var(--weight-strong); text-transform: uppercase; }
 h4 { font-size: var(--size-h4); }
 h5 { font-size: var(--size-h5); margin-bottom: 0; }
-@media (min-width: 768px) { h2 { font-size: var(--size-h2); } }
-@media (max-width: 768px) { h1 { font-size: var(--size-h1-md); } }
-@media (max-width: 576px) { h1 { font-size: var(--size-h1-sm); } }
+/* The site's 768px and 576px breakpoints, as container queries at --threshold-l (48rem) and --threshold-s (36rem). */
+@container (width >= 48rem) { h2 { font-size: var(--size-h2); } }
+@container (width <= 48rem) { h1 { font-size: var(--size-h1-md); } }
+@container (width <= 36rem) { h1 { font-size: var(--size-h1-sm); } }
 
-/* .h2 + .font-base: the big sentence-case Europa heading ("Want to pray globally…"). */
+/* .h2 + .font-body: the big sentence-case Europa heading ("Want to pray globally…"). */
 .h2 { font-size: var(--size-h2-sm); line-height: var(--leading-title); }
-@media (max-width: 768px) { .h2 { font-size: var(--size-h2-xs); } }
-.font-base { font-family: var(--font-body); }
-.font-title { font-family: var(--font-heading); }
-.font-weight-bold { font-weight: var(--weight-strong); }
-.uppercase { text-transform: uppercase; }
+@container (width <= 48rem) { .h2 { font-size: var(--size-h2-xs); } }
 
 p { margin: 0 0 var(--space-xs); }
 a { color: var(--color-brand-lighter); transition: 0.3s all ease; }
@@ -50,10 +49,3 @@ li + li { margin-top: var(--space-xs); }
 [dir="rtl"] ul li::before { left: auto; right: 0; }
 
 *:focus-visible { box-shadow: none; outline: 2px solid var(--color-secondary); outline-offset: 2px; }
-
-/* Colour utilities the site uses on whole sections. */
-.white { color: var(--color-white); }
-.brand-bg { background-color: var(--color-brand); }
-.brand-lightest-bg { background-color: var(--color-brand-lightest); }
-.dark-bg { background-color: var(--color-dark); }
-.brand-highlight { color: var(--color-brand-highlight); }

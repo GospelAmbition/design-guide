@@ -7,8 +7,10 @@ summary: Triggers an action. Primary for the main action on a screen, secondary 
 
 ## When to use
 
-- **Primary:** the single most important action on a screen.
-- **Secondary:** any other action next to a primary one.
+- **Primary** (`data-variant="primary"`): the single most important action on a screen.
+- **Secondary** (`data-variant="secondary"`): any other action next to a primary one.
+
+Variants are CUBE CSS exceptions: the block is `.btn`, and `data-variant` picks the version.
 
 ## Do
 
@@ -23,8 +25,8 @@ summary: Triggers an action. Primary for the main action on a screen, secondary 
 ## Code
 
 ```html
-<button class="btn btn-primary" type="button">Primary action</button>
-<button class="btn btn-secondary" type="button">Secondary</button>
+<button class="btn" data-variant="primary" type="button">Primary action</button>
+<button class="btn" data-variant="secondary" type="button">Secondary</button>
 ```
 
 ```css
@@ -35,12 +37,12 @@ summary: Triggers an action. Primary for the main action on a screen, secondary 
   padding: var(--space-s) var(--space-l);
   cursor: pointer;
 }
-.btn-primary {
+.btn[data-variant="primary"] {
   background: var(--color-primary);
   color: var(--color-on-primary);
 }
-.btn-primary:hover { background: var(--color-primary-hover); }
-.btn-secondary {
+.btn[data-variant="primary"]:hover { background: var(--color-primary-hover); }
+.btn[data-variant="secondary"] {
   background: transparent;
   color: var(--color-secondary);
   box-shadow: inset 0 0 0 2px var(--color-secondary);

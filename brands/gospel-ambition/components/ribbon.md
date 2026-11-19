@@ -8,11 +8,13 @@ The design's signature shape, used twice on the home page: once under the hero (
 
 The shape is an inline SVG stretched to the band (`preserveAspectRatio="none"`), so it keeps the curve at any width. The content's padding scales with the viewport so the text stays inside the tall part.
 
+Add `data-overlap` to lay the ribbon over the bottom of the section above (the hero photo, the photo band), as the design does both times.
+
 ## Settings
 
 | Property | Default | What it does |
 | --- | --- | --- |
-| `--ribbon-overlap` | `0` | Negative top margin, to lay the ribbon over the bottom of the section above (the hero photo, the photo band). The design overlaps by about 13cqi. |
+| `--ribbon-overlap` | `-13.4cqi` | With `data-overlap`: the negative top margin. The design's overlap; you rarely need to change it. |
 | `--ribbon-below` | `transparent` | Fill for the area under the ribbon's bottom edge. Set it to the next section's top colour when the next section starts behind the ribbon (`var(--color-grey-wash)` before the tools section). |
 
 ## Do
@@ -27,15 +29,9 @@ The shape is an inline SVG stretched to the band (`preserveAspectRatio="none"`),
 
 ## Approximate
 
-- Below 48rem (no mobile design) the ribbon would get too thin on the right for its text, so it becomes a plain red band with the curve dropped. This is a proposal.
+- Below 48rem (`--threshold-m`, no mobile design) the ribbon would get too thin on the right for its text, so it becomes a plain red band with the curve dropped. This is a proposal.
 
 ## Code
-
-The shape on its own, at the design's proportions:
-
-```html
-<svg viewBox="0 0 1924.5 664.5" style="display: block; width: 100%; height: auto; fill: var(--color-red)" aria-hidden="true"><path d="M0 110C0 110 997.3 342.9 1924.5 0V248.3C1924.5 248.3 1446.7 450.5 1152.7 517.9 817.6 594.7 0 664.5 0 664.5Z"/></svg>
-```
 
 The ribbon with its content. In a narrow preview it shows the small-screen fallback:
 
@@ -56,16 +52,17 @@ The ribbon with its content. In a narrow preview it shows the small-screen fallb
 .ribbon {
   position: relative;
   z-index: 1;
-  margin-block-start: var(--ribbon-overlap, 0);
-  color: var(--color-white);
+  color: var(--surface-red-text);
 }
-.ribbon__shape { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; fill: var(--color-red); }
+.ribbon[data-overlap] { margin-block-start: var(--ribbon-overlap, -13.4cqi); }
+.ribbon__shape { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; fill: var(--surface-red-background); }
 .ribbon__shape .ribbon__below { fill: var(--ribbon-below, transparent); }
 .ribbon__content { padding-block: 20cqi 7cqi; }
 .ribbon__content > * { max-inline-size: var(--size-measure); }
 .ribbon__title { font-size: var(--size-h1); font-weight: var(--weight-heavy); margin-block-end: var(--space-xxs); }
 @container (max-width: 48rem) {
-  .ribbon { background: var(--color-red); margin-block-start: 0; }
+  .ribbon { background: var(--surface-red-background); }
+  .ribbon[data-overlap] { margin-block-start: 0; }
   .ribbon__shape { display: none; }
   .ribbon__content { padding-block: var(--space-l); }
 }

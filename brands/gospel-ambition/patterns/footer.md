@@ -17,15 +17,15 @@ The page ends where it started: "Fulfilling the Great Commission in this generat
 <footer class="footer">
   <p class="tagline text-center container">Fulfilling the Great Commission in this generation, <span class="text-accent">with you.</span></p>
   <div class="footer__brand">
-    <a class="footer__logo" href="#"><img src="/brands/gospel-ambition/assets/logo-badge.png" alt="" /><img src="/brands/gospel-ambition/assets/logo-wordmark.png" alt="Gospel Ambition" /></a>
+    <a class="footer__logo" href="/"><img src="/brands/gospel-ambition/assets/logo-badge.png" alt="" /><img src="/brands/gospel-ambition/assets/logo-wordmark.png" alt="Gospel Ambition" /></a>
   </div>
   <div class="container repel footer__bar">
     <p>© 2026 Gospel Ambition. All rights reserved.</p>
     <nav class="cluster footer__links" aria-label="Footer">
-      <a href="#">Free resources</a>
-      <a href="#">Contact</a>
-      <a href="#">Give</a>
-      <a href="#">Privacy</a>
+      <a href="/resources/">Free resources</a>
+      <a href="/contact/">Contact</a>
+      <a href="/give/">Give</a>
+      <a href="/privacy/">Privacy</a>
     </nav>
   </div>
 </footer>

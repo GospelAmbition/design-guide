@@ -60,4 +60,21 @@
   --space-l: 4rem; /** 64px. Space under the button in a tool card; between a heading block and a grid. */
   --space-xl: 6rem; /** 96px. Section padding top and bottom. */
   --space-xxl: 8.75rem; /** 140px. The scripture block's indent (131px in the design). */
+  --threshold-s: 28rem; /** 448px. The narrowest a tool card gets before the tools grid drops a column. Also for sidebars, reel items and grid columns. */
+  --threshold-m: 48rem; /** 768px. Where the hero, story, ribbon, scripture indent, ministries panel and chat button switch to their small-screen layouts, and where two testimonials stack. */
+  --threshold-l: 60rem; /** 960px. Where the two call-to-action cards stack. Above it the testimonials are staggered. */
+  --surface-default-background: #ffffff;
+  --surface-default-text: #2e2d2c;
+  --surface-default-accent: #bc2026; /** Highlighted words in headings (.text-accent). */
+  --surface-default-eyebrow: #bc2026; /** Bebas eyebrows. */
+  --surface-wash-background: linear-gradient(#e6e7e8, #ffffff);
+  --surface-wash-text: #2e2d2c;
+  --surface-wash-accent: #bc2026;
+  --surface-wash-eyebrow: #bc2026;
+  --surface-dark-background: #2e2d2c;
+  --surface-dark-text: #ffffff;
+  --surface-dark-accent: #ffffff; /** Red is 2.2:1 on charcoal, so highlighted words stay white here. */
+  --surface-dark-eyebrow: #ffffff;
+  --surface-red-background: #bc2026;
+  --surface-red-text: #ffffff;
 }

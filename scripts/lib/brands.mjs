@@ -48,6 +48,7 @@ export function loadSystem() {
     components: loadDocs('system/components'),
     patterns: loadDocs('system/patterns'),
     base: 'system/base.css',
+    utilities: JSON.parse(read('system/utilities.json')).utilities,
   };
 }
 
@@ -83,7 +84,38 @@ export function loadBrand(id) {
     assets: list(`${dir}/assets`).filter((f) => f !== 'assets.md'),
     assetsDoc: exists(`${dir}/assets/assets.md`) ? parseMarkdown(read(`${dir}/assets/assets.md`)) : null,
     base: exists(`${dir}/base.css`) ? `${dir}/base.css` : null,
+    // brands/<id>/utilities.json adds to or changes the shared utilities (system/utilities.json).
+    utilitiesConfig: exists(`${dir}/utilities.json`) ? JSON.parse(read(`${dir}/utilities.json`)).utilities ?? [] : [],
   };
+}
+
+// Brand utilities replace shared ones of the same name, { name, remove: true } drops one, and new names are added.
+function resolveUtilities(shared, own) {
+  const byName = new Map(shared.map((u) => [u.name, u]));
+  for (const u of own) {
+    if (u.remove) byName.delete(u.name);
+    else byName.set(u.name, u);
+  }
+  return [...byName.values()];
+}
+
+// Token paths resolved to their final values: { 'color.red': '#BC2026', 'surface.dark.text': '#FFFFFF', … }
+export function resolvedTokens(tokens) {
+  const byPath = {};
+  const walk = (obj, path = []) => {
+    for (const [k, v] of Object.entries(obj)) {
+      if (k.startsWith('$')) continue;
+      if (v && typeof v === 'object' && '$value' in v) byPath[[...path, k].join('.')] = String(v.$value);
+      else if (v && typeof v === 'object') walk(v, [...path, k]);
+    }
+  };
+  walk(tokens);
+  const resolve = (value, seen = new Set()) =>
+    value.replace(/\{([\w.-]+)\}/g, (m, ref) => {
+      if (seen.has(ref) || byPath[ref] === undefined) return m;
+      return resolve(byPath[ref], new Set([...seen, ref]));
+    });
+  return Object.fromEntries(Object.entries(byPath).map(([k, v]) => [k, resolve(v)]));
 }
 
 // The components/patterns a brand actually has: shared ones (minus `exclude`),
@@ -101,7 +133,7 @@ export function resolveBrand(brand, system = loadSystem()) {
       ...brand[kind].filter((d) => !sharedNames.has(d.name)).map((d) => ({ ...d, origin: 'brand' })),
     ].sort((a, b) => a.name.localeCompare(b.name));
   }
-  return { ...brand, ...resolved, base: brand.base ?? system.base, excluded: [...exclude] };
+  return { ...brand, ...resolved, base: brand.base ?? system.base, excluded: [...exclude], utilities: resolveUtilities(system.utilities, brand.utilitiesConfig) };
 }
 
 export const loadAll = () => {

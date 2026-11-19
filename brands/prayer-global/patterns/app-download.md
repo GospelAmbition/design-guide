@@ -1,7 +1,7 @@
 ---
 title: Get the app
 summary: A "Get the app" title and the App Store and Google Play badges beside the two-phone mockup.
-uses: [center, container, flow, switcher, switcher-variants, utilities]
+uses: [center, container, flow, switcher]
 ---
 
 From the bottom of the home page.
@@ -12,7 +12,7 @@ From the bottom of the home page.
 
 ## Do
 
-- Use the official badges unchanged (`assets/app-store-badge.svg`, `assets/google-play-badge.png`) and link them to the store listings.
+- Use the official badges unchanged (`assets/app-store-badge.svg`, `assets/google-play-badge.png`) and link them to the store listings. The store URLs in the example are placeholders: use the real listing links.
 
 ## Don't
 
@@ -21,16 +21,16 @@ From the bottom of the home page.
 ## Code
 
 ```html
-<section class="py-xl" style="width: 100%">
-  <div class="switcher container switcher-md align-items-center">
-    <div class="flow-medium">
+<section class="py-xl">
+  <div class="container switcher align-items-center" style="--threshold: var(--threshold-m); --gutter: var(--space-m)">
+    <div class="flow">
       <h2 class="text-center">Get the app</h2>
-      <div class="center app-badges">
-        <a href="#"><img src="/brands/prayer-global/assets/app-store-badge.svg" alt="Download on the App Store" /></a>
-        <a href="#"><img src="/brands/prayer-global/assets/google-play-badge.png" alt="Get it on Google Play" /></a>
+      <div class="center app-badges" data-intrinsic>
+        <a href="https://apps.apple.com/"><img src="/brands/prayer-global/assets/app-store-badge.svg" alt="Download on the App Store" /></a>
+        <a href="https://play.google.com/store/apps/"><img src="/brands/prayer-global/assets/google-play-badge.png" alt="Get it on Google Play" /></a>
       </div>
     </div>
-    <div><img src="/brands/prayer-global/assets/photos/app-phones.png" alt="The Prayer.Global app on two phones" style="max-width: 100%" /></div>
+    <div><img src="/brands/prayer-global/assets/photos/app-phones.png" alt="The Prayer.Global app on two phones" /></div>
   </div>
 </section>
 ```

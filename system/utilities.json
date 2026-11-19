@@ -1,0 +1,35 @@
+{
+  "$description": "Utility classes every brand gets, generated into brand.css from the brand's own tokens (CUBE CSS's utility layer, the way Gorko does it). An entry with \"tokens\" makes one class per token in that group, named <name>-<token>: { \"name\": \"py\", \"property\": \"padding-block\", \"tokens\": \"space\" } gives .py-xs, .py-s and so on. \"tokens\" can also be a list of token paths, to pick a few tokens from a group. An entry with \"values\" makes one class per value, and an entry with \"class\" is a single hand-written class. A group the brand doesn't have produces nothing. A brand adds to or changes this list in brands/<id>/utilities.json: an entry with the same name replaces the shared one, and { \"name\": \"x\", \"remove\": true } drops it.",
+  "utilities": [
+    { "name": "p",  "property": "padding", "tokens": "space", "description": "Padding on every side." },
+    { "name": "px", "property": "padding-inline", "tokens": "space", "description": "Padding left and right." },
+    { "name": "py", "property": "padding-block", "tokens": "space", "description": "Padding top and bottom. The usual way to space a section." },
+    { "name": "pt", "property": "padding-block-start", "tokens": "space", "description": "Padding on top." },
+    { "name": "pb", "property": "padding-block-end", "tokens": "space", "description": "Padding at the bottom." },
+    { "name": "weight", "property": "font-weight", "tokens": "weight", "description": "Font weight." },
+    { "name": "font", "property": "font-family", "tokens": "font", "description": "Font family." },
+    { "name": "leading", "property": "line-height", "tokens": "leading", "description": "Line height." },
+    { "name": "radius", "property": "border-radius", "tokens": "radius", "description": "Rounded corners." },
+    { "name": "shadow", "property": "box-shadow", "tokens": "shadow", "description": "Shadow." },
+    { "name": "text", "property": "text-align", "values": { "start": "start", "center": "center", "end": "end" }, "description": "Text alignment." },
+    { "name": "mx", "property": "margin-inline", "values": { "auto": "auto" }, "description": "Centres a block that has a width." },
+    { "name": "italic", "class": "italic", "declarations": { "font-style": "italic" }, "description": "Italic text." },
+    { "name": "uppercase", "class": "uppercase", "declarations": { "text-transform": "uppercase" }, "description": "Capitals." },
+    {
+      "name": "visually-hidden",
+      "class": "visually-hidden",
+      "declarations": {
+        "position": "absolute",
+        "inline-size": "1px",
+        "block-size": "1px",
+        "padding": "0",
+        "margin": "-1px",
+        "overflow": "hidden",
+        "clip": "rect(0, 0, 0, 0)",
+        "white-space": "nowrap",
+        "border": "0"
+      },
+      "description": "Hides text on screen but keeps it for screen readers, such as a label for an icon-only link."
+    }
+  ]
+}

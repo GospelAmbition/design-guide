@@ -10,6 +10,8 @@ body {
   font-weight: var(--weight-regular);
   line-height: var(--leading-base);
   -webkit-font-smoothing: antialiased;
+  /* Lets components and patterns switch with @container at a --threshold-* value instead of viewport breakpoints. */
+  container-type: inline-size;
 }
 h1, h2, h3, h4, h5 { margin: 0; }
 
@@ -31,8 +33,8 @@ h2, h3 {
 }
 h2 { font-size: var(--size-h2); }
 h3 { font-size: var(--size-h3); }
-/* Image-box titles: Open Sans 700 in the text colour. */
-h4, h5 { font-family: var(--font-heading); font-weight: var(--weight-strong); color: var(--color-text); }
+/* Image-box titles: Open Sans 700 in the colour of the text around them. */
+h4, h5 { font-family: var(--font-heading); font-weight: var(--weight-strong); }
 h4 { font-size: var(--size-h4); line-height: var(--leading-base); }
 h5 { font-size: var(--size-h5); line-height: var(--leading-h5); }
 
@@ -46,11 +48,10 @@ a:hover, a:focus { color: var(--color-green); text-decoration: underline; }
 *:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
 img { max-width: 100%; height: auto; }
 
-/* Section colours. Text on blue and green is white; headings follow. */
-.bg-blue { background-color: var(--color-blue); color: var(--color-white); }
-.bg-green { background-color: var(--color-green); color: var(--color-white); }
-.bg-grey-light { background-color: var(--color-grey-light); }
-.bg-grey-lightest { background-color: var(--color-grey-lightest); }
-.bg-blue h2, .bg-blue h3, .bg-green h2, .bg-green h3 { color: var(--color-white); }
-.bg-blue p { color: var(--color-grey-lighter); }
-.bg-blue a, .bg-green a { color: var(--color-white); }
+/* Headings on a surface take its heading colour (see the surface tokens). Text and link colours
+   come from the generated .surface-* utilities. */
+.surface-default :is(h1, h2, h3) { color: var(--surface-default-heading); }
+.surface-blue :is(h1, h2, h3) { color: var(--surface-blue-heading); }
+.surface-green :is(h1, h2, h3) { color: var(--surface-green-heading); }
+.surface-grey-light :is(h1, h2, h3) { color: var(--surface-grey-light-heading-large); }
+.surface-grey-lightest :is(h1, h2, h3) { color: var(--surface-grey-lightest-heading); }

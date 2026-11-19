@@ -1,0 +1,20 @@
+{
+  "brand": "prayer-global",
+  "name": "Prayer.Global",
+  "fonts": [
+    "assets/fonts/fonts.css",
+    "assets/fonts/prayer-global-icons.css"
+  ],
+  "files": [
+    "assets/fonts/BebasKai.woff",
+    "assets/fonts/BebasKai.woff2",
+    "assets/fonts/Europa-Bold.woff",
+    "assets/fonts/Europa-Bold.woff2",
+    "assets/fonts/Europa-Regular.woff",
+    "assets/fonts/Europa-Regular.woff2",
+    "assets/fonts/PrayerGlobal.ttf",
+    "assets/fonts/PrayerGlobal.woff",
+    "assets/fonts/fonts.css",
+    "assets/fonts/prayer-global-icons.css"
+  ]
+}
