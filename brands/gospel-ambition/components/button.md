@@ -38,10 +38,22 @@ The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), i
 ## Code
 
 ```html
-<a class="btn" data-variant="primary" href="/tools/">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="light" href="/about/">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="outline" href="https://zume.training/">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="primary" href="/tools/">
+  Our tools &amp; trainings
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="light" href="/about/">
+  Our story
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="outline-grey" href="/about/">
+  More about us 
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="outline" href="https://zume.training/">
+  Explore Zume.Training 
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
 <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
 ```
 
@@ -76,14 +88,55 @@ The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), i
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
-.btn:hover { color: var(--btn-hover-color); background-color: var(--btn-hover-bg); border-color: var(--btn-hover-border); }
-.btn:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-.btn__icon { flex: none; inline-size: var(--size-icon); block-size: auto; fill: currentColor; }
+.btn:hover {
+  color: var(--btn-hover-color);
+  background-color: var(--btn-hover-bg);
+  border-color: var(--btn-hover-border);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+.btn__icon {
+  flex: none;
+  inline-size: var(--size-icon);
+  block-size: auto; fill: currentColor; }
 
-.btn[data-variant="primary"] { --btn-hover-bg: var(--color-red-dark); --btn-hover-border: var(--color-red-dark); }
-.btn[data-variant="light"] { --btn-color: var(--color-charcoal); --btn-bg: var(--color-white); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-.btn[data-variant="grey"] { --btn-color: var(--color-charcoal); --btn-bg: var(--color-grey-light); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-.btn[data-variant="outline"] { --btn-color: var(--color-red); --btn-bg: var(--color-white); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-red); font-size: var(--size-small); }
-.btn[data-variant="outline-light"] { --btn-color: var(--color-white); --btn-bg: transparent; --btn-border: var(--color-white); --btn-hover-color: var(--color-charcoal); --btn-hover-bg: var(--color-white); }
-.btn[data-size="small"] { min-inline-size: 0; padding: 0.15em 1.3em; font-size: var(--size-small); }
+.btn[data-variant="primary"] {
+  --btn-hover-bg: var(--color-red-dark);
+  --btn-hover-border: var(--color-red-dark);
+}
+.btn[data-variant="light"] {
+  --btn-color: var(--color-charcoal);
+  --btn-bg: var(--color-white);
+  --btn-border: transparent;
+  --btn-hover-color: var(--color-red);
+  --btn-hover-border: var(--color-red);
+}
+.btn[data-variant="outline-grey"] {
+  --btn-color: var(--color-charcoal);
+  --btn-bg: var(--color-white);
+  --btn-border: var(--color-grey);
+  --btn-hover-color: var(--color-red);
+  --btn-hover-border: var(--color-red);
+}
+.btn[data-variant="outline"] {
+  --btn-color: var(--color-red);
+  --btn-bg: var(--color-white);
+  --btn-hover-color: var(--color-white);
+  --btn-hover-bg: var(--color-red);
+  font-size: var(--size-small);
+}
+.btn[data-variant="outline-light"] {
+  --btn-color: var(--color-white);
+  --btn-bg: transparent;
+  --btn-border: var(--color-white);
+  --btn-hover-color: var(--color-charcoal);
+  --btn-hover-bg: var(--color-white);
+}
+.btn[data-size="small"] {
+  min-inline-size: 0;
+  padding: 0.15em 1.3em;
+  font-size: var(--size-small);
+}
 ```

@@ -31,7 +31,7 @@ a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
 a:hover { color: var(--color-red); }
 
 *:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-img { max-width: 100%; height: auto; }
+img { display: block; max-width: 100%; height: auto; }
 
 /* Text styles. */
 .display { font-family: var(--font-heading); font-size: var(--size-display); font-weight: var(--weight-heavy); line-height: var(--leading-display); }

@@ -1026,10 +1026,22 @@ The arrow is the design's `arrow-right` icon (`assets/icons/arrow-right.svg`), i
 #### Code
 
 ```html
-<a class="btn" data-variant="primary" href="/tools/">Our tools &amp; trainings <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="light" href="/about/">Our story <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
-<a class="btn" data-variant="outline" href="https://zume.training/">Explore Zume.Training <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+<a class="btn" data-variant="primary" href="/tools/">
+  Our tools &amp; trainings
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="light" href="/about/">
+  Our story
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="outline-grey" href="/about/">
+  More about us 
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
+<a class="btn" data-variant="outline" href="https://zume.training/">
+  Explore Zume.Training 
+  <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg>
+</a>
 <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
 ```
 
@@ -1171,22 +1183,13 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
 <header class="nav-bar">
   <svg class="nav-bar__arch" viewBox="0 0 1920 73" preserveAspectRatio="none" aria-hidden="true"><path d="M1920 73.3C1920 73.3 1619.9 12.7 962.3 12.7 325.9 12.7 0 73.3 0 73.3V0h1920Z"/></svg>
   <div class="container nav-bar__inner">
-    <a class="nav-bar__logo" href="/"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" /></a>
+    <a class="nav-bar__logo" href="/"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" width="640" height="187" /></a>
     <nav class="nav-bar__menu" aria-label="Main">
       <a href="/about/">About</a>
       <a href="/tools/">Tools &amp; trainings</a>
       <a href="/impact/">Impact</a>
       <a href="/for-your-ministry/">For your ministry</a>
-      <div class="cluster" style="--gutter: var(--space-s)">
-        <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
-        <form role="search" action="/search/">
-          <label class="search">
-            <svg class="search__icon" viewBox="0 0 16.19 16.19" aria-hidden="true"><path d="M11.88 10.46a6.57 6.57 0 1 0-1.41 1.42h-.01l.1.12 3.9 3.89a1.01 1.01 0 0 0 1.43-1.43L12 10.56a1 1 0 0 0-.12-.1Zm.26-3.89a5.57 5.57 0 1 1-11.13 0 5.57 5.57 0 0 1 11.13 0Z"/></svg>
-            <span class="visually-hidden">Search</span>
-            <input class="search__input" type="search" name="q" />
-          </label>
-        </form>
-      </div>
+      <a class="btn" data-variant="primary" data-size="small" href="/give/">Give</a>
     </nav>
   </div>
 </header>
@@ -1565,7 +1568,7 @@ Follows the first ribbon on the home page: "Jesus has given us our **motive, mis
         <p>Go, then, and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to obey everything I have commanded. And remember: I am with you always, to the end of the age.”</p>
         <cite>Matthew 28:17–20</cite>
       </blockquote>
-      <a class="btn" data-variant="grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
+      <a class="btn" data-variant="outline-grey" href="/about/">More about us <svg class="btn__icon" viewBox="1 3.49 26.42 16.99" aria-hidden="true"><path d="M1 11.99c0-.52.42-.95.94-.95H24.2l-5.94-5.93a.95.95 0 0 1 0-1.34.94.94 0 0 1 1.33 0l7.55 7.55a.95.95 0 0 1 .28.67.95.95 0 0 1-.28.67l-7.55 7.55a.94.94 0 0 1-1.33 0 .95.95 0 0 1 0-1.34l5.94-5.94H1.94A.94.94 0 0 1 1 11.99Z"/></svg></a>
     </div>
   </div>
 </section>
@@ -1766,7 +1769,7 @@ a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
 a:hover { color: var(--color-red); }
 
 *:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-img { max-width: 100%; height: auto; }
+img { display: block; max-width: 100%; height: auto; }
 
 /* Text styles. */
 .display { font-family: var(--font-heading); font-size: var(--size-display); font-weight: var(--weight-heavy); line-height: var(--leading-display); }

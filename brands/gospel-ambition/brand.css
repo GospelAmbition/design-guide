@@ -146,7 +146,7 @@
   a:hover { color: var(--color-red); }
 
   *:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-  img { max-width: 100%; height: auto; }
+  img { display: block; max-width: 100%; height: auto; }
 
   /* Text styles. */
   .display { font-family: var(--font-heading); font-size: var(--size-display); font-weight: var(--weight-heavy); line-height: var(--leading-display); }
@@ -368,16 +368,57 @@
     cursor: pointer;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   }
-  .btn:hover { color: var(--btn-hover-color); background-color: var(--btn-hover-bg); border-color: var(--btn-hover-border); }
-  .btn:focus-visible { outline: 2px solid var(--color-red); outline-offset: 3px; }
-  .btn__icon { flex: none; inline-size: var(--size-icon); block-size: auto; fill: currentColor; }
+  .btn:hover {
+    color: var(--btn-hover-color);
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+  .btn__icon {
+    flex: none;
+    inline-size: var(--size-icon);
+    block-size: auto; fill: currentColor; }
 
-  .btn[data-variant="primary"] { --btn-hover-bg: var(--color-red-dark); --btn-hover-border: var(--color-red-dark); }
-  .btn[data-variant="light"] { --btn-color: var(--color-charcoal); --btn-bg: var(--color-white); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-  .btn[data-variant="grey"] { --btn-color: var(--color-charcoal); --btn-bg: var(--color-grey-light); --btn-border: var(--color-grey); --btn-hover-color: var(--color-red); --btn-hover-border: var(--color-red); }
-  .btn[data-variant="outline"] { --btn-color: var(--color-red); --btn-bg: var(--color-white); --btn-hover-color: var(--color-white); --btn-hover-bg: var(--color-red); font-size: var(--size-small); }
-  .btn[data-variant="outline-light"] { --btn-color: var(--color-white); --btn-bg: transparent; --btn-border: var(--color-white); --btn-hover-color: var(--color-charcoal); --btn-hover-bg: var(--color-white); }
-  .btn[data-size="small"] { min-inline-size: 0; padding: 0.15em 1.3em; font-size: var(--size-small); }
+  .btn[data-variant="primary"] {
+    --btn-hover-bg: var(--color-red-dark);
+    --btn-hover-border: var(--color-red-dark);
+  }
+  .btn[data-variant="light"] {
+    --btn-color: var(--color-charcoal);
+    --btn-bg: var(--color-white);
+    --btn-border: transparent;
+    --btn-hover-color: var(--color-red);
+    --btn-hover-border: var(--color-red);
+  }
+  .btn[data-variant="outline-grey"] {
+    --btn-color: var(--color-charcoal);
+    --btn-bg: var(--color-white);
+    --btn-border: var(--color-grey);
+    --btn-hover-color: var(--color-red);
+    --btn-hover-border: var(--color-red);
+  }
+  .btn[data-variant="outline"] {
+    --btn-color: var(--color-red);
+    --btn-bg: var(--color-white);
+    --btn-hover-color: var(--color-white);
+    --btn-hover-bg: var(--color-red);
+    font-size: var(--size-small);
+  }
+  .btn[data-variant="outline-light"] {
+    --btn-color: var(--color-white);
+    --btn-bg: transparent;
+    --btn-border: var(--color-white);
+    --btn-hover-color: var(--color-charcoal);
+    --btn-hover-bg: var(--color-white);
+  }
+  .btn[data-size="small"] {
+    min-inline-size: 0;
+    padding: 0.15em 1.3em;
+    font-size: var(--size-small);
+  }
 
   /* brands/gospel-ambition/components/card.md */
   .card {
@@ -483,7 +524,11 @@
     gap: var(--space-xs) var(--space-l);
     padding-block: var(--space-xxs) var(--space-s);
   }
-  .nav-bar__logo { display: block; flex: none; }
+  .nav-bar__logo {
+    display: block;
+    flex: none;
+    width: clamp(140px, 15.5vw, 300px);
+  }
   .nav-bar__logo img { display: block; block-size: var(--size-logo); inline-size: auto; }
   .nav-bar__menu { display: flex; flex-wrap: wrap; align-items: center; column-gap: calc(var(--space-s) * 2); row-gap: var(--space-xs); }
   .nav-bar__menu > a:not(.btn) {
