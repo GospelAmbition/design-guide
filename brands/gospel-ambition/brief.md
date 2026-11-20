@@ -1161,21 +1161,26 @@ The design has no forms. For a sign-up or contact form, ask for a design rather 
 
 ### Nav bar
 
-A red arch across the top of the page, then a white bar with the logo on the left and uppercase links, a red Give pill and the search field on the right. Gospel Ambition-only (`brands/gospel-ambition/components/nav-bar.md`). Works with: container, button, input. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/nav-bar.md */`).
+A red arch across the top of the page, then a white bar with the logo on the left and uppercase links and a red Give pill on the right. Below 960px the links fold into a hamburger menu. Gospel Ambition-only (`brands/gospel-ambition/components/nav-bar.md`). Works with: container, button. Its CSS is in brand.css (look for `/* brands/gospel-ambition/components/nav-bar.md */`).
 
-The top of every page. A red band arches across the very top (73px at the edges, 13px in the middle, at 1920px), and the white bar below it (187px in all) holds the logo at 93px tall (`--size-logo`) and the menu. Links are Poppins SemiBold 18px in charcoal, uppercase, about 56px apart. The Give pill is the only red item; the search field closes the row. The bar has a faint shadow (`--shadow-nav`).
+The top of every page. A red band arches across the very top (73px at the edges, 13px in the middle, at 1920px), and the white bar below it holds the logo and the menu. Links are Poppins SemiBold 18px in charcoal, uppercase, about 56px apart. The Give pill is the only red item. The bar has a faint shadow (`--shadow-nav`).
 
 The arch is the design's own curve, drawn with an inline SVG that stretches to the page width.
+
+Below 960px (`--threshold-l`) the links fold away behind a menu button, as on gospelambition.org: three charcoal bars, 48px square, on the right of the logo. Pressed, the bars turn into an X and the links drop below the logo as a full-width list under a thin grey rule, one per row, with the Give pill stretched across the bottom.
 
 #### Do
 
 - Keep the menu to four or five short items. The design has About, Tools & trainings, Impact, For your ministry.
-- Keep Give as the last link, as a small primary pill: `class="btn" data-variant="primary" data-size="small"`. Give and the search field sit together in a cluster, 28px apart (half the gap between links), so they wrap as a pair on narrow screens.
+- Keep Give as the last link, as a small primary pill: `class="btn" data-variant="primary" data-size="small"`.
+- Keep the button's label ("Menu") for screen readers, and point `aria-controls` at the menu's id.
+
+- Wire up the menu button with the script below. It switches `aria-expanded` on the button; the CSS shows or hides the menu from that. Escape and choosing a link close the menu.
 
 #### Approximate
 
-- The design has no mobile menu. Here the links wrap under the logo on narrow screens; a real build needs a menu button, which isn't designed yet.
-- Hover is a proposal: links turn red.
+- The XD design has no mobile menu. The hamburger follows the live site, gospelambition.org.
+- Hover is a proposal: links and the menu button turn red.
 
 #### Code
 
@@ -1184,7 +1189,11 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
   <svg class="nav-bar__arch" viewBox="0 0 1920 73" preserveAspectRatio="none" aria-hidden="true"><path d="M1920 73.3C1920 73.3 1619.9 12.7 962.3 12.7 325.9 12.7 0 73.3 0 73.3V0h1920Z"/></svg>
   <div class="container nav-bar__inner">
     <a class="nav-bar__logo" href="/"><img src="/brands/gospel-ambition/assets/logo.png" alt="Gospel Ambition" width="640" height="187" /></a>
-    <nav class="nav-bar__menu" aria-label="Main">
+    <button class="nav-bar__toggle" type="button" aria-expanded="false" aria-controls="nav-bar-menu">
+      <span class="visually-hidden">Menu</span>
+      <span class="nav-bar__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+    <nav class="nav-bar__menu" id="nav-bar-menu" aria-label="Main">
       <a href="/about/">About</a>
       <a href="/tools/">Tools &amp; trainings</a>
       <a href="/impact/">Impact</a>
@@ -1193,6 +1202,21 @@ The arch is the design's own curve, drawn with an inline SVG that stretches to t
     </nav>
   </div>
 </header>
+```
+
+```js
+// site.js: open and close the menu by switching aria-expanded on the button.
+const toggle = document.querySelector(".nav-bar__toggle");
+const menu = document.getElementById(toggle.getAttribute("aria-controls"));
+const setOpen = (open) => toggle.setAttribute("aria-expanded", String(open));
+toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+    setOpen(false);
+    toggle.focus();
+  }
+});
 ```
 
 ### Ribbon

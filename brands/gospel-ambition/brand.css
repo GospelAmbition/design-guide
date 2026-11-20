@@ -529,7 +529,7 @@
     flex: none;
     width: clamp(140px, 15.5vw, 300px);
   }
-  .nav-bar__logo img { display: block; block-size: var(--size-logo); inline-size: auto; }
+  .nav-bar__logo img { display: block; inline-size: auto; }
   .nav-bar__menu { display: flex; flex-wrap: wrap; align-items: center; column-gap: calc(var(--space-s) * 2); row-gap: var(--space-xs); }
   .nav-bar__menu > a:not(.btn) {
     font-size: var(--size-small);
@@ -539,6 +539,45 @@
     color: var(--color-text);
   }
   .nav-bar__menu > a:not(.btn):hover { color: var(--color-red); }
+  .nav-bar__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--space-m);
+    block-size: var(--space-m);
+    padding: 0;
+    color: var(--color-text);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .nav-bar__toggle:hover { color: var(--color-red); }
+  .nav-bar__toggle:focus-visible { outline: 2px solid var(--color-red); outline-offset: 2px; }
+  .nav-bar__bars { display: flex; flex-direction: column; gap: var(--nav-bar-bar-gap, 5px); inline-size: var(--nav-bar-bar-width, 26px); }
+  .nav-bar__bars > span {
+    display: block;
+    block-size: 2px;
+    background: currentColor;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-bar__toggle[aria-expanded="true"] .nav-bar__bars > span:first-child { transform: translateY(var(--nav-bar-bar-shift, 7px)) rotate(45deg); }
+  .nav-bar__toggle[aria-expanded="true"] .nav-bar__bars > span:nth-child(2) { opacity: 0; }
+  .nav-bar__toggle[aria-expanded="true"] .nav-bar__bars > span:last-child { transform: translateY(calc(var(--nav-bar-bar-shift, 7px) * -1)) rotate(-45deg); }
+  @container (max-width: 60rem) {
+    .nav-bar__toggle { display: flex; }
+    .nav-bar__menu {
+      flex-direction: column;
+      align-items: stretch;
+      inline-size: 100%;
+      gap: 0;
+      padding-block-start: var(--space-xxs);
+      border-block-start: 1px solid var(--color-grey);
+    }
+    .nav-bar__menu > a:not(.btn) { padding-block: var(--space-xxs); }
+    .nav-bar__menu > .btn { margin-block-start: var(--space-xxs); text-align: center; }
+    .nav-bar__toggle[aria-expanded="false"] + .nav-bar__menu { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nav-bar__bars > span { transition: none; } }
 
   /* brands/gospel-ambition/components/ribbon.md */
   .ribbon {

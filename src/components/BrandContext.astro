@@ -74,6 +74,12 @@ const json = JSON.stringify({
       const canvas = document.createElement('div');
       canvas.className = 'canvas';
       canvas.append(this.querySelector('template').content.cloneNode(true));
+      // Examples ship without their page script. Stand in for the usual disclosure script
+      // (a menu button and the like) so toggles can be tried: flip aria-expanded on click.
+      canvas.addEventListener('click', (event) => {
+        const toggle = event.target.closest('button[aria-expanded][aria-controls]');
+        if (toggle) toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true'));
+      });
       root.append(canvas);
     }
   }
