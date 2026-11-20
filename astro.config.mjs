@@ -80,6 +80,9 @@ export default defineConfig({
       title: 'Design System',
       description: 'Brand guides for building on-brand sites, by people and by AI.',
       customCss: ['./src/styles/docs.css'],
+      components: { SiteTitle: './src/components/SiteTitle.astro' },
+      // Apply a minimised sidebar before first paint so it doesn't flash open.
+      head: [{ tag: 'script', content: "try{localStorage.getItem('ds-sidebar-collapsed')&&document.documentElement.setAttribute('data-sidebar-collapsed','')}catch{}" }],
       sidebar,
     }),
     liveSources,

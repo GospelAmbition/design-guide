@@ -19,3 +19,9 @@
 /* Assets meant for dark backgrounds: wrap them in <div class="ds-on-dark"> in assets.md. */
 .ds-on-dark { background: #11224e; padding: 1.5rem; border-radius: 8px; width: fit-content; }
 .ds-on-dark img { display: block; max-width: 220px; height: auto; margin: 0 !important; }
+
+/* Minimised sidebar (desktop). Toggled by the button in src/components/SiteTitle.astro. */
+@media (min-width: 50em) {
+  :root[data-has-sidebar][data-sidebar-collapsed] { --sl-content-inline-start: 0rem; --__sidebar-pad: 0rem; }
+  :root[data-sidebar-collapsed] .sidebar-pane { display: none; }
+}
