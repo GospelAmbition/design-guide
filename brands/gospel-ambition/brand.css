@@ -591,7 +591,45 @@
   .ribbon__content { padding-block: 20cqi 7cqi; }
   .ribbon__content > * { max-inline-size: var(--size-measure); }
   .ribbon__title { font-size: var(--size-h1); font-weight: var(--weight-heavy); margin-block-end: var(--space-xxs); }
+  .ribbon[data-variant="wave"] {
+    --ribbon-wave: clamp(5.625rem, 21cqi, 26.25rem);
+    --ribbon-wave-space: 0.62;
+  }
+  .ribbon__photo {
+    display: block;
+    inline-size: 100%;
+    block-size: var(--ribbon-photo-height, clamp(16.25rem, 46cqi, 55rem));
+    object-fit: cover;
+    object-position: 50% 25%;
+    /* Fades in at the top over whatever is above. A mask only reads alpha, so any opaque colour works. */
+    mask-image: linear-gradient(transparent, var(--color-red) 9%);
+  }
+  .ribbon__band { position: relative; background: var(--surface-red-background); }
+  .ribbon__dip {
+    position: absolute;
+    inset: auto 0 calc(100% - 1px); /* sits on the band's top edge, over the photo */
+    display: block;
+    inline-size: 100%;
+    block-size: var(--ribbon-dip, clamp(1.5rem, 5.5cqi, 6.5625rem));
+    fill: var(--surface-red-background);
+    pointer-events: none;
+  }
+  .ribbon[data-variant="wave"] .ribbon__content {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(2.5rem, 7cqi, 8.4375rem) calc(var(--ribbon-wave) * var(--ribbon-wave-space));
+  }
+  .ribbon__wave {
+    position: absolute;
+    inset: auto 0 -1px; /* overlaps the seam so no hairline shows */
+    display: block;
+    inline-size: 100%;
+    block-size: var(--ribbon-wave);
+    fill: var(--ribbon-below, var(--color-background));
+    pointer-events: none;
+  }
   @container (max-width: 48rem) {
+    .ribbon[data-variant="wave"] { --ribbon-wave: 30cqi; --ribbon-wave-space: 0.75; background: none; }
     .ribbon { background: var(--surface-red-background); }
     .ribbon[data-overlap] { margin-block-start: 0; }
     .ribbon__shape { display: none; }
