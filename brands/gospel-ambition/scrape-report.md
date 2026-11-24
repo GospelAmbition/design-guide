@@ -15,7 +15,7 @@ The whole page was then rebuilt from the guide's own CSS and pattern HTML at 192
 ## What's in it
 
 - **Tokens:**
-  - **Colours:** red `#BC2026`, charcoal `#2E2D2C`, four greys (`#E6E7E8` wash, `#F7F7F7` crescents, `#C7C7C7` outlines, `#707070` card outline) and white. Also `red-dark` `#8A1E20`, a swatch saved in the XD file but unused on the page, used here only for hover.
+  - **Colours:** red `#BC2026`, charcoal `#2E2D2C`, four greys (`#E6E7E8` wash, `#F6F6F6` crescents, `#C7C7C7` outlines, `#707070` card outline) and white. Also `red-dark` `#8A1E20`, a swatch saved in the XD file but unused on the page, used here only for hover.
   - **Fonts:** Poppins 400–800 with italics for everything, and Bebas Neue for the small red eyebrow labels. Both are free from Google Fonts.
   - **Spacing:** `xxs`–`xxl` (8, 16, 28, 48, 64, 96, 140px).
   - **Other:** five gradients (the grey wash and photo fades), three shadows, three radii (16px, 25px, pill).

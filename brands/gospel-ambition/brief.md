@@ -141,7 +141,7 @@ These are facts from the XD file, recorded so builds don't copy them by accident
 - `--color-red-dark`: `#8A1E20` — A swatch saved in the design file but not used on the page. Used here only for hover on red buttons; the design has no hover states.
 - `--color-charcoal`: `#2E2D2C` — Text, the dark ministries section, and the overlay on the call-to-action photo (at 78%).
 - `--color-grey-wash`: `#E6E7E8` — Top of the wash gradient behind the stats and tools sections.
-- `--color-grey-light`: `#F7F7F7` — The swoosh crescents between sections, and the grey button.
+- `--color-grey-light`: `#F6F6F6` — The swoosh crescents between sections, and the grey button.
 - `--color-grey`: `#C7C7C7` — 1px outlines of the light and grey buttons and the search field, and the search icon.
 - `--color-grey-dark`: `#707070` — 1px outline of the call-to-action cards. Barely visible on the dark photo behind them.
 - `--color-white`: `#FFFFFF` — Text on red, charcoal and photos; button labels on red.
